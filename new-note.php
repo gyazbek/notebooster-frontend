@@ -35,7 +35,7 @@
 		          			<label for="no_of_pages">Number of Pages:</label>
 		          		</div>
 		          		<div class="col-md-2 form-group">
-		          			<input class="form-control" name="num_of_pages" /><div class="has-error-text" id="note-pages-error">Please state the number of pages.</div>
+		          			<input class="form-control" name="num_of_pages" />
 		          		</div>
 		          		<div class="clearfix"></div>
 		          		<div class="col-md-4">
@@ -105,13 +105,11 @@
 		          		<div class="col-xs-12 mbot15 form-group">
 		          			<label for="note_title">Note Title: <span class="muted">(Max: 140 characters)</span></label>
 		          			<input class="form-control" name="note_title" />
-		          			<div class="has-error-text" id="title-error">Please write a title.<br>Title is too long.</div>
 		          		</div>
 		          		<div class="clearfix"></div>
 		          		<div class="col-xs-12 form-group">
 		          			<label for="note_description">Note Description:</label>
 		          			<textarea class="form-control" name="note_description"></textarea>
-		          			<div class="has-error-text" id="description-error">Please write a description.</div>
 		          		</div>
 		          		<div class="clearfix"></div>
 		          		<hr class="narrower">
@@ -120,7 +118,6 @@
 		          		</div>
 		          		<div class="col-md-8 form-group">
 		          			<select class="school-select-box form-control" name="school" value="<?=$school?>"></select>
-		          			<div class="has-error-text" id="school-error">Please select your school.</div>
 		          		</div>
 		          		<div class="clearfix mbot15"></div>
 		          		<div class="col-md-4">
@@ -134,7 +131,6 @@
 		          				<option>Fall</option>
 		          				<option>Winter</option>
 		          			</select>
-		          			<div class="has-error-text" id="semester-error">Please select a semester.</div>
 		          		</div>
 		          		<div class="col-md-4 form-group">
 		          			<select class="form-control" name="semester-year">
@@ -152,7 +148,6 @@
 		          			<div class="add-new">
 		          				<p><a href="#" data-toggle="modal" data-target="#new-course">Don't see your Course in the list?</a></p>
 		          				<?php $modals->add('new-course'); ?>
-		          				<div class="has-error-text" id="course-error">Please identify the course.</div>
 							</div>
 		          		</div>
 		          		<div class="clearfix mbot15"></div>
@@ -164,7 +159,6 @@
 		          			<div class="add-new">
 		          				<p><a href="#" data-toggle="modal" data-target="#new-instructor">Don't see your Professor in the list?</a></p>
 		          				<?php $modals->add('new-instructor'); ?>
-		          				<div class="has-error-text" id="description-error">Please identify the instructor.</div>
 							</div>
 		          		</div>
 		          		<div class="clearfix"></div>
@@ -175,7 +169,6 @@
 		          		<div class="col-md-8 form-group">
 		          			<input class="form-control" name="paypal_account" />
 		          			<span class="muted">All payments are delivered to you securely via Paypal. <br><a href="https://www.paypal.com/signup/account" target="_blank">Need an account?</a></span>
-		          			<div class="has-error-text" id="paypal-error">Please input your Paypal email address.</div>
 		          		</div>
 		          		<div class="clearfix"></div>
 		          		<hr class="narrower">
@@ -207,21 +200,4 @@
 	</div>
 
 <?php include ('inc/footer.php'); ?>
-
-	<!-- REMOVE THIS FOR REAL PRODUCTION -->
-	<!-- START TOGGLE -->
-	<div style="width: 100%;position: fixed;margin-bottom: -40px;padding-right: 10px;text-align: right;top: 50%;"><span href="#" style="color:pink; cursor: pointer;" class="toggle-errors">[TOGGLE ALERTS]</span></div>
-	<script type="text/javascript">
-		$(".toggle-errors").click(function() {
-   			$('.has-error-text').toggle();
-   			$('.form-group').toggleClass('has-error');
-		});
-
-		$("#free_price").click(function() {
-			$('.note_price').val('0.00').toggleClass('disabled');
-   			$('.note_price').prop('disabled', function(i, v) { return !v; });
-		});
-
-	</script>
-	<!-- END TOGGLE -->
 
