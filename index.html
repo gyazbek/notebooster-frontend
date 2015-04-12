@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>NoteBooster</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/css/select2.min.css" rel="stylesheet" />
+    <link href='//fonts.googleapis.com/css?family=Ubuntu:300,500' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+    <style>
+[ng-cloak]
+{
+  display: none !important;
+}
+
+</style>
+  </head>
+  <body ng-app="angularNoteboosterApp" ng-controller="MasterCtrl" ng-cloak>
+
+  <div id="wrap" >
+
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId=692231817534566&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <div class="overlay-trans"></div>
+
+
+
+    <nav class="navbar" role="navigation" ui-view="header">
+
+    </nav>
+
+
+ 	<div ui-view="content" autoscroll="true">
+	
+	</div>
+	</div>
+	<footer class="footer" ui-view="footer">
+
+	</footer>
+
+
+    
+
+      <div class="modal fade" id="register">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h3 class="modal-title">Register</h3>
+              <p>Lorem ipsum dolor sit amet, consectetuer.</p>
+            </div>
+            <div class="modal-body"><form method="post" action="">
+        <div class="form-group">
+          <label for="reg-username">Username:</label>
+          <input type="text" name="reg-username" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="reg-password">Password:</label>
+          <input type="password" name="reg-password" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="reg-confirm-password">Confirm Password:</label>
+          <input type="password" name="reg-confirm-password" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="reg-email">Your Email:</label>
+          <input type="text" name="reg-email" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="reg-school">Your School:</label>
+          <select name="reg-school" class="form-control">
+            <option value="0">Select School
+          </select>
+        </div>
+        <label for="reg-confirm">
+          <input type="checkbox" name="reg-confirm" id="reg-confirm">
+          <span class="muted">I have read and agree to the Terms of Use</span>
+        </label>
+        <div class="row">
+          <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2 mtop25">
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+          </div>
+        </div></form></div>
+          </div>
+          <p class="text-center mtop25"><a href="#" data-dismiss="modal" data-toggle="modal" data-target="#signin">Already registered? Sign in here.</a></p>
+        </div>
+      </div>
+
+
+
+
+
+   
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/ui-router/angular-ui-router.min.js"></script>
+   
+    <script src="bower_components/ui-bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+ 
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/register.js"></script>
+    <script src="scripts/controllers/passwordreset.js"></script>
+    <script src="scripts/controllers/passwordresetconfirm.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/verifyemail.js"></script>
+    <script src="scripts/controllers/logout.js"></script>
+    <script src="scripts/controllers/userprofile.js"></script>
+    <script src="scripts/controllers/passwordchange.js"></script>
+    <script src="scripts/services/djangoAuth.js"></script>
+    <script src="scripts/services/validate.js"></script>
+    <script src="scripts/controllers/master.js"></script>
+    <script src="scripts/controllers/restricted.js"></script>
+    <script src="scripts/controllers/authrequired.js"></script>
+
+
+ 
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
+    <script src="js/main.js"></script>
+
+    </body>
+</html>
