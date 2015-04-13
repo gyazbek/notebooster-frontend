@@ -13,19 +13,6 @@ html, body {
   display: table;
   width: 100%; }
 
-/*
-footer.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 216px;
-}
-#wrap {
-  min-height: 100%;
-  height: auto;
-  margin: 0 auto -216px;
-  padding: 0 0 216px;
-}*/
 #wrap {
   background: url(../img/noteboosterBG.png);
   padding-bottom: 25px; }
@@ -50,11 +37,11 @@ h4 {
       color: #1a1a1a; }
 
 a {
-  color: #07ab4c; }
+  color: #21ab07; }
   a:hover {
-    color: #09dc62; }
+    color: #2adc09; }
   a:visited {
-    color: #057a36; }
+    color: #187a05; }
 
 .overlay-dark {
   background: #30353a; }
@@ -71,6 +58,12 @@ a {
 .mbot0 {
   margin-bottom: 0px; }
 
+.mleft0 {
+  margin-left: 0px; }
+
+.mright0 {
+  margin-right: 0px; }
+
 .ptop0 {
   padding-top: 0px; }
 
@@ -82,6 +75,12 @@ a {
 
 .mbot5 {
   margin-bottom: 5px; }
+
+.mleft5 {
+  margin-left: 5px; }
+
+.mright5 {
+  margin-right: 5px; }
 
 .ptop5 {
   padding-top: 5px; }
@@ -95,6 +94,12 @@ a {
 .mbot15 {
   margin-bottom: 15px; }
 
+.mleft15 {
+  margin-left: 15px; }
+
+.mright15 {
+  margin-right: 15px; }
+
 .ptop15 {
   padding-top: 15px; }
 
@@ -106,6 +111,12 @@ a {
 
 .mbot25 {
   margin-bottom: 25px; }
+
+.mleft25 {
+  margin-left: 25px; }
+
+.mright25 {
+  margin-right: 25px; }
 
 .ptop25 {
   padding-top: 25px; }
@@ -119,6 +130,12 @@ a {
 .mbot50 {
   margin-bottom: 50px; }
 
+.mleft50 {
+  margin-left: 50px; }
+
+.mright50 {
+  margin-right: 50px; }
+
 .ptop50 {
   padding-top: 50px; }
 
@@ -131,6 +148,12 @@ a {
 .mbot100 {
   margin-bottom: 100px; }
 
+.mleft100 {
+  margin-left: 100px; }
+
+.mright100 {
+  margin-right: 100px; }
+
 .ptop100 {
   padding-top: 100px; }
 
@@ -142,6 +165,12 @@ a {
 
 .mbot200 {
   margin-bottom: 200px; }
+
+.mleft200 {
+  margin-left: 200px; }
+
+.mright200 {
+  margin-right: 200px; }
 
 .ptop200 {
   padding-top: 200px; }
@@ -185,6 +214,18 @@ img.img-responsive {
 .text-center {
   text-align: center; }
 
+.thin {
+  font-weight: lighter; }
+
+.disabled {
+  color: #999999; }
+
+.has-error-text {
+  color: #a94442;
+  font-weight: lighter;
+  display: none;
+  transition: .5s all; }
+
 hr {
   border-color: #44494E; }
   hr.dotted {
@@ -214,6 +255,9 @@ hr {
   .fa-star.off {
     color: #BDBDBD; }
 
+.thin {
+  -webkit-font-smoothing: antialiased; }
+
 /*
  * Forms
  */
@@ -223,6 +267,9 @@ input, button, .btn, select, .form-control {
   -ms-border-radius: 0;
   border-radius: 0;
   font-size: 1.3em; }
+
+textarea.form-control {
+  height: 5em; }
 
 select {
   font-weight: 300; }
@@ -264,6 +311,13 @@ label {
     color: #222;
     border-color: #222; }
 
+.form-action-holder {
+  float: none;
+  margin-left: auto;
+  margin-right: auto; }
+  .form-action-holder a, .form-action-holder button {
+    float: none; }
+
 .select2-results li {
   color: #000; }
   .select2-results li .secondaryschoolinfo {
@@ -283,19 +337,20 @@ label {
 .btn {
   border: 0;
   color: #FFF;
-  font-weight: 300; }
+  font-weight: 300;
+  transition: all .3s; }
   .btn:hover, .btn:focus, .btn.focus {
     color: #FFF; }
   .btn:visited {
     color: white; }
   .btn.btn-primary {
-    background-color: #07ab4c; }
+    background-color: #21ab07; }
     .btn.btn-primary:hover {
-      background-color: #057a36; }
+      background-color: #187a05; }
   .btn.btn-notes {
-    background-color: #0a597b; }
+    background-color: #077dab; }
     .btn.btn-notes:hover {
-      background-color: #06374c; }
+      background-color: #05597a; }
   .btn.btn-minor {
     background-color: #d8d8d8;
     color: #000; }
@@ -335,16 +390,19 @@ nav.navbar {
     background-color: #0a597b; }
   nav.navbar .navbar-brand {
     height: auto;
-    width: 205px;
-    padding: 10px 15px 10px 0;
+    width: 232px;
+    padding: 7px 15px 7px 0;
     position: relative;
     z-index: 1000; }
     nav.navbar .navbar-brand img {
-      width: 100%; }
+      width: 100%;
+      transition: all .1s; }
+      nav.navbar .navbar-brand img:hover {
+        opacity: .8; }
   nav.navbar .nav > li > a {
-    padding-top: 23px;
-    padding-bottom: 23px;
-    font-size: 1.3em;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    font-size: 1.5em;
     color: white; }
     nav.navbar .nav > li > a:hover, nav.navbar .nav > li > a:focus {
       background-color: transparent;
@@ -391,7 +449,8 @@ nav.navbar {
     right: 0; }
     nav.navbar .nav.navbar-center > li {
       float: none;
-      display: inline-block; }
+      display: inline-block;
+      min-width: 100px; }
   nav.navbar .nav.status-bar {
     width: 268px; }
     nav.navbar .nav.status-bar > li {
@@ -438,23 +497,31 @@ nav.navbar {
  */
 .home-notes {
   padding: 15px 0 25px;
-  background-color: rgba(255, 255, 255, 0.3); }
+  background-color: #dfe5ea; }
+  .home-notes label {
+    color: #077dab; }
 
 .panel-heading {
   padding: 10px 0; }
 
-#lower-content a {
+.overlay-light a {
   text-decoration: underline;
   color: #FFF; }
 
-#lower-content a:hover {
+.overlay-light a:hover {
   color: #e6e6e6; }
 
+.middle-bar .lead {
+  margin-bottom: 10px; }
+
 /*
- * One Fact
+ * New Note
  */
 .add-new p {
   margin-bottom: 0; }
+
+.charity-description {
+  position: absolute; }
 
 /*
  * One Fact
@@ -465,7 +532,7 @@ nav.navbar {
   margin: auto; }
 
 /*
- * Acordion
+ * Accordion
  */
 .panel-group .panel {
   border: 0;
@@ -477,7 +544,8 @@ nav.navbar {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   -ms-box-shadow: none;
-  box-shadow: none; }
+  box-shadow: none;
+  margin-bottom: 50px; }
   .panel-group .panel .panel-heading {
     background: transparent;
     border-bottom: 1px solid #c2cdd6; }
@@ -569,14 +637,14 @@ nav.navbar {
     .results header.bottom {
       margin-top: 0;
       margin-bottom: -15px; }
+    .results header.top-search label {
+      color: #077dab; }
   .results main {
     background-color: #FFF; }
   .results hr, .results .hr-right, .results .hr-left {
     border-color: #c2cdd6; }
   .results main {
     background-color: #FFF; }
-  .results .fb-like {
-    float: right; }
   .results .pagination {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;
@@ -594,6 +662,11 @@ nav.navbar {
     .results .pagination > li.active a {
       background: #FFF;
       color: #000; }
+
+/* Alert  */
+.alert-success {
+  max-width: 400px;
+  display: none; }
 
 /* Footer Navigation */
 footer.footer {
@@ -621,6 +694,88 @@ footer.footer {
     margin: 0 5px;
     color: rgba(255, 255, 255, 0.2); }
 
+/* CSS Tooltip */
+.toolHolder {
+  cursor: help;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased;
+  /* webkit text rendering fix */ }
+
+.toolHolder .tooltip {
+  background: #dfe5ea;
+  font-size: 18px;
+  bottom: 100%;
+  font-family: 'Open Sans', sans-serif;
+  color: #000;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 20px;
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  -ms-transform: translateY(10px);
+  -o-transform: translateY(10px);
+  transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+  -moz-transition: all .25s ease-out;
+  -ms-transition: all .25s ease-out;
+  -o-transition: all .25s ease-out;
+  transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28); }
+
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.toolHolder .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%; }
+
+.tipSpace {
+  margin-top: 16px; }
+
+/* CSS Triangles - see Trevor's post */
+.toolHolder .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #dfe5ea 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 50%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0; }
+
+.toolHolder:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(0px);
+  -moz-transform: translateY(0px);
+  -ms-transform: translateY(0px);
+  -o-transform: translateY(0px);
+  transform: translateY(0px); }
+
+/* IE can just show/hide with no transition */
+.lte8 .toolHolder .tooltip {
+  display: none; }
+
+.lte8 .toolHolder:hover .tooltip {
+  display: block; }
+
+/* End Tooltip */
 /*
  * Media Queries
  */
@@ -633,7 +788,8 @@ footer.footer {
   .navbar .navbar-nav {
     display: inline-block;
     float: none;
-    vertical-align: top; }
+    vertical-align: top;
+    margin-right: -30px; }
   .navbar #navbar {
     text-align: center; }
 
@@ -689,7 +845,13 @@ footer.footer {
     margin-top: 100px; }
 
   .mbot100-sm {
-    margin-bottom: 100px; } }
+    margin-bottom: 100px; }
+
+  .charity-description {
+    position: inherit;
+    max-width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); } }
 @media (max-width: 768px) {
   h1 {
     font-size: 1.6em; }
@@ -758,7 +920,9 @@ footer.footer {
   nav.navbar {
     margin: 0; }
     nav.navbar .navbar-brand {
-      width: 200px; }
+      width: 150px;
+      padding: 15px 15px 10px 0;
+      height: 65px; }
     nav.navbar .nav.navbar-nav.navbar-center {
       top: 56px;
       text-align: inherit;
@@ -771,7 +935,7 @@ footer.footer {
       height: 0;
       bottom: -2px; }
       nav.navbar .nav.navbar-nav.browsesell > li.org-nav {
-        width: 40%; }
+        width: 50%; }
       nav.navbar .nav.navbar-nav.browsesell > li.org-nav.org-profile {
         display: none; }
       nav.navbar .nav.navbar-nav.browsesell > li > a {
@@ -821,4 +985,27 @@ footer.footer {
     display: inline-block;
     float: none; }
     footer.footer ul.footer-nav li > a {
-      line-height: 2.5em; } }
+      line-height: 2.5em; }
+
+  .charity-description {
+    position: inherit;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+
+  .middle-bar .tooltip {
+    width: 100vw;
+    position: fixed;
+    display: none; }
+
+  .middle-bar .toolHolder:nth-of-type(1) .tooltip {
+    left: -20%; }
+  .middle-bar .toolHolder:nth-of-type(1) .tooltip:after {
+    left: 16%; }
+
+  .middle-bar .toolHolder:nth-of-type(2) .tooltip {
+    left: -120%; }
+
+  .middle-bar .toolHolder:nth-of-type(3) .tooltip {
+    left: -220%; }
+  .middle-bar .toolHolder:nth-of-type(3) .tooltip:after {
+    left: 81%; } }

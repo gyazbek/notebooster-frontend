@@ -8,13 +8,14 @@ $dark-blue: rgb(10,89,123);
 $dark-grey: #30353A;
 $mid-grey: #44494E;
 $light-grey: #53585B;
-$main-green: rgb(7,171,76);
+$main-green: rgb(33,171,7);
 $bg-grey-light: rgb(223,229,234);
 $bg-grey-dark: rgb(194,205,214);
 $minor-grey: rgb(216,216,216);
 $muted: #a0a6aa;
 $twitter-color: #55ACEE;
 $facebook-color: #3b5998;
+$has-error-color: rgb(169, 68, 66);
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -53,25 +54,12 @@ $facebook-color: #3b5998;
 html, body {
 	font-family: Ubuntu;
 	background: rgba(25,31,36,1);
-	// background-image: url('../img/bg.png');
 	color: white;
 	height: 100%;
 	display: table;
 	width: 100%;
 }
-/*
-footer.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	height: 216px;
-}
-#wrap {
-  min-height: 100%;
-  height: auto;
-  margin: 0 auto -216px;
-  padding: 0 0 216px;
-}*/
+
 
 #wrap{
 	background: url(../img/noteboosterBG.png);
@@ -118,16 +106,21 @@ a {
 	background: $light-grey;
 }
 
-$allsteps: -25 0 5 15 25 50 100 200;
+$allsteps: 0 5 15 25 50 100 200;
 $mobilesteps: 0 15 25 50 100;
 @each $s in $allsteps {
 	.mtop#{$s} { margin-top: #{$s}px; }
 	.mbot#{$s} { margin-bottom: #{$s}px; }
+	.mleft#{$s} { margin-left: #{$s}px; }
+	.mright#{$s} { margin-right: #{$s}px; }
 	.ptop#{$s} { padding-top: #{$s}px; }
 	.pbot#{$s} { padding-bottom: #{$s}px; }
 }
 .pad15 {
 	padding: 15px;
+}
+.mbot-25 {
+	margin-bottom: -25px;
 }
 p {
 	color: white;
@@ -163,6 +156,18 @@ img.img-responsive {
 }
 .text-center {
 	text-align: center;
+}
+.thin {
+	font-weight: lighter;
+}
+.disabled {
+	color: rgb(153, 153, 153);
+}
+.has-error-text {
+	color: $has-error-color;
+	font-weight: lighter;
+	display: none;
+	transition: .5s all;
 }
 hr {
 	border-color: #44494E;
@@ -207,6 +212,10 @@ hr {
 	}
 }
 
+.thin {
+	-webkit-font-smoothing: antialiased;
+}
+
 /*
  * Forms
  */
@@ -215,6 +224,11 @@ input, button, .btn, select, .form-control {
 	@include border-radius(0);
 	font-size: 1.3em;
 }
+
+textarea.form-control {
+	height: 5em;
+}
+
 select {
 	font-weight: 300;
 }
@@ -256,6 +270,15 @@ label {
 	}
 }
 
+.form-action-holder {
+	float: none;
+  	margin-left: auto;
+  	margin-right: auto;
+
+  	a, button {
+  		float: none;
+  	}
+}
 
 .select2-results {
 	li {
@@ -281,6 +304,7 @@ label {
 	border: 0;
 	color: #FFF;
 	font-weight: 300;
+	transition: all .3s;
 
 	&:hover, &:focus, &.focus {
 		color: #FFF;
@@ -297,9 +321,9 @@ label {
 	}
 
 	&.btn-notes {
-		background-color: $dark-blue;
+		background-color: $light-blue;
 		&:hover {
-			background-color: darken( $dark-blue, 10% );
+			background-color: darken( $light-blue, 10% );
 		}
 	}
 
@@ -354,13 +378,17 @@ nav.navbar {
 
 	.navbar-brand {
 		height: auto;
-		width: 205px;
-		padding: 10px 15px 10px 0;
+		width: 232px;
+		padding: 7px 15px 7px 0;
 		position: relative;
 		z-index: 1000;
 
 		img {
 			width: 100%;
+			transition: all .1s;
+			&:hover {
+				opacity: .8;
+			}
 		}
 	}
 
@@ -369,9 +397,9 @@ nav.navbar {
 		>li {
 
 			>a {
-				padding-top: 23px;
-				padding-bottom: 23px;
-				font-size: 1.3em;
+				padding-top: 24px;
+				padding-bottom: 24px;
+				font-size: 1.5em;
 				color: white;
 
 				&:hover, &:focus {
@@ -382,7 +410,7 @@ nav.navbar {
 
 			.dropdown-menu {
 				@include border-radius(0);
-				@include box-shadow(0);
+				@include box-shadow(none);
 				margin-top: 4px;
 				border: none;
 				width: 260px;
@@ -431,6 +459,7 @@ nav.navbar {
 			>li {
 				float: none;
 				display: inline-block;
+				min-width: 100px;
 			}
 		}
 
@@ -508,25 +537,36 @@ nav.navbar {
 
 .home-notes {
 	padding: 15px 0 25px;
-	background-color: rgba(255,255,255,0.3);
+	background-color: $bg-grey-light;
+	label {
+		color: $light-blue;
+	}
 }
+
 .panel-heading {
 	padding: 10px 0;
 }
 
-#lower-content a{
+.overlay-light a{
 	text-decoration: underline;
 	color: #FFF;
 }
 
-#lower-content a:hover{color: darken( #fff, 10% )}
+.overlay-light a:hover {color: darken( #fff, 10% )}
+
+.middle-bar .lead {margin-bottom: 10px;}
+
+
 
 /*
- * One Fact
+ * New Note
  */
 
-.add-new p{margin-bottom: 0;}
+.add-new p {margin-bottom: 0;}
 
+.charity-description {
+	position: absolute;
+}
 
 /*
  * One Fact
@@ -539,7 +579,7 @@ margin: auto;
 }
 
 /*
- * Acordion
+ * Accordion
  */
 
 .panel-group .panel {
@@ -547,6 +587,7 @@ margin: auto;
 	background: transparent;
 	@include border-radius(0px);
 	@include box-shadow(none);
+	margin-bottom: 50px;
 
 	.panel-heading {
 		background: transparent;
@@ -637,7 +678,6 @@ margin: auto;
 
 .toggle-link.active {
 	color: #23527c;
-  	// text-decoration: underline;
 }
 
 .inbox-outbox-holder {
@@ -684,6 +724,9 @@ margin: auto;
 			margin-top: 0;
 			margin-bottom: -15px;
 		}
+		&.top-search label{
+			color: $light-blue;
+		}
  	}
 
  	main {
@@ -699,7 +742,7 @@ margin: auto;
  	}
 
  	.fb-like {
- 		float: right;
+ 		// float: right;
  	}
 
  	.pagination {
@@ -721,6 +764,11 @@ margin: auto;
  	}
 
  }
+
+/* Alert  */
+.alert-success { max-width: 400px; display: none;}
+
+
 
 /* Footer Navigation */
 
@@ -761,6 +809,96 @@ footer.footer {
 
 }
 
+
+/* CSS Tooltip */
+// TipHolder styles
+  .toolHolder {
+  cursor: help;
+  position: relative;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.toolHolder .tooltip {
+  background: $bg-grey-light;
+  font-size: 18px;
+  bottom: 100%;
+  font-family: 'Open Sans', sans-serif;
+  color: #000;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 20px;
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.toolHolder .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.tipSpace{margin-top: 16px;}
+
+/* CSS Triangles - see Trevor's post */
+.toolHolder .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid $bg-grey-light 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 50%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+
+.toolHolder:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+
+/* IE can just show/hide with no transition */
+.lte8 .toolHolder .tooltip {
+  display: none;
+}
+
+.lte8 .toolHolder:hover .tooltip {
+  display: block;
+}
+
+/* End Tooltip */
+
+
 /*
  * Media Queries
  */
@@ -779,6 +917,7 @@ footer.footer {
 	        display: inline-block;
 	        float: none;
 	        vertical-align: top;
+	        margin-right: -30px;
 	    }
 		#navbar {
 	        text-align: center;
@@ -814,6 +953,12 @@ footer.footer {
 	@each $s in $mobilesteps {
 		.mtop#{$s}-sm { margin-top: #{$s}px; }
 		.mbot#{$s}-sm { margin-bottom: #{$s}px; }
+	}
+	.charity-description {
+		position: inherit;
+		max-width: 100%;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+  		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 	}
 }
 @media (max-width: 768px) {
@@ -864,7 +1009,9 @@ footer.footer {
 		margin: 0;
 
 		.navbar-brand {
-			width: 200px;
+			  width: 150px;
+			  padding: 15px 15px 10px 0;
+			  height: 65px;
 		}
 		.nav.navbar-nav {
 			&.navbar-center {
@@ -881,7 +1028,7 @@ footer.footer {
 				bottom: -2px;
 
 			&.org-nav{
-			width: 40%;
+			width: 50%;
 		}
 		&.org-nav.org-profile{
 			display: none;
@@ -950,6 +1097,40 @@ footer.footer {
 			>a {
 				line-height: 2.5em;
 			}
+		}
+	}
+	.charity-description {
+		position: inherit;
+		border-top: 1px solid rgba(0, 0, 0, 0.1);
+  		border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.middle-bar .tooltip {
+		width: 100vw;
+		position: fixed;
+		display: none;
+	}
+
+	.middle-bar .toolHolder:nth-of-type(1) {
+		.tooltip {
+		  	left: -20%;
+	  	}
+		.tooltip:after {
+			left: 16%;
+		}
+	}
+	.middle-bar .toolHolder:nth-of-type(2) {
+		.tooltip {
+		  	left: -120%;
+	  	}
+	}
+
+	.middle-bar .toolHolder:nth-of-type(3) {
+		.tooltip {
+		  	left: -220%;
+	  	}
+		.tooltip:after {
+			left: 81%;
 		}
 	}
 }
