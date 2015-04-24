@@ -5,7 +5,7 @@ angular.module('angularNoteboosterApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  
+
 ])
 
 .config(function($stateProvider, $urlRouterProvider){
@@ -20,8 +20,8 @@ angular.module('angularNoteboosterApp', [
 });
 
      $urlRouterProvider.otherwise('/');
- 
- 
+
+
 
 
     $stateProvider
@@ -38,6 +38,21 @@ angular.module('angularNoteboosterApp', [
             },
             'footer': {
                 templateUrl: 'views/footer.html'
+            }
+        },
+        resolve: {
+          authenticated: ['djangoAuth', function(djangoAuth){
+            return djangoAuth.authenticationStatus();
+          }],
+        }
+      })
+
+        .state('app.new-note', {
+         url: 'new-note',
+         views: {
+            'content@': {
+                controller: 'NewNoteCtrl',
+                templateUrl: 'views/new-note.html'
             }
         },
         resolve: {
@@ -221,7 +236,7 @@ angular.module('angularNoteboosterApp', [
       },
       abstract: true
     });
-   
+
   })
   .run(function(djangoAuth){
     djangoAuth.initialize('//127.0.0.1:8000/rest-auth', false);
