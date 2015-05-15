@@ -9,7 +9,7 @@
  */
 angular.module('angularNoteboosterApp')
   .controller('RestrictedCtrl', function ($scope, $location) {
-    $scope.$on('djangoAuth.logged_in', function() {
+    $scope.$on('nbApiService.logged_in', function() {
       $location.path('/');
     });
   });

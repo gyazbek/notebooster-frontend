@@ -1,14 +1,15 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('PasswordchangeCtrl', function ($scope, nbApiService, Validate) {
-    $scope.model = {'new_password1':'','new_password2':''};
+  .controller('ContactCtrl', function ($scope, nbApiService, Validate) {
+    $scope.model = {'email':'', 'message':'', 'name':'', 'subject':''};
   	$scope.complete = false;
-    $scope.changePassword = function(formData){
+    $scope.contact = function(formData){
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid){
-        nbApiService.changePassword($scope.model.new_password1, $scope.model.new_password2)
+        
+        nbApiService.contact( $scope.model.email,$scope.model.message,$scope.model.name,$scope.model.subject)
         .then(function(data){
         	// success case
         	$scope.complete = true;
@@ -16,6 +17,8 @@ angular.module('angularNoteboosterApp')
         	// error case
         	$scope.errors = data;
         });
+      
       }
+
     }
   });

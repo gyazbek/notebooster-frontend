@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .service('djangoAuth', function djangoAuth($q, $http, $cookies, $rootScope) {
+  .service('nbApiService', function nbApiService($q, $http, $cookies, $rootScope) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var service = {
         /* START CUSTOMIZATION HERE */
@@ -79,7 +79,7 @@ angular.module('angularNoteboosterApp')
             });
         },
         'login': function(username,password){
-            var djangoAuth = this;
+            var nbApiService = this;
             return this.request({
                 'method': "POST",
                 'url': "/rest-auth/login/",
@@ -88,24 +88,24 @@ angular.module('angularNoteboosterApp')
                     'password':password
                 }
             }).then(function(data){
-                if(!djangoAuth.use_session){
+                if(!nbApiService.use_session){
                     $http.defaults.headers.common.Authorization = 'Token ' + data.key;
                     $cookies.token = data.key;
                 }
-                djangoAuth.authenticated = true;
-                $rootScope.$broadcast("djangoAuth.logged_in", data);
+                nbApiService.authenticated = true;
+                $rootScope.$broadcast("nbApiService.logged_in", data);
             });
         },
         'logout': function(){
-            var djangoAuth = this;
+            var nbApiService = this;
             return this.request({
                 'method': "POST",
                 'url': "/rest-auth/logout/"
             }).then(function(data){
                 delete $http.defaults.headers.common.Authorization;
                 delete $cookies.token;
-                djangoAuth.authenticated = false;
-                $rootScope.$broadcast("djangoAuth.logged_out");
+                nbApiService.authenticated = false;
+                $rootScope.$broadcast("nbApiService.logged_out");
             });
         },
         'changePassword': function(password1,password2){
@@ -177,6 +177,10 @@ angular.module('angularNoteboosterApp')
                 // We have a stored value which means we can pass it back right away.
                 if(this.authenticated == false && restrict){
                     getAuthStatus.reject("User is not logged in.");
+                    delete $http.defaults.headers.common.Authorization;
+                    delete $cookies.token;
+                    nbApiService.authenticated = false;
+                    $rootScope.$broadcast("nbApiService.logged_out");
                 }else{
                     getAuthStatus.resolve();
                 }
@@ -190,12 +194,32 @@ angular.module('angularNoteboosterApp')
                     da.authenticated = false;
                     if(restrict){
                         getAuthStatus.reject("User is not logged in.");
+                        delete $http.defaults.headers.common.Authorization;
+                        delete $cookies.token;
+                        nbApiService.authenticated = false;
+                        $rootScope.$broadcast("nbApiService.logged_out");
                     }else{
                         getAuthStatus.resolve();
                     }
                 });
             }
             return getAuthStatus.promise;
+        },
+        'contact': function(email,message,name,subject, more){
+           
+            var data = {
+                'email':email,
+                'message':message,
+                'subject':subject,
+                'name':name
+                
+            }
+            data = angular.extend(data,more);
+            return this.request({
+                'method': "POST",
+                'url': "/contact",
+                'data' :data
+            });
         },
         'initialize': function(url, sessions){
             this.API_URL = url;

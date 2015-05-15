@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('PasswordresetCtrl', function ($scope, djangoAuth, Validate) {
+  .controller('PasswordresetCtrl', function ($scope, nbApiService, Validate) {
     $scope.model = {'email':''};
   	$scope.complete = false;
     $scope.resetPassword = function(formData){
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid){
-        djangoAuth.resetPassword($scope.model.email)
+        nbApiService.resetPassword($scope.model.email)
         .then(function(data){
         	// success case
         	$scope.complete = true;

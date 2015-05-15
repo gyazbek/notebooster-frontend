@@ -1,19 +1,19 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('MasterCtrl', function ($scope, $location, djangoAuth) {
+  .controller('MasterCtrl', function ($scope, $location, nbApiService) {
     // Assume user is not logged in until we hear otherwise
     $scope.authenticated = false;
     // Wait for the status of authentication, set scope var to true if it resolves
-    djangoAuth.authenticationStatus(true).then(function(){
+    nbApiService.authenticationStatus(true).then(function(){
         $scope.authenticated = true;
     });
     // Wait and respond to the logout event.
-    $scope.$on('djangoAuth.logged_out', function() {
+    $scope.$on('nbApiService.logged_out', function() {
       $scope.authenticated = false;
     });
     // Wait and respond to the log in event.
-    $scope.$on('djangoAuth.logged_in', function() {
+    $scope.$on('nbApiService.logged_in', function() {
       $scope.authenticated = true;
     });
     // If the user attempts to access a restricted page, redirect them back to the main page.

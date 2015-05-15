@@ -5,7 +5,7 @@ angular.module('angularNoteboosterApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-
+  
 ])
 
 .config(function($stateProvider, $urlRouterProvider){
@@ -20,8 +20,8 @@ angular.module('angularNoteboosterApp', [
 });
 
      $urlRouterProvider.otherwise('/');
-
-
+ 
+ 
 
 
     $stateProvider
@@ -41,23 +41,8 @@ angular.module('angularNoteboosterApp', [
             }
         },
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
-          }],
-        }
-      })
-
-        .state('app.new-note', {
-         url: 'new-note',
-         views: {
-            'content@': {
-                controller: 'NewNoteCtrl',
-                templateUrl: 'views/new-note.html'
-            }
-        },
-        resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -66,13 +51,13 @@ angular.module('angularNoteboosterApp', [
          url: 'about',
          views: {
             'content@': {
-                controller: 'AboutCtrl',
+                
                 templateUrl: 'views/about.html'
             }
         },
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -86,8 +71,8 @@ angular.module('angularNoteboosterApp', [
             }
         },
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -101,8 +86,8 @@ angular.module('angularNoteboosterApp', [
             }
         },
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -116,8 +101,8 @@ angular.module('angularNoteboosterApp', [
             }
         },
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -131,8 +116,8 @@ angular.module('angularNoteboosterApp', [
             }
         },
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -141,8 +126,8 @@ angular.module('angularNoteboosterApp', [
          url: '/register',
         templateUrl: 'views/register.html',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -150,8 +135,8 @@ angular.module('angularNoteboosterApp', [
            url: '/passwordReset',
         templateUrl: 'views/passwordreset.html',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -159,8 +144,8 @@ angular.module('angularNoteboosterApp', [
            url: '/passwordResetConfirm/:firstToken/:passwordResetToken',
         templateUrl: 'views/passwordresetconfirm.html',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -168,8 +153,8 @@ angular.module('angularNoteboosterApp', [
            url: '/login',
         templateUrl: 'views/login.html',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -177,8 +162,8 @@ angular.module('angularNoteboosterApp', [
            url: '/verifyEmail/:emailVerificationToken',
         templateUrl: 'views/verifyemail.html',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -186,8 +171,8 @@ angular.module('angularNoteboosterApp', [
            url: '/logout',
         templateUrl: 'views/logout.html',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -195,8 +180,8 @@ angular.module('angularNoteboosterApp', [
            url: '/userProfile',
         templateUrl: 'views/userprofile.html',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -204,8 +189,8 @@ angular.module('angularNoteboosterApp', [
            url: '/passwordChange',
         templateUrl: 'views/passwordchange.html',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -214,8 +199,8 @@ angular.module('angularNoteboosterApp', [
         templateUrl: 'views/restricted.html',
         controller: 'RestrictedCtrl',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus();
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
           }],
         }
       })
@@ -224,8 +209,8 @@ angular.module('angularNoteboosterApp', [
         templateUrl: 'views/authrequired.html',
         controller: 'AuthrequiredCtrl',
         resolve: {
-          authenticated: ['djangoAuth', function(djangoAuth){
-            return djangoAuth.authenticationStatus(true);
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus(true);
           }],
         }
       }).state("modals", {
@@ -236,8 +221,9 @@ angular.module('angularNoteboosterApp', [
       },
       abstract: true
     });
-
+   
   })
-  .run(function(djangoAuth){
-    djangoAuth.initialize('//127.0.0.1:8000/rest-auth', false);
+  .run(function(nbApiService){
+   
+    nbApiService.initialize('http://23.102.158.243', false);
   });

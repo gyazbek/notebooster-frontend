@@ -1,56 +1,79 @@
-<div class="container results mtop25 mbot25 outline">
+<div class="container results mtop25 mbot25">
 		<h1>Contact Us</h1>
-		<p class="mbot50">Tell us whatever is on your mind. We welcome all feedback.</p>
+		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+		<h2>Category Title</h2>
+		<p><strong>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</strong></p>
+		<p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes
+			demonstraverunt lectores legere me lius quod ii legunt saepius. Typi non habent claritatem insitam; est
+			usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius
+			quod ii legunt saepius. Claritas est etiam processus dynamicus</p>
+		
 		<hr class="mtop25 mbot15">
-
+		<h2>Category Title</h2>
+		
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3">
-				<form method="post" action="">
+				<form ng-controller="ContactCtrl" name="contactForm" role="form" ng-submit="contact(contactForm)" novalidate>
 					<div class="form-group">
-						<label for="cont-message">Message*:</label>
-						<textarea name="cont-message" class="form-control"></textarea>
+					 <div class="alert alert-danger" ng-repeat="error in errors.message">{{error}}</div>
+						<label for="cont-message">Message:</label>
+						<textarea name="message" class="form-control" ng-model="model.message" required ></textarea>
 					</div>
 					<div class="form-group">
-						<label name="cont-subject">Subject*:</label>
-						<select class="form-control" name="cont-subject">
-							<option value="0">Please select a subject</option>
-							<option>Idea</option>
-							<option>Problem</option>
-							<option>Question</option>
-							<option>Praise</option>
+					 <div class="alert alert-danger" ng-repeat="error in errors.subject">{{error}}</div>
+						<label name="cont-subject">Subject:</label>
+						<select class="form-control" name="subject" ng-model="model.subject" required placeholder="Please select a subject">
+							<option value="Suggestion">Suggestion</option>
 						</select>
 					</div>
 					<div class="form-group">
 						<label for="cont-name">Your Name:</label>
-						<input type="text" name="cont-name" class="form-control" />
+						<input type="text" name="name" class="form-control"  ng-model="model.name" />
 					</div>
 					<div class="form-group">
-						<label for="cont-email">Your Email*:</label>
-						<input type="email" name="cont-email" class="form-control" />
+						<label for="cont-email">Your Email:</label>
+						<input type="email" name="email" class="form-control" ng-model="model.email" />
 					</div>
 						<div class="row">
 							<div class="col-sm-6 col-sm-offset-3">
 								<button type="submit" class="btn btn-primary btn-block">Send</button>
 							</div>
 						</div>
+						<div ng-if="complete == true">
+        <div class="alert alert-success">Message Sent!</div>
+    </div>
+					      <div class="alert alert-danger" ng-repeat="error in errors.non_field_errors">{{error}}</div>
+					      <div class="alert alert-danger" ng-if="error">{{error}}</div>
 				</form>
 			</div>
 		</div>
-
+		
 		<hr class="mtop25 mbot15">
-		<h2>Contact Information</h2>
-
+		<h2>Category Title</h2>
+		
 		<div class="row mtop25 mbot25">
-			<div class="col-sm-10">
+			<div class="col-sm-10 col-sm-offset-1">
 				<div class="row">
 					<div class="col-sm-4 col-xs-12">
-						<!-- <p class="lead mbot15">Nam liber tempor</p> -->
-						<p>PO Box 20845 Tallahassee, FL 32316</p>
-						<p>(650) 564-7104</p>
-						<p>contact@notebooster.com</p>
+						<p class="lead mbot15">Nam liber tempor</p>
+						<p>Main Office</p>
+						<p>000-000-0000</p>
+						<p>email@email.com</p>
+					</div>
+					<div class="col-sm-4 col-xs-12">
+						<p class="lead mbot15">Nam liber tempor</p>
+						<p>Main Office</p>
+						<p>000-000-0000</p>
+						<p>email@email.com</p>
+					</div>
+					<div class="col-sm-4 col-xs-12">
+						<p class="lead mbot15">Nam liber tempor</p>
+						<p>Main Office</p>
+						<p>000-000-0000</p>
+						<p>email@email.com</p>
 					</div>
 				</div>
 			</div>
 		</div>
-
+		
 	</div>

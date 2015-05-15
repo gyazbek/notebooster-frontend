@@ -1,32 +1,32 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('MainCtrl', function ($scope, $cookies, $location, djangoAuth) {
+  .controller('MainCtrl', function ($scope, $cookies, $location, nbApiService) {
     
     $scope.login = function(){
-      djangoAuth.login(prompt('Username'),prompt('password'))
+      nbApiService.login(prompt('Username'),prompt('password'))
       .then(function(data){
         handleSuccess(data);
       },handleError);
     }
     
     $scope.logout = function(){
-      djangoAuth.logout()
+      nbApiService.logout()
       .then(handleSuccess,handleError);
     }
     
     $scope.resetPassword = function(){
-      djangoAuth.resetPassword(prompt('Email'))
+      nbApiService.resetPassword(prompt('Email'))
       .then(handleSuccess,handleError);
     }
     
     $scope.register = function(){
-      djangoAuth.register(prompt('Username'),prompt('Password'),prompt('Email'))
+      nbApiService.register(prompt('Username'),prompt('Password'),prompt('Email'))
       .then(handleSuccess,handleError);
     }
     
     $scope.verify = function(){
-      djangoAuth.verify(prompt("Please enter verification code"))
+      nbApiService.verify(prompt("Please enter verification code"))
       .then(handleSuccess,handleError);
     }
     
@@ -35,22 +35,22 @@ angular.module('angularNoteboosterApp')
     }
     
     $scope.changePassword = function(){
-      djangoAuth.changePassword(prompt("Password"), prompt("Repeat Password"))
+      nbApiService.changePassword(prompt("Password"), prompt("Repeat Password"))
       .then(handleSuccess,handleError);
     }
     
     $scope.profile = function(){
-      djangoAuth.profile()
+      nbApiService.profile()
       .then(handleSuccess,handleError);
     }
     
     $scope.updateProfile = function(){
-      djangoAuth.updateProfile({'first_name': prompt("First Name"), 'last_name': prompt("Last Name"), 'email': prompt("Email")})
+      nbApiService.updateProfile({'first_name': prompt("First Name"), 'last_name': prompt("Last Name"), 'email': prompt("Email")})
       .then(handleSuccess,handleError);
     }
     
     $scope.confirmReset = function(){
-      djangoAuth.confirmReset(prompt("Code 1"), prompt("Code 2"), prompt("Password"), prompt("Repeat Password"))
+      nbApiService.confirmReset(prompt("Code 1"), prompt("Code 2"), prompt("Password"), prompt("Repeat Password"))
       .then(handleSuccess,handleError);
     }
 
@@ -67,10 +67,10 @@ angular.module('angularNoteboosterApp')
     }
 
     $scope.show_login = true;
-    $scope.$on("djangoAuth.logged_in", function(data){
+    $scope.$on("nbApiService.logged_in", function(data){
       $scope.show_login = false;
     });
-    $scope.$on("djangoAuth.logged_out", function(data){
+    $scope.$on("nbApiService.logged_out", function(data){
       $scope.show_login = true;
     });
 

@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('PasswordresetconfirmCtrl', function ($scope, $routeParams, djangoAuth, Validate) {
+  .controller('PasswordresetconfirmCtrl', function ($scope, $routeParams, nbApiService, Validate) {
     $scope.model = {'new_password1':'','new_password2':''};
   	$scope.complete = false;
     $scope.confirmReset = function(formData){
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid){
-        djangoAuth.confirmReset($routeParams['firstToken'], $routeParams['passwordResetToken'], $scope.model.new_password1, $scope.model.new_password2)
+        nbApiService.confirmReset($routeParams['firstToken'], $routeParams['passwordResetToken'], $scope.model.new_password1, $scope.model.new_password2)
         .then(function(data){
         	// success case
         	$scope.complete = true;
