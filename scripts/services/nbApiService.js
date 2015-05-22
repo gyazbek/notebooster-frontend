@@ -221,6 +221,23 @@ angular.module('angularNoteboosterApp')
                 'data' :data
             });
         },
+
+        'browseNotes': function(school, course, more){
+           
+            // var data = {
+            //     'email':email,
+            //     'message':message,
+            //     'subject':subject,
+            //     'name':name
+                
+            // }
+            //data = angular.extend(data,more);
+            return this.request({
+                'method': "GET",
+                'url': "/note/",
+                // 'data' :data
+            });
+        },
         'initialize': function(url, sessions){
             this.API_URL = url;
             this.use_session = sessions;

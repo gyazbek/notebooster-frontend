@@ -78,21 +78,6 @@ angular.module('angularNoteboosterApp', [
         }
       })
 
-     .state('app.browse', {
-         url: 'browse?schoolId&courseId',
-         views: {
-            'content@': {
-                controller: 'BrowseCtrl',
-                templateUrl: 'views/browse.html'
-            }
-        },
-        resolve: {
-          authenticated: ['nbApiService', function(nbApiService){
-            return nbApiService.authenticationStatus();
-          }],
-        }
-      })
-
           .state('app.legal', {
          url: 'legal',
          views: {
