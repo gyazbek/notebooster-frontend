@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('PasswordchangeCtrl', function ($scope, nbApiService, Validate) {
+  .controller('PasswordSettingsCtrl', function ($scope, nbApiService, Validate) {
     $scope.model = {'new_password1':'','new_password2':''};
   	$scope.complete = false;
     $scope.changePassword = function(formData){

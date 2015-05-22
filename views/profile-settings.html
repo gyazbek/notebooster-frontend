@@ -1,0 +1,83 @@
+<div class="container mtop25 pbot25">
+		<div class="row">
+			<div class="row">
+				<div class="col-sm-9">
+					<div class="results pad15 title-block outline">
+						<h1>Profile Settings</h1>
+						<!-- <p class="muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p> -->
+						<div class="row mtop25">
+							<div class="col-sm-3 col-sm-offset-0 col-xs-8 col-xs-offset-2 mtop25-xs">
+								<img src="img/profile.png" alt="" class="img-responsive" alt="Profile Picture" />
+								<button class="btn btn-minor btn-block mtop25">Upload Image</button>
+								<div class="has-error-text" id="upload-error">Error</div>
+							</div>
+							<div class="clearfix"></div>
+							<hr>
+						</div>
+						<form>
+							<div class="form-group">
+								<label for="bio">Bio</label>
+								<textarea name="bio" class="form-control"></textarea>
+								<div class="has-error-text" id="bio-error">Error</div>
+							</div>
+							<hr>
+							<div class="form-group">
+								<label for="username">User Name</label>
+								<input type="text" name="username" class="form-control">
+								<div class="has-error-text" id="user-error">Error</div>
+							</div>
+							<hr>
+							<div class="form-group">
+								<label for="default-school">Default School</label>
+								<select class="school-select-box form-control" name="school"></select>
+								<div class="has-error-text" id="school-error">Error</div>
+							</div>
+							<div class="form-group">
+								<label for="email">Email Address</label>
+								<input type="text" name="email" class="form-control" />
+								<div class="has-error-text" id="terms-error">Error</div>
+							</div>
+							<div class="form-group">
+								<label for="notifications">
+									<input type="checkbox" name="notifications" id="notifications" />
+									Send notifications by email
+								</label>
+							</div>
+							<hr>
+							<div class="row">
+								<div class="col-sm-6 col-sm-offset-3">
+									<button type="submit" class="btn btn-block btn-primary">Save Settings</button>
+								</div>
+							</div>
+							<hr>
+							<p clas="text-center mtop25"><a href="#" data-toggle="modal" data-target="#disablemyaccount">Disable My Account</a></p>
+													</form>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="row">
+	<div class="col-md-12 col-sm-6 col-xs-12">
+		<div class="results pad15 mbot25 mtop25-xs">
+			<h3>Settings</h3>
+			<hr>
+			<p><a ui-sref="app.profile-settings">Profile Settings</a></p>
+			<p><a ui-sref="app.password-settings" >Password</a></p>
+			<p><a href="payment-info">Payment Info</a></p>
+		</div>
+	</div>
+	<div class="col-md-12 col-sm-6 col-xs-12">
+		<div class="results pad15 mbot25">
+			<h3>Dashboard</h3>
+			<hr>
+			<p><a href="notes-purchased">Notes Purchased</a></p>
+			<p><a href="notes-for-sale">Notes for Sale</a></p>
+			<p><a href="watch-list">Watch List</a></p>
+			<p><a href="messages">Messages</a></p>
+		</div>
+	</div>
+</div>				</div>
+			</div>
+		</div>
+	</div>
+
+	</div>

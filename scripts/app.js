@@ -58,7 +58,7 @@ angular.module('angularNoteboosterApp', [
         },
         resolve: {
           authenticated: ['nbApiService', function(nbApiService){
-            return nbApiService.authenticationStatus();
+            return nbApiService.authenticationStatus(true);
           }],
         }
       })
@@ -84,6 +84,53 @@ angular.module('angularNoteboosterApp', [
             'content@': {
                 controller: 'BrowseCtrl',
                 templateUrl: 'views/browse.html'
+            }
+        },
+        resolve: {
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
+          }],
+        }
+      })
+      .state('app.note', {
+         url: 'note',
+         views: {
+            'content@': {
+                controller: 'NoteCtrl',
+                templateUrl: 'views/note.html'
+            }
+        },
+        resolve: {
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
+          }],
+        }
+      })
+
+
+      
+
+       .state('app.profile-settings', {
+         url: 'profile-settings',
+         views: {
+            'content@': {
+                controller: 'ProfileSettingsCtrl',
+                templateUrl: 'views/profile-settings.html'
+            }
+        },
+        resolve: {
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
+          }],
+        }
+      })
+
+       .state('app.password-settings', {
+         url: 'password-settings',
+         views: {
+            'content@': {
+                controller: 'PasswordSettingsCtrl',
+                templateUrl: 'views/password-settings.html'
             }
         },
         resolve: {
