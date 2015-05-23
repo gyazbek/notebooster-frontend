@@ -92,12 +92,13 @@ angular.module('angularNoteboosterApp', [
           }],
         }
       })
-      .state('app.note', {
-         url: 'note',
+
+      .state('app.note-details', {
+         url: 'note-details',
          views: {
             'content@': {
-                controller: 'NoteCtrl',
-                templateUrl: 'views/note.html'
+                controller: 'NoteDetailsCtrl',
+                templateUrl: 'views/notedetails.html'
             }
         },
         resolve: {
@@ -108,7 +109,99 @@ angular.module('angularNoteboosterApp', [
       })
 
 
+
+      .state('app.payment-settings', {
+         url: 'payment-settings',
+         views: {
+            'content@': {
+                controller: 'PaymentSettingsCtrl',
+                templateUrl: 'views/payment-settings.html'
+            }
+        },
+        resolve: {
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
+          }],
+        }
+      })
+
+
+      .state('app.new-note', {
+         url: 'new-note',
+         views: {
+            'content@': {
+                controller: 'NewNoteCtrl',
+                templateUrl: 'views/new-note.html'
+            }
+        },
+        resolve: {
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
+          }],
+        }
+      })
+
+      .state('app.notes-forsale', {
+         url: 'notes-forsale',
+         views: {
+            'content@': {
+                controller: 'NotesForSaleCtrl',
+                templateUrl: 'views/notes-forsale.html'
+            }
+        },
+        resolve: {
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
+          }],
+        }
+      })
+
+      .state('app.notes-purchased', {
+         url: 'notes-purchased',
+         views: {
+            'content@': {
+                controller: 'NotesPurchasedCtrl',
+                templateUrl: 'views/notes-purchased.html'
+            }
+        },
+        resolve: {
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
+          }],
+        }
+      })
+
+
+
+      .state('app.watch-list', {
+         url: 'watch-list',
+         views: {
+            'content@': {
+                controller: 'WatchlistCtrl',
+                templateUrl: 'views/watch-list.html'
+            }
+        },
+        resolve: {
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
+          }],
+        }
+      })
       
+            .state('app.messages', {
+         url: 'messages',
+         views: {
+            'content@': {
+                controller: 'MessagesCtrl',
+                templateUrl: 'views/messages.html'
+            }
+        },
+        resolve: {
+          authenticated: ['nbApiService', function(nbApiService){
+            return nbApiService.authenticationStatus();
+          }],
+        }
+      })
 
        .state('app.profile-settings', {
          url: 'profile-settings',

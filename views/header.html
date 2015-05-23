@@ -6,7 +6,7 @@
           <ul class="nav navbar-nav navbar-center browsesell">
          
               <li><a ui-sref="app.browse">Browse</a></li>
-              <li><a ui-sref="app.sell">Sell</a></li>
+              <li><a ui-sref="app.new-note">Sell</a></li>
        
           </ul>
           <ul class="nav navbar-nav navbar-right status-bar">
@@ -31,21 +31,25 @@
         </a>
         <div id="navbar">
           <ul class="nav navbar-nav navbar-center browsesell">
-                          <li><a href="browse-notes">Browse</a></li>
-              <li><a href="new-note">Sell</a></li>
+             <li><a ui-sref="app.browse">Browse</a></li>
+              <li><a ui-sref="app.new-note">Sell</a></li>
                       </ul>
           <ul class="nav navbar-nav navbar-right status-bar">
                           <li class="dropdown profile">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                   <img src="img/profile.png" class="img-responsive" alt="Gricha2380 Profile Picture">
                 </a>
                   <span>gricha2380</span>
                   <span class="user-email-minor">gricha2380@gmail.com</span>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="notes-purchased">Notes Purchased</a></li>
-                    <li><a href="notes-for-sale">Notes for Sale</a></li>
-                    <li><a href="watch-list">Watch List</a></li>
-                    <li><a href="messages">Messages <span class="notification">4</span></a></li>
+    
+
+                     <li><a ui-sref="app.notes-purchased">Notes Purchased</a></li>
+                    <li><a ui-sref="app.notes-forsale">Notes for Sale</a></li>
+                    <li><a ui-sref="app.watch-list">Watch List</a></li>
+                    <li><a ui-sref="app.messages">Messages <span class="notification">4</span></a></li>
+                 
+
                     <li class="divider"></li>
                     <li><a ui-sref="app.profile-settings">Edit Settings</a></li>
                     <li class="divider"></li>
