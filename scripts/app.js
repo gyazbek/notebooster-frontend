@@ -52,7 +52,7 @@ angular.module('angularNoteboosterApp', [
          url: 'about',
          views: {
             'content@': {
-                
+                controller: 'AboutCtrl',
                 templateUrl: 'views/about.html'
             }
         },

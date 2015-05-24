@@ -21,26 +21,13 @@
 					legunt saepius.</p>
 			</div>
 		</div>
-		<div class="row vertical-align normalize-xs mtop15 mbot15">
+    <div class="row vertical-align normalize-xs mtop15 mbot15" ng-repeat="item in aboutItems">
 			<div class="col-sm-3 col-sm-offset-0 col-xs-8 col-xs-offset-2">
-				<img src="http://placehold.it/300x300" class="img-responsive" alt="" />
+				<img ng-src="{{item.imageUrl}}" class="img-responsive" alt="" />
 			</div>
 			<div class="col-sm-9 col-xs-12">
-				<p class="lead">Nam liber tempor cum soluta nobis eleifend option congue</p>
-				<p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum
-					claritatem. Investigationes demonstraverunt lectores legere me lius quod ii
-					legunt saepius.</p>
-			</div>
-		</div>
-		<div class="row vertical-align normalize-xs mtop15 mbot15">
-			<div class="col-sm-3 col-sm-offset-0 col-xs-8 col-xs-offset-2">
-				<img src="http://placehold.it/300x300" class="img-responsive" alt="" />
-			</div>
-			<div class="col-sm-9 col-xs-12">
-				<p class="lead">Nam liber tempor cum soluta nobis eleifend option congue</p>
-				<p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum
-					claritatem. Investigationes demonstraverunt lectores legere me lius quod ii
-					legunt saepius.</p>
+				<p class="lead">{{item.name}}</p>
+				<p>{{item.description}}</p>
 			</div>
 		</div>
 		<p class="lead mtop50">Nam liber tempor cum soluta nobis eleifend option congue</p>
