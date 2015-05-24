@@ -98,5 +98,19 @@
                 <div class="clearfix"></div>
             </div>
             <p class="text-right mtop25 mbot50"><a href="organization-partnerships">View All Partners</a></p>
+          
+          <div class="row">
+            <div class="col-xs-4" ng-repeat="org in organizations">
+            <div>
+              <img src="http://placehold.it/500x300" class="img-responsive" alt="" />
+            </div>
+            <div>
+              <p class="lead">{{org.name}}</p>
+              <p>{{org.contact_email}}</p>
+              <p>{{org.contact_person}}</p>
+              <p>{{org.fact}}</p>
+            </div>
+              </div>
+          </div>
         </div>
     </div>

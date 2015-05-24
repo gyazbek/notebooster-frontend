@@ -41,7 +41,7 @@ angular.module('angularNoteboosterApp')
       'http://23.102.158.243/school',
       {params: params}
     ).then(function(response) {
-      $scope.schools = response.data.results
+      $scope.schools = response.data.results;
     });
   };
 
@@ -153,5 +153,8 @@ angular.module('angularNoteboosterApp')
     $scope.$on("nbApiService.logged_out", function(data){
       $scope.show_login = true;
     });
-
+  
+    $http.get('http://23.102.158.243:80/organizations/').success(function(data) {
+      $scope.organizations = data;
+    });
   });
