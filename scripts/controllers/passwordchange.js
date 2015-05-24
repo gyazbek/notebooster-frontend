@@ -11,6 +11,7 @@ angular.module('angularNoteboosterApp')
         nbApiService.changePassword($scope.model.new_password1, $scope.model.new_password2)
         .then(function(data){
         	// success case
+          console.log (data.success);
         	$scope.complete = true;
         },function(data){
         	// error case

@@ -666,7 +666,7 @@ nav.navbar {
 /* Alert  */
 .alert-success {
   max-width: 400px;
-  display: none; }
+}
 
 /* Footer Navigation */
 footer.footer {
