@@ -1,0 +1,51 @@
+[
+  {
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "title": "Best Financial Accounting Note in FSU",
+      "description": "This is the best set of FIN3344 Notes available anywhere\r\n\r\nI guarantee it!",
+      "page_count": 22,
+      "price": 6,
+      "kind": "Notes",
+      "term": "Spring",
+      "year": 2015,
+      "school": {
+        "id": 405,
+        "state": "FL",
+        "name": "Florida State University - FSU",
+        "city": "Tallahassee"
+      },
+      "user": {
+        "id": 2,
+        "username": "gui",
+        "profile": {
+          "profile_picture": "https://notebooster.blob.core.windows.net/general-storage/images/cabinets.jpg?st=2015-05-24T22%3A00%3A50Z&se=2015-05-24T23%3A00%3A50Z&sp=r&sr=b&sv=2014-02-14&sig=Il5eQaYK7Yv2RNC7r8r93rbw3Z4YB9biTm2eliTcScM%3D&",
+          "paypal_email": "guicansado@hotmail.com"
+        },
+        "organization": {
+          "name": "http://whoweplayfor.com/",
+          "contact_email": "",
+          "contact_person": "",
+          "fact": "Awesome People Do Awesome things"
+        },
+        "account_type": ""
+      },
+      "course": {
+        "id": 1,
+        "school": 405,
+        "subject": 1,
+        "name": "FIN3344",
+        "title": "Financial Accounting of the Firm"
+      },
+      "instructor": {
+        "id": 1,
+        "name": "Tobias Mostel"
+      }
+    }
+  ]
+}
+]
