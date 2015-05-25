@@ -9,149 +9,45 @@
 								<!-- <p class="lead muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
 							</div>
 							<div class="col-xs-3 text-right mtop25-sm mbot25-sm">
-								<p class="lead mbot0">42 Items</p>
+								<p class="lead mbot0">{{itemCount}} Items</p>
 							</div>
 							<div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
-								<select class="form-control">
-									<option '0'>Newest First</option>
-									<option '0'>Lowest Price</option>
-									<option '0'>Highest Price</option>
+								<select class="form-control" ng-model="orderProp">
+									<option value="date">Newest First</option>
+									<option value="notePrice">Lowest Price</option>
+									<option value="-notePrice">Highest Price</option>
 								</select>
 							</div>
 						</section>
 						<main class="row less-spacing">
 							<div class="col-xs-12">
-																	<div class="row vertical-align normalize-xs lined">
+									<div class="row vertical-align normalize-xs lined" ng-repeat="note in notesPurchased | orderBy:orderProp">
 										<div class="col-sm-2 col-xs-0 hidden-xs text-center">
 											<div class="row">
 												<div class="col-xs-10 col-xs-offset-1">
 													<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
 												</div>
 											</div>
-											<p class="mtop15"><a href="user-profile">GRicha2380</a></p>
+											<p class="mtop15"><a href="user-profile">{{note.userName}}</a></p>
 										</div>
 										<div class="col-sm-2 col-xs-0 hidden-xs">
-											<p class="large muted hidden-xs text-center">$7.49</p>
+											<p class="large muted hidden-xs text-center">{{note.notePrice | currency}}</p>
 										</div>
 										<div class="col-md-5 col-sm-7 col-xs-12 mtop15 mbot5">
-											<p class="lead"><a href="note-details">Title of Note File Goes Here</a></p>
-											<p class="visible-xs lead">$7.49</p>
-											<p class="visible-xs muted">Provided by: <a href="user-profile">GRicha2380</a></p>
-											<p>Date: Feb. 21, 2015</p>
-											<p>Course: MAR4613</p>
-											<p>Instructor: Ronald Goldsmith</p>
+											<p class="lead"><a href="note-details">{{note.noteTitle}}</a></p>
+											<p class="visible-xs lead">{{note.notePrice | currency}}</p>
+											<p class="visible-xs muted">Provided by: <a href="user-profile">{{note.providedBy}}</a></p>
+											<p>Date: {{note.date}}</p>
+											<p>Course: {{note.course}}</p>
+											<p>Instructor: {{note.instructor}}</p>
 										</div>
 										<div class="col-sm-3 col-xs-12 text-center mtop5 mbot5 mtop25-xs">
 											<button class="btn btn-minor btn-block" data-toggle="modal" data-target="#ratenote">Rate</button>
 											<button class="btn btn-primary btn-block">Download <i class="fa fa-arrow-down"></i></button>
-																						<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
+										  <p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
 										</div>
 									</div>
-																	<div class="row vertical-align normalize-xs lined">
-										<div class="col-sm-2 col-xs-0 hidden-xs text-center">
-											<div class="row">
-												<div class="col-xs-10 col-xs-offset-1">
-													<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
-												</div>
-											</div>
-											<p class="mtop15"><a href="user-profile">GRicha2380</a></p>
-										</div>
-										<div class="col-sm-2 col-xs-0 hidden-xs">
-											<p class="large muted hidden-xs text-center">$7.49</p>
-										</div>
-										<div class="col-md-5 col-sm-7 col-xs-12 mtop15 mbot5">
-											<p class="lead"><a href="note-details">Title of Note File Goes Here</a></p>
-											<p class="visible-xs lead">$7.49</p>
-											<p class="visible-xs muted">Provided by: <a href="user-profile">GRicha2380</a></p>
-											<p>Date: Feb. 21, 2015</p>
-											<p>Course: MAR4613</p>
-											<p>Instructor: Ronald Goldsmith</p>
-										</div>
-										<div class="col-sm-3 col-xs-12 text-center mtop5 mbot5 mtop25-xs">
-											<button class="btn btn-minor btn-block" data-toggle="modal" data-target="#ratenote">Rate</button>
-											<button class="btn btn-primary btn-block">Download <i class="fa fa-arrow-down"></i></button>
-																						<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
-										</div>
-									</div>
-																	<div class="row vertical-align normalize-xs lined">
-										<div class="col-sm-2 col-xs-0 hidden-xs text-center">
-											<div class="row">
-												<div class="col-xs-10 col-xs-offset-1">
-													<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
-												</div>
-											</div>
-											<p class="mtop15"><a href="user-profile">GRicha2380</a></p>
-										</div>
-										<div class="col-sm-2 col-xs-0 hidden-xs">
-											<p class="large muted hidden-xs text-center">$7.49</p>
-										</div>
-										<div class="col-md-5 col-sm-7 col-xs-12 mtop15 mbot5">
-											<p class="lead"><a href="note-details">Title of Note File Goes Here</a></p>
-											<p class="visible-xs lead">$7.49</p>
-											<p class="visible-xs muted">Provided by: <a href="user-profile">GRicha2380</a></p>
-											<p>Date: Feb. 21, 2015</p>
-											<p>Course: MAR4613</p>
-											<p>Instructor: Ronald Goldsmith</p>
-										</div>
-										<div class="col-sm-3 col-xs-12 text-center mtop5 mbot5 mtop25-xs">
-											<button class="btn btn-minor btn-block" data-toggle="modal" data-target="#ratenote">Rate</button>
-											<button class="btn btn-primary btn-block">Download <i class="fa fa-arrow-down"></i></button>
-																						<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
-										</div>
-									</div>
-																	<div class="row vertical-align normalize-xs lined">
-										<div class="col-sm-2 col-xs-0 hidden-xs text-center">
-											<div class="row">
-												<div class="col-xs-10 col-xs-offset-1">
-													<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
-												</div>
-											</div>
-											<p class="mtop15"><a href="user-profile">GRicha2380</a></p>
-										</div>
-										<div class="col-sm-2 col-xs-0 hidden-xs">
-											<p class="large muted hidden-xs text-center">$7.49</p>
-										</div>
-										<div class="col-md-5 col-sm-7 col-xs-12 mtop15 mbot5">
-											<p class="lead"><a href="note-details">Title of Note File Goes Here</a></p>
-											<p class="visible-xs lead">$7.49</p>
-											<p class="visible-xs muted">Provided by: <a href="user-profile">GRicha2380</a></p>
-											<p>Date: Feb. 21, 2015</p>
-											<p>Course: MAR4613</p>
-											<p>Instructor: Ronald Goldsmith</p>
-										</div>
-										<div class="col-sm-3 col-xs-12 text-center mtop5 mbot5 mtop25-xs">
-											<button class="btn btn-minor btn-block" data-toggle="modal" data-target="#ratenote">Rate</button>
-											<button class="btn btn-primary btn-block">Download <i class="fa fa-arrow-down"></i></button>
-																						<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
-										</div>
-									</div>
-																	<div class="row vertical-align normalize-xs lined">
-										<div class="col-sm-2 col-xs-0 hidden-xs text-center">
-											<div class="row">
-												<div class="col-xs-10 col-xs-offset-1">
-													<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
-												</div>
-											</div>
-											<p class="mtop15"><a href="user-profile">GRicha2380</a></p>
-										</div>
-										<div class="col-sm-2 col-xs-0 hidden-xs">
-											<p class="large muted hidden-xs text-center">$7.49</p>
-										</div>
-										<div class="col-md-5 col-sm-7 col-xs-12 mtop15 mbot5">
-											<p class="lead"><a href="note-details">Title of Note File Goes Here</a></p>
-											<p class="visible-xs lead">$7.49</p>
-											<p class="visible-xs muted">Provided by: <a href="user-profile">GRicha2380</a></p>
-											<p>Date: Feb. 21, 2015</p>
-											<p>Course: MAR4613</p>
-											<p>Instructor: Ronald Goldsmith</p>
-										</div>
-										<div class="col-sm-3 col-xs-12 text-center mtop5 mbot5 mtop25-xs">
-											<button class="btn btn-minor btn-block" data-toggle="modal" data-target="#ratenote">Rate</button>
-											<button class="btn btn-primary btn-block">Download <i class="fa fa-arrow-down"></i></button>
-																						<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
-										</div>
-									</div>
-															</div>
+							 </div>
 						</main>
 						<footer class="row">
 							<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
