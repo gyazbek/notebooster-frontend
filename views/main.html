@@ -1,120 +1,120 @@
 <div class="container" ng-controller="MainCtrl">
-        <div class="row mtop100 mbot200 mtop50-xs mbot100-xs">
-            <div class="col-md-10 col-md-offset-1">
-                <p class="lead text-center">Lorem ipsum dolor sit amet, consectetuer adipiscing.</p>
-                <form method="post" action="">
-                    <div class="col-xs-10 col-xs-offset-1">
-                        <div class="row home-notes">
-                            <div class="col-sm-6 form-group">
-                                <label>Choose your school</label>
-                                    <ui-select
-                                    ng-model="school.selected"
-                                    data-ng-disabled="disabled"   theme="bootstrap"   on-select="schoolSelected($item, $model)">
-                                      <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                                      <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
-                                        <span ng-bind-html="school.name | highlight: $select.search"></span>
-                                      </ui-select-choices>
-                                    </ui-select>
-
-                               
-                            </div>
-                            <div class="col-sm-6 form-group">
-                                <label>Choose your course</label>
-                                 <ui-select
-                                    ng-model="course.selected"
-                                    data-ng-disabled="disabled"   theme="bootstrap" >
-                                      <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
-                                      <ui-select-choices refresh="searchCourse($select.search)"  refresh-delay="300" repeat="course in courses">
-                                        <span ng-bind-html="course.name | highlight: $select.search"></span>
-                                      </ui-select-choices>
-                                    </ui-select>
-                            </div>
-                            <div class="clearfix"></div>
-                            <div class="col-xs-12">
-                                <button type="submit" ng-click="searchNotes()" class="btn btn-block btn-notes">Browse Notes</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <div class="clearfix"></div>
-            </div>
+  <div class="row mtop100 mbot200 mtop50-xs mbot100-xs">
+    <div class="col-md-10 col-md-offset-1">
+      <p class="lead text-center">Lorem ipsum dolor sit amet, consectetuer adipiscing.</p>
+      <form method="post" action="">
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="row home-notes">
+            <div class="col-sm-6 form-group">
+              <label>Choose your school</label>
+              <ui-select
+              ng-model="school.selected"
+              data-ng-disabled="disabled"   theme="bootstrap"   on-select="schoolSelected($item, $model)">
+              <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
+              <span ng-bind-html="school.name | highlight: $select.search"></span>
+            </ui-select-choices>
+          </ui-select>
         </div>
+        <div class="col-sm-6 form-group">
+          <label>Choose your course</label>
+          <ui-select
+          ng-model="course.selected"
+          data-ng-disabled="disabled"   theme="bootstrap" >
+          <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+          <ui-select-choices refresh="searchCourse($select.search)"  refresh-delay="300" repeat="course in courses">
+          <span ng-bind-html="course.name | highlight: $select.search"></span>
+        </ui-select-choices>
+      </ui-select>
     </div>
+    <div class="clearfix"></div>
+    <div class="col-xs-12">
+      <button type="submit" ng-click="searchNotes()" class="btn btn-block btn-notes">Browse Notes</button>
+    </div>
+  </div>
+</div>
+</form>
+<div class="clearfix"></div>
+</div>
+</div>
+</div>
 
-   <div class="overlay-dark middle-bar">
-        <div class="container">
-            <div class="row mtop15 mbot15 text-center">
-                <div class="col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0 toolHolder">
-                <div class="tooltip mleft25 muted thin">Browse our growing collection of notes from different schools</div>
-                    <a ui-sref="app.browse">
-                    <div class="row">
-                        <div class="col-sm-4 col-sm-offset-4">
-                              <img src="img/icon-buy.png" class="img-responsive" alt="Buy Notes">
-                        </div>
-                    </div>
-                    <p class="lead thin">Buy Notes</p>
-                    </a>
-                </div>
-                <div class="col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0 toolHolder">
-                <div class="tooltip mleft25 muted thin">Use NoteBooster to share your notes with other students</div>
-                  <a ui-sref="app.new-note">
-                    <div class="row">
-                        <div class="col-sm-4 col-sm-offset-4">
-                              <img src="img/icon-sell.png" class="img-responsive" alt="Sell Notes">
-                        </div>
-                    </div>
-                    <p class="lead thin">Sell Notes</p>
-                    </a>
-                </div>
-                <div class="col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0 toolHolder">
-                <div class="tooltip mleft25 muted thin">With each purchase proceeds are donated towards a good cause</div>
-                    <div class="row">
-                        <div class="col-sm-4 col-sm-offset-4">
-                            <img src="img/icon-support.png" class="img-responsive" alt="Support a Cause">
-                        </div>
-                    </div>
-                    <p class="lead thin">Support a Cause</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-    </div>
-<div class="overlay-light mbot-25">
-        <div class="container" id="lower-content">
-            <div class="row">
-                <div class="col-xs-12 mtop25">
-                    <h2>What is NoteBooster?</h2>
-                    <p>We are an online student-to-student marketplace. We provide an opportunity for students to support purpose-driven organizations through the buying and selling of their own class notes. 20% of all notes profit goes towards our partnering organizations, with the note seller having the option to increase that share, while keeping the remainder.  A fixed $0.49 service fee is charged on every transaction.</p>
-                    <p><a ui-sref="app.about">Learn More</a></p>
-                    <hr class="mbot25">
-                    <h2>Partnering Organizations</h2>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-xs-4">
-                    <img src="http://placehold.it/500x300" class="img-responsive" alt="">
-                </div>
-                <div class="col-xs-4">
-                    <img src="http://placehold.it/500x300" class="img-responsive" alt="">
-                </div>
-                <div class="col-xs-4">
-                    <img src="http://placehold.it/500x300" class="img-responsive" alt="">
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <p class="text-right mtop25 mbot50"><a ui-sref="app.organization-partnerships">View All Partners</a></p>
-          
+<div class="overlay-dark middle-bar">
+  <div class="container">
+    <div class="row mtop15 mbot15 text-center">
+      <div class="col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0 toolHolder">
+        <div class="tooltip mleft25 muted thin">Browse our growing collection of notes from different schools</div>
+        <a ui-sref="app.browse">
           <div class="row">
-            <div class="col-xs-4" ng-repeat="org in organizations">
-            <div>
-              <img src="http://placehold.it/500x300" class="img-responsive" alt="" />
+            <div class="col-sm-4 col-sm-offset-4">
+              <img src="img/icon-buy.png" class="img-responsive" alt="Buy Notes">
             </div>
-            <div>
-              <p class="lead">{{org.name}}</p>
-              <p>{{org.contact_email}}</p>
-              <p>{{org.contact_person}}</p>
-              <p>{{org.fact}}</p>
+          </div>
+          <p class="lead thin">Buy Notes</p>
+        </a>
+      </div>
+      <div class="col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0 toolHolder">
+        <div class="tooltip mleft25 muted thin">Use NoteBooster to share your notes with other students</div>
+        <a ui-sref="app.new-note">
+          <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+              <img src="img/icon-sell.png" class="img-responsive" alt="Sell Notes">
             </div>
-              </div>
+          </div>
+          <p class="lead thin">Sell Notes</p>
+        </a>
+      </div>
+      <div class="col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0 toolHolder">
+        <a ui-sref="/organization-partnerships#existing">
+        <div class="tooltip mleft25 muted thin">With each purchase proceeds are donated towards a good cause</div>
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-4">
+            <img src="img/icon-support.png" class="img-responsive" alt="Support a Cause">
           </div>
         </div>
+        <p class="lead thin">Support a Cause</p>
+      </a>
+      </div>
+      <div class="clearfix"></div>
     </div>
+  </div>
+</div>
+<div class="overlay-light mbot-25">
+  <div class="container" id="lower-content">
+    <div class="row">
+      <div class="col-xs-12 mtop25">
+        <h2>What is NoteBooster?</h2>
+        <p>We are an online student-to-student marketplace. We provide an opportunity for students to support purpose-driven organizations through the buying and selling of their own class notes. 20% of all notes profit goes towards our partnering organizations, with the note seller having the option to increase that share, while keeping the remainder.  A fixed $0.49 service fee is charged on every transaction.</p>
+        <p><a ui-sref="app.about">Learn More</a></p>
+        <hr class="mbot25">
+        <h2>Partnering Organizations</h2>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-xs-4">
+        <img src="http://placehold.it/500x300" class="img-responsive" alt="">
+      </div>
+      <div class="col-xs-4">
+        <img src="http://placehold.it/500x300" class="img-responsive" alt="">
+      </div>
+      <div class="col-xs-4">
+        <img src="http://placehold.it/500x300" class="img-responsive" alt="">
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <p class="text-right mtop25 mbot50"><a ui-sref="app.organization-partnerships">View All Partners</a></p>
+
+    <div class="row">
+      <div class="col-xs-4" ng-repeat="org in organizations">
+        <div>
+          <img src="http://placehold.it/500x300" class="img-responsive" alt="" />
+        </div>
+        <div>
+          <p class="lead">{{org.name}}</p>
+          <p>{{org.contact_email}}</p>
+          <p>{{org.contact_person}}</p>
+          <p>{{org.fact}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
