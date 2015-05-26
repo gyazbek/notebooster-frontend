@@ -1,0 +1,18 @@
+[
+  {
+    "imageUrl" : "img/profile.png",
+    "username" : "hello world",
+    "dateJoined": "02/25/2015",
+    "notes": 11,
+    "providedBy": "Batman",
+    "school": "FSU"
+  },
+  {
+    "imageUrl" : "img/profile.png",
+    "username" : "Joker",
+    "dateJoined": "02/21/2015",
+    "notes": 12,
+    "providedBy": "Batman",
+    "school": "Clown University"
+  }
+]
