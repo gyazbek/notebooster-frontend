@@ -8,7 +8,7 @@ angular.module('angularNoteboosterApp')
     $http.get('app/watchlist/watchlist.json').success(function(data) {
       $scope.results = data;
       $scope.itemCount = data.length;
-    }); 
+    });
   }
 });
 // .controller('WatchlistCtrl', function ($scope,$stateParams, nbApiService, Validate) {
