@@ -62,25 +62,34 @@
         </div>
         <div class="modal-body">
 
-          <form ng-controller="LoginCtrl" name="loginForm" role="form" ng-submit="login(loginForm)" novalidate>
+          <form ng-controller="LoginCtrl" name="loginForm" role="form" ng-submit="login(loginForm)">
             <div class="form-group">
               <label for="username">Username:</label>
               <input type="text" class="form-control" name="username"  ng-model="model.username" required />
+              <div class="alert alert-danger" ng-repeat="error in errors.username">{{error}}</div>
+              <div class="alert alert-danger" ng-show="loginForm.username.$dirty && loginForm.username.$invalid">
+                <small ng-show="loginForm.username.$error.required">
+                  Username is required.
+                </small>
+              </div>
             </div>
-            <div class="alert alert-danger" ng-repeat="error in errors.username">{{error}}</div>
             <div class="form-group">
               <label for="password">Password:</label>
               <input  type="password" class="form-control" ng-model="model.password" name="password" required />
+              <div class="alert alert-danger" ng-repeat="error in errors.password">{{error}}</div>
+              <div class="alert alert-danger" ng-repeat="error in errors.non_field_errors">{{error}}</div>
+              <div class="alert alert-danger" ng-if="error">{{error}}</div>
+              <div class="alert alert-danger" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+                <small ng-show="loginForm.password.$error.required">
+                  Password is required.
+                </small>
+              </div>
             </div>
             <div class="row">
               <div class="col-sm-6 col-sm-offset-3">
                 <button type="submit" class="btn btn-primary btn-block">Sign In</button>
               </div>
             </div>
-
-            <div class="alert alert-danger" ng-repeat="error in errors.password">{{error}}</div>
-            <div class="alert alert-danger" ng-repeat="error in errors.non_field_errors">{{error}}</div>
-            <div class="alert alert-danger" ng-if="error">{{error}}</div>
 
             <p class="mtop15 text-center"><a href="#" data-dismiss="modal" data-toggle="modal" data-target="#register">No Account? Register Here!</a></p>
           </form>
@@ -101,29 +110,56 @@
         <div class="modal-body">
           <form ng-controller="RegisterCtrl" ng-submit="register(registerForm)" name="registerForm" role="form">
             <div class="form-group">
-              <label for="reg-username">Username:</label>
-              <input ng-model="model.username" type="text" name="reg-username" class="form-control" required>
+              <label for="username">Username:</label>
+              <input ng-model="model.username" type="text" name="username" class="form-control" required>
+              <div class="alert alert-danger" ng-repeat="error in errors.username">{{error}}</div>
+              <div class="alert alert-danger" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">
+                <small ng-show="registerForm.username.$error.required">
+                  Username is required.
+                </small>
+              </div>
             </div>
             <div class="form-group">
-              <label for="reg-password">Password:</label>
-              <input ng-model="model.password1" type="password" name="reg-password" class="form-control" required>
+              <label for="password">Password:</label>
+              <input ng-model="model.password1" type="password" name="password" class="form-control" required 
+                ng-minlength=6 />
+              <div class="alert alert-danger" ng-repeat="error in errors.password1">{{error}}</div>
+              <div class="alert alert-danger" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+                <small ng-show="registerForm.password.$error.required">
+                  Password is required.
+                </small>
+                <small ng-show="registerForm.password.$error.minlength">
+                  Password must be at least 6 characters long.
+                </small>
+              </div>
             </div>
             <div class="form-group">
-              <label for="reg-confirm-password">Confirm Password:</label>
-              <input ng-model="model.password2" type="password" name="reg-confirm-password" class="form-control" required>
+              <label for="confirm_password">Confirm Password:</label>
+              <input ng-model="model.password2" type="password" name="confirm_password" class="form-control" data-matcher="model.password1" required>
+              <div class="alert alert-danger" ng-repeat="error in errors.password2">{{error}}</div>
+              <div class="alert alert-danger"
+                  ng-show="registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid || isNotPasswordMatch">
+                <small ng-show="registerForm.confirm_password.$error.required">
+                  Confirm Password is required.
+                </small>
+                <small ng-show="registerForm.confirm_password.$error.match">
+                  Passwords must match.
+                </small>
+              </div>
             </div>
             <div class="form-group">
               <label for="reg-email">Your Email:</label>
-              <input ng-model="model.email" type="text" name="reg-email" class="form-control" required>
+              <input ng-model="model.email" type="email" name="reg-email" class="form-control" required>
+              <div class="alert alert-danger" ng-repeat="error in errors.email">{{error}}</div>
             </div>
             <div class="form-group">
-              <label for="reg-school">Your School:</label>
-              <select name="reg-school" class="form-control">
+              <label for="school">Your School:</label>
+              <select name="school" class="form-control">
                 <option value="0">Select School</option>
               </select>
             </div>
             <label for="reg-confirm">
-              <input type="checkbox" name="reg-confirm" id="reg-confirm">
+              <input type="checkbox" name="reg-confirm" id="reg-confirm" required>
               <span class="muted">I have read and agree to the Terms of Use</span>
             </label>
             <div class="row">
@@ -183,6 +219,7 @@
   <script src="scripts/controllers/restricted.js"></script>
   <script src="scripts/controllers/authrequired.js"></script>
   <script src="scripts/controllers/faq.js"></script>
+  <script src="scripts/directives/match.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-beta.3/js/select2.min.js"></script>
   <script src="js/main.js"></script>
 </body>
