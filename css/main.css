@@ -524,6 +524,15 @@ nav.navbar {
   position: absolute; }
 
 /*
+ * Browse Notes
+ */
+.ui-select-match-text {
+  color: #999; }
+
+.home-notes .caret {
+  color: #999; }
+
+/*
  * One Fact
  */
 #one-fact {
@@ -666,7 +675,7 @@ nav.navbar {
 /* Alert  */
 .alert-success {
   max-width: 400px;
-}
+  display: none; }
 
 /* Footer Navigation */
 footer.footer {

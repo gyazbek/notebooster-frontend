@@ -22,8 +22,6 @@ nav.navbar {
 
 .home-notes {
   outline: 10px rgba(0, 0, 0, 0.1) solid; }
-  .home-notes .ui-select-toggle {
-    color: #444; }
 
 .overlay-dark {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.24);

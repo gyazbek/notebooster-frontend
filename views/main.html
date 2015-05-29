@@ -1,26 +1,25 @@
 <div class="container" ng-controller="MainCtrl">
   <div class="row mtop100 mbot200 mtop50-xs mbot100-xs">
     <div class="col-md-10 col-md-offset-1">
-      <p class="lead text-center">Lorem ipsum dolor sit amet, consectetuer adipiscing.</p>
       <form name="searchNotesForm" role="form" ng-submit="searchNotes(searchNotesForm)">
         <div class="col-xs-10 col-xs-offset-1">
           <div class="row home-notes">
-            <div class="col-sm-6 form-group">
-              <label>Choose your school</label> <span class="alert-warning" ng-if="!school.selected">(Required)</span>
-            <ui-select required ng-model="school.selected" data-ng-disabled="disabled" theme="bootstrap" 
+            <div class="col-sm-6 form-group thin text-center">
+              <label>Choose your school</label>
+            <ui-select required ng-model="school.selected" data-ng-disabled="disabled" theme="bootstrap"
               on-select="schoolSelected($item, $model)">
-              <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+              <ui-select-match placeholder="Search for your school">{{$select.selected.name}}</ui-select-match>
               <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
               <span ng-bind-html="school.name | highlight: $select.search"></span>
             </ui-select-choices>
           </ui-select>
         </div>
-        <div class="col-sm-6 form-group">
+        <div class="col-sm-6 form-group thin text-center">
           <label>Choose your course</label>
           <ui-select
           ng-model="course.selected"
           data-ng-disabled="disabled"   theme="bootstrap" >
-          <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+          <ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices refresh="searchCourse($select.search)"  refresh-delay="300" repeat="course in courses">
           <span ng-bind-html="course.name | highlight: $select.search"></span>
         </ui-select-choices>

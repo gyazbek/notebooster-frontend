@@ -6,7 +6,7 @@
            <ui-select
             ng-model="school.selected"
             data-ng-disabled="disabled"   theme="bootstrap"   on-select="schoolSelected($item, $model)">
-              <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+              <ui-select-match placeholder="Search for your school">{{$select.selected.name}}</ui-select-match>
               <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
                 <span ng-bind-html="school.name | highlight: $select.search"></span>
               </ui-select-choices>
@@ -17,11 +17,11 @@
            <ui-select
             ng-model="school.selected"
             data-ng-disabled="disabled"   theme="bootstrap"   on-select="schoolSelected($item, $model)">
-              <ui-select-match placeholder="">{{$select.selected.name}}</ui-select-match>
+              <ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
               <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
                 <span ng-bind-html="school.name | highlight: $select.search"></span>
               </ui-select-choices>
-            </ui-select>          
+            </ui-select>
 				</div>
 				<div class="col-sm-2 col-xs-12 form-group search-group">
 					<button type="submit" class="btn btn-block btn-notes">Search</button>

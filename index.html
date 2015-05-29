@@ -46,12 +46,12 @@
 
     <div class="overlay-trans"></div>
     <nav class="navbar" role="navigation" ui-view="header"></nav>
-    
+
     <div ui-view="content" autoscroll="false"></div>
   </div>
 
   <footer class="footer" ui-view="footer"></footer>
-  
+
   <div class="modal fade" id="signin">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -121,7 +121,7 @@
             </div>
             <div class="form-group">
               <label for="password">Password:</label>
-              <input ng-model="model.password1" type="password" name="password" class="form-control" required 
+              <input ng-model="model.password1" type="password" name="password" class="form-control" required
                 ng-minlength=6 />
               <div class="alert alert-danger" ng-repeat="error in errors.password1">{{error}}</div>
               <div class="alert alert-danger" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
