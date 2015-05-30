@@ -51,14 +51,15 @@ angular.module('angularNoteboosterApp')
     $scope.searchNotes = function() {
       if (angular.isDefined($scope.school.selected) && Object.keys($scope.school.selected).length > 0 && angular.isDefined($scope.school.selected.id)){
           var schoolId = $scope.school.selected.id;
+          var courseId;
 
           if (angular.isDefined($scope.course.selected) && Object.keys($scope.course.selected).length > 0 && angular.isDefined($scope.course.selected.id)){
-
+            courseId = $scope.course.selected.id;
           }
 
-          $state.go('app.browse');
+          $state.go('app.browse', {"schoolId": schoolId, "courseId": courseId});
       } else {
-        $scope.choose = "Must Select School.";
+        $scope.chooseSchool = "Must Select School.";
       }
     }
 
@@ -67,20 +68,16 @@ angular.module('angularNoteboosterApp')
     }
 
     $scope.searchCourse = function(course) {
-
-    if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null && Object.keys($scope.school.selected).length > 0 && angular.isDefined($scope.school.selected.id)){
-
-
-      var params = {search: course,school: $scope.school.selected.id, page: 1};
-      return $http.get(
-        'http://23.102.158.243/course',
-        {params: params}
-      ).then(function(response) {
-        $scope.courses = response.data.results
-      });
-
-   }
-  };
+      if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
+        var params = {search: course,school: $scope.school.selected.id, page: 1};
+        return $http.get(
+          'http://23.102.158.243/course',
+          {params: params}
+        ).then(function(response) {
+          $scope.courses = response.data.results
+        });
+      }
+    };
 
     $scope.login = function(){
       nbApiService.login(prompt('Username'),prompt('password'))
