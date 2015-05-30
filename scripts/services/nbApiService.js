@@ -64,12 +64,13 @@ angular.module('angularNoteboosterApp')
             }));
             return deferred.promise;
         },
-        'register': function(username,password1,password2,email,more){
+        'register': function(username,password1,password2,email,schoolId,more){
             var data = {
                 'username':username,
                 'password1':password1,
                 'password2':password2,
-                'email':email
+                'email':email,
+                'schoolId': schoolId
             }
             data = angular.extend(data,more);
             return this.request({

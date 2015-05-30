@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('BrowseCtrl', function ($scope,$http) {
+  .controller('BrowseCtrl', function ($scope,$http,$stateParams) {
     init();
-  
+    
+    console.log($stateParams.schoolId);
+    console.log($stateParams.courseId);
+
     $scope.search = function(formData){
       $http.get('/app/notes/notes.json').success(function(data){
           $scope.data = data;
@@ -14,7 +17,7 @@ angular.module('angularNoteboosterApp')
     function init(){
       $scope.model = {'email':'', 'message':'', 'name':'', 'subject':''};
   	  $scope.complete = false;
-      
+
       $http.get('/app/notes/notes.json').success(function(data){
           $scope.data = data;
           $scope.itemCount = data.length;
