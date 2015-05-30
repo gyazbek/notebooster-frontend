@@ -66,23 +66,23 @@
             <div class="form-group">
               <label for="username">Username:</label>
               <input type="text" class="form-control" name="username"  ng-model="model.username" required />
-              <div class="alert alert-danger" ng-repeat="error in errors.username">{{error}}</div>
-              <div class="alert alert-danger" ng-show="loginForm.username.$dirty && loginForm.username.$invalid">
-                <small ng-show="loginForm.username.$error.required">
+              <div class="error-msg" ng-repeat="error in errors.username">{{error}}</div>
+              <div class="error-msg" ng-show="loginForm.username.$dirty && loginForm.username.$invalid">
+                <span ng-show="loginForm.username.$error.required">
                   Username is required.
-                </small>
+                </span>
               </div>
             </div>
             <div class="form-group">
               <label for="password">Password:</label>
               <input  type="password" class="form-control" ng-model="model.password" name="password" required />
-              <div class="alert alert-danger" ng-repeat="error in errors.password">{{error}}</div>
-              <div class="alert alert-danger" ng-repeat="error in errors.non_field_errors">{{error}}</div>
-              <div class="alert alert-danger" ng-if="error">{{error}}</div>
-              <div class="alert alert-danger" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
-                <small ng-show="loginForm.password.$error.required">
+              <div class="error-msg" ng-repeat="error in errors.password">{{error}}</div>
+              <div class="error-msg" ng-repeat="error in errors.non_field_errors">{{error}}</div>
+              <div class="error-msg" ng-if="error">{{error}}</div>
+              <div class="error-msg" ng-show="loginForm.password.$dirty && loginForm.password.$invalid">
+                <span ng-show="loginForm.password.$error.required">
                   Password is required.
-                </small>
+                </span>
               </div>
             </div>
             <div class="row">
@@ -112,45 +112,45 @@
             <div class="form-group">
               <label for="username">Username:</label>
               <input ng-model="model.username" type="text" name="username" class="form-control" required>
-              <div class="alert alert-danger" ng-repeat="error in errors.username">{{error}}</div>
-              <div class="alert alert-danger" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">
-                <small ng-show="registerForm.username.$error.required">
+              <div class="error-msg" ng-repeat="error in errors.username">{{error}}</div>
+              <div class="error-msg" ng-show="registerForm.username.$dirty && registerForm.username.$invalid">
+                <span ng-show="registerForm.username.$error.required">
                   Username is required.
-                </small>
+                </span>
               </div>
             </div>
             <div class="form-group">
               <label for="password">Password:</label>
               <input ng-model="model.password1" type="password" name="password" class="form-control" required
                 ng-minlength=6 />
-              <div class="alert alert-danger" ng-repeat="error in errors.password1">{{error}}</div>
-              <div class="alert alert-danger" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
-                <small ng-show="registerForm.password.$error.required">
+              <div class="error-msg" ng-repeat="error in errors.password1">{{error}}</div>
+              <div class="error-msg" ng-show="registerForm.password.$dirty && registerForm.password.$invalid">
+                <span ng-show="registerForm.password.$error.required">
                   Password is required.
-                </small>
-                <small ng-show="registerForm.password.$error.minlength">
+                </span>
+                <span ng-show="registerForm.password.$error.minlength">
                   Password must be at least 6 characters long.
-                </small>
+                </span>
               </div>
             </div>
             <div class="form-group">
               <label for="confirm_password">Confirm Password:</label>
               <input ng-model="model.password2" type="password" name="confirm_password" class="form-control" data-matcher="model.password1" required>
-              <div class="alert alert-danger" ng-repeat="error in errors.password2">{{error}}</div>
-              <div class="alert alert-danger"
+              <div class="error-msg" ng-repeat="error in errors.password2">{{error}}</div>
+              <div class="error-msg"
                   ng-show="registerForm.confirm_password.$dirty && registerForm.confirm_password.$invalid || isNotPasswordMatch">
-                <small ng-show="registerForm.confirm_password.$error.required">
+                <span ng-show="registerForm.confirm_password.$error.required">
                   Confirm Password is required.
-                </small>
-                <small ng-show="registerForm.confirm_password.$error.match">
+                </span>
+                <span ng-show="registerForm.confirm_password.$error.match">
                   Passwords must match.
-                </small>
+                </span>
               </div>
             </div>
             <div class="form-group">
               <label for="reg-email">Your Email:</label>
               <input ng-model="model.email" type="email" name="reg-email" class="form-control" required>
-              <div class="alert alert-danger" ng-repeat="error in errors.email">{{error}}</div>
+              <div class="error-msg" ng-repeat="error in errors.email">{{error}}</div>
             </div>
             <div class="form-group">
               <label for="school">Your School:</label>

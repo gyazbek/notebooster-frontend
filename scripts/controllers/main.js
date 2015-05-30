@@ -48,7 +48,6 @@ angular.module('angularNoteboosterApp')
     $scope.school = {};
     $scope.course = {};
 
-
     $scope.searchNotes = function() {
       if (angular.isDefined($scope.school.selected) && Object.keys($scope.school.selected).length > 0 && angular.isDefined($scope.school.selected.id)){
           var schoolId = $scope.school.selected.id;
@@ -57,9 +56,9 @@ angular.module('angularNoteboosterApp')
 
           }
 
-         // $location.url('/browse');
-
           $state.go('app.browse');
+      } else {
+        $scope.choose = "Must Select School.";
       }
     }
 

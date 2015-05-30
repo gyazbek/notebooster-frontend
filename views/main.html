@@ -6,13 +6,14 @@
           <div class="row home-notes">
             <div class="col-sm-6 form-group thin text-center">
               <label>Choose your school</label>
-            <ui-select required ng-model="school.selected" data-ng-disabled="disabled" theme="bootstrap"
+            <ui-select ng-model="school.selected" data-ng-disabled="disabled" theme="bootstrap"
               on-select="schoolSelected($item, $model)">
               <ui-select-match placeholder="Search for your school">{{$select.selected.name}}</ui-select-match>
               <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
               <span ng-bind-html="school.name | highlight: $select.search"></span>
             </ui-select-choices>
           </ui-select>
+          <span ng-show="!school.selected" class="error-msg">{{choose}}</span>
         </div>
         <div class="col-sm-6 form-group thin text-center">
           <label>Choose your course</label>
