@@ -33,8 +33,8 @@ angular.module('angularNoteboosterApp').filter('propsFilter', function() {
 
 angular.module('angularNoteboosterApp')
   .controller('MainCtrl', function ($http,$state, $scope, $cookies, $location, nbApiService) {
-    
-  
+
+
   $scope.searchSchool = function(school) {
     var params = {search: school, page: 1};
     return $http.get(
@@ -52,9 +52,9 @@ angular.module('angularNoteboosterApp')
     $scope.searchNotes = function() {
       if (angular.isDefined($scope.school.selected) && Object.keys($scope.school.selected).length > 0 && angular.isDefined($scope.school.selected.id)){
           var schoolId = $scope.school.selected.id;
-          
+
           if (angular.isDefined($scope.course.selected) && Object.keys($scope.course.selected).length > 0 && angular.isDefined($scope.course.selected.id)){
-            
+
           }
 
          // $location.url('/browse');
@@ -70,8 +70,8 @@ angular.module('angularNoteboosterApp')
     $scope.searchCourse = function(course) {
 
     if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null && Object.keys($scope.school.selected).length > 0 && angular.isDefined($scope.school.selected.id)){
-    
-  
+
+
       var params = {search: course,school: $scope.school.selected.id, page: 1};
       return $http.get(
         'http://23.102.158.243/course',
@@ -89,46 +89,46 @@ angular.module('angularNoteboosterApp')
         handleSuccess(data);
       },handleError);
     }
-    
+
     $scope.logout = function(){
       nbApiService.logout()
       .then(handleSuccess,handleError);
     }
-    
+
     $scope.resetPassword = function(){
       nbApiService.resetPassword(prompt('Email'))
       .then(handleSuccess,handleError);
     }
-    
+
     $scope.register = function(){
       nbApiService.register(prompt('Username'),prompt('Password'),prompt('Email'))
       .then(handleSuccess,handleError);
     }
-    
+
     $scope.verify = function(){
       nbApiService.verify(prompt("Please enter verification code"))
       .then(handleSuccess,handleError);
     }
-    
+
     $scope.goVerify = function(){
       $location.path("/verifyEmail/"+prompt("Please enter verification code"));
     }
-    
+
     $scope.changePassword = function(){
       nbApiService.changePassword(prompt("Password"), prompt("Repeat Password"))
       .then(handleSuccess,handleError);
     }
-    
+
     $scope.profile = function(){
       nbApiService.profile()
       .then(handleSuccess,handleError);
     }
-    
+
     $scope.updateProfile = function(){
       nbApiService.updateProfile({'first_name': prompt("First Name"), 'last_name': prompt("Last Name"), 'email': prompt("Email")})
       .then(handleSuccess,handleError);
     }
-    
+
     $scope.confirmReset = function(){
       nbApiService.confirmReset(prompt("Code 1"), prompt("Code 2"), prompt("Password"), prompt("Repeat Password"))
       .then(handleSuccess,handleError);
@@ -137,11 +137,11 @@ angular.module('angularNoteboosterApp')
     $scope.goConfirmReset = function(){
       $location.path("/passwordResetConfirm/"+prompt("Code 1")+"/"+prompt("Code 2"))
     }
-    
+
     var handleSuccess = function(data){
       $scope.response = data;
     }
-    
+
     var handleError = function(data){
       $scope.response = data;
     }
@@ -153,8 +153,76 @@ angular.module('angularNoteboosterApp')
     $scope.$on("nbApiService.logged_out", function(data){
       $scope.show_login = true;
     });
-  
+
     $http.get('http://23.102.158.243:80/organizations/').success(function(data) {
       $scope.organizations = data;
     });
+
+
+
+
+ function openDropdown() {
+
+            $('.dropdown').data('open', true);
+        $('.overlay-trans').addClass('visible');
+
+        $('li.notification').fadeOut(0);
+        if($(window).width() > 768) {
+            $('li.profile').animate({
+                width: "260px"
+            }, 400, function() {
+                $('li.profile>span').fadeIn('slow');
+            });
+        } else {
+            $('li.profile>span').fadeIn('slow');
+        }
+    }
+    function closeDropdown() {
+      $('.dropdown').data('open', false);
+        $('.overlay-trans').removeClass('visible');
+
+        if($(window).width() > 768) {
+            $('li.profile>span').fadeOut('fast', function() {
+                $('li.profile').animate({
+                    width: "79px"
+                }, 400, function() {
+                    $('li.notification').fadeIn('fast');
+                });
+            });
+        } else {
+            $('li.profile>span').hide();
+            $('li.notification').fadeIn('fast');
+        }
+    }
+
+
+    $('.dropdown').data('open', false);
+
+
+
+    $('.dropdown-toggle').click(function() {
+
+        if($('.dropdown').data('open')) {
+            closeDropdown();
+        } else {
+            openDropdown();
+
+    }
+
+     $('.overlay-trans.visible').click(function() {
+      if($('.dropdown').data('open')) {
+              closeDropdown();
+      }
+    });
+
+
+
+
   });
+
+
+
+
+
+  });
+

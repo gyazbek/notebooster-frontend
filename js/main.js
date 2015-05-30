@@ -1,53 +1,5 @@
 $(document).ready(function() {
 
-    function openDropdown() {
-        $('.dropdown').data('open', true);
-        $('.overlay-trans').addClass('visible');
-
-        $('li.notification').fadeOut(0);
-        if($(window).width() > 768) {
-            $('li.profile').animate({
-                width: "260px"
-            }, 400, function() {
-                $('li.profile>span').fadeIn('slow');
-            });
-        } else {
-            $('li.profile>span').fadeIn('slow');
-        }
-    }
-    function closeDropdown() {
-        $('.dropdown').data('open', false);
-        $('.overlay-trans').removeClass('visible');
-
-        if($(window).width() > 768) {
-            $('li.profile>span').fadeOut('fast', function() {
-                $('li.profile').animate({
-                    width: "79px"
-                }, 400, function() {
-                    $('li.notification').fadeIn('fast');
-                });
-            });
-        } else {
-            $('li.profile>span').hide();
-            $('li.notification').fadeIn('fast');
-        }
-    }
-
-    $('.dropdown').data('open', false);
-
-    $('.dropdown-toggle').click(function() {
-        if($('.dropdown').data('open')) {
-            closeDropdown();
-        } else {
-            openDropdown();
-		}
-	});
-
-    $(document).click(function() {
-		if($('.dropdown').data('open')) {
-            closeDropdown();
-		}
-	});
 
     // UPLOAD CLASS DEFINITION
     // ======================
@@ -87,7 +39,7 @@ $(document).ready(function() {
 
 
 //     $("select.school-select-box").select2({
-//         "minimumInputLength":2, 
+//         "minimumInputLength":2,
 //     ajax: {
 //     url: "http://23.102.158.243/school",
 //     dataType: 'json',
@@ -109,10 +61,10 @@ $(document).ready(function() {
 //                 })
 //             };
 //         },
-  
+
 //     }
 // });
-   
+
 
     $('#collapsedonation').on('shown.bs.collapse', function () {
        $(".buynow-drop .fa-caret-right").removeClass("fa-caret-right").addClass("fa-caret-down");

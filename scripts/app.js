@@ -1,11 +1,11 @@
 'use strict';
-
 angular.module('angularNoteboosterApp', [
   'ui.router',
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ui.select'
+  'ui.select',
+  'ui.bootstrap'
   ])
 .config(function($stateProvider, $urlRouterProvider){
 //  .config(['$routeProvider', function ($routeProvider) {
