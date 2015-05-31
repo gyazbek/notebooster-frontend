@@ -34,7 +34,6 @@ angular.module('angularNoteboosterApp').filter('propsFilter', function() {
 angular.module('angularNoteboosterApp')
   .controller('MainCtrl', function ($http,$state, $scope, $cookies, $location, nbApiService) {
 
-
   $scope.searchSchool = function(school) {
     var params = {search: school, page: 1};
     return $http.get(

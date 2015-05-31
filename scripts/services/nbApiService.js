@@ -207,7 +207,6 @@ angular.module('angularNoteboosterApp')
             return getAuthStatus.promise;
         },
         'contact': function(email,message,name,subject, more){
-           
             var data = {
                 'email':email,
                 'message':message,
@@ -223,20 +222,17 @@ angular.module('angularNoteboosterApp')
             });
         },
 
-        'browseNotes': function(school, course, more){
-           
-            // var data = {
-            //     'email':email,
-            //     'message':message,
-            //     'subject':subject,
-            //     'name':name
-                
-            // }
-            //data = angular.extend(data,more);
+        'browseNotes': function(schoolId, courseId, page, more){
+            var data = {
+                'schoolId':schoolId,
+                'courseId':courseId,
+                'page':page,
+            }
+            data = angular.extend(data,more);
             return this.request({
                 'method': "GET",
                 'url': "/note/",
-                // 'data' :data
+                'data' :data
             });
         },
         'initialize': function(url, sessions){

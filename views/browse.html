@@ -3,25 +3,22 @@
 			<header class="row bottom-align ptop25 pbot25 top-search">
 				<div class="col-sm-5 col-xs-12 form-group text-center">
 					<label>School</label>
-           <ui-select
-            ng-model="school.selected"
-            data-ng-disabled="disabled"   theme="bootstrap"   on-select="schoolSelected($item, $model)">
+           <ui-select ng-model="school.selected" data-ng-disabled="disabled" theme="bootstrap" on-select="schoolSelected($item, $model)" ng-change="searchCourse()">
               <ui-select-match placeholder="Search for your school">{{$select.selected.name}}</ui-select-match>
               <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
                 <span ng-bind-html="school.name | highlight: $select.search"></span>
               </ui-select-choices>
             </ui-select>
+          	<span ng-show="!school.selected" class="error-msg">{{chooseSchool}}</span>
 				</div>
 				<div class="col-sm-5 col-xs-12 form-group text-center">
 					<label>Course</label>
-           <ui-select
-            ng-model="school.selected"
-            data-ng-disabled="disabled"   theme="bootstrap"   on-select="schoolSelected($item, $model)">
-              <ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
-              <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
-                <span ng-bind-html="school.name | highlight: $select.search"></span>
-              </ui-select-choices>
-            </ui-select>
+           <ui-select ng-model="course.selected" data-ng-disabled="disabled" theme="bootstrap" >
+	          <ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
+	          <ui-select-choices repeat="course in courses">
+	          	<span ng-bind-html="course.name | highlight: $select.search"></span>
+		        </ui-select-choices>
+		      </ui-select>
 				</div>
 				<div class="col-sm-2 col-xs-12 form-group search-group">
 					<button type="submit" class="btn btn-block btn-notes">Search</button>
@@ -35,10 +32,10 @@
 				<p class="lead muted">for MAR3023 - Basic Marketing Concepts at Florida State University</p>
 			</div>
 			<div class="col-md-4 col-sm-4 col-xs-6">
-				<select ng-model="orderListValue" class="form-control">
-					<option value="results[0].date">Newest First</option>
-					<option value="results[0].price">Lowest Price</option>
-					<option value="-results[0].price">Highest Price</option>
+				<select class="form-control">
+					<option value="date" selected="selected">Newest First</option>
+					<option value="price">Lowest Price</option>
+					<option value="-price">Highest Price</option>
 				</select>
 				<div class="clearfix"></div>
 			</div>
@@ -46,7 +43,7 @@
 		</section>
 		<main class="row">
 			<div class="col-xs-12">
-									<div class="row vertical-align normalize-xs lined"  ng-repeat="note in data | orderBy: orderListValue">
+									<div class="row vertical-align normalize-xs lined"  ng-repeat="note in results | orderBy: orderListValue">
 						<div class="col-md-2 col-sm-3 col-xs-0 hidden-xs text-center">
 							<div class="row mtop5">
 								<div class="col-sm-10 col-sm-offset-1">
@@ -55,18 +52,18 @@
 									</a>
 								</div>
 							</div>
-							<p class="hidden-xs text-center mbot5"><a href="user-profile">{{note.results[0].user.username}}</a></p>
+							<p class="hidden-xs text-center mbot5"><a href="user-profile">{{note.user.username}}</a></p>
 						</div>
 						<div class="col-md-1 col-sm-0 hidden-sm hidden-xs">
-							<p class="large muted hidden-xs text-center">{{note.results[0].price | currency}}</p>
+							<p class="large muted hidden-xs text-center">{{note.price | currency}}</p>
 						</div>
 						<div class="col-sm-6 col-xs-12 mtop5 mbot15-xs less-spacing">
-							<p class="lead"><a href="note-details">{{note.results[0].title}}</a></p>
-							<p class="visible-sm visible-xs">{{note.results[0].price | currency}}</p>
+							<p class="lead"><a href="note-details">{{note.title}}</a></p>
+							<p class="visible-sm visible-xs">{{note.price | currency}}</p>
 							<p class="visible-xs">Provided by: <a href="user-profile">asdf</a></p>
-							<p>Date: {{note.results[0].date}}</p>
-							<p>Course: {{note.results[0].course.name}} </p>
-							<p>Instructor: {{note.results[0].instructor.name}}</p>
+							<p>Date: {{note.date}}</p>
+							<p>Course: {{note.course.name}} </p>
+							<p>Instructor: {{note.instructor.name}}</p>
 						</div>
 						<div class="col-md-2 col-sm-3 col-xs-12 text-center">
 							<a class="btn btn-primary btn-block" ui-sref="app.note-details">Details</a>
