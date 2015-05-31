@@ -61,7 +61,7 @@
 							<p class="lead"><a href="note-details">{{note.title}}</a></p>
 							<p class="visible-sm visible-xs">{{note.price | currency}}</p>
 							<p class="visible-xs">Provided by: <a href="user-profile">asdf</a></p>
-							<p>Date: {{note.date}}</p>
+							<p>Date: {{note.year}}</p>
 							<p>Course: {{note.course.name}} </p>
 							<p>Instructor: {{note.instructor.name}}</p>
 						</div>
@@ -70,19 +70,15 @@
 							<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
 						</div>
 					</div>
-								<div class="clearfix"></div>
+					<div class="clearfix"></div>
 			</div>
 		</main>
 		<footer class="row">
-			<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-				<ul class="pagination mtop50 mbot50">
-					<li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
-					<li class="active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-				</ul>
+			<div class="col-sm-12 col-xs-12 text-center">
+		    <pagination total-items="itemCount" ng-model="bigCurrentPage" max-size="maxSize" boundary-links="true" rotate="true" num-pages="numPages"></pagination>
+			</div>
+			<div ng-if="false" class="col-sm-12 col-xs-12 text-center">
+		    <pagination total-items="bigTotalItems" ng-model="bigCurrentPage" max-size="maxSize" boundary-links="true" rotate="true" num-pages="numPages"></pagination>
 			</div>
 		</footer>
 		<div class="clearfix"></div>

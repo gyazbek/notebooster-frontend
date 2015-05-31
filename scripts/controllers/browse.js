@@ -1,11 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
- .controller('BrowseCtrl', function ($scope,$stateParams, nbApiService, Validate, $http) {
-    $scope.model = {'email':'', 'message':'', 'name':'', 'subject':''};
-    $scope.schoolId = '';
-    $scope.courseId = '';
-    $scope.order = 'new';
+ .controller('BrowseCtrl', function ($scope, $stateParams, nbApiService, Validate, $http) {
     $scope.page = 1;
     $scope.school = {};
     $scope.course = {};
@@ -17,15 +13,14 @@ angular.module('angularNoteboosterApp')
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid && angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
-        console.log('have entered the bldg');
-        getNotes($scope.schoolId,$scope.courseId,$scope.page);
+        var courseId = angular.isDefined($scope.course.selected) ? $scope.course.selected.id : '';
+        getNotes($scope.school.selected.id,courseId,$scope.page);
       } else {
         $scope.chooseSchool = "Must Select School.";
       }
     }
 
     $scope.searchSchool = function(school) {
-      console.log
       var params = {search: school, page: 1};
       return $http.get(
         'http://23.102.158.243/school',
@@ -51,6 +46,11 @@ angular.module('angularNoteboosterApp')
       $scope.course = {};
     }
 
+    $scope.getNumber = function(num) {
+      --num;
+      return new Array(num);   
+    }
+
     function getNotes(schoolId, courseId, page){
       nbApiService.browseNotes(schoolId,courseId,page)
         .then(function(data){
@@ -63,19 +63,32 @@ angular.module('angularNoteboosterApp')
           $scope.errors = data;
       });
     }
-
-    function setPage(page){
-      $scope.page = page;
-    }
      
     function init(){
+      var schoolId = '';
+      var courseId = '';
       if(typeof $stateParams.schoolId !== 'undefined') {
-        $scope.schoolId = $stateParams.schoolId;
+        schoolId = $stateParams.schoolId;
       }
       if(typeof $stateParams.courseId !== 'undefined') {
-        $scope.courseId = $stateParams.courseId;
+        courseId = $stateParams.courseId;
       }
 
-      getNotes($scope.schoolId,$scope.courseId,$scope.page, $scope.order);
+      getNotes(schoolId,courseId,$scope.page);
     }
+
+    // Pagination Section
+    $scope.maxSize = 5;
+    $scope.bigTotalItems = 175;
+    $scope.bigCurrentPage = 1;
+    $scope.totalItems = 64;
+    $scope.currentPage = 4;
+
+    $scope.setPage = function (pageNo) {
+      $scope.currentPage = pageNo;
+    };
+
+    $scope.pageChanged = function() {
+      // Make browseNote call
+    };
 });
