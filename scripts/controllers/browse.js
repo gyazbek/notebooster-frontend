@@ -73,6 +73,10 @@ angular.module('angularNoteboosterApp')
           $scope.errors = data;
       });
     }
+
+    $scope.getNoteDetails = function(event){
+      console.log(event.target.id);
+    }
     
     function init(){
       if(typeof $stateParams.schoolId !== 'undefined') {
