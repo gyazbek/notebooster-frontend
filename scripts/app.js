@@ -66,7 +66,7 @@ angular.module('angularNoteboosterApp', [
     }
   })
   .state('app.browse', {
-    url: 'browse?schoolId&courseId',
+    url: 'browse?schoolId&schoolName&courseId&courseName',
     views: {
       'content@': {
         controller: 'BrowseCtrl',

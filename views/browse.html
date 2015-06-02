@@ -29,13 +29,14 @@
 		<section class="row  vertical-align">
 			<div class="col-sm-8 col-xs-6">
 				<h1>{{itemCount}} Results</h1>
-				<p class="lead muted">for MAR3023 - Basic Marketing Concepts at Florida State University</p>
+				<p ng-if="schoolId" class="lead muted">for {{courseName}} - {{schoolName}}</p>
+				<p ng-if="!schoolId" class="lead muted"> Select a school, course and click search on the form above.</p>
 			</div>
-			<div class="col-md-4 col-sm-4 col-xs-6">
-				<select class="form-control">
-					<option value="date" selected="selected">Newest First</option>
-					<option value="price">Lowest Price</option>
-					<option value="-price">Highest Price</option>
+			<div ng-if="schoolId" class="col-md-4 col-sm-4 col-xs-6">
+				<select class="form-control" ng-model="pageOrder" ng-change="getNotes(shcoolId,courseId,page,pageOrder)">
+					<option value="newest" selected="selected">Newest First</option>
+					<option value="lowest">Lowest Price</option>
+					<option value="highest">Highest Price</option>
 				</select>
 				<div class="clearfix"></div>
 			</div>
@@ -43,7 +44,7 @@
 		</section>
 		<main class="row">
 			<div class="col-xs-12">
-						<div class="row vertical-align normalize-xs lined"  ng-repeat="note in results | orderBy: orderListValue">
+						<div class="row vertical-align normalize-xs lined"  ng-repeat="note in results">
 						<div class="col-md-2 col-sm-3 col-xs-0 hidden-xs text-center">
 							<div class="row mtop5">
 								<div class="col-sm-10 col-sm-offset-1">
@@ -75,11 +76,10 @@
 		</main>
 		<footer class="row">
 			<div class="col-sm-12 col-xs-12 text-center">
-				<pagination ng-model="page" total-items="77" boundary-links="true" 
+				<pagination ng-model="page" total-items="itemCount" boundary-links="true" 
 					first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
-					rotate="true" max-size="maxSize" ng-change="getNotes(schoolId,courseId,page)">
+					rotate="true" max-size="maxSize" ng-change="getNotes(schoolId,courseId,page,pageOrder)">
 				</pagination>
-				<p>{{maxSize}}</p>
 			</div>
 		</footer>
 		<div class="clearfix"></div>

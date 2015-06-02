@@ -2,22 +2,34 @@
 
 angular.module('angularNoteboosterApp')
  .controller('BrowseCtrl', function ($scope, $stateParams, nbApiService, Validate, $http) {
-    $scope.page = 1;
+    // Variables for getting notes
     $scope.schoolId = '';
     $scope.courseId = '';
+    $scope.page = 1;
+    $scope.pageOrder = "newest";
+
+    // Variable for performing new search
     $scope.school = {};
     $scope.course = {};
     $scope.itemCount = 0;
+    $scope.courseName = 0;
+
+    $scope.schoolName = "";
+    $scope.courseName = "";
     $scope.complete = false;
 
     $scope.search = function(formData){
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid && angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
+        
         $scope.schoolId = $scope.school.selected.id;
-        console.log($scope.school.selected.id);
+        $scope.schoolName = $scope.school.selected.name;
         $scope.courseId = angular.isDefined($scope.course.selected) ? $scope.course.selected.id : '';
-        getNotes($scope.schoolId,$scope.courseId,$scope.page);
+        $scope.courseName = angular.isDefined($scope.course.selected) ? $scope.course.selected.name : '';
+        
+        $scope.getNotes($scope.schoolId,$scope.courseId,$scope.page,$scope.pageOrder);
+      
       } else {
         $scope.chooseSchool = "Must Select School.";
       }
@@ -49,7 +61,7 @@ angular.module('angularNoteboosterApp')
       $scope.course = {};
     }
 
-    $scope.getNotes = function(schoolId, courseId, page){
+    $scope.getNotes = function(schoolId, courseId, page, pageOrder){
       nbApiService.browseNotes(schoolId,courseId,page)
         .then(function(data){
          // success case
@@ -66,11 +78,17 @@ angular.module('angularNoteboosterApp')
       if(typeof $stateParams.schoolId !== 'undefined') {
         $scope.schoolId = $stateParams.schoolId;
       }
+      if(typeof $stateParams.schoolName !== 'undefined') {
+        $scope.schoolName = $stateParams.schoolName;
+      }
       if(typeof $stateParams.courseId !== 'undefined') {
         $scope.courseId = $stateParams.courseId;
       }
+      if(typeof $stateParams.courseName !== 'undefined') {
+        $scope.courseName = $stateParams.courseName;
+      }
 
-      $scope.getNotes($scope.schoolId,$scope.courseId,$scope.page);
+      $scope.getNotes($scope.schoolId,$scope.courseId,$scope.page,$scope.pageOrder);
 
       // Pagination Settings Initialization
       $scope.maxSize = 5;
