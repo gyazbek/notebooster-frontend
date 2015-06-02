@@ -3,18 +3,21 @@
 angular.module('angularNoteboosterApp')
  .controller('BrowseCtrl', function ($scope, $stateParams, nbApiService, Validate, $http) {
     $scope.page = 1;
+    $scope.schoolId = '';
+    $scope.courseId = '';
     $scope.school = {};
     $scope.course = {};
+    $scope.itemCount = 0;
     $scope.complete = false;
-    
-    init();
 
     $scope.search = function(formData){
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid && angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
-        var courseId = angular.isDefined($scope.course.selected) ? $scope.course.selected.id : '';
-        getNotes($scope.school.selected.id,courseId,$scope.page);
+        $scope.schoolId = $scope.school.selected.id;
+        console.log($scope.school.selected.id);
+        $scope.courseId = angular.isDefined($scope.course.selected) ? $scope.course.selected.id : '';
+        getNotes($scope.schoolId,$scope.courseId,$scope.page);
       } else {
         $scope.chooseSchool = "Must Select School.";
       }
@@ -46,12 +49,7 @@ angular.module('angularNoteboosterApp')
       $scope.course = {};
     }
 
-    $scope.getNumber = function(num) {
-      --num;
-      return new Array(num);   
-    }
-
-    function getNotes(schoolId, courseId, page){
+    $scope.getNotes = function(schoolId, courseId, page){
       nbApiService.browseNotes(schoolId,courseId,page)
         .then(function(data){
          // success case
@@ -63,32 +61,23 @@ angular.module('angularNoteboosterApp')
           $scope.errors = data;
       });
     }
-     
+    
     function init(){
-      var schoolId = '';
-      var courseId = '';
       if(typeof $stateParams.schoolId !== 'undefined') {
-        schoolId = $stateParams.schoolId;
+        $scope.schoolId = $stateParams.schoolId;
       }
       if(typeof $stateParams.courseId !== 'undefined') {
-        courseId = $stateParams.courseId;
+        $scope.courseId = $stateParams.courseId;
       }
 
-      getNotes(schoolId,courseId,$scope.page);
+      $scope.getNotes($scope.schoolId,$scope.courseId,$scope.page);
+
+      // Pagination Settings Initialization
+      $scope.maxSize = 5;
     }
 
-    // Pagination Section
-    $scope.maxSize = 5;
-    $scope.bigTotalItems = 175;
-    $scope.bigCurrentPage = 1;
-    $scope.totalItems = 64;
-    $scope.currentPage = 4;
-
-    $scope.setPage = function (pageNo) {
-      $scope.currentPage = pageNo;
-    };
-
-    $scope.pageChanged = function() {
-      // Make browseNote call
-    };
+    // Initialize settings 
+    // This function was placed here because AngularJs can only reference a function if it has been previously defined.
+    // And currently getNotes() is a scope function.
+    init();
 });
