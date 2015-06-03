@@ -235,6 +235,14 @@ angular.module('angularNoteboosterApp')
                 'data' :data
             });
         },
+
+        'noteDetails': function(noteId){
+            return this.request({
+                'method': "GET",
+                'url': "/note/" + noteId + "/?format=json"
+            });
+        },
+
         'initialize': function(url, sessions){
             this.API_URL = url;
             this.use_session = sessions;

@@ -1,31 +1,27 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('NoteDetailsCtrl', function ($scope,$stateParams, nbApiService, Validate) {
-    $scope.model = {'email':'', 'message':'', 'name':'', 'subject':''};
+  .controller('NoteDetailsCtrl', function ($scope, $stateParams, nbApiService, Validate) {
+    $scope.noteId = $stateParams.noteId;
   	$scope.complete = false;
 
+    $scope.getNoteDetails = function(noteId){
+      nbApiService.noteDetails(noteId)
+      .then(function(data){
+        // success case
+        $scope.complete = true;
+        $scope.note = data;
 
-
-
-     if(typeof $stateParams.noteId !== 'undefined') {
-        alert('note id is here');
+      },function(data){
+        // error case
+        $scope.errors = data;
+      });  
+    }
+    
+    function init(){
+      $scope.getNoteDetails($scope.noteId);
+      // console.log($scope.noteId);
     }
 
- 
-
-
-        
-        nbApiService.browseNotes( '','')
-        .then(function(data){
-          // success case
-          $scope.complete = true;
-          $scope.results = data.results;
-        },function(data){
-          // error case
-          $scope.errors = data;
-        });
-      
-      
-
-  });
+    init();
+});

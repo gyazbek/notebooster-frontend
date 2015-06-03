@@ -80,7 +80,7 @@ angular.module('angularNoteboosterApp', [
     }
   })
   .state('app.note-details', {
-    url: 'note-details',
+    url: 'note-details?noteId',
     views: {
       'content@': {
         controller: 'NoteDetailsCtrl',

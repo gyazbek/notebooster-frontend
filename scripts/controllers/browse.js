@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
- .controller('BrowseCtrl', function ($scope, $stateParams, nbApiService, Validate, $http) {
+ .controller('BrowseCtrl', function ($scope, $state, $stateParams, nbApiService, Validate, $http) {
     // Variables for getting notes
     $scope.schoolId = '';
     $scope.courseId = '';
@@ -75,7 +75,8 @@ angular.module('angularNoteboosterApp')
     }
 
     $scope.getNoteDetails = function(event){
-      console.log(event.target.id);
+      var noteId = event.target.id;
+      $state.go('app.note-details', {'noteId': noteId});
     }
     
     function init(){
