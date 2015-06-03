@@ -364,7 +364,7 @@ label {
 
 nav.navbar {
 
-	background-color: $light-blue;
+	// background-color: $light-blue;
 	font-weight: 300;
 	border: 0;
 	z-index: 1000;
@@ -783,6 +783,10 @@ margin: auto;
 /* Alert  */
 .alert-success { max-width: 400px; display: none;}
 
+.error-msg {
+  color: #f40000;
+  font-size: 85%;
+}
 
 
 /* Footer Navigation */

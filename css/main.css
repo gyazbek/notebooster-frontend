@@ -44,13 +44,13 @@ a {
     color: #187a05; }
 
 .overlay-dark {
-  background: #30353a; }
+  background: #30353A; }
 
 .overlay-mid {
-  background: #44494e; }
+  background: #44494E; }
 
 .overlay-light {
-  background: #53585b; }
+  background: #53585B; }
 
 .mtop0 {
   margin-top: 0px; }
@@ -376,7 +376,6 @@ label {
  * Navigation
  */
 nav.navbar {
-  background-color: #077dab;
   font-weight: 300;
   border: 0;
   z-index: 1000;
@@ -570,11 +569,11 @@ nav.navbar {
   color: #000;
   font-weight: 300; }
   .modal p, .modal label {
-    color: #53585b; }
+    color: #53585B; }
   .modal i.promote {
     font-size: 8em; }
     .modal i.promote.fa-twitter {
-      color: #55acee; }
+      color: #55ACEE; }
     .modal i.promote.fa-facebook {
       color: #3b5998; }
   .modal .modal-dialog {
@@ -679,8 +678,7 @@ nav.navbar {
 
 .error-msg {
   color: #f40000;
-  font-size: 85%;
-}
+  font-size: 85%; }
 
 /* Footer Navigation */
 footer.footer {
