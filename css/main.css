@@ -525,10 +525,13 @@ nav.navbar {
 /*
  * Browse Notes
  */
+.ui-select-container {
+  font-weight: 300; }
+
 .ui-select-match-text {
   color: #999; }
 
-.home-notes .caret {
+.home-notes .caret, .caret {
   color: #999; }
 
 /*

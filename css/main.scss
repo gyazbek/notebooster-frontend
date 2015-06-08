@@ -576,11 +576,14 @@ nav.navbar {
 // 	font-weight: 300;
 // }
 
+.ui-select-container {font-weight: 300;}
+
 .ui-select-match-text {
 	color: #999;
 }
 
-.home-notes .caret {color: #999;}
+.home-notes .caret,.caret
+ {color: #999;}
 
 
 /*
