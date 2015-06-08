@@ -177,6 +177,48 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
+   .state('app.viewmessage', {
+    url: 'messages/{threadId}',
+    views: {
+      'content@': {
+        controller: 'MessagesCtrl', //reuse or create a new controller for viewing messages
+        templateUrl: 'views/messages-detail.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })
+    .state('app.viewprofile', {
+    url: 'user/{username}',
+    views: {
+      'content@': {
+        controller: 'MessagesCtrl', //Create new controller for viewing profile
+        templateUrl: 'views/user-profile.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })    
+    .state('app.vieworganization', {
+    url: 'organization/{username}', // I might use a slug based of the organization name, i'll let you know
+    views: {
+      'content@': {
+        controller: 'MessagesCtrl', //Create new controller for viewing organization profile
+        templateUrl: 'views/organization-profile.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })
   .state('app.profile-settings', {
     url: 'profile-settings',
     views: {
