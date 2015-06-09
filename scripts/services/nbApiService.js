@@ -221,12 +221,11 @@ angular.module('angularNoteboosterApp')
                 'data' :data
             });
         },
-
         'browseNotes': function(schoolId, courseId, page, more){
             var data = {
                 'schoolId':schoolId,
                 'courseId':courseId,
-                'page':page,
+                'page':page
             }
             data = angular.extend(data,more);
             return this.request({
@@ -235,14 +234,30 @@ angular.module('angularNoteboosterApp')
                 'data' :data
             });
         },
-
         'noteDetails': function(noteId){
             return this.request({
                 'method': "GET",
                 'url': "/note/" + noteId + "/?format=json"
             });
         },
-
+        'getInbox': function(){
+            return this.request({
+                'method': "GET",
+                'url': "/message/inbox"
+            });
+        },
+        'sendMsg': function(recipient,subject,msg){
+            var data = {
+                'recipient':recipient,
+                'subject':subject,
+                'message':msg
+            }
+            return this.request({
+                'method': "POST",
+                'url': "/message/compose",
+                'data': data
+            });
+        },
         'initialize': function(url, sessions){
             this.API_URL = url;
             this.use_session = sessions;

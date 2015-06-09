@@ -1,30 +1,52 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-.controller('MessagesCtrl', function ($scope,$http) {
-  init();
+.controller('MessagesCtrl', function ($scope,$modal,nbApiService) {
+  	$scope.page = 1;
+  	$scope.listOrder = "newest";
+  	$scope.itemCount = 0;
 
-  function init(){
-    $http.get('app/messages/messages.json').success(function(data) {
-      $scope.messages = data;
-      $scope.itemCount = data.length;
-    });
-  }
-// .controller('MessagesCtrl', function ($scope,$stateParams, nbApiService, Validate) {
-//   $scope.model = {'email':'', 'message':'', 'name':'', 'subject':''};
-//   $scope.complete = false;
+  	// Error variables
+  	$scope.unableToGetList = false;
 
-//   if(typeof $stateParams.noteId !== 'undefined') {
-//     alert('note id is here');
-//   }
+	// Total number items displayed per page in pagination
+	$scope.itemsPerPage = 10;
+	$scope.maxSize = 5;
 
-//   nbApiService.browseNotes( '','')
-//   .then(function(data){
-//     // success case
-//     $scope.complete = true;
-//     $scope.results = data.results;
-//   },function(data){
-//     // error case
-//     $scope.errors = data;
-//   });
+  	$scope.getUserInbox = function(order,page){
+  		nbApiService.getInbox()
+  	 	.then(function(data){
+  	 		$scope.itemCount = data.count;
+  	 		$scope.messages = data.results;
+  	 		console.log(data.results)
+  	 	},function(data) {
+  	 		$scope.unableToGetList = true;
+  	 	});
+  	};
+
+  	$scope.open = function(size) {
+		var modalInstance = $modal.open({
+			animation: true,
+			templateUrl: '/views/partials/new_msg_modal.html',
+			controller: 'NewMsgCtrl',
+			size: size,
+			resolve: {
+				items: function () {
+		  			return $scope.items;
+				}
+			}
+		});
+
+		modalInstance.result.then(function (selectedItem) {
+			$scope.selected = selectedItem;
+		}, function (reason) {
+			console.log('Modal dismissed at: ' + new Date() + '\t' + reason);
+		});
+	};
+
+  	function init(){
+    	$scope.getUserInbox($scope.listOrder, $scope.page);
+  	};
+
+  	init();
 });

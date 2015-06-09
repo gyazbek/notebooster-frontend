@@ -6,7 +6,10 @@ angular.module('angularNoteboosterApp')
     $scope.schoolId = '';
     $scope.courseId = '';
     $scope.page = 1;
-    $scope.pageOrder = "newest";
+    $scope.listOrder = "newest";
+
+    // Total number of items displayed per page in pagination
+    $scope.maxSize = 10;
 
     // Variable for performing new search
     $scope.school = {};
@@ -94,9 +97,6 @@ angular.module('angularNoteboosterApp')
       }
 
       $scope.getNotes($scope.schoolId,$scope.courseId,$scope.page,$scope.pageOrder);
-
-      // Pagination Settings Initialization
-      $scope.maxSize = 5;
     }
 
     // Initialize settings 
