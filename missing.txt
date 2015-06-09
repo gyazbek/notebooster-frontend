@@ -11,6 +11,4 @@ notedetails.html
 
 
 message.html response:
-	- asssuming img path is profile from response
-	- assuming title is subject from response
 	- 

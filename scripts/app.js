@@ -177,11 +177,11 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
-   .state('app.viewmessage', {
-    url: 'messages/{threadId}',
+   .state('app.messagethread', {
+    url: 'messages?threadId',
     views: {
       'content@': {
-        controller: 'MessagesCtrl', //reuse or create a new controller for viewing messages
+        controller: 'MessagesDetailCtrl',
         templateUrl: 'views/messages-detail.html'
       }
     },

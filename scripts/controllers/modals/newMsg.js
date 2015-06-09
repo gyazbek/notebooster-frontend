@@ -7,17 +7,15 @@ angular.module('angularNoteboosterApp')
   $scope.send = function () {
     nbApiService.sendMsg($scope.to, $scope.subject, $scope.msg)
     .then(function(data) {
-      console.log("success")
-      console.log(data);
+      $scope.msgSentResponse = 'Success';
+      $modalInstance.close($scope.msgSentResponse);
     },function(data){
-      console.log("error");
-      console.log(data);
+      $scope.msgSentResponse = 'Failed';
+      $modalInstance.close($scope.msgSentResponse);
     });
-    console.log('sent');
-    // $modalInstance.close();
   };
 
   $scope.cancel = function () {
-    $modalInstance.dismiss('canel');
+    $modalInstance.dismiss('cancel');
   };
 });

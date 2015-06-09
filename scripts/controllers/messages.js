@@ -1,18 +1,22 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-.controller('MessagesCtrl', function ($scope,$modal,nbApiService) {
+.controller('MessagesCtrl', function ($state,$scope,$modal,nbApiService) {
   	$scope.page = 1;
   	$scope.listOrder = "newest";
   	$scope.itemCount = 0;
 
-  	// Error variables
+  	// Error variables.
   	$scope.unableToGetList = false;
 
-	// Total number items displayed per page in pagination
+	// Total number items displayed per page in pagination.
 	$scope.itemsPerPage = 10;
 	$scope.maxSize = 5;
 
+	// For when new message is create.
+  	$scope.msgSentResponse = "";
+
+  	// TODO: current arguments order and page is not being sent. 
   	$scope.getUserInbox = function(order,page){
   		nbApiService.getInbox()
   	 	.then(function(data){
@@ -25,23 +29,35 @@ angular.module('angularNoteboosterApp')
   	};
 
   	$scope.open = function(size) {
+  		$scope.msgSentResponse = "";
 		var modalInstance = $modal.open({
 			animation: true,
 			templateUrl: '/views/partials/new_msg_modal.html',
 			controller: 'NewMsgCtrl',
 			size: size,
 			resolve: {
-				items: function () {
-		  			return $scope.items;
+				msgSent: function () {
+		  			return $scope.msgSentResponse;
 				}
 			}
 		});
 
-		modalInstance.result.then(function (selectedItem) {
-			$scope.selected = selectedItem;
+		modalInstance.result.then(function (msgResponse) {
+			$scope.msgSentResponse = msgResponse;
 		}, function (reason) {
-			console.log('Modal dismissed at: ' + new Date() + '\t' + reason);
+			// Modal closed.
 		});
+	};
+
+	//TODO implement delete.
+	$scope.deleteMsg = function(event) {
+      var threadId = event.target.id;
+      console.log(threadId);
+	};
+
+	$scope.view = function(event) {
+      var threadId = event.target.id;
+      $state.go('app.messagethread', {'threadId': threadId});
 	};
 
   	function init(){
