@@ -258,6 +258,18 @@ angular.module('angularNoteboosterApp')
                 'data': data
             });
         },
+        'getThread': function(threadId){
+            return this.request({
+                'method': "GET",
+                'url': "/message/thread/" + threadId + "/"
+            });
+        },
+        'deleteThread': function(threadId){
+            return this.request({
+                'method': "GET",
+                'url': "/message/thread/" + threadId + "/delete"
+            });
+        },
         'initialize': function(url, sessions){
             this.API_URL = url;
             this.use_session = sessions;

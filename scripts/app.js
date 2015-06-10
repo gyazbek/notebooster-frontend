@@ -178,10 +178,10 @@ angular.module('angularNoteboosterApp', [
     }
   })
    .state('app.messagethread', {
-    url: 'messages?threadId',
+    url: 'messages/{threadId}',
     views: {
       'content@': {
-        controller: 'MessagesDetailCtrl',
+        controller: 'MessagesThreadCtrl',
         templateUrl: 'views/messages-detail.html'
       }
     },

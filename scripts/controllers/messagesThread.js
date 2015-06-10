@@ -1,14 +1,22 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-.controller('MessagesDetailCtrl', function ($scope,$stateParams,nbApiService) {
+.controller('MessagesThreadCtrl', function ($scope,$stateParams,nbApiService) {
 	
-	$scope.getThread(threadId){
-		
+	$scope.getThread = function(threadId){
+  		nbApiService.getThread(threadId)
+  	 	.then(function(data){
+  	 		$scope.itemCount = data.count;
+  	 		$scope.messages = data.results;
+  	 		console.log(data.results)
+  	 	},function(data) {
+  	 		$scope.unableToGetList = true;
+  	 	});
 	}
 
 	init();
 	function init(){
 		console.log($stateParams.threadId);
+		$scope.getThread($stateParams.threadId);
 	};
 });

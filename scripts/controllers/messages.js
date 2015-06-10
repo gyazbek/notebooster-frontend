@@ -22,7 +22,6 @@ angular.module('angularNoteboosterApp')
   	 	.then(function(data){
   	 		$scope.itemCount = data.count;
   	 		$scope.messages = data.results;
-  	 		console.log(data.results)
   	 	},function(data) {
   	 		$scope.unableToGetList = true;
   	 	});
@@ -49,10 +48,14 @@ angular.module('angularNoteboosterApp')
 		});
 	};
 
-	//TODO implement delete.
 	$scope.deleteMsg = function(event) {
-      var threadId = event.target.id;
-      console.log(threadId);
+      	var threadId = event.target.id;
+		nbApiService.deleteThread(threadId)
+	 	.then(function(data){
+	 		$scope.getUserInbox($scope.listOrder, $scope.page);
+	 	},function(data) {
+
+	 	});
 	};
 
 	$scope.view = function(event) {
