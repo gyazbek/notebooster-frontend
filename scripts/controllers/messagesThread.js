@@ -2,21 +2,31 @@
 
 angular.module('angularNoteboosterApp')
 .controller('MessagesThreadCtrl', function ($scope,$stateParams,nbApiService) {
-	
+  	$scope.threadId = "";
+  	$scope.msg = "";
+
 	$scope.getThread = function(threadId){
   		nbApiService.getThread(threadId)
   	 	.then(function(data){
-  	 		$scope.itemCount = data.count;
-  	 		$scope.messages = data.results;
-  	 		console.log(data.results)
+  	 		$scope.thread = data;
+  			$scope.msg = "";
   	 	},function(data) {
-  	 		$scope.unableToGetList = true;
+  	 		
   	 	});
 	}
 
+	$scope.threadReply = function () {
+    nbApiService.threadReply($scope.threadId, $scope.msg)
+    .then(function(data) {
+      	$scope.getThread($scope.threadId);
+    },function(data){
+      
+    });
+  };
+
 	init();
 	function init(){
-		console.log($stateParams.threadId);
-		$scope.getThread($stateParams.threadId);
+		$scope.threadId = $stateParams.threadId;
+		$scope.getThread($scope.threadId);
 	};
 });

@@ -10,5 +10,5 @@ notedetails.html
 
 
 
-message.html response:
-	- 
+message details get thread response:
+	- contains subject id in wrong spot

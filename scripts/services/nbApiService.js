@@ -264,6 +264,13 @@ angular.module('angularNoteboosterApp')
                 'url': "/message/thread/" + threadId + "/"
             });
         },
+        'threadReply': function(threadId, msg){
+            return this.request({
+                'method': "GET",
+                'url': "/message/thread/" + threadId + "/reply",
+                'data': {'message': msg}
+            });
+        },
         'deleteThread': function(threadId){
             return this.request({
                 'method': "GET",
