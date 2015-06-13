@@ -5,7 +5,6 @@ angular.module('angularNoteboosterApp')
   $scope.username = username;
   
   $scope.close = function () {
-    console.log('follow closed');
     $modalInstance.close();
   };
 });

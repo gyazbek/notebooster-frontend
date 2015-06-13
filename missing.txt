@@ -6,3 +6,8 @@ in /profile/user/username (user-profile.html):
 
 in /user/watchlist (watchlist.html):
 - delete user requires userId but im sending username
+
+in /profile-settings for user (profile-settings.html):
+- missing upload img
+- linked to backend but not sure if data is being sent properly
+- where do i disable my account
