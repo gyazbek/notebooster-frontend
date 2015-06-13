@@ -144,7 +144,7 @@ angular.module('angularNoteboosterApp')
         'getProfile': function (username) {
             return this.request({
                 'method': "GET",
-                'url': "/profile/user/" + username
+                'url': "/profile/user/" + username + "/?format=json"
             });
         },
         'verify': function(key){
@@ -246,6 +246,12 @@ angular.module('angularNoteboosterApp')
                 'url': "/note/" + noteId + "/?format=json"
             });
         },
+        'getNotesPosted': function(username){
+            return this.request({
+                'method': "GET",
+                'url': "/user/" + username + "/?format=json"
+            });
+        },
         'getInbox': function(){
             return this.request({
                 'method': "GET",
@@ -281,6 +287,13 @@ angular.module('angularNoteboosterApp')
             return this.request({
                 'method': "DELETE",
                 'url': "/message/thread/" + threadId + "/delete"
+            });
+        },
+        'followUser': function(userId){
+            return this.request({
+                'method': "POST",
+                'url': "/user/watchlist",
+                'data': {'user_id':userId}
             });
         },
         'initialize': function(url, sessions){

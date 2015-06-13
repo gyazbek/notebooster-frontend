@@ -1,5 +1,3 @@
 			MISSING
-Messages/MessagesDetails
-	- connect username link to their profile
-
-
+- where do i send a request to report violation in /profile/user/username
+- follow button set up but not working

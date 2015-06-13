@@ -39,7 +39,7 @@
                   <p class="mtop15"><a id="{{msg.sender.username}}" href="" ng-click="getUserProfile($event)">{{msg.sender.username}}</a></p>
                 </div>
                 <div class="col-sm-5 col-xs-8 mtop15 mbot5">
-                  <p class="lead"><a href="view-message">{{msg.subject}}</a></p>
+                  <p class="lead"><a id="{{msg.id}}" ng-click="view($event)" href="">{{msg.subject}}</a></p>
                   <p class="visible-xs muted"><a href="user-profile">{{msg.sender.username}}</a></p>
                   <p>{{msg.latest_msg.body}}</p>
                 </div>

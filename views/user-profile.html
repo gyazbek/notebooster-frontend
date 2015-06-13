@@ -3,27 +3,24 @@
 		<div class="row vertical-align normalize-xs">
 			<div class="col-sm-2 col-xs-3 text-center mtop25-xs">
 				<img class="img-responsive" src="img/profile.png" alt="Gricha2380 Profile Picture" />
-				<span class="mtop15"><a href="#" data-toggle="modal" data-target="#violation">Report Violation</a></span>
+				<span class="mtop15"><a href="" ng-click="report()">Report Violation</a></span>
 							</div>
 			<div class="col-sm-7 col-xs-9 mbot25-xs">
-				<h1>GRicha2380</h1>
+				<h1>{{userInfo.username}}</h1>
 				<div class="fb-like" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-				<p>Attends: FSU</p>
-				<p>Joined: Feb 11, 2015</p>
-				<p>Sales: 495</p>
+				<p>{{userInfo.profile.school}}</p>
+				<p>Joined: {{userInfo.profile.created | date}}</p>
+				<p>Sales: {{userInfo.profile.sales_quatity}}</p>
 				<p>Rating:
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star"></i>
-					<i class="fa fa-star off"></i>
-					<i class="fa fa-star off"></i>
-					<i class="fa fa-star off"></i>
+					<i ng-repeat=" i in [] | range:userInfo.profile.rating" class="fa fa-star"></i>
+					<i ng-repeat=" i in [] | range:(5 - userInfo.profile.rating)" class="fa fa-star off"></i>
 				</p>
 			</div>
 			<div class="clearfix visible-xs"></div>
 			<div class="col-sm-3 col-xs-12">
-				<a href="#" class="btn btn-minor btn-block" data-toggle="modal" data-target="#followconfirm">Follow</a>
-				<a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#contactseller">Contact</a>
-											</div>
+				<a href="" class="btn btn-minor btn-block" ng-click="followUser()">Follow</a>
+				<a href="" class="btn btn-primary btn-block" ng-click="contactUser()">Contact</a>
+			</div>
 		</div>
 		<div class="clearfix"></div>
 		<hr class="mtop25">

@@ -1,0 +1,42 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button ng-click="cancel()" type="button" class="close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h3 class="modal-title">Report Violation</h3>
+        <p>We take violations of our Terms &amp; Policies very seriously. Please report this violation only if you have a strong certainty.</p>
+    </div>
+    <div class="modal-body"><form ng-submit="send()">
+        <div class="form-group">
+            <label for="vio-name">Your Name:</label>
+            <input required ng-model="name" type="text" class="form-control" name="vio-name">
+        </div>
+        <div class="form-group">
+            <label for="vio-email">Email Address:</label>
+            <input required ng-model="email" type="text" class="form-control" name="vio-email">
+            <div class="has-error-text" id="subject-error">Please enter your name.</div>
+        </div>
+        <div class="form-group">
+            <label for="vio-subject">Subject:</label>
+            <select required ng-model="reason" name="vio-subject" class="form-control">
+                <option>Please select one</option>
+                <option>These notes are stolen.</option>
+                <option>This comment is offensive.</option>
+                <option>I am a professor and do not want notes for my class posted.</option>
+                <option>These notes have significant errors.</option>
+                <option>Spam</option>
+            </select>
+            <div class="has-error-text" id="subject-error">Please select a subject.</div>
+        </div>
+        <div class="form-group">
+            <label for="vio-message">Message:</label>
+            <textarea required ng-model="msg" class="form-control" name="vio-message"></textarea>
+            <div class="has-error-text" id="email-error">Please enter a message.</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <button type="submit" class="btn btn-primary btn-block">Submit Violation</button>
+            </div>
+        </div>
+    </form></div>
+</div>

@@ -1,0 +1,26 @@
+<div class="modal-content">
+	<div class="modal-header">
+	    <button ng-click="cancel()" type="button" class="close">
+	        <span aria-hidden="true">×</span>
+	    </button>
+		<h3 class="modal-title">Compose Message</h3>
+		<p></p>
+	</div>
+	<div class="modal-body"><form ng-submit+"send()">
+		<label class="mbot15">To: {{to}}</label>
+		<div class="form-group">
+			<label for="cont-subject">Subject:</label>
+			<input ng-model="subject" type="text" name="cont-subject" class="form-control">
+			<div class="has-error-text" id="subject-error">Please enter a subject.</div>
+		</div>
+		<div class="form-group">
+			<label for="cont-message">Message:</label>
+			<textarea required ng-model="msg" name="cont-message" class="form-control"></textarea>
+			<div class="has-error-text" id="email-error">Please enter a message.</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+				<button ng-click="send()" class="btn btn-primary btn-block">Send</button>
+			</div>
+		</div></form></div>
+	</div>          

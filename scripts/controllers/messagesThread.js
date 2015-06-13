@@ -26,8 +26,7 @@ angular.module('angularNoteboosterApp')
 
   $scope.getUserProfile = function(event){
       var username = event.target.id;
-      $state.go('app.viewprofile', {'username': username});   
-      console.log(username);
+      $state.go('app.viewprofile', {'username': username});
   };
 
 	init();

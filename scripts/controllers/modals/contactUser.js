@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-.controller('NewMsgCtrl', function ($scope,$modalInstance,nbApiService) {
-  $scope.to = "";
+.controller('ContactUserCtrl', function ($scope,$modalInstance,nbApiService,username) {
+  $scope.to = username;
   $scope.subject = "";
   $scope.msg = "";
 
