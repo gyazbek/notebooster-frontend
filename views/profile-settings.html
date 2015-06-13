@@ -14,32 +14,37 @@
 							<div class="clearfix"></div>
 							<hr>
 						</div>
-						<form>
+						<form ng-submit="saveSettings()">
 							<div class="form-group">
 								<label for="bio">Bio</label>
-								<textarea name="bio" class="form-control"></textarea>
+								<textarea ng-model="bio" name="bio" class="form-control"></textarea>
 								<div class="has-error-text" id="bio-error">Error</div>
 							</div>
 							<hr>
 							<div class="form-group">
 								<label for="username">User Name</label>
-								<input type="text" name="username" class="form-control">
+								<input ng-model="username" type="text" name="username" class="form-control">
 								<div class="has-error-text" id="user-error">Error</div>
 							</div>
 							<hr>
 							<div class="form-group">
 								<label for="default-school">Default School</label>
-								<select class="school-select-box form-control" name="school"></select>
+								<ui-select ng-model="school.selected" theme="bootstrap">
+		              <ui-select-match placeholder="Search for your school">{{$select.selected.name}}</ui-select-match>
+		              <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
+		                <span ng-bind-html="school.name | highlight: $select.search"></span>
+		              </ui-select-choices>
+		            </ui-select>
 								<div class="has-error-text" id="school-error">Error</div>
 							</div>
 							<div class="form-group">
 								<label for="email">Email Address</label>
-								<input type="text" name="email" class="form-control" />
+								<input ng-model="email" type="text" name="email" class="form-control" />
 								<div class="has-error-text" id="terms-error">Error</div>
 							</div>
 							<div class="form-group">
 								<label for="notifications">
-									<input type="checkbox" name="notifications" id="notifications" />
+									<input ng-model="notifyByEmail" type="checkbox" name="notifications" id="notifications" />
 									Send notifications by email
 								</label>
 							</div>

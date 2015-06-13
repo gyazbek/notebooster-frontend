@@ -147,6 +147,13 @@ angular.module('angularNoteboosterApp')
                 'url': "/profile/user/" + username + "/?format=json"
             });
         },
+        'updateProfile': function (data) {
+            return this.request({
+                'method': "PUT",
+                'url': "/profile/update",
+                'data': data
+            });
+        },
         'getNotesForSale': function (username, page) {
             return this.request({
                 'method': "GET",
