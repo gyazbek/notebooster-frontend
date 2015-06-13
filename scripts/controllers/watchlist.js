@@ -10,13 +10,24 @@ angular.module('angularNoteboosterApp')
 	$scope.maxSize = 10;
 
 	$scope.getWatchlist = function(order,page){
-		console.log(order);
-		console.log(page);
+		nbApiService.getWatchlist(order, page)
+  	 	.then(function(data){
+  	 		$scope.results = data;
+			$scope.watchlistCount = data.length;
+			console.log(data.length);
+  	 	},function(data) {
+  	 		$scope.unableToGetList = true;
+  	 	});
 	};
 
 	$scope.removeFromWatchlist = function(event){
 		var username = event.target.id;
-		console.log('removed ' + username);
+		nbApiService.removeFromWatchlist(username)
+  	 	.then(function(data){
+  	 		$scope.removed = true;
+  	 	},function(data) {
+  	 		$scope.removed = false;
+  	 	});
 	};
 
 	$scope.getUserProfile = function(event){
@@ -27,7 +38,7 @@ angular.module('angularNoteboosterApp')
 	function init(){
 		$http.get('app/watchlist/watchlist.json').success(function(data) {
 		  $scope.results = data;
-		  $scope.itemCount = data.length;
+		  $scope.watchlistCount = data.length;
 		});
 	}
 	init();

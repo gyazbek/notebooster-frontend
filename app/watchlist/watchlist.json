@@ -6,7 +6,7 @@
     "notes": 11,
     "providedBy": "Batman",
     "school": "FSU",
-    "rating": 5
+    "rating": 4
   },
   {
     "imageUrl" : "img/profile.png",
@@ -15,6 +15,6 @@
     "notes": 12,
     "providedBy": "Batman",
     "school": "Clown University",
-    "rating": 3
+    "rating": 5
   }
 ]
