@@ -1,198 +1,108 @@
 
 <div class="container results mtop25 mbot25 outline">
-		<div class="row vertical-align normalize-xs">
-			<div class="col-sm-2 col-xs-3 text-center mtop25-xs">
-				<img class="img-responsive" src="img/profile.png" alt="Gricha2380 Profile Picture" />
-				<span class="mtop15"><a href="" ng-click="report()">Report Violation</a></span>
-							</div>
-			<div class="col-sm-7 col-xs-9 mbot25-xs">
-				<h1>{{userInfo.username}}</h1>
-				<div class="fb-like" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
-				<p>{{userInfo.profile.school}}</p>
-				<p>Joined: {{userInfo.profile.created | date}}</p>
-				<p>Sales: {{userInfo.profile.sales_quatity}}</p>
-				<p>Rating:
-					<i ng-repeat=" i in [] | range:userInfo.profile.rating" class="fa fa-star"></i>
-					<i ng-repeat=" i in [] | range:(5 - userInfo.profile.rating)" class="fa fa-star off"></i>
-				</p>
-			</div>
-			<div class="clearfix visible-xs"></div>
-			<div class="col-sm-3 col-xs-12">
-				<a href="" class="btn btn-minor btn-block" ng-click="followUser()">Follow</a>
-				<a href="" class="btn btn-primary btn-block" ng-click="contactUser()">Contact</a>
-			</div>
+	<div class="row vertical-align normalize-xs">
+		<div class="col-sm-2 col-xs-3 text-center mtop25-xs">
+			<img class="img-responsive" src="img/profile.png" alt="Gricha2380 Profile Picture" />
+			<span class="mtop15"><a href="" ng-click="report()">Report Violation</a></span>
 		</div>
-		<div class="clearfix"></div>
-		<hr class="mtop25">
-		<h2>Bio</h2>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet
-			dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper
-			suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in
-			vulputate velit esse molestie consequat</p>
-		<div class="clearfix"></div>
-		<div class="clearfix"></div>
-		<hr class="mtop25">
-		<div class="row vertical-align mtop50 mbot25">
-			<div class="col-sm-12 text-center">
-				<p class="lead">
-					<a href="#posted" aria-controls="posted" role="tab" data-toggle="tab">Notes Posted: 42</a> |
-					<a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Comments: 10</a>
-				</p>
-			</div>
+		<div class="col-sm-7 col-xs-9 mbot25-xs">
+			<h1>{{userInfo.username}}</h1>
+			<div class="fb-like" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+			<p>{{userInfo.profile.school}}</p>
+			<p>Joined: {{userInfo.profile.created | date}}</p>
+			<p>Sales: {{userInfo.profile.sales_quatity}}</p>
+			<p>Rating:
+				<i ng-repeat=" i in [] | range:userInfo.profile.rating" class="fa fa-star"></i>
+				<i ng-repeat=" i in [] | range:(5 - userInfo.profile.rating)" class="fa fa-star off"></i>
+			</p>
 		</div>
-		<hr>
-		<div class="tab-content">
-			<div class="tab-pane active" id="posted" role="tabpanel">
-				<h2>Notes Posted</h2>
-									<main class="row vertical-align lined less-spacing">
-						<div class="col-sm-2 col-xs-0 hidden-xs text-center">
-							<div class="row mtop5">
-								<div class="col-sm-10 col-sm-offset-1">
-									<a href="user-profile">
-										<img src="img/profile.png" class="img-responsive" alt="Profile Image" />
-									</a>
-								</div>
-							</div>
-							<p class="hidden-xs text-center mtop5"><a href="user-profile">GRicha2380</a></p>
+		<div class="clearfix visible-xs"></div>
+		<div class="col-sm-3 col-xs-12">
+			<a href="" class="btn btn-minor btn-block" ng-click="followUser()">Follow</a>
+			<a href="" class="btn btn-primary btn-block" ng-click="contactUser()">Contact</a>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<hr class="mtop25">
+	<h2>Bio</h2>
+	<p>{{userInfo.profile.bio}}</p>
+	<div class="clearfix"></div>
+	<div class="clearfix"></div>
+	<hr class="mtop25">
+	<div class="row vertical-align mtop50 mbot25">
+		<div class="col-sm-12 text-center">
+			<p class="lead">
+				<a href="" ng-click="getNotesForSale()" aria-controls="posted" role="tab" data-toggle="tab">Notes Posted: {{notesCount}}</a> |
+				<a href="" ng-click="getComments()" aria-controls="comments" role="tab" data-toggle="tab">Comments: {{commentsCount}}</a>
+			</p>
+		</div>
+	</div>
+	<hr>
+	<div class="tab-content">
+		<div ng-if="tab=='forsale'" class="tab-pane active" id="posted" role="tabpanel">
+			<h2>Notes Posted</h2>
+			<main class="row vertical-align lined less-spacing" ng-repeat="note in notesForSale">
+				<div class="col-sm-2 col-xs-0 hidden-xs text-center">
+					<div class="row mtop5">
+						<div class="col-sm-10 col-sm-offset-1">
+							<a href="user-profile">
+								<img src="img/profile.png" class="img-responsive" alt="Profile Image" />
+							</a>
 						</div>
-						<div class="col-sm-2 col-xs-0 hidden-xs">
-							<p class="large muted hidden-xs text-center">$7.49</p>
-						</div>
-						<div class="col-sm-6 col-xs-8 mtop15 mbot5">
-							<p class="lead"><a href="note-details">Title of Note File Goes Here</a></p>
-							<p class="visible-xs">$7.49</p>
-							<p class="visible-xs">Provided by: <a href="user-profile">GRicha2380</a></p>
-							<p>Date: Feb. 21, 2015</p>
-							<p>Course: MAR4613</p>
-							<p>Instructor: Ronald Goldsmith</p>
-						</div>
-						<div class="col-sm-2 col-xs-4 text-center">
-							<a class="btn btn-primary btn-block" href="note-details">Details</a>
-							<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
-						</div>
-					</main>
-									<main class="row vertical-align lined less-spacing">
-						<div class="col-sm-2 col-xs-0 hidden-xs text-center">
-							<div class="row mtop5">
-								<div class="col-sm-10 col-sm-offset-1">
-									<a href="user-profile">
-										<img src="img/profile.png" class="img-responsive" alt="Profile Image" />
-									</a>
-								</div>
-							</div>
-							<p class="hidden-xs text-center mtop5"><a href="user-profile">GRicha2380</a></p>
-						</div>
-						<div class="col-sm-2 col-xs-0 hidden-xs">
-							<p class="large muted hidden-xs text-center">$7.49</p>
-						</div>
-						<div class="col-sm-6 col-xs-8 mtop15 mbot5">
-							<p class="lead"><a href="note-details">Title of Note File Goes Here</a></p>
-							<p class="visible-xs">$7.49</p>
-							<p class="visible-xs">Provided by: <a href="user-profile">GRicha2380</a></p>
-							<p>Date: Feb. 21, 2015</p>
-							<p>Course: MAR4613</p>
-							<p>Instructor: Ronald Goldsmith</p>
-						</div>
-						<div class="col-sm-2 col-xs-4 text-center">
-							<a class="btn btn-primary btn-block" href="note-details">Details</a>
-							<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
-						</div>
-					</main>
-									<main class="row vertical-align lined less-spacing">
-						<div class="col-sm-2 col-xs-0 hidden-xs text-center">
-							<div class="row mtop5">
-								<div class="col-sm-10 col-sm-offset-1">
-									<a href="user-profile">
-										<img src="img/profile.png" class="img-responsive" alt="Profile Image" />
-									</a>
-								</div>
-							</div>
-							<p class="hidden-xs text-center mtop5"><a href="user-profile">GRicha2380</a></p>
-						</div>
-						<div class="col-sm-2 col-xs-0 hidden-xs">
-							<p class="large muted hidden-xs text-center">$7.49</p>
-						</div>
-						<div class="col-sm-6 col-xs-8 mtop15 mbot5">
-							<p class="lead"><a href="note-details">Title of Note File Goes Here</a></p>
-							<p class="visible-xs">$7.49</p>
-							<p class="visible-xs">Provided by: <a href="user-profile">GRicha2380</a></p>
-							<p>Date: Feb. 21, 2015</p>
-							<p>Course: MAR4613</p>
-							<p>Instructor: Ronald Goldsmith</p>
-						</div>
-						<div class="col-sm-2 col-xs-4 text-center">
-							<a class="btn btn-primary btn-block" href="note-details">Details</a>
-							<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
-						</div>
-					</main>
-								<footer class="row">
-					<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-						<ul class="pagination mtop50 mbot50">
-							<li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-						</ul>
 					</div>
-				</footer>
+					<p class="hidden-xs text-center mtop5"><a href="" ng-click="getProfile(note.user.username)">{{note.user.username}}</a></p>
+				</div>
+				<div class="col-sm-2 col-xs-0 hidden-xs">
+					<p class="large muted hidden-xs text-center">{{note.price | currency}}</p>
+				</div>
+				<div class="col-sm-6 col-xs-8 mtop15 mbot5">
+					<p class="lead"><a href="" id="{{note.id}}" ng-click="getNoteDetails($event)">{{note.title}}</a></p>
+					<p class="visible-xs">{{note.price | currency}}</p>
+					<p class="visible-xs">Provided by: <a href="user-profile">{{note.user.username}}</a></p>
+					<p>Date: {{note.year}}</p>
+					<p>Course: {{note.course.name}} </p>
+					<p>Instructor: {{note.instructor.name}}</p>
+				</div>
+				<div class="col-sm-2 col-xs-4 text-center">
+					<a class="btn btn-primary btn-block" id="{{note.id}}" ng-click="getNoteDetails($event)">Details</a>
+					<p class="muted mtop15"><i ng-if="!note.charity" class="fa fa-heart-o"> For Charity</i></p>
+				</div>
+			</main>
+			<footer class="row">
+				<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
+				<pagination ng-model="page" total-items="notesCount" boundary-links="true" 
+					first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
+					rotate="true" max-size="maxSize" ng-change="getNotesForSale(username,page)">
+				</pagination>
 			</div>
-			<div class="tab-pane" id="comments" role="tabpanel">
-				<h2>Comments</h2>
-				<div class="row mtop15 mbot15">
-	<div class="col-sm-2 col-xs-3 text-center">
-		<img src="img/profile.png" class="img-responsive" alt="Road Warrior's Profile Picture" />
-		<a href="user-profile" class="thin">Road Warrior</a>
+		</footer>
 	</div>
-	<div class="col-sm-10 col-xs-9">
-		<p class="muted"><em>Feb 20th, 2015</em></p>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-			nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-			Ut wisi enim ad minim veniam.</p>
-	</div>
-</div>
-<hr>
-<div class="clearfix"></div><div class="row mtop15 mbot15">
-	<div class="col-sm-2 col-xs-3 text-center">
-		<img src="img/profile.png" class="img-responsive" alt="Road Warrior's Profile Picture" />
-		<a href="user-profile" class="thin">Road Warrior</a>
-	</div>
-	<div class="col-sm-10 col-xs-9">
-		<p class="muted"><em>Feb 20th, 2015</em></p>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-			nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-			Ut wisi enim ad minim veniam.</p>
-	</div>
-</div>
-<hr>
-<div class="clearfix"></div><div class="row mtop15 mbot15">
-	<div class="col-sm-2 col-xs-3 text-center">
-		<img src="img/profile.png" class="img-responsive" alt="Road Warrior's Profile Picture" />
-		<a href="user-profile" class="thin">Road Warrior</a>
-	</div>
-	<div class="col-sm-10 col-xs-9">
-		<p class="muted"><em>Feb 20th, 2015</em></p>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-			nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-			Ut wisi enim ad minim veniam.</p>
-	</div>
-</div>
-<hr>
-<div class="clearfix"></div>				<footer class="row">
-					<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-						<ul class="pagination mtop50 mbot50">
-							<li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-						</ul>
-					</div>
-				</footer>
+	<div ng-if="tab=='comments'" class="tab-pane active" id="comments" role="tabpanel">
+		<h2>Comments</h2>
+			<div class="row mtop15 mbot15">
+			<div class="col-sm-2 col-xs-3 text-center">
+				<img src="img/profile.png" class="img-responsive" alt="Road Warrior's Profile Picture" />
+				<a href="user-profile" class="thin">Road Warrior</a>
 			</div>
-		</div>
+			<div class="col-sm-10 col-xs-9">
+				<p class="muted"><em>Feb 20th, 2015</em></p>
+				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+					nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+					Ut wisi enim ad minim veniam.</p>
+				</div>
+			</div>
+			<hr>
+			<div class="clearfix"></div>
+			<footer class="row">
+			<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
+				<pagination ng-model="page" total-items="commentsCount" boundary-links="true" 
+					first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
+					rotate="true" max-size="maxSize" ng-change="getUserComments(username,page)">
+				</pagination>
+			</div>
+		</footer>
 	</div>
+	</div>
+</div>
 
-	</div>
+</div>

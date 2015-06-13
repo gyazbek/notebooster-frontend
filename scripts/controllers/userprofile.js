@@ -1,33 +1,49 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('UserprofileCtrl', function ($scope,$modal,$stateParams,nbApiService,Validate) {
+  .controller('UserprofileCtrl', function ($scope,$state,$modal,$stateParams,nbApiService,Validate) {
     $scope.username = "";
     $scope.userInfo = "";
+    $scope.notesForSale = {};
+    $scope.comments = {};
+
+    // Pagination
+    $scope.notesCount = 0;
+    $scope.commentsCount = 0;
+    $scope.page = 1;
+    $scope.maxSize = 10;
+
+    //tab
+    $scope.tab = "";
 
     $scope.getProfile = function(username){
       nbApiService.getProfile(username)
       .then(function(data){
         $scope.userInfo = data;
       },function(data){
-        console.log(data);
         $scope.error;
       });
     };
 
-    $scope.updateProfile = function(formData, model){
-      $scope.errors = [];
-      Validate.form_validation(formData,$scope.errors);
-      if(!formData.$invalid){
-        nbApiService.updateProfile(model)
-        .then(function(data){
-        	// success case
-        	$scope.complete = true;
-        },function(data){
-        	// error case
-        	$scope.error = data;
-        });
-      }
+    $scope.getNotesForSale = function(){
+      $scope.tab = "forsale";
+      nbApiService.getNotesForSale($scope.username, $scope.page)
+      .then(function(data){
+        $scope.notesForSale = data;
+        $scope.notesCount = $scope.notesForSale.length;
+      },function(data){
+        $scope.error;
+      });
+    };
+
+    $scope.getNoteDetails = function(event){
+      var noteId = event.target.id;
+      $state.go('app.note-details', {'noteId': noteId});
+    }
+
+    $scope.getComments = function(){
+      $scope.tab = "comments";   
+      $scope.commentsCount = 3;
     };
 
     $scope.report = function(size) {
@@ -100,9 +116,11 @@ angular.module('angularNoteboosterApp')
       });
     };
 
-    init();
     function init() {
       $scope.username = $stateParams.username;
       $scope.getProfile($scope.username);
+      $scope.getNotesForSale();
     }
+
+    init();
   });

@@ -59,7 +59,7 @@
 							<p class="large muted hidden-xs text-center">{{note.price | currency}}</p>
 						</div>
 						<div class="col-sm-6 col-xs-12 mtop5 mbot15-xs less-spacing">
-							<p class="lead"><a href="note-details">{{note.title}}</a></p>
+							<p class="lead"><a id="{{note.id}}" ng-click="getNoteDetails($event)">{{note.title}}</a></p>
 							<p class="visible-sm visible-xs">{{note.price | currency}}</p>
 							<p class="visible-xs">Provided by: <a href="user-profile">asdf</a></p>
 							<p>Date: {{note.year}}</p>
