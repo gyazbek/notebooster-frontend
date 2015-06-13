@@ -68,32 +68,30 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.followUser = function(size){
-      var modalInstance = $modal.open({
-        animation: true,
-        templateUrl: '/views/partials/follow_modal.html',
-        controller: 'FollowCtrl',
-        size: size,
-        resolve: {
-          username: function () {
-              return $scope.username;
+      nbApiService.followUser($scope.userInfo.id)
+      .then(function(data){
+        var modalInstance = $modal.open({
+          animation: true,
+          templateUrl: '/views/partials/follow_modal.html',
+          controller: 'FollowCtrl',
+          size: size,
+          resolve: {
+            username: function () {
+                return $scope.username;
+            }
           }
-        }
-      });
+        });
 
-      modalInstance.result.then(function (msgResponse) {
-        $scope.msgSentResponse = msgResponse;
-      }, function (reason) {
-        // Modal closed.
+        modalInstance.result.then(function (msgResponse) {
+          $scope.msgSentResponse = msgResponse;
+        }, function (reason) {
+          // Modal closed.
+        });
+      },function(data){
+        // error case
+        $scope.error = data;
+        console.log(data);
       });
-      // nbApiService.followUser($scope.userInfo.id)
-      // .then(function(data){
-      //   // success case
-      //   console.log(data);
-      // },function(data){
-      //   // error case
-      //   $scope.error = data;
-      //   console.log(data);
-      // });
     };
 
     $scope.contactUser = function(size){

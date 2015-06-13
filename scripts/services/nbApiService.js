@@ -305,6 +305,25 @@ angular.module('angularNoteboosterApp')
                 'data': {'user_id':userId}
             });
         },
+        'getWatchlist' : function(order, page){
+            return this.request({
+                'method': "GET",
+                'url': "/user/watchlist",
+                'date': {
+                    'order': order,
+                    'page': page
+                }
+            });
+        },
+        'removeFromWatchlist' : function(userId){
+            return this.request({
+                'method': "DELETE",
+                'url': "/user/watchlist",
+                'date': {
+                    'user_id': userId,
+                }
+            });
+        },
         'initialize': function(url, sessions){
             this.API_URL = url;
             this.use_session = sessions;

@@ -1,30 +1,34 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-.controller('WatchlistCtrl', function ($scope,$http) {
-  init();
+.controller('WatchlistCtrl', function ($scope,$state,nbApiService,$http) {
+	$scope.orderSelect = "dateAdded";
 
-  function init(){
-    $http.get('app/watchlist/watchlist.json').success(function(data) {
-      $scope.results = data;
-      $scope.itemCount = data.length;
-    });
-  }
+	// Pagination
+	$scope.watchlistCount = 0;
+	$scope.page = 1;
+	$scope.maxSize = 10;
+
+	$scope.getWatchlist = function(order,page){
+		console.log(order);
+		console.log(page);
+	};
+
+	$scope.removeFromWatchlist = function(event){
+		var username = event.target.id;
+		console.log('removed ' + username);
+	};
+
+	$scope.getUserProfile = function(event){
+	  	var username = event.target.id;
+      	$state.go('app.viewprofile', {'username': username});		
+	};
+
+	function init(){
+		$http.get('app/watchlist/watchlist.json').success(function(data) {
+		  $scope.results = data;
+		  $scope.itemCount = data.length;
+		});
+	}
+	init();
 });
-// .controller('WatchlistCtrl', function ($scope,$stateParams, nbApiService, Validate) {
-//   $scope.model = {'email':'', 'message':'', 'name':'', 'subject':''};
-//   $scope.complete = false;
-
-//   if(typeof $stateParams.noteId !== 'undefined') {
-//     alert('note id is here');
-//   }
-
-//   nbApiService.browseNotes( '','')
-//   .then(function(data){
-//     // success case
-//     $scope.complete = true;
-//     $scope.results = data.results;
-//   }, function(data){
-//     // error case
-//     $scope.errors = data;
-//   });

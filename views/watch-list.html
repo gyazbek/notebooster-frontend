@@ -12,52 +12,45 @@
               <p class="lead mbot0">{{itemCount}} Items</p>
             </div>
             <div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
-              <select class="form-control" ng-model="orderListValue">
-                <option value="">Activity</option>
-                <option value="dateJoined">Date Added</option>
+              <select ng-model="orderSelect" ng-change="getWatchlist(orderSelect,page)" class="form-control" ng-model="orderListValue">
+                <option value="activity">Activity</option>
+                <option value="dateAdded">Date Added</option>
               </select>
             </div>
           </section>
           <main class="row">
             <div class="col-xs-12">
-              <div class="row vertical-align lined" ng-repeat="item in results | orderBy: orderListValue">
+              <div class="row vertical-align lined" ng-repeat="user in results">
                 <div class="col-sm-2 col-xs-0 hidden-xs text-center">
                   <div class="row">
                     <div class="col-xs-10 col-xs-offset-1">
                       <img src="img/profile.png" class="img-responsive" alt="Gricha2380 Profile Picture" />
                     </div>
                   </div>
-                  <p><a href="user-profile">{{item.username}}</a></p>
+                  <p><a id="{{user.username}}" href="" ng-click="getUserProfile($event)">{{user.username}}</a></p>
                 </div>
                 <div class="col-xs-7 mtop15 mbot5">
-                  <p>Attends: {{item.school}}</p>
-                  <p>Joined: {{item.dateJoined}}</p>
-                  <p>Notes: {{item.notes}}</p>
+                  <p>Attends: {{user.school}}</p>
+                  <p>Joined: {{user.dateJoined}}</p>
+                  <p>Notes: {{user.notes}}</p>
                   <p>Rating:
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star off"></i>
-                    <i class="fa fa-star off"></i>
-                    <i class="fa fa-star off"></i>
+                    <i ng-repeat=" i in [] | range:user.rating" class="fa fa-star"></i>
+                    <i ng-repeat=" i in [] | range:(5 - user.rating)" class="fa fa-star off"></i>
                   </p>
                 </div>
                 <div class="col-sm-3 col-xs-5 text-center">
-                  <button class="btn btn-minor btn-block">Remove</button>
-                  <a href="user-profile" class="btn btn-primary btn-block">View Profile</a>
+                  <button id="{{user.username}}" ng-click="removeFromWatchlist($event)" class="btn btn-minor btn-block">Remove</button>
+                  <a id="{{user.username}}" href="" ng-click="getUserProfile($event)"class="btn btn-primary btn-block">View Profile</a>
                 </div>
               </div>
             </div>
           </main>
           <footer class="row">
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-              <ul class="pagination mtop50 mbot50">
-                <li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-              </ul>
+              <pagination ng-model="page" total-items="commentsCount" boundary-links="true" 
+                first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
+                rotate="true" max-size="maxSize" ng-change="getWatchlist(user.username,page)">
+              </pagination>
             </div>
           </footer>
           <div class="clearfix"></div>

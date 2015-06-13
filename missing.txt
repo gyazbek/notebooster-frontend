@@ -1,3 +1,8 @@
 			MISSING
-- where do i send a request to report violation in /profile/user/username
+in /profile/user/username (user-profile.html): 
+- where do i send a request to report violation
 - follow button set up but not working
+- where to get user comments from
+
+in /user/watchlist (watchlist.html):
+- delete user requires userId but im sending username
