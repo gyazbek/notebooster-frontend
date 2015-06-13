@@ -59,8 +59,13 @@ angular.module('angularNoteboosterApp')
 	};
 
 	$scope.view = function(event) {
-      var threadId = event.target.id;
-      $state.go('app.messagethread', {'threadId': threadId});
+      	var threadId = event.target.id;
+      	$state.go('app.messagethread', {'threadId': threadId});
+	};
+
+	$scope.getUserProfile = function(event){
+	  	var username = event.target.id;
+      	$state.go('app.viewprofile', {'username': username});		
 	};
 
   	function init(){

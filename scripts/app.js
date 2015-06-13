@@ -192,10 +192,10 @@ angular.module('angularNoteboosterApp', [
     }
   })
     .state('app.viewprofile', {
-    url: 'user/{username}',
+    url: 'profile/user/{username}',
     views: {
       'content@': {
-        controller: 'MessagesCtrl', //Create new controller for viewing profile
+        controller: 'UserprofileCtrl', 
         templateUrl: 'views/user-profile.html'
       }
     },

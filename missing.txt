@@ -1,14 +1,5 @@
 			MISSING
-notedetails.html
-	- Notes img contains static url, no url passed for note img
-	- is "Attends: " supposed to show school acronym? (no acronym found)
-	- "Joined: " object returned contains no such thing
-	- "Created: " object doesn't contain info
-	- "Format: " field not found in obj returned 
-	- "Purchases: " field not found in obj returned 
-	- "Rating: " field not found in obj returned
+Messages/MessagesDetails
+	- connect username link to their profile
 
 
-
-message details get thread response:
-	- contains subject id in wrong spot

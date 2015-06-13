@@ -141,6 +141,12 @@ angular.module('angularNoteboosterApp')
                 'data':data
             }); 
         },
+        'getProfile': function (username) {
+            return this.request({
+                'method': "GET",
+                'url': "/profile/user/" + username
+            });
+        },
         'verify': function(key){
             return this.request({
                 'method': "POST",
@@ -266,14 +272,14 @@ angular.module('angularNoteboosterApp')
         },
         'threadReply': function(threadId, msg){
             return this.request({
-                'method': "GET",
+                'method': "POST",
                 'url': "/message/thread/" + threadId + "/reply",
                 'data': {'message': msg}
             });
         },
         'deleteThread': function(threadId){
             return this.request({
-                'method': "GET",
+                'method': "DELETE",
                 'url': "/message/thread/" + threadId + "/delete"
             });
         },

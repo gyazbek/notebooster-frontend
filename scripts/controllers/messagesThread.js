@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-.controller('MessagesThreadCtrl', function ($scope,$stateParams,nbApiService) {
+.controller('MessagesThreadCtrl', function ($scope,$state,$stateParams,nbApiService) {
   	$scope.threadId = "";
   	$scope.msg = "";
 
@@ -22,6 +22,12 @@ angular.module('angularNoteboosterApp')
     },function(data){
       
     });
+  };
+
+  $scope.getUserProfile = function(event){
+      var username = event.target.id;
+      $state.go('app.viewprofile', {'username': username});   
+      console.log(username);
   };
 
 	init();

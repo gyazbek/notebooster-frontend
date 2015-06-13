@@ -36,7 +36,7 @@
                       <img ng-src="img/profile.png" class="img-responsive" alt="Profile Picture" />
                     </div>
                   </div>
-                  <p class="mtop15"><a href="user-profile">{{msg.sender.username}}</a></p>
+                  <p class="mtop15"><a id="{{msg.sender.username}}" href="" ng-click="getUserProfile($event)">{{msg.sender.username}}</a></p>
                 </div>
                 <div class="col-sm-5 col-xs-8 mtop15 mbot5">
                   <p class="lead"><a href="view-message">{{msg.subject}}</a></p>
