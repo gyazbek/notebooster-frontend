@@ -10,10 +10,10 @@
 								<img src="img/paypal.png" alt="PayPal Logo" class="img-responsive">
 							</div>
 						</div>
-						<form method="post" action="">
+						<form ng-submit="saveSettings()">
 							<div class="form-group">
 								<label for="paypal">PayPal Account</label>
-								<input type="text" name="paypal" class="form-control" />
+								<input ng-model="paypal_email" type="text" name="paypal" class="form-control" />
 								<div class="has-error-text" id="bio-error">Error</div>
 								<p class="mtop25 mbot15"><a href="https://www.paypal.com/webapps/mpp/account-setup">Click here to create a PayPal Account</a></p>
 							</div>

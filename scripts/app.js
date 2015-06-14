@@ -289,6 +289,20 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
+  .state('app.organization-register', {
+    url: 'organization-register',
+    views: {
+      'content@': {
+        controller: 'OrganizationRegisterCtrl',
+        templateUrl: 'views/organization-signup.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })
   .state('register', {
     url: '/register',
     templateUrl: 'views/register.html',
