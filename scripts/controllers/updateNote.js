@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('NewNoteCtrl', function ($scope,$stateParams,nbApiService,Validate) {
+  .controller('UpdateNoteCtrl', function ($scope,$stateParams,nbApiService,Validate) {
     $scope.noteId = "";
     $scope.isUpdating = false;
 

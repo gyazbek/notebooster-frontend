@@ -121,6 +121,20 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
+  .state('app.update-note', {
+    url: 'update-note?noteId',
+    views: {
+      'content@': {
+        controller: 'UpdateNoteCtrl',
+        templateUrl: 'views/update-note.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })
   .state('app.notes-forsale', {
     url: 'notes-forsale',
     views: {
