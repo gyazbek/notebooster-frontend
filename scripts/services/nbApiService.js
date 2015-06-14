@@ -272,11 +272,32 @@ angular.module('angularNoteboosterApp')
             return this.request({
                 'method': "GET",
                 'url': "/note/purchased",
-                'datat': {
+                'data': {
                     'page': page,
                     'order': order
                 }
             });
+        },
+        'getMyNotesForSale': function(page,order){
+            return this.request({
+                'method': "GET",
+                'url': "/note/forsale",
+                'data': {
+                    'page': page,
+                    'order': order
+                }
+            });
+        },
+        'setNoteStatus': function(noteId, noteStatus){
+            return {};
+            // return this.request({
+            //     'method': "GET",
+            //     'url': "/note/status",
+            //     'data': {
+            //         'noteId': noteId;
+            //         'noteStatus': noteStatus
+            //     }
+            // });
         },
         'getInbox': function(){
             return this.request({

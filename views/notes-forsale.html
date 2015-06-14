@@ -9,41 +9,41 @@
               <!-- <p class="lead muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
             </div>
             <div class="col-xs-3 text-right mtop25-sm mbot25-sm">
-              <p class="lead mbot0">{{itemCount}} Items</p>
+              <p class="lead mbot0">{{noteCount}} Items</p>
             </div>
             <div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
-              <select class="form-control" ng-model="orderListValue">
-                <option value="date">Newest First</option>
-                <option value="notePrice">Lowest Price</option>
-                <option value="-notePrice">Highest Price</option>
+              <select ng-model="order" ng-click="getMyNotesForSale(page,order)" class="form-control" ng-model="orderListValue">
+                <option value="newest">Newest First</option>
+                <option value="lowest">Lowest Price</option>
+                <option value="highest">Highest Price</option>
               </select>
             </div>
           </section>
           <main class="row">
             <div class="col-xs-12">
-              <div class="row vertical-align normalize-xs lined" ng-repeat="note in notes | orderBy: orderListValue">
+              <div class="row vertical-align normalize-xs lined" ng-repeat="note in results">
                 <div class="col-sm-8 col-xs-12 mtop15 mbot5">
                   <div class="row">
                     <div class="col-xs-12">
-                      <p class="lead mbot0"><a href="note-details">{{note.noteTitle}}</a></p>
+                      <p class="lead mbot0"><a href="" id="{{note.id}}" ng-click="getNoteDetails($event)">{{note.title}}</a></p>
                     </div>
                     <div class="col-sm-6 col-xs-4 mtop15 mbot5">
-                      <p>Price: {{note.notePrice | currency}}</p>
+                      <p>Price: {{note.price | currency}}</p>
                       <p>Sales: N/A</p>
                       <p>Revenue: N/A</p>
                       <p>Charity Split: N/A</p>
                     </div>
                     <div class="col-sm-6 col-xs-8 mtop15 mbot5">
-                      <p class="visible-xs lead">{{note.notePrice | currency}}</p>
-                      <p class="visible-xs muted">Provided by: <a href="user-profile">{{note.providedBy}}</a></p>
-                      <p>Date: {{note.date}}</p>
-                      <p>Course: {{note.course}}</p>
-                      <p>Instructor: {{note.instructor}}</p>
+                      <p class="visible-xs lead">{{note.price | currency}}</p>
+                      <p class="visible-xs muted">Provided by: <a id="{{note.user.username}}" href="" ng-click="getUserProfile($event)">{note.user.username}}</a></p>
+                      <p>Date: {{note.year}}</p>
+                      <p>Course: {{note.course.name}}</p>
+                      <p>Instructor: {{note.instructor.name}}</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-sm-4 col-xs-12 text-center form-group">
-                  <select class="form-control" name="note-status">
+                  <select id="{{note.id}}" class="form-control" name="note-status">
                     <option>Active</option>
                     <option>Disabled</option>
                   </select>

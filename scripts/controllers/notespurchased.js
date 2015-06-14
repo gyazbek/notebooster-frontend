@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-.controller('NotesPurchasedCtrl', function ($scope,$modal,nbApiService,$http) {
+.controller('NotesPurchasedCtrl', function ($scope,$state,$modal,nbApiService,$http) {
 	$scope.notesPurchased = {};
 	$scope.notesCount = 0;
 	$scope.order = 'newest';
@@ -16,7 +16,6 @@ angular.module('angularNoteboosterApp')
 		nbApiService.getNotesPurchased(page,order)
         .then(function(data){
         	// success case
-          	console.log(data);
           	$scope.notesPurchased = data.results;
           	$scope.notesCount = data.results.length;
         },function(data){

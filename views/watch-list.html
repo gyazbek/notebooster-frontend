@@ -12,7 +12,7 @@
               <p class="lead mbot0">{{watchlistCount}} Items</p>
             </div>
             <div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
-              <select ng-model="orderSelect" ng-change="getWatchlist(orderSelect,page)" class="form-control" ng-model="orderListValue">
+              <select ng-model="order" ng-change="getWatchlist(order,page)" class="form-control" ng-model="orderListValue">
                 <option value="activity">Activity</option>
                 <option value="dateAdded">Date Added</option>
               </select>
@@ -24,23 +24,23 @@
                 <div class="col-sm-2 col-xs-0 hidden-xs text-center">
                   <div class="row">
                     <div class="col-xs-10 col-xs-offset-1">
-                      <img src="img/profile.png" class="img-responsive" alt="Gricha2380 Profile Picture" />
+                      <img ng-src="img/profile.png" class="img-responsive" alt="Profile Picture" />
                     </div>
                   </div>
-                  <p><a id="{{user.username}}" href="" ng-click="getUserProfile($event)">{{user.username}}</a></p>
+                  <p><a id="{{user.user_watched.username}}" href="" ng-click="getUserProfile($event)">{{user.user_watched.username}}</a></p>
                 </div>
                 <div class="col-xs-7 mtop15 mbot5">
-                  <p>Attends: {{user.school}}</p>
-                  <p>Joined: {{user.dateJoined}}</p>
-                  <p>Notes: {{user.notes}}</p>
+                  <p>Attends: {{user.user_watched.profile.school.name}}</p>
+                  <p>Joined: {{user.user_watched.date_joined | date}}</p>
+                  <p>Notes: {{user.user_watched.sales_quantity}}</p>
                   <p>Rating:
-                    <i ng-repeat=" i in [] | range:user.rating" class="fa fa-star"></i>
-                    <i ng-repeat=" i in [] | range:(5 - user.rating)" class="fa fa-star off"></i>
+                    <i ng-repeat=" i in [] | range:user.user_watched.profile.rating" class="fa fa-star"></i>
+                    <i ng-repeat=" i in [] | range:(5 - user.user_watched.profile.rating)" class="fa fa-star off"></i>
                   </p>
                 </div>
                 <div class="col-sm-3 col-xs-5 text-center">
-                  <button id="{{user.username}}" ng-click="removeFromWatchlist($event)" class="btn btn-minor btn-block">Remove</button>
-                  <a id="{{user.username}}" href="" ng-click="getUserProfile($event)"class="btn btn-primary btn-block">View Profile</a>
+                  <button id="{{user.user_watched.username}}" ng-click="removeFromWatchlist($event)" class="btn btn-minor btn-block">Remove</button>
+                  <a id="{{user.user_watched.username}}" href="" ng-click="getUserProfile($event)"class="btn btn-primary btn-block">View Profile</a>
                 </div>
               </div>
             </div>

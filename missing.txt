@@ -11,6 +11,7 @@ in /profile-settings for user (profile-settings.html):
 - missing upload img
 - linked to backend but not sure if data is being sent properly
 - where do i disable my account
+	DELETE /user
 
 
 
@@ -20,3 +21,11 @@ BROWSE.HTML
 NOTES-PURCHASE.HTML
 	- not sure where rate this note sends request
 	- download button not set up
+
+
+{
+	'profile': 
+	{
+		'paypal_email': email
+	}
+}

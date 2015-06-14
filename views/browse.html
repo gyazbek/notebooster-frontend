@@ -61,7 +61,7 @@
 			<div class="col-sm-6 col-xs-12 mtop5 mbot15-xs less-spacing">
 				<p class="lead"><a id="{{note.id}}" ng-click="getNoteDetails($event)">{{note.title}}</a></p>
 				<p class="visible-sm visible-xs">{{note.price | currency}}</p>
-				<p class="visible-xs">Provided by: <a id="{{msg.sender.username}}" href="" ng-click="getUserProfile($event)">{note.user.username}}</a></p>
+				<p class="visible-xs">Provided by: <a id="{{note.user.username}}" href="" ng-click="getUserProfile($event)">{note.user.username}}</a></p>
 				<p>Date: {{note.year}}</p>
 				<p>Course: {{note.course.name}} </p>
 				<p>Instructor: {{note.instructor.name}}</p>

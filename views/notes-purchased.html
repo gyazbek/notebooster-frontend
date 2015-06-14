@@ -21,7 +21,7 @@
 						</section>
 						<main class="row less-spacing">
 							<div class="col-xs-12">
-									<div class="row vertical-align normalize-xs lined" ng-repeat="note in notesPurchased | orderBy:orderListValue">
+									<div class="row vertical-align normalize-xs lined" ng-repeat="note in notesPurchased">
 										<div class="col-sm-2 col-xs-0 hidden-xs text-center">
 											<div class="row">
 												<div class="col-xs-10 col-xs-offset-1">
@@ -44,7 +44,7 @@
 										<div class="col-sm-3 col-xs-12 text-center mtop5 mbot5 mtop25-xs">
 											<button class="btn btn-minor btn-block" id="{{note.note.title}}" ng-click="rateNote($event)">Rate</button>
 											<button class="btn btn-primary btn-block">Download <i class="fa fa-arrow-down"></i></button>
-										  <p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
+										  <p class="muted mtop15"><i ng-if="note.charity.name" class="fa fa-heart-o"> For Charity</i></p>
 										</div>
 									</div>
 							 </div>

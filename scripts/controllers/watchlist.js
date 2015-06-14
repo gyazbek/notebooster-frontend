@@ -2,7 +2,7 @@
 
 angular.module('angularNoteboosterApp')
 .controller('WatchlistCtrl', function ($scope,$state,nbApiService,$http) {
-	$scope.orderSelect = "dateAdded";
+	$scope.order = "activity";
 
 	// Pagination
 	$scope.watchlistCount = 0;
@@ -14,7 +14,6 @@ angular.module('angularNoteboosterApp')
   	 	.then(function(data){
   	 		$scope.results = data;
 			$scope.watchlistCount = data.length;
-			console.log(data.length);
   	 	},function(data) {
   	 		$scope.unableToGetList = true;
   	 	});
@@ -36,10 +35,7 @@ angular.module('angularNoteboosterApp')
 	};
 
 	function init(){
-		$http.get('app/watchlist/watchlist.json').success(function(data) {
-		  $scope.results = data;
-		  $scope.watchlistCount = data.length;
-		});
+		$scope.getWatchlist($scope.order,$scope.page);
 	}
 	init();
 });
