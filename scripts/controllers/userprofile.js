@@ -25,6 +25,11 @@ angular.module('angularNoteboosterApp')
       });
     };
 
+    $scope.getUserProfile = function(event){
+        var username = event.target.id;
+        $state.go('app.viewprofile', {'username': username});   
+    };
+
     $scope.getNotesForSale = function(){
       $scope.tab = "forsale";
       nbApiService.getNotesForSale($scope.username, $scope.page)
@@ -42,8 +47,14 @@ angular.module('angularNoteboosterApp')
     }
 
     $scope.getComments = function(){
-      $scope.tab = "comments";   
-      $scope.commentsCount = 3;
+      $scope.tab = "comments"; 
+      nbApiService.getUserFeedback($scope.username, $scope.page)
+      .then(function(data){
+        $scope.comments = data;
+        $scope.commentsCount = $scope.comments.length;
+      },function(data){
+        $scope.error;
+      });
     };
 
     $scope.report = function(size) {
@@ -118,6 +129,14 @@ angular.module('angularNoteboosterApp')
       $scope.username = $stateParams.username;
       $scope.getProfile($scope.username);
       $scope.getNotesForSale();
+
+      nbApiService.getUserFeedback($scope.username, $scope.page)
+      .then(function(data){
+        $scope.comments = data;
+        $scope.commentsCount = $scope.comments.length;
+      },function(data){
+        $scope.error;
+      });
     }
 
     init();

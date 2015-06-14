@@ -50,7 +50,7 @@
 							</a>
 						</div>
 					</div>
-					<p class="hidden-xs text-center mtop5"><a href="" ng-click="getProfile(note.user.username)">{{note.user.username}}</a></p>
+					<p class="hidden-xs text-center mtop5"><a href="" id="{{note.user.username}}" ng-click="getUserProfile($event)">{{note.user.username}}</a></p>
 				</div>
 				<div class="col-sm-2 col-xs-0 hidden-xs">
 					<p class="large muted hidden-xs text-center">{{note.price | currency}}</p>
@@ -79,16 +79,14 @@
 	</div>
 	<div ng-if="tab=='comments'" class="tab-pane active" id="comments" role="tabpanel">
 		<h2>Comments</h2>
-			<div class="row mtop15 mbot15">
-			<div class="col-sm-2 col-xs-3 text-center">
-				<img src="img/profile.png" class="img-responsive" alt="Road Warrior's Profile Picture" />
-				<a href="user-profile" class="thin">Road Warrior</a>
-			</div>
-			<div class="col-sm-10 col-xs-9">
-				<p class="muted"><em>Feb 20th, 2015</em></p>
-				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-					nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-					Ut wisi enim ad minim veniam.</p>
+			<div class="row mtop15 mbot15" ng-repeat="comment in comments">
+				<div class="col-sm-2 col-xs-3 text-center">
+					<img src="img/profile.png" class="img-responsive" alt="Road Warrior's Profile Picture" />
+					<a href="" id="{{comment.user.username}}" ng-click="getUserProfile($event)"class="thin">{{comment.user.username}}</a>
+				</div>
+				<div class="col-sm-10 col-xs-9">
+				<p class="muted"><em>{{comment.created | date}}</em></p>
+				<p>{{comment.content}}</p>
 				</div>
 			</div>
 			<hr>

@@ -374,6 +374,13 @@ angular.module('angularNoteboosterApp')
                 }
             });
         },
+        'getUserFeedback' : function(username, page){
+            return this.request({
+                'method': "GET",
+                'url': "/profile/" + username + '/feedback',
+                'data': {'page':page}
+            });
+        },
         'initialize': function(url, sessions){
             this.API_URL = url;
             this.use_session = sessions;
