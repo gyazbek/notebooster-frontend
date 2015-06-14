@@ -347,7 +347,7 @@ angular.module('angularNoteboosterApp')
             return this.request({
                 'method': "GET",
                 'url': "/user/watchlist",
-                'date': {
+                'data': {
                     'order': order,
                     'page': page
                 }
@@ -357,8 +357,20 @@ angular.module('angularNoteboosterApp')
             return this.request({
                 'method': "DELETE",
                 'url': "/user/watchlist",
-                'date': {
+                'data': {
                     'user_id': userId,
+                }
+            });
+        },
+        'setPaymentSettings' : function(email){
+            return this.request({
+                'method': "PUT",
+                'url': "/profile/update",
+                'data': {
+                    'profile': 
+                    {
+                        'paypal_email': email
+                    }
                 }
             });
         },

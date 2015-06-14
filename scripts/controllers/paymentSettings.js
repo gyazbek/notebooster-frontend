@@ -1,10 +1,15 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('PaymentSettingsCtrl', function ($scope, nbApiService, Validate) {
+  .controller('PaymentSettingsCtrl', function ($scope,nbApiService,Validate) {
     $scope.paypal_email="";
 
     $scope.saveSettings = function(email){
-      console.log('Email saved.');
+      nbApiService.setPaymentSettings(email)
+      .then(function(data){
+      	console.log('Success');
+      },function(data){
+      	console.log('Failed');
+      });
     };
   });
