@@ -9,13 +9,13 @@
 								<!-- <p class="lead muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
 							</div>
 							<div class="col-xs-3 text-right mtop25-sm mbot25-sm">
-								<p class="lead mbot0">{{itemCount}} Items</p>
+								<p class="lead mbot0">{{notesCount}} Items</p>
 							</div>
 							<div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
-								<select class="form-control" ng-model="orderListValue">
-									<option value="date">Newest First</option>
-									<option value="notePrice">Lowest Price</option>
-									<option value="-notePrice">Highest Price</option>
+								<select ng-model="order" ng-change="getNotesPurchased(order)" class="form-control" ng-model="orderListValue">
+									<option value="newest">Newest First</option>
+									<option value="lowest">Lowest Price</option>
+									<option value="highest">Highest Price</option>
 								</select>
 							</div>
 						</section>
@@ -28,21 +28,21 @@
 													<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
 												</div>
 											</div>
-											<p class="mtop15"><a href="user-profile">{{note.userName}}</a></p>
+											<p class="mtop15"><a id="{{note.user.username}}" href="" ng-click="getUserProfile($event)">{{note.user.username}}</a></p>
 										</div>
 										<div class="col-sm-2 col-xs-0 hidden-xs">
-											<p class="large muted hidden-xs text-center">{{note.notePrice | currency}}</p>
+											<p class="large muted hidden-xs text-center">{{note.note.price | currency}}</p>
 										</div>
 										<div class="col-md-5 col-sm-7 col-xs-12 mtop15 mbot5">
-											<p class="lead"><a href="note-details">{{note.noteTitle}}</a></p>
-											<p class="visible-xs lead">{{note.notePrice | currency}}</p>
-											<p class="visible-xs muted">Provided by: <a href="user-profile">{{note.providedBy}}</a></p>
+											<p class="lead"><a id="{{note.note.title}}" ng-click="getNoteDetails($event)">{{note.note.title}}</a></p>
+											<p class="visible-xs lead">{{note.note.price | currency}}</p>
+											<p class="visible-xs muted">Provided by: <a id="{{note.user.username}}" href="" ng-click="getUserProfile($event)">{{note.user.username}}</a></p>
 											<p>Date: {{note.date}}</p>
-											<p>Course: {{note.course}}</p>
-											<p>Instructor: {{note.instructor}}</p>
+											<p>Course: {{note.course.name}}</p>
+											<p>Instructor: {{note.instructor.name}}</p>
 										</div>
 										<div class="col-sm-3 col-xs-12 text-center mtop5 mbot5 mtop25-xs">
-											<button class="btn btn-minor btn-block" data-toggle="modal" data-target="#ratenote">Rate</button>
+											<button class="btn btn-minor btn-block" id="{{note.note.title}}" ng-click="rateNote($event)">Rate</button>
 											<button class="btn btn-primary btn-block">Download <i class="fa fa-arrow-down"></i></button>
 										  <p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
 										</div>
@@ -51,14 +51,10 @@
 						</main>
 						<footer class="row">
 							<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-								<ul class="pagination mtop50 mbot50">
-									<li><a href="#"><i class="fa fa-arrow-left"></i></a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#"><i class="fa fa-arrow-right"></i></a></li>
-								</ul>
+								<pagination ng-model="page" total-items="notesCount" boundary-links="true" 
+									first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
+									rotate="true" max-size="maxSize" ng-change="getNotesPurchased(page,order)">
+								</pagination>
 							</div>
 						</footer>
 						<div class="clearfix"></div>

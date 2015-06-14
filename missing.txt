@@ -11,3 +11,12 @@ in /profile-settings for user (profile-settings.html):
 - missing upload img
 - linked to backend but not sure if data is being sent properly
 - where do i disable my account
+
+
+
+BROWSE.HTML
+	- getNotes getting 405 error (method not allowed)
+
+NOTES-PURCHASE.HTML
+	- not sure where rate this note sends request
+	- download button not set up

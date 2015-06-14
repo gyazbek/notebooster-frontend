@@ -268,6 +268,16 @@ angular.module('angularNoteboosterApp')
                 'url': "/user/" + username + "/?format=json"
             });
         },
+        'getNotesPurchased': function(page,order){
+            return this.request({
+                'method': "GET",
+                'url': "/note/purchased",
+                'datat': {
+                    'page': page,
+                    'order': order
+                }
+            });
+        },
         'getInbox': function(){
             return this.request({
                 'method': "GET",

@@ -81,6 +81,11 @@ angular.module('angularNoteboosterApp')
       var noteId = event.target.id;
       $state.go('app.note-details', {'noteId': noteId});
     }
+
+    $scope.getUserProfile = function(event){
+        var username = event.target.id;
+        $state.go('app.viewprofile', {'username': username});   
+    };
     
     function init(){
       if(typeof $stateParams.schoolId !== 'undefined') {

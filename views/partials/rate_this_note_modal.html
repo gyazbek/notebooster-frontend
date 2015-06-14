@@ -1,0 +1,29 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button ng-click="close()" type="button" class="close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h3 class="modal-title">Rate This Note</h3>
+    <p>Leave feedback on this note</p>
+  </div>
+  <div class="modal-body">
+    <form ng-submit="send()">
+    <h4 class="mbot15">{{noteTitle}}</h4>
+    <div class="form-group">
+      <label for="note-rating">Select Rating:</label>
+      <select name="note-rating" class="form-control">
+        <option value="0">Select Rating</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="note-feedback">Leave Feedback: <span class="muted">(Max 500 words)</span></label>
+      <textarea ng-model="feedback" name="note-feedback" class="form-control"></textarea>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+        <button type="submit" class="btn btn-primary btn-block">Send</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
