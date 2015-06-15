@@ -20,18 +20,25 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.saveSettings = function(){
-    	$scope.data = {};
+    	$scope.data = {
+        'username': $scope.username,
+        'email': $scope.email,
+        'profile': {
+          'school': $scope.school,
+          'email_notification': $scope.notifyByEmail,
+          'bio': $scope.bio
+        }
+      }
 
     	nbApiService.updateProfile($scope.data)
     	.then(function(data){
-    		console.log("success");
+
     	},function(data){
-    		console.log("failed");
+        
     	});
     };
 
   	$scope.disableAccount = function(size) {
-  		console.log('hi');
 		var modalInstance = $modal.open({
 			animation: true,
 			templateUrl: '/views/partials/disable_account_modal.html',
@@ -48,4 +55,38 @@ angular.module('angularNoteboosterApp')
 		});
 	};
   
-  });
+  $scope.onFileSelect = function($flow) {
+    console.log($files);
+    //$files: an array of files selected, each file has name, size, and type.
+    // for (var i = 0; i < $files.length; i++) {
+    //   var $file = $files[i];
+    //   $upload.upload({
+    //     url: 'my/upload/url',
+    //     file: $file,
+    //     progress: function(e){}
+    //   }).then(function(data, status, headers, config) {
+    //     // file is uploaded successfully
+    //     console.log(data);
+    //   }); 
+    // }
+  }
+
+  init();
+  function init() {
+    getUserProfile();
+  }
+
+  function getUserProfile(){
+    nbApiService.profile()
+    .then(function(data){
+      $scope.bio = data.profile.bio;
+      $scope.username = data.username;
+      $scope.school = {selected: data.profile.school};
+      $scope.email = data.email;
+      $scope.notifyByEmail = data.profile.email_notification;
+    },function(data){
+
+    });
+  }
+  
+});

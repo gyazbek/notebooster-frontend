@@ -136,7 +136,7 @@ angular.module('angularNoteboosterApp')
         },
         'updateProfile': function(data){
             return this.request({
-                'method': "PATCH",
+                'method': "PUT",
                 'url': "/rest-auth/user/",
                 'data':data
             }); 
