@@ -20,6 +20,9 @@ NOTES-FOR-SALE.HTML
 	- where to get total earnings from, sold_count?
 	- where to set note status
 
+NEW-NOTE.HTML
+	- get charities api
+
 
 {
 	'profile': 
