@@ -299,10 +299,11 @@ angular.module('angularNoteboosterApp')
             //     }
             // });
         },
-        'getInbox': function(){
+        'getInbox': function(order){
+            var orderAppend = (order != '' ? (order == 'newest' ? '?ordering=latest' : (  order =='oldest' ? '?ordering=-latest' : '') ) : '') 
             return this.request({
                 'method': "GET",
-                'url': "/message/inbox"
+                'url': "/message/inbox" + orderAppend
             });
         },
         'sendMsg': function(recipient,subject,msg){

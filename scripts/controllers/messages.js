@@ -18,7 +18,7 @@ angular.module('angularNoteboosterApp')
 
   	// TODO: current arguments order and page is not being sent. 
   	$scope.getUserInbox = function(order,page){
-  		nbApiService.getInbox()
+  		nbApiService.getInbox(order)
   	 	.then(function(data){
   	 		$scope.itemCount = data.count;
   	 		$scope.messages = data.results;
