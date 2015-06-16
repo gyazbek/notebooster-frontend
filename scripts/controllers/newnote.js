@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('NewNoteCtrl', function ($scope,$http,nbApiService,Validate) {
+  .controller('NewNoteCtrl', function ($scope,$http,$modal,nbApiService,Validate) {
     $scope.numOfPages = 1;
     $scope.notePreview = "firstOnly";
     $scope.notePrice;
+    $scope.free = false;
     $scope.charitySplit = "20";
     $scope.noteTitle = "";
     $scope.noteDesc = "";
@@ -42,8 +43,69 @@ angular.module('angularNoteboosterApp')
       }
     };
 
+    $scope.learnMore = function(size) {
+      var modalInstance = $modal.open({
+        animation: true,
+        templateUrl: '/views/partials/learn_more_modal.html',
+        controller: 'CloseOnlyCtrl',
+        size: size
+      });
+    };
+
+    $scope.addCourse = function(size) {
+      var modalInstance = $modal.open({
+        animation: true,
+        templateUrl: '/views/partials/add_course_modal.html',
+        controller: 'AddCourseCtrl',
+        size: size, 
+        resolve: {
+            school: function () {
+                return $scope.school;
+            }
+          }
+        });
+          
+
+        modalInstance.result.then(function (msgResponse) {
+          $scope.msgSentResponse = msgResponse;
+        }, function (reason) {
+          // Modal closed.
+        });
+      }
+
+    $scope.addInstructor = function(size) {
+      var modalInstance = $modal.open({
+        animation: true,
+        templateUrl: '/views/partials/add_instructor_modal.html',
+        controller: 'AddInstructorCtrl',
+        size: size
+      });
+          
+
+        modalInstance.result.then(function (msgResponse) {
+          $scope.msgSentResponse = msgResponse;
+        }, function (reason) {
+          // Modal closed.
+        });
+      }
+
     init();
     function init(){
       
     };
+    // $scope.errors = {
+    //   'numOfPages':[],
+    //   'notePreview':[],
+    //   'notePrice':[],
+    //   'charitySplit':[],
+    //   'noteTitle':[],
+    //   'noteDesc':[],
+    //   'school':[],
+    //   'course':[],
+    //   'semester':[],
+    //   'semesterYear':[],
+    //   'professor':[],
+    //   'paypalEmail':[],
+    //   'eula':[]
+    // };
   });

@@ -1,0 +1,21 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button ng-click="cancel()" type="button" class="close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h3 class="modal-title">Add New Instructor</h3>
+    <p></p>
+  </div>
+  <div class="modal-body"><form ng-submit="addInstructor()">
+    <div class="form-group">
+      <label for="instructor-name">Instructor Name:</label>
+      <input ng-model="name" type="text" class="form-control" name="instructor-name">
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <button type="submit" class="btn btn-primary btn-block">Add Instructor</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>

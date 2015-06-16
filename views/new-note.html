@@ -59,7 +59,7 @@
 					</div>
 					<div class="col-md-3 form-group">
 						<label for="free_price">
-							<input type="checkbox" name="free_price" id="free_price" /> Make it Free!
+							<input ng-model="free" type="checkbox" name="free_price" id="free_price" /> Make it Free!
 						</label>
 					</div>
 					<div class="clearfix"></div>
@@ -77,7 +77,7 @@
 					</div>
 					<div class="col-md-5 form-group">
 						<p class="muted">A portion of every sale is given to the nonprofit of your choosing.</p>
-						<p><a href="#" data-toggle="modal" data-target="#charitysupport">Learn More</a></p>
+						<p><a href="" ng-click="learnMore()">Learn More</a></p>
 						<!-- charitysupport MODAL GOES HERE -->
 
 					</div>
@@ -159,7 +159,7 @@
 							</ui-select-choices>
 						</ui-select>
 						<div class="add-new">
-							<p><a href="#" data-toggle="modal" data-target="#new-course">Don't see your Course in the list?</a></p>
+							<p><a href="" ng-click="addCourse()">Don't see your Course in the list?</a></p>
 							<!-- new-course MODAL GOES HERE -->
 						</div>
 					</div>
@@ -171,7 +171,7 @@
 						<!-- PROFESSOR LIST JSON GOES HERE -->
 						<select ng-model"professor" class="professor-select-box form-control" name="professor" value="<?=$professor?>" required></select>
 						<div class="add-new">
-							<p><a href="#" data-toggle="modal" data-target="#new-instructor">Don't see your Professor in the list?</a></p>
+							<p><a href="" ng-click="addInstructor()">Don't see your Professor in the list?</a></p>
 							<!-- new-instructor MODAL GOES HERE -->
 						</div>
 					</div>

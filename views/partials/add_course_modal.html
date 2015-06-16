@@ -1,0 +1,31 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button ng-click="cancel()" type="button" class="close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h3 class="modal-title">Add New Course</h3>
+    <p></p>
+  </div>
+  <div class="modal-body"><form ng-submit="addCourse()">
+    <div class="form-group">
+      <label for="course-title">Course Title:</label>
+      <input ng-model="title" type="text" class="form-control" name="course-title" placeholder="eg: English Composition">
+    </div>
+    <div class="form-group">
+      <label for="course-code">Course Code:</label>
+      <input ng-model="courseCode" type="text" class="form-control" name="course-code" placeholder="eg: ENC1101">
+    </div>
+    <div class="form-group">
+      <label for="course-subject">Subject (optional):</label>
+      <select name="course-subject" class="form-control">
+        <option>Optional...</option>
+      </select>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <button type="submit" class="btn btn-primary btn-block">Add Course</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
