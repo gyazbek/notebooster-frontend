@@ -16,18 +16,16 @@ angular.module('angularNoteboosterApp')
     $scope.oneFact = "";
     $scope.eulaCheck = false;
 
+    $scope.regitster = function(){
+        
+    }
+
   	$scope.whatsthis = function(descriptor,size) {
 		var modalInstance = $modal.open({
 			animation: true,
 			templateUrl: '/views/partials/'+ descriptor +'_modal.html',
 			controller: 'WhatsThisCtrl',
 			size: size
-		});
-
-		modalInstance.result.then(function(){
-
-		}, function (reason) {
-
 		});
 	};
   });

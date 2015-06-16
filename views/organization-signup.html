@@ -4,7 +4,7 @@
 
 	<div class="row">
 		<div class="col-sm-7 hr-right">
-			<form method="post" action="">
+			<form ng-submit="register()">
 
 				<div class="row form-group">
 					<div class="col-sm-6">
@@ -149,7 +149,7 @@
 				<hr class="mtop15 mbot25">
 
 				<label for="org-agree-tc">
-					<input requried ng-model="eulaCheck" type="checkbox" name="org-agree-tc" id="org-agree-tc">
+					<input ng-model="eulaCheck" type="checkbox" name="org-agree-tc" id="org-agree-tc">
 					I have read and agree to the <a href="legal">Terms of Use</a>
 				</label>
 
