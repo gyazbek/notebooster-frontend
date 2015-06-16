@@ -262,6 +262,13 @@ angular.module('angularNoteboosterApp')
                 'url': "/note/" + noteId + "/?format=json"
             });
         },
+        'updateNote': function(noteId, data){
+            return this.request({
+                'method': "PUT",
+                'url': "/note/" + noteId,
+                'data': data
+            });
+        },
         'getNotesPosted': function(username){
             return this.request({
                 'method': "GET",
@@ -286,6 +293,12 @@ angular.module('angularNoteboosterApp')
                     'page': page,
                     'order': order
                 }
+            });
+        },
+        'getNote': function(noteId){
+            return this.request({
+                'method': "GET",
+                'url': "/note/" + noteId
             });
         },
         'setNoteStatus': function(noteId, noteStatus){

@@ -6,12 +6,12 @@ angular.module('angularNoteboosterApp')
     $scope.notePreview = "firstOnly";
     $scope.notePrice;
     $scope.free = false;
-    $scope.charitySplit = "20";
+    $scope.charitySplit = "10";
     $scope.noteTitle = "";
     $scope.noteDesc = "";
     $scope.school = {};
     $scope.course = {};
-    $scope.semester = "spring";
+    $scope.semester = "Spring";
     $scope.semesterYear = "2015";
     $scope.professor;
     $scope.paypalEmail;

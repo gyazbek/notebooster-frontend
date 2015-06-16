@@ -28,7 +28,7 @@
 				<div class="list-group"><p class="muted"><em>No uploaded files</em></p></div>
 			</div>
 
-			<form ng-submit="create()" method="post">
+			<form ng-submit="create()">
 				<div class="row">
 					<div class="col-md-4">
 						<label for="no_of_pages">Number of Pages:</label>
@@ -68,6 +68,7 @@
 					</div>
 					<div class="col-md-3 form-group">
 						<select ng-model="charitySplit" class="form-control" name="charity_split">
+							<option value="10">10%</option>
 							<option value="20">20%</option>
 							<option value="25">25%</option>
 							<option value="50">50%</option>
@@ -133,10 +134,10 @@
 					</div>
 					<div class="col-md-4 form-group">
 						<select ng-model="semester" class="form-control" name="semester" required>
-							<option value="spring">Spring</option>
-							<option value="summer">Summer</option>
-							<option value="fall">Fall</option>
-							<option value="winter">Winter</option>
+							<option value="Spring">Spring</option>
+							<option value="Summer">Summer</option>
+							<option value="Fall">Fall</option>
+							<option value="Winter">Winter</option>
 						</select>
 					</div>
 					<div class="col-md-4 form-group">
@@ -169,7 +170,7 @@
 					</div>
 					<div class="col-md-8 form-group">
 						<!-- PROFESSOR LIST JSON GOES HERE -->
-						<select ng-model"professor" class="professor-select-box form-control" name="professor" value="<?=$professor?>" required></select>
+						<select ng-model="professor" class="professor-select-box form-control" name="professor" required></select>
 						<div class="add-new">
 							<p><a href="" ng-click="addInstructor()">Don't see your Professor in the list?</a></p>
 							<!-- new-instructor MODAL GOES HERE -->
