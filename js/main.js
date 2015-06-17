@@ -37,35 +37,6 @@ $(document).ready(function() {
         }
     }
 
-
-//     $("select.school-select-box").select2({
-//         "minimumInputLength":2,
-//     ajax: {
-//     url: "http://23.102.158.243/school",
-//     dataType: 'json',
-//     delay: 250,
-//     data: function (params) {
-//       return {
-//         search: params.term, // search term
-//         page: params.page
-//       };
-//     },
-//     results: function (data) {
-//             return {
-//                 results: $.map(data.results, function (item) {
-//                     return {
-//                         text: item.name,
-//                         slug: item.name,
-//                         id: item.id
-//                     }
-//                 })
-//             };
-//         },
-
-//     }
-// });
-
-
     $('#collapsedonation').on('shown.bs.collapse', function () {
        $(".buynow-drop .fa-caret-right").removeClass("fa-caret-right").addClass("fa-caret-down");
     });

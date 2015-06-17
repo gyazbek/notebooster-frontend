@@ -395,12 +395,18 @@ angular.module('angularNoteboosterApp')
                 'data': {'page':page}
             });
         },
+        'getSchools' : function(params){
+            return this.request({
+                'method': "GET",
+                'url': "/school",
+                'data': params
+            });
+        },
         'initialize': function(url, sessions){
             this.API_URL = url;
             this.use_session = sessions;
             return this.authenticationStatus();
         }
-
     }
     return service;
   });

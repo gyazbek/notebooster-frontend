@@ -39,12 +39,14 @@ angular.module('angularNoteboosterApp')
     }
 
     $scope.searchSchool = function(school) {
-      var params = {search: school, page: 1};
-      return $http.get(
-        'http://23.102.158.243/school',
-        {params: params}
-      ).then(function(response) {
-        $scope.schools = response.data.results;
+      var params = {search: school, page: 1};      
+      nbApiService.getSchools(params)
+        .then(function(data){
+         // success case
+         $scope.schools = data.results;
+        },function(data){
+          // error case
+          $scope.errors = data;
       });
     };
 
