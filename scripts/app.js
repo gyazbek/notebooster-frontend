@@ -418,5 +418,5 @@ angular.module('angularNoteboosterApp', [
   });
 })
 .run(function(nbApiService){
-  nbApiService.initialize('https://notebooster.com/api', false);
+  nbApiService.initialize('https://notebooster.com/api', true);
 });
