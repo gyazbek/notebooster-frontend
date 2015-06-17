@@ -158,6 +158,46 @@ angular.module('angularNoteboosterApp')
 
 
 
+  //   $('.dropdown').data('open', false);
+
+
+
+  //   $('.dropdown-toggle').click(function() {
+
+  //       if($('.dropdown').data('open')) {
+  //           closeDropdown();
+  //       } else {
+  //           openDropdown();
+
+  //   }
+
+  //    $('.overlay-trans.visible').click(function() {
+  //     if($('.dropdown').data('open')) {
+  //             closeDropdown();
+  //     }
+
+
+  //   });
+
+
+
+
+  // });
+
+
+
+
+
+
+  });
+
+
+
+
+angular.module('angularNoteboosterApp')
+  .controller('DropdownCtrl', function ($http, $state, $scope, $cookies, $location, nbApiService) {
+
+
  function openDropdown() {
 
             $('.dropdown').data('open', true);
@@ -193,33 +233,14 @@ angular.module('angularNoteboosterApp')
     }
 
 
-    $('.dropdown').data('open', false);
-
-
-
-    $('.dropdown-toggle').click(function() {
-
-        if($('.dropdown').data('open')) {
-            closeDropdown();
-        } else {
-            openDropdown();
-
+  $scope.toggled = function(open) {
+    if(open){
+      openDropdown();
+    }else{
+      closeDropdown();
     }
-
-     $('.overlay-trans.visible').click(function() {
-      if($('.dropdown').data('open')) {
-              closeDropdown();
-      }
-    });
+  };
 
 
-
-
-  });
-
-
-
-
-
-  });
+});
 
