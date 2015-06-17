@@ -418,5 +418,5 @@ angular.module('angularNoteboosterApp', [
   });
 })
 .run(function(nbApiService){
-  nbApiService.initialize('http://23.102.158.243', false);
+  nbApiService.initialize('https://notebooster.com/api', false);
 });
