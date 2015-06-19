@@ -402,6 +402,9 @@ angular.module('angularNoteboosterApp')
                 'data': params
             });
         },
+        'getBaseApiUrl' : function(){
+            return this.API_URL;
+        },
         'initialize': function(url, sessions){
             this.API_URL = url;
             this.use_session = sessions;

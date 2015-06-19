@@ -1,13 +1,97 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('ProfileSettingsCtrl', function ($scope,$modal,$stateParams,$http,nbApiService,Validate) {
+  .controller('ProfileSettingsCtrl', function ($scope,$modal,$stateParams,$http,nbApiService,Validate,$cookies, FileUploader) {
   	$scope.img = "";
   	$scope.bio = "";
   	$scope.username = "";
   	$scope.school = {};
   	$scope.email = "";
   	$scope.notifyByEmail = false;
+
+// FileUploader.prototype.uploadItem = function(value) {
+//     var index = this.getIndexOfItem(value),
+//         item = this.queue[index],
+//         self = this;
+
+//     item._prepareToUploading();
+//     if (this.isUploading) {
+//         return;
+//     }
+
+//     this.isUploading = true;
+
+//      	if($cookies.token){
+//          	$http.defaults.headers.common.Authorization = 'Token ' + $cookies.token;
+//         }
+// 	    $http({
+// 	        url: item.url,
+// 	        method: item.method,
+// 	        data: item._file,
+// 	        headers: item.headers
+// 	    }).then(function (response, status, headers) {
+// 	        self._onSuccessItem(item, response, status, headers);
+// 	    }).catch(function (response, status, headers) {
+// 	        self._onErrorItem(item, response, status, headers);
+// 	    }).finally(function (response, status, headers) {
+// 	        self._onCompleteItem(item, response, status, headers);
+// 	    });
+// 	};
+
+    var uploader = $scope.uploader = new FileUploader({
+            url: nbApiService.getBaseApiUrl() + '/profile/picture',
+            autoUpload: true,
+
+            headers: {'X-CSRFToken': $cookies['csrftoken'],
+        				'Authorization': 'Token ' + $cookies.token},
+        });
+
+        // FILTERS
+
+      uploader.filters.push({
+          name: 'customFilter',
+          fn: function(item /*{File|FileLikeObject}*/, options) {
+              return this.queue.length < 10;
+          }
+      });
+
+       // CALLBACKS
+
+        uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+            console.info('onWhenAddingFileFailed', item, filter, options);
+        };
+        uploader.onAfterAddingFile = function(fileItem) {
+            console.info('onAfterAddingFile', fileItem);
+        };
+        uploader.onAfterAddingAll = function(addedFileItems) {
+            console.info('onAfterAddingAll', addedFileItems);
+        };
+        uploader.onBeforeUploadItem = function(item) {
+            console.info('onBeforeUploadItem', item);
+        };
+        uploader.onProgressItem = function(fileItem, progress) {
+            console.info('onProgressItem', fileItem, progress);
+        };
+        uploader.onProgressAll = function(progress) {
+            console.info('onProgressAll', progress);
+        };
+        uploader.onSuccessItem = function(fileItem, response, status, headers) {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+        };
+        uploader.onErrorItem = function(fileItem, response, status, headers) {
+            console.info('onErrorItem', fileItem, response, status, headers);
+        };
+        uploader.onCancelItem = function(fileItem, response, status, headers) {
+            console.info('onCancelItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteItem = function(fileItem, response, status, headers) {
+            console.info('onCompleteItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteAll = function() {
+            console.info('onCompleteAll');
+        };
+
+        console.info('uploader', uploader);
 
     $scope.searchSchool = function(school) {
       var params = {search: school, page: 1};      

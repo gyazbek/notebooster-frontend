@@ -5,7 +5,8 @@ angular.module('angularNoteboosterApp', [
   'ngResource',
   'ngSanitize',
   'ui.select',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'angularFileUpload',
   ])
 .config(function($stateProvider, $urlRouterProvider){
 //  .config(['$routeProvider', function ($routeProvider) {
