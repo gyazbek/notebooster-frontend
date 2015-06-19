@@ -409,7 +409,8 @@ angular.module('angularNoteboosterApp', [
         return nbApiService.authenticationStatus(true);
       }],
     }
-  }).state("modals", {
+  })
+  .state("modals", {
     views:{
       "signin": {
         templateUrl: "modals/signin.html"

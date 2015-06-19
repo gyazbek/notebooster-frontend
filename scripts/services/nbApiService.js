@@ -14,6 +14,10 @@ angular.module('angularNoteboosterApp')
         /* END OF CUSTOMIZATION */
         'authenticated': null,
         'authPromise': null,
+        'currentUser' : {     username: 'Bill',
+                    profile_picture: ''
+            },
+
         'request': function(args) {
             // Let's retrieve the token from the cookie, if available
             if($cookies.token){
@@ -98,16 +102,19 @@ angular.module('angularNoteboosterApp')
             });
         },
         'logout': function(){
+
             var nbApiService = this;
-            return this.request({
+            var logoutRequest = this.request({
                 'method': "POST",
                 'url': "/rest-auth/logout/"
-            }).then(function(data){
-                delete $http.defaults.headers.common.Authorization;
-                delete $cookies.token;
-                nbApiService.authenticated = false;
-                $rootScope.$broadcast("nbApiService.logged_out");
             });
+
+            delete $http.defaults.headers.common.Authorization;
+            delete $cookies.token;
+            nbApiService.authenticated = false;
+            $rootScope.$broadcast("nbApiService.logged_out");
+            
+            return logoutRequest;
         },
         'changePassword': function(password1,password2){
             return this.request({

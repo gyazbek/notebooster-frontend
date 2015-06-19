@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('MasterCtrl', function ($scope, $location, $state, nbApiService) {
+  .controller('MasterCtrl', function ($scope, $location, $state, nbApiService,$modal, $log) {
     // Assume user is not logged in until we hear otherwise
     $scope.authenticated = false;
     // Wait for the status of authentication, set scope var to true if it resolves
@@ -23,4 +23,23 @@ angular.module('angularNoteboosterApp')
        $state.go('authRequired');
       // $location.path('/authRequired').replace();
     });
-  });
+ 
+
+
+    $scope.signinModal = function(size) {
+    var modalInstance = $modal.open({
+      animation: true,
+      templateUrl: '/views/partials/signin_modal.html',
+      controller: 'LoginCtrl',
+      size: size
+    });
+
+    modalInstance.result.then(function () {
+      //TODO: disable account and log user out
+      console.log('disable it');
+    }, function (reason) {
+      // Modal closed.
+      console.log(reason);
+    });
+  };
+});
