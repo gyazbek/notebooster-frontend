@@ -318,6 +318,20 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
+  .state('app.organization-donations', {
+    url: 'organization-donations',
+    views: {
+      'content@': {
+        controller: 'OrganizationDonationsCtrl',
+        templateUrl: 'views/organization-donations.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })
   .state('register', {
     url: '/register',
     templateUrl: 'views/register.html',
