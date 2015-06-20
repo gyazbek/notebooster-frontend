@@ -332,6 +332,20 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
+  .state('app.organization-profile-settings', {
+    url: 'organization-profile-settings',
+    views: {
+      'content@': {
+        controller: 'OrganizationProfileSettingsCtrl',
+        templateUrl: 'views/organization-profile-settings.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })
   .state('register', {
     url: '/register',
     templateUrl: 'views/register.html',
