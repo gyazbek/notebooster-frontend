@@ -221,10 +221,10 @@ angular.module('angularNoteboosterApp', [
     }
   })    
     .state('app.vieworganization', {
-    url: 'organization/{username}', // I might use a slug based of the organization name, i'll let you know
+    url: 'organization/{username}', 
     views: {
       'content@': {
-        controller: 'MessagesCtrl', //Create new controller for viewing organization profile
+        controller: 'OrganizationProfileCtrl', 
         templateUrl: 'views/organization-profile.html'
       }
     },
@@ -310,6 +310,34 @@ angular.module('angularNoteboosterApp', [
       'content@': {
         controller: 'OrganizationRegisterCtrl',
         templateUrl: 'views/organization-signup.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })
+  .state('app.organization-donations', {
+    url: 'organization-donations',
+    views: {
+      'content@': {
+        controller: 'OrganizationDonationsCtrl',
+        templateUrl: 'views/organization-donations.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })
+  .state('app.organization-profile-settings', {
+    url: 'organization-profile-settings',
+    views: {
+      'content@': {
+        controller: 'OrganizationProfileSettingsCtrl',
+        templateUrl: 'views/organization-profile-settings.html'
       }
     },
     resolve: {
