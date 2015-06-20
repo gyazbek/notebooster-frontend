@@ -4,16 +4,16 @@
 				<div class="col-md-9">
 					<div class="results pad15 title-block outline">
 						<h1>Profile Settings</h1>
-						<a href="/organization-profile" class="pull-right" target="_blank">View Profile</a>
+						<a ui-sref="app.vieworganization" class="pull-right">View Profile</a>
 						<p class="muted mbot50">Lorem ipsum dolor sit amet, consectetuer.</p>
-						<form method="post" action="">
+						<form ng-submit="saveSettings()">
 
 							<div class="row form-group">
 								<div class="col-sm-6">
 									<label for="org-name">Organization Name:</label>
 								</div>
 								<div class="col-sm-6">
-									<input type="text" class="form-control" name="org-name" id="org-name">
+									<input ng-model="orgname" type="text" class="form-control" name="org-name" id="org-name">
 								</div>
 							</div>
 							<div class="row form-group">
@@ -21,13 +21,13 @@
 									<label for="org-email">Email Address:</label>
 								</div>
 								<div class="col-sm-6">
-									<input type="email" class="form-control" name="org-email">
+									<input ng-model="orgemail" type="email" class="form-control" name="org-email">
 								</div>
 							</div>
 							<div class="row form-group">
 								<div class="col-sm-6 col-sm-offset-6">
 									<label for="org-agree-tc">
-										<input type="checkbox" name="org-agree-tc" id="org-agree-tc" checked="true">
+										<input ng-model="orgemailnotification" type="checkbox" name="org-agree-tc" id="org-agree-tc" checked="true">
 										Send notification via email
 									</label>
 								</div>
@@ -37,7 +37,7 @@
 									<label for="org-website">Website:</label>
 								</div>
 								<div class="col-sm-6">
-									<input type="text" class="form-control" name="org-website">
+									<input ng-model="website" type="text" class="form-control" name="org-website">
 								</div>
 							</div>
 
@@ -48,7 +48,7 @@
 									<label for="org-person-name">Contact Person:</label>
 								</div>
 								<div class="col-sm-6">
-									<input type="text" class="form-control" name="org-person-name">
+									<input ng-model="contact" type="text" class="form-control" name="org-person-name">
 								</div>
 							</div>
 							<div class="row form-group">
@@ -56,7 +56,7 @@
 									<label for="org-person-email">Contact Email:</label>
 								</div>
 								<div class="col-sm-6">
-									<input type="email" class="form-control" name="org-person-email">
+									<input ng-model="contactemail" type="email" class="form-control" name="org-person-email">
 								</div>
 							</div>
 
@@ -89,27 +89,27 @@
 							<hr class="mtop15 mbot25">
 
 							<div class="form-group mbot50">
-				          		<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-short-description">What's this?</a></p>
-				          						          		<!-- The short description appears alongside notes which support your cause. It's a brief introduction to your organization. -->
+								<p class="pull-right"><a href="" ng-click="whatsthis('shortbio')">What's this?</a></p>
+								<!-- The short description appears alongside notes which support your cause. It's a brief introduction to your organization. -->
 								<label for="org-short-description">Short Description: <span class="muted">(Max: 140 characters)</span></label>
-								<textarea class="form-control" name="org-short-description"></textarea>
+								<textarea ng-model="shortbio" class="form-control" name="org-short-description"></textarea>
 							</div>
 							<div class="form-group mbot50">
-								<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-full-bio">What's this?</a></p>
-																<!-- The Full Bio is your opportunity to describe your organization at length. This will be visible on your public profile page. -->
+								<p class="pull-right"><a href="" ng-click="whatsthis('fullbio')">What's this?</a></p>
+								<!-- The Full Bio is your opportunity to describe your organization at length. This will be visible on your public profile page. -->
 								<label for="org-full-description">Full Bio: </label>
-								<textarea class="form-control" name="org-full-description"></textarea>
+								<textarea ng-model="fullbio" class="form-control" name="org-full-description"></textarea>
 							</div>
 							<div class="form-group mbot50">
-				          		<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-one-fact">What's this?</a></p>
-				          						          		<!-- This is a brief statement visible to students after they make a donation. Use this area to provide a thought provoking statistic or fact about your cause. -->
+								<p class="pull-right"><a href="" ng-click="whatsthis('onefact')">What's this?</a></p>
+								<!-- This is a brief statement visible to students after they make a donation. Use this area to provide a thought provoking statistic or fact about your cause. -->
 								<label for="org-short-description">One Fact: <span class="muted">(Max: 320 characters)</span></label>
-								<textarea class="form-control" name="org-short-description"></textarea>
+								<textarea ng-model="onefact" class="form-control" name="org-short-description"></textarea>
 							</div>
 
 							<hr class="mtop15 mbot25">
 
-							<a href="#" data-toggle="modal" data-target="#info">Delete My Account</a>
+							<a href="" ng-click="disableAccount()">Disable My Account</a>
 							
 							<hr class="mtop15 mbot25">
 
@@ -128,11 +128,11 @@
 		<div class="results pad15 mbot25 mtop25-xs">
 			<h3>Settings</h3>
 			<hr>
-			<p><a href="organization-profile-settings">Profile Settings</a></p>
-			<p><a href="password-settings">Passwords</a></p>
-			<p><a href="payment-info">Payment Info</a></p>
-			<p><a href="donations">Donations</a></p>
-			<p><a href="messages">Messages</a></p>
+			<p><a ui-sref="app.organization-profile-settings">Profile Settings</a></p>
+			<p><a ui-sref="app.password-settings">Passwords</a></p>
+			<p><a ui-sref="app.payment-settings">Payment Info</a></p>
+			<p><a ui-sref="app.organization-donations">Donations</a></p>
+			<p><a ui-sref="app.messages">Messages</a></p>
 		</div>
 	</div>
 </div>				</div>
