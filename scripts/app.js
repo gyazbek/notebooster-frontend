@@ -221,10 +221,10 @@ angular.module('angularNoteboosterApp', [
     }
   })    
     .state('app.vieworganization', {
-    url: 'organization/{username}', // I might use a slug based of the organization name, i'll let you know
+    url: 'organization/{username}', 
     views: {
       'content@': {
-        controller: 'MessagesCtrl', //Create new controller for viewing organization profile
+        controller: 'OrganizationProfileCtrl', 
         templateUrl: 'views/organization-profile.html'
       }
     },
