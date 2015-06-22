@@ -2,6 +2,11 @@
 
 angular.module('angularNoteboosterApp')
   .service('nbApiService', function nbApiService($q, $http, $cookies, $rootScope) {
+
+
+     $rootScope.currentUser =  {username: 'Bill', email:'gui@notebooster.com', profile_picture: ''};
+
+
     // AngularJS will instantiate a singleton by calling "new" on this function
     var service = {
         /* START CUSTOMIZATION HERE */
@@ -14,9 +19,7 @@ angular.module('angularNoteboosterApp')
         /* END OF CUSTOMIZATION */
         'authenticated': null,
         'authPromise': null,
-        'currentUser' : {     username: 'Bill',
-                    profile_picture: ''
-            },
+        '_identity' : undefined,
 
         'request': function(args) {
             // Let's retrieve the token from the cookie, if available
@@ -93,12 +96,16 @@ angular.module('angularNoteboosterApp')
                     'password':password
                 }
             }).then(function(data){
+
+
                 if(!nbApiService.use_session){
                     $http.defaults.headers.common.Authorization = 'Token ' + data.key;
                     $cookies.token = data.key;
                 }
                 nbApiService.authenticated = true;
                 $rootScope.$broadcast("nbApiService.logged_in", data);
+            
+
             });
         },
         'logout': function(){
@@ -115,6 +122,31 @@ angular.module('angularNoteboosterApp')
             $rootScope.$broadcast("nbApiService.logged_out");
             
             return logoutRequest;
+        },
+        'identity': function(force){
+
+            var deferred = $q.defer();
+
+
+            if (force === true) this._identity = undefined;
+
+            if (angular.isDefined(this._identity)) {
+              deferred.resolve(this._identity);
+              //alert(JSON.stringify(this._identity));
+            
+            }else{
+            	alert('rejected')
+            	deferred.reject("Could not retrieve");
+	            // this.request({
+	            //     'method': "GET",
+	            //     'url': "/rest-auth/user/"
+	            // }).then(function(data) {
+	            // 	this._identity = data;
+	            // });
+
+	        }
+
+            return deferred.promise;
         },
         'changePassword': function(password1,password2){
             return this.request({
@@ -139,13 +171,6 @@ angular.module('angularNoteboosterApp')
             return this.request({
                 'method': "GET",
                 'url': "/rest-auth/user/"
-            }); 
-        },
-        'updateProfile': function(data){
-            return this.request({
-                'method': "PUT",
-                'url': "/rest-auth/user/",
-                'data':data
             }); 
         },
         'getProfile': function (username) {
@@ -195,15 +220,34 @@ angular.module('angularNoteboosterApp')
             // Set force to true to ignore stored value and query API
             restrict = restrict || false;
             force = force || false;
+
+            //alert('restrict: ' + restrict + ' / force: ' + force);
+
+
+
+            // if($cookies.token){
+            //     alert('Token cookie set')
+            // }else{
+            //     alert('Cookie not set')
+            // }
+
             if(this.authPromise == null || force){
+
+                
                 this.authPromise = this.request({
                     'method': "GET",
                     'url': "/rest-auth/user/"
                 })
+
+
             }
             var da = this;
             var getAuthStatus = $q.defer();
+
+
+            // if not authentication and we aren't forcing recheck
             if(this.authenticated != null && !force){
+
                 // We have a stored value which means we can pass it back right away.
                 if(this.authenticated == false && restrict){
                     getAuthStatus.reject("User is not logged in.");
@@ -214,12 +258,15 @@ angular.module('angularNoteboosterApp')
                 }else{
                     getAuthStatus.resolve();
                 }
-            }else{
+            }else{ // if not authenticated or forced to recheck
                 // There isn't a stored value, or we're forcing a request back to
                 // the API to get the authentication status.
-                this.authPromise.then(function(){
+                this.authPromise.then(function(data){
+                	//alert('got here')
                     da.authenticated = true;
+                    da._identity = data;
                     getAuthStatus.resolve();
+                   // alert( alert(JSON.stringify(data)))
                 },function(){
                     da.authenticated = false;
                     if(restrict){
@@ -233,6 +280,7 @@ angular.module('angularNoteboosterApp')
                     }
                 });
             }
+
             return getAuthStatus.promise;
         },
         'contact': function(email,message,name,subject, more){
@@ -413,6 +461,7 @@ angular.module('angularNoteboosterApp')
             return this.API_URL;
         },
         'initialize': function(url, sessions){
+            
             this.API_URL = url;
             this.use_session = sessions;
             return this.authenticationStatus();

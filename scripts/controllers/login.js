@@ -20,4 +20,8 @@ angular.module('angularNoteboosterApp')
         });
       }
     }
+
+      $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
   });

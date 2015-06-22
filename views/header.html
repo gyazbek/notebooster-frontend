@@ -23,19 +23,28 @@
     <img src="img/logo.png" class="img-responsive" alt="NoteBooster Logo">
   </a>
   <div id="navbar">
-    <ul class="nav navbar-nav navbar-center browsesell">
+    <ul class="nav navbar-nav navbar-center browsesell" ng-if="user.account_type == 'student'">
       <li><a ui-sref="app.browse">Browse</a></li>
       <li><a ui-sref="app.new-note">Sell</a></li>
     </ul>
+
+
+    <ul class="nav navbar-nav navbar-center browsesell" ng-if="user.account_type == 'organization'">
+      <li class="org-nav"><a ui-sref="app.donations">Donations</a></li>
+      <li class="org-nav org-profile"><a ui-sref="app.browse">Profile</a></li>
+      <li class="org-nav"><a ui-sref="app.browse">Payment Info</a></li>
+     </ul>
     <ul class="nav navbar-nav navbar-right status-bar" ng-controller="DropdownCtrl">
 
 
       <li class="dropdown profile" dropdown  on-toggle="toggled(open)" >
         <a class="dropdown-toggle" aria-expanded="false" dropdown-toggle>
-          <img src="img/profile.png" class="img-responsive" alt="Gricha2380 Profile Picture">
+          <img ng-src="{{ user.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Picture">
         </a>
-        <span>{{}}</span>
-        <span class="user-email-minor">gricha2380@gmail.com</span>
+
+
+        <span>{{user.username}}</span>
+        <span class="user-email-minor">{{user.email}}</span>
         <ul class="dropdown-menu">
 
 

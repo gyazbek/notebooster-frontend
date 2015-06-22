@@ -118,7 +118,7 @@ angular.module('angularNoteboosterApp', [
     },
     resolve: {
       authenticated: ['nbApiService', function(nbApiService){
-        return nbApiService.authenticationStatus();
+        return nbApiService.authenticationStatus(true);
       }],
     }
   })

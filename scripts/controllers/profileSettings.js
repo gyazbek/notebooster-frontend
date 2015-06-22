@@ -9,6 +9,8 @@ angular.module('angularNoteboosterApp')
   	$scope.email = "";
   	$scope.notifyByEmail = false;
 
+
+    $scope.profilePic = ($scope.user.profile_picture || 'img/profile.png');
 // FileUploader.prototype.uploadItem = function(value) {
 //     var index = this.getIndexOfItem(value),
 //         item = this.queue[index],
@@ -86,6 +88,10 @@ angular.module('angularNoteboosterApp')
         };
         uploader.onCompleteItem = function(fileItem, response, status, headers) {
             console.info('onCompleteItem', fileItem, response, status, headers);
+
+          if(status==201){
+            $scope.profilePic = response.profile_picture;
+          }
         };
         uploader.onCompleteAll = function() {
             console.info('onCompleteAll');
