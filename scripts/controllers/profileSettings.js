@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('ProfileSettingsCtrl', function ($scope,$modal,$stateParams,$http,nbApiService,Validate,$cookies, FileUploader) {
+  .controller('ProfileSettingsCtrl', function ($scope,$modal,$stateParams,$http,nbApiService,Validate,$cookies,$rootScope, FileUploader) {
   	$scope.img = "";
   	$scope.bio = "";
   	$scope.username = "";
@@ -91,6 +91,8 @@ angular.module('angularNoteboosterApp')
 
           if(status==201){
             $scope.profilePic = response.profile_picture;
+            $rootScope.newProfilePic = response.profile_picture; 
+            $rootScope.$broadcast("nbApiService.profile_picture_changed");
           }
         };
         uploader.onCompleteAll = function() {

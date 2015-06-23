@@ -51,7 +51,7 @@
           <li><a ui-sref="app.notes-purchased">Notes Purchased</a></li>
           <li><a ui-sref="app.notes-forsale">Notes for Sale</a></li>
           <li><a ui-sref="app.watch-list">Watch List</a></li>
-          <li><a ui-sref="app.messages">Messages <span class="notification">4</span></a></li>
+          <li><a ui-sref="app.messages">Messages <span class="notification">{{notificationCount}}</span></a></li>
 
 
           <li class="divider"></li>
@@ -62,7 +62,7 @@
           <li ng-controller="LogoutCtrl"><a ui-sref="app" ng-click="logout()">Sign Out</a></li>
         </ul>
       </li>
-      <li class="notification"><a ui-sref="app.messages">4</a></li>
+      <li class="notification"><a ui-sref="app.messages">{{notificationCount}}</a></li>
     </ul>
   </div><!--/.navbar-collapse -->
 </div>

@@ -4,7 +4,7 @@ angular.module('angularNoteboosterApp')
   .service('nbApiService', function nbApiService($q, $http, $cookies, $rootScope) {
 
 
-     $rootScope.currentUser =  {username: 'Bill', email:'gui@notebooster.com', profile_picture: ''};
+     
 
 
     // AngularJS will instantiate a singleton by calling "new" on this function
@@ -116,9 +116,13 @@ angular.module('angularNoteboosterApp')
                 'url': "/rest-auth/logout/"
             });
 
+            this.authPromise = null;
+            this._identity = undefined;
+
             delete $http.defaults.headers.common.Authorization;
             delete $cookies.token;
             nbApiService.authenticated = false;
+
             $rootScope.$broadcast("nbApiService.logged_out");
             
             return logoutRequest;
@@ -135,14 +139,24 @@ angular.module('angularNoteboosterApp')
               //alert(JSON.stringify(this._identity));
             
             }else{
-            	alert('rejected')
-            	deferred.reject("Could not retrieve");
-	            // this.request({
-	            //     'method': "GET",
-	            //     'url': "/rest-auth/user/"
-	            // }).then(function(data) {
-	            // 	this._identity = data;
-	            // });
+                 if(this.authPromise == null || force){
+
+                    this.authPromise = this.request({
+                        'method': "GET",
+                        'url': "/rest-auth/user/"
+                    })
+
+                 }
+
+                this.authPromise.then(function(data){
+                    this._identity = data;
+                    deferred.resolve(this._identity);
+                   // alert( alert(JSON.stringify(data)))
+                },function(){
+                    this.authenticated = false;
+                    deferred.resolve();
+                    
+                });
 
 	        }
 
@@ -166,6 +180,12 @@ angular.module('angularNoteboosterApp')
                     'email':email
                 }
             });
+        },
+        'messageCount': function(){
+            return this.request({
+                'method': "GET",
+                'url': "/message/newcount"
+            }); 
         },
         'profile': function(){
             return this.request({
