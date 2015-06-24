@@ -1,24 +1,19 @@
-html, body {
-  background: #077dab; }
-
-nav.navbar {
+nav.navbar .sub-navbar {
   background-color: transparent; }
-  nav.navbar .sub-navbar {
-    background-color: transparent; }
-  nav.navbar .navbar-brand {
-    width: 217px;
-    padding-top: 9px; }
-  nav.navbar li a {
-    -webkit-font-smoothing: antialiased; }
-  nav.navbar .nav.status-bar > li.notification > a {
-    padding: 5px 8px;
-    margin: 9px 0;
-    background-color: #fff;
-    border-radius: 8px;
-    color: #077dab; }
-    nav.navbar .nav.status-bar > li.notification > a:hover, nav.navbar .nav.status-bar > li.notification > a:focus {
-      background-color: #e6e6e6;
-      transition: .5s all; }
+nav.navbar .navbar-brand {
+  width: 217px;
+  padding-top: 9px; }
+nav.navbar li a {
+  -webkit-font-smoothing: antialiased; }
+nav.navbar .nav.status-bar > li.notification > a {
+  padding: 5px 8px;
+  margin: 9px 0;
+  background-color: #fff;
+  border-radius: 8px;
+  color: #077DAB; }
+  nav.navbar .nav.status-bar > li.notification > a:hover, nav.navbar .nav.status-bar > li.notification > a:focus {
+    background-color: #e6e6e6;
+    transition: .5s all; }
 
 .home-notes {
   outline: 10px rgba(0, 0, 0, 0.1) solid; }
@@ -29,7 +24,7 @@ nav.navbar {
   position: relative; }
 
 .overlay-light {
-  background: #e7e7e7;
+  background: #E7E7E7;
   color: #494949; }
   .overlay-light p, .overlay-light a {
     color: #494949; }

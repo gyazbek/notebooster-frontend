@@ -1,20 +1,22 @@
 /*
  * Imports & Variables
  */
-@import url(//fonts.googleapis.com/css?family=Ubuntu:300,500);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu:300,500);
 /*
  * Rest Styles
  */
 html, body {
   font-family: Ubuntu;
-  background: #191f24;
   color: white;
   height: 100%;
   display: table;
   width: 100%; }
 
+body {
+  background-image: url("../img/noteboosterBG.png");
+  background-color: #077DAB; }
+
 #wrap {
-  background: url(../img/noteboosterBG.png);
   padding-bottom: 25px; }
 
 h1 {
@@ -50,7 +52,7 @@ a {
   background: #44494E; }
 
 .overlay-light {
-  background: #53585B; }
+  background: #E7E7E7; }
 
 .mtop0 {
   margin-top: 0px; }
@@ -572,7 +574,7 @@ nav.navbar {
   color: #000;
   font-weight: 300; }
   .modal p, .modal label {
-    color: #53585B; }
+    color: #E7E7E7; }
   .modal i.promote {
     font-size: 8em; }
     .modal i.promote.fa-twitter {
@@ -596,6 +598,10 @@ nav.navbar {
   .modal hr {
     margin-top: 0;
     border-color: #c2cdd6; }
+
+.modal-backdrop {
+  height: 100%;
+  opacity: 0.8; }
 
 .modal.fade .modal-dialog {
   -webkit-transform: scale(0.7);

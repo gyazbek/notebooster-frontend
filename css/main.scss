@@ -17,6 +17,13 @@ $twitter-color: #55ACEE;
 $facebook-color: #3b5998;
 $has-error-color: rgb(169, 68, 66);
 
+$main-blue: #077DAB;
+$dark-text: #494949;
+$light-text: #fff;
+$lightest-bg: #fff;
+$light-grey: #E7E7E7;
+
+
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
@@ -53,16 +60,19 @@ $has-error-color: rgb(169, 68, 66);
 
 html, body {
 	font-family: Ubuntu;
-	background: rgba(25,31,36,1);
 	color: white;
 	height: 100%;
 	display: table;
 	width: 100%;
 }
 
+body {
+	background-image: url("../img/noteboosterBG.png");
+	background-color: $main-blue;
+}
 
 #wrap{
-	background: url(../img/noteboosterBG.png);
+	// background: url(../img/noteboosterBG.png);
 	padding-bottom: 25px;
 }
 
@@ -661,6 +671,10 @@ margin: auto;
 	}
 }
 
+	.modal-backdrop {
+		height: 100%;
+		opacity: 0.8;
+	}
 
 
 // custom modal transition code
