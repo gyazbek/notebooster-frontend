@@ -2,23 +2,10 @@
 
 angular.module('angularNoteboosterApp')
   .controller('OrganizationRegisterCtrl', function ($scope,$modal,nbApiService,Validate) {
-    $scope.orgname = "";
-    $scope.taxExemptNum = "";
-    $scope.orgemail = "";
-    $scope.username = "";
-    $scope.pw = "";
-    $scope.pwConfirm = "";
-    $scope.spoc = "";
-    $scope.spocEmail = "";
-    $scope.paypalAccount = "";
-    $scope.shortBio = "";
-    $scope.fullBio = "";
-    $scope.oneFact = "";
+
     $scope.eulaCheck = false;
 
-    $scope.regitster = function(){
-        
-    }
+
 
   	$scope.whatsthis = function(descriptor,size) {
 		var modalInstance = $modal.open({
@@ -28,4 +15,44 @@ angular.module('angularNoteboosterApp')
 			size: size
 		});
 	};
+
+    $scope.model = {'username':'','password1':'','password2':'','email':''};
+    $scope.organizationModel = {'name':'','contact_email':'','contact_person':'','fact':'', 'tax_exemption_number' : ''};
+    $scope.profileModel = {'paypal_email':'', 'short_bio': '', 'bio':'', 'user_type':'ORGANIZATION'};
+
+    $scope.complete = false;
+    $scope.register = function(formData){
+      $scope.errors = [];
+      Validate.form_validation(formData,$scope.errors);
+      if(!formData.$invalid){
+            
+            var moreData = {};
+            moreData = angular.extend(moreData, {
+                'profile': $scope.profileModel,
+                'organization': $scope.organizationModel,
+            });
+
+
+          nbApiService.register($scope.model.username,$scope.model.password1,$scope.model.password2,$scope.model.email, moreData)
+          .then(function(data){
+            // success case
+            $scope.complete = true;
+          },function(data){
+            // error case
+            $scope.errors = data;
+          }); 
+    
+
+      }
+    }
+
+    $scope.signupForm = function() {
+      console.log('signed up.');
+    }
+
+    $scope.checkPasswordMatch = function(){
+      $scope.isNotPasswordMatch = ($scope.model.password1 == $scope.model.password2) ? false: true;
+      console.log($scope.isNotPasswordMatch);
+    }
+
   });

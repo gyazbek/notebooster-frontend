@@ -4,14 +4,14 @@
 
 	<div class="row">
 		<div class="col-sm-7 hr-right">
-			<form ng-submit="register()">
-
+			<form ng-submit="register(registerForm)" name="registerForm" role="form">
+		
 				<div class="row form-group">
 					<div class="col-sm-6">
 						<label for="org-name">Organization Name:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="orgname" type="text" class="form-control" name="org-name">
+						<input required ng-model="organizationModel.name" type="text" class="form-control">
 						<div class="has-error-text" id="org-name">Please enter an organization name.</div>
 					</div>
 				</div>
@@ -20,7 +20,7 @@
 						<label for="org-name">Tax Exemption Number:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="taxExemptNum" type="text" class="form-control" name="org-name">
+						<input required ng-model="organizationModel.tax_exemption_number" type="text" class="form-control">
 						<div class="has-error-text" id="org-tax-number">Please enter a valid tax exemption number.</div>
 					</div>
 				</div>
@@ -32,7 +32,7 @@
 						<label for="org-email">Email Address:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="orgemail" type="email" class="form-control" name="org-email">
+						<input required ng-model="model.email" type="email" class="form-control">
 						<div class="has-error-text" id="org-email">Please enter a valid email address.</div>
 					</div>
 				</div>
@@ -41,8 +41,8 @@
 						<label for="org-email">Username:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="username" type="text" class="form-control" name="org-username">
-						<div class="has-error-text" id="org-username">Please enter a valid username.</div>
+						<input ng-model="model.username" type="text" class="form-control" required>
+			           <div class="has-error-text" ng-repeat="error in errors.username">{{error}}</div>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -50,8 +50,8 @@
 						<label for="org-password">Password:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="pw" type="password" class="form-control" name="org-password">
-						<div class="has-error-text" id="org-password">Please enter a valid password.</div>
+						<input required ng-model="model.password1" name="password1" type="password" class="form-control" >
+						<div class="has-error-text">Please enter a valid password.</div>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -59,8 +59,11 @@
 						<label for="org-confirm-password">Confirm Password:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="pwConfirm" type="password" class="form-control" name="org-confirm-password">
-						<div class="has-error-text" id="org-confirm-password">Passwords must match.</div>
+						<input required ng-model="model.password2" type="password" name="password2" class="form-control" data-matcher="model.password1" >
+		      	      <div class="error-msg" ng-repeat="error in errors.password2">{{error}}</div>
+      	               
+      	            
+      	               
 					</div>
 				</div>
 
@@ -71,7 +74,7 @@
 						<label for="org-person-name">Contact Person:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="spoc" type="text" class="form-control" name="org-person-name">
+						<input required ng-model="organizationModel.contact_person" type="text" class="form-control">
 						<div class="has-error-text" id="org-person-name">Please designate a contact person.</div>
 					</div>
 				</div>
@@ -80,7 +83,7 @@
 						<label for="org-person-email">Contact Email:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="spocEmail" type="email" class="form-control" name="org-person-email">
+						<input required ng-model="organizationModel.contact_email" type="email" class="form-control">
 						<div class="has-error-text" id="org-email">Please enter a valid email address.</div>
 					</div>
 				</div>
@@ -92,34 +95,10 @@
 						<label for="org-paypal">PayPal Account:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="paypalAccount" type="text" class="form-control" name="org-paypal">
+						<input required ng-model="profileModel.paypal_email" type="text" class="form-control">
 						<span class="muted">All payments are delivered to you securely via Paypal. <br><a href="https://www.paypal.com/signup/account" target="_blank">Need an account?</a></span>
 						<div class="has-error-text" id="paypal-error">Please input your Paypal email address.</div>
 					</div>
-				</div>
-
-				<hr class="mtop15 mbot25">
-
-				<!-- Standar Form -->
-				<h4>Organization Logo</h4>
-				<form action="" method="post" enctype="multipart/form-data" id="js-upload-form">
-					<div class="form-inline">
-						<div class="form-group">
-							<input type="file" name="files[]" id="js-upload-files" multiple>
-						</div>
-						<button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
-					</div>
-				</form>
-
-				<!-- Drop Zone -->
-				<div class="upload-drop-zone mtop15" id="drop-zone">
-					...or drag and drop files here!
-				</div>
-
-				<!-- Upload Finished -->
-				<div class="js-upload-finished">
-					<h3>Processed files</h3>
-					<div class="list-group"><p class="muted"><em>No uploaded files</em></p></div>
 				</div>
 
 				<hr class="mtop15 mbot25">
@@ -128,28 +107,28 @@
 					<p class="pull-right"><a href="" ng-click="whatsthis('shortbio')">What's this?</a></p>
 					<!-- The short description appears alongside notes which support your cause. It's a brief introduction to your organization. -->
 					<label for="org-short-description">Short Description: <span class="muted">(Max: 140 characters)</span></label>
-					<textarea ng-model="shortBio" class="form-control" name="org-short-description"></textarea>
+					<textarea ng-model="profileModel.short_bio" class="form-control" ></textarea>
 					<div class="has-error-text" id="org-short-description-error">Please write a description.</div>
 				</div>
 				<div class="form-group mbot50">
 					<p class="pull-right"><a href="" ng-click="whatsthis('fullbio')">What's this?</a></p>
 					<!-- The Full Bio is your opportunity to describe your organization at length. This will be visible on your public profile page. -->
 					<label for="org-full-description">Full Bio: </label>
-					<textarea ng-model="fullBio" class="form-control" name="org-full-description"></textarea>
+					<textarea ng-model="profileModel.bio" class="form-control" name="org-full-description"></textarea>
 					<div class="has-error-text" id="org-full-description-error">Please write a description.</div>
 				</div>
 				<div class="form-group mbot50">
 					<p class="pull-right"><a href="" ng-click="whatsthis('onefact')">What's this?</a></p>
 					<!-- This is a brief statement visible to students after they make a donation. Use this area to provide a thought provoking statistic or fact about your cause. -->
 					<label for="org-short-description">One Fact: <span class="muted">(Max: 320 characters)</span></label>
-					<textarea ng-model="oneFact" class="form-control" name="org-short-description"></textarea>
+					<textarea ng-model="organizationModel.fact" class="form-control" ></textarea>
 					<div class="has-error-text" id="one-fact-error">Please write a fact.</div>
 				</div>
 
 				<hr class="mtop15 mbot25">
 
 				<label for="org-agree-tc">
-					<input ng-model="eulaCheck" type="checkbox" name="org-agree-tc" id="org-agree-tc">
+					<input ng-model="eulaCheck" type="checkbox" id="org-agree-tc">
 					I have read and agree to the <a href="legal">Terms of Use</a>
 				</label>
 

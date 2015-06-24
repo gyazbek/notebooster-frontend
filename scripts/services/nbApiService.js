@@ -71,18 +71,17 @@ angular.module('angularNoteboosterApp')
             }));
             return deferred.promise;
         },
-        'register': function(username,password1,password2,email,schoolId,more){
+        'register': function(username,password1,password2,email,more){
             var data = {
                 'username':username,
                 'password1':password1,
                 'password2':password2,
-                'email':email,
-                'schoolId': schoolId
+                'email':email
             }
             data = angular.extend(data,more);
             return this.request({
                 'method': "POST",
-                'url': "/rest-auth/registration/",
+                'url': "/user/signup",
                 'data' :data
             });
         },

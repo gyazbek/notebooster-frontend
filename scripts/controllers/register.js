@@ -2,7 +2,10 @@
 
 angular.module('angularNoteboosterApp')
   .controller('RegisterCtrl', function ($scope, nbApiService, Validate, $http) {
-  	$scope.model = {'username':'','password1':'','password2':'','email':'', 'schooId':''};
+  	$scope.model = {'username':'','password1':'','password2':'','email':''};
+
+
+ 
     $scope.school = {};
   	$scope.complete = false;
     $scope.register = function(formData){
@@ -10,7 +13,13 @@ angular.module('angularNoteboosterApp')
       Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid){
         if (angular.isDefined($scope.school.selected) && Object.keys($scope.school.selected).length > 0 && angular.isDefined($scope.school.selected.id)){
-          nbApiService.register($scope.model.username,$scope.model.password1,$scope.model.password2,$scope.model.email, $scope.school.selected.id)
+          $scope.profileModel = {'school_id':$scope.school.selected.id, 'user_type':'STUDENT'};
+           var moreData = {};
+            moreData = angular.extend(moreData, {
+                'profile': $scope.profileModel,
+            });
+
+          nbApiService.register($scope.model.username,$scope.model.password1,$scope.model.password2,$scope.model.email,moreData )
           .then(function(data){
           	// success case
           	$scope.complete = true;
