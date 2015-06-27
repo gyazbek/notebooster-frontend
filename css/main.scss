@@ -638,7 +638,7 @@ margin: auto;
 	font-weight: 300;
 
 	p, label {
-		color: $light-grey;
+		color: $dark-grey;
 	}
 	i.promote {
 		font-size: 8em;
@@ -803,6 +803,12 @@ margin: auto;
 .error-msg {
   color: #f40000;
   font-size: 85%;
+}
+
+.solo-btn {
+	margin-left: auto;
+  	float: none;
+  	margin-right: auto;
 }
 
 

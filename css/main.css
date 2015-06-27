@@ -574,7 +574,7 @@ nav.navbar {
   color: #000;
   font-weight: 300; }
   .modal p, .modal label {
-    color: #E7E7E7; }
+    color: #30353A; }
   .modal i.promote {
     font-size: 8em; }
     .modal i.promote.fa-twitter {
@@ -688,6 +688,11 @@ nav.navbar {
 .error-msg {
   color: #f40000;
   font-size: 85%; }
+
+.solo-btn {
+  margin-left: auto;
+  float: none;
+  margin-right: auto; }
 
 /* Footer Navigation */
 footer.footer {
