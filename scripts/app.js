@@ -419,6 +419,6 @@ angular.module('angularNoteboosterApp', [
 .run(function(nbApiService){
 
   
-   nbApiService.initialize('http://localhost:8000', false);
-  //nbApiService.initialize('https://notebooster.com/api', false);
+   //nbApiService.initialize('http://localhost:8000', false);
+  nbApiService.initialize('https://notebooster.com/api', false);
 });
