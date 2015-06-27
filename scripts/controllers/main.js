@@ -44,11 +44,10 @@ angular.module('angularNoteboosterApp')
     $scope.searchCourse = function(course) {
       if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
         var params = {search: course,school: $scope.school.selected.id,page: 1};
-        return $http.get(
-          'https://notebooster.com/api/course',
-          {params: params}
-        ).then(function(response) {
-          $scope.courses = response.data.results
+        nbApiService.getCourses(
+          params
+        ).then(function(data) {
+          $scope.courses = data.results
         });
       }
     };

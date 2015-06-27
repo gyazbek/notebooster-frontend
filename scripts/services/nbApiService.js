@@ -129,7 +129,7 @@ angular.module('angularNoteboosterApp')
         'identity': function(force){
 
             var deferred = $q.defer();
-
+            var da = this;
 
             if (force === true) this._identity = undefined;
 
@@ -148,11 +148,11 @@ angular.module('angularNoteboosterApp')
                  }
 
                 this.authPromise.then(function(data){
-                    this._identity = data;
-                    deferred.resolve(this._identity);
+                    da._identity = data;
+                    deferred.resolve(da._identity);
                    // alert( alert(JSON.stringify(data)))
                 },function(){
-                    this.authenticated = false;
+                    da.authenticated = false;
                     deferred.resolve();
                     
                 });
@@ -326,14 +326,20 @@ angular.module('angularNoteboosterApp')
             data = angular.extend(data,more);
             return this.request({
                 'method': "GET",
-                'url': "/note/",
-                'data' :data
+                'url': "/note",
+                'params' :data
             });
         },
         'noteDetails': function(noteId){
             return this.request({
                 'method': "GET",
-                'url': "/note/" + noteId + "/?format=json"
+                'url': "/note/" + noteId + "?format=json"
+            });
+        },
+        'noteFeedbackList': function(noteId){
+            return this.request({
+                'method': "GET",
+                'url': "/note/" + noteId + "/feedback"
             });
         },
         'updateNote': function(noteId, data){
@@ -473,7 +479,14 @@ angular.module('angularNoteboosterApp')
             return this.request({
                 'method': "GET",
                 'url': "/school",
-                'data': params
+                'params': params
+            });
+        },
+        'getCourses' : function(params){
+            return this.request({
+                'method': "GET",
+                'url': "/course",
+                'params': params
             });
         },
         'getBaseApiUrl' : function(){

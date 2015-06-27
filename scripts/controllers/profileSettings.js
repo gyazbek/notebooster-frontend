@@ -171,7 +171,7 @@ angular.module('angularNoteboosterApp')
   }
 
   function getUserProfile(){
-    nbApiService.profile()
+    $scope.settingsPromise = nbApiService.profile()
     .then(function(data){
       $scope.bio = data.profile.bio;
       $scope.username = data.username;

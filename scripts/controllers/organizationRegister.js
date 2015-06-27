@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('OrganizationRegisterCtrl', function ($scope,$modal,nbApiService,Validate) {
+  .controller('OrganizationRegisterCtrl', function ($scope,$state,$modal,nbApiService,Validate) {
 
     $scope.eulaCheck = false;
 
@@ -37,6 +37,8 @@ angular.module('angularNoteboosterApp')
           .then(function(data){
             // success case
             $scope.complete = true;
+
+             $state.go('app.organization-register.confirmation');
           },function(data){
             // error case
             $scope.errors = data;

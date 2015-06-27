@@ -5,7 +5,6 @@
 	<div class="row">
 		<div class="col-sm-7 hr-right">
 			<form ng-submit="register(registerForm)" name="registerForm" role="form">
-		
 				<div class="row form-group">
 					<div class="col-sm-6">
 						<label for="org-name">Organization Name:</label>
@@ -95,7 +94,7 @@
 						<label for="org-paypal">PayPal Account:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="profileModel.paypal_email" type="text" class="form-control">
+						<input required ng-model="profileModel.paypal_email" type="email" class="form-control">
 						<span class="muted">All payments are delivered to you securely via Paypal. <br><a href="https://www.paypal.com/signup/account" target="_blank">Need an account?</a></span>
 						<div class="has-error-text" id="paypal-error">Please input your Paypal email address.</div>
 					</div>

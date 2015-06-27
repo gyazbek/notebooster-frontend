@@ -1,4 +1,4 @@
-<div class="container results mtop25 mbot25 outline">
+<div class="container results mtop25 mbot25 outline" cg-busy="notePromise">
 		<section class="row">
 			<div class="col-md-9 col-sm-12">
 				<h1>{{note.title}}</h1>
@@ -7,7 +7,7 @@
 					<div class="col-sm-7 col-xs-12 mbot25">
 						<img src="http://placehold.it/900x1100" class="img-responsive" alt="Note Snapshot" />
 						<p class="large text-center mbot25 mtop25 visible-sm visible-xs">Price: {{note.price | currency}}</p>
-						<button class="btn btn-primary btn-block mbot25 visible-sm visible-xs" data-toggle="modal" data-target="#buynow">Buy Now</button>
+						<button class="btn btn-primary btn-block mbot25 visible-sm visible-xs" ng-click="authenticated ? purchaseModal() : signinModal()">Buy Now</button>
 						<main class="col-xs-12 mbot25 visible-xs visible-sm">
 							<p class="muted mbot15 mtop25-sm">NOTE PURCHASE SUPPORTS</p>
 							<img src="http://placehold.it/400x200" class="img-responsive" alt="Charity Picture" />
@@ -20,7 +20,7 @@
 					<div class="col-sm-5 col-xs-12 mbot25">
 						<div class="row">
 							<div class="col-xs-4 text-center">
-								<img src="img/profile.png" class="img-responsive" alt="Gricha2380 Profile Picture" />
+								<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
 							</div>
 							<p>By: <a href="user-profile">{{note.user.username}}</a></p>
 							<p>Attends: {{"TO DO"}}</p>
@@ -48,15 +48,12 @@
 								<p>{{"TO DO"}}</p>
 								<p>{{note.term + " " + note.year}}</p>
 								<p>{{note.page_count}}</p>
-								<p>{{"TO DO"}}</p>
-								<p>{{"TO DO"}}</p>
-								<p>{{"TO DO"}}
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star off"></i>
-									<i class="fa fa-star off"></i>
-									<i class="fa fa-star off"></i>
-								</p>
+								<p>{{note.kind}}</p>
+								<p>{{note.sold_count}}</p>
+								<p>Rating:
+												<i ng-repeat=" i in [] | range:note.user.rating" class="fa fa-star"></i>
+												<i ng-repeat=" i in [] | range:(5 - note.user..rating)" class="fa fa-star off"></i>
+											</p>
 							</div>
 						</div>
 						<hr>
@@ -64,19 +61,17 @@
 						<p>{{note.description}}</p>
 					</div>
 				</div>
-				<div class="comments-holder">
+				<div class="comments-holder" cg-busy="noteFeedbackPromise">
 					<hr>
-					<h2>Comments {{<b>{{"Need api to get comments for a note"}}</b>}}</h2>
-					<div class="row mtop15 mbot15">
+					<h2>Comments</h2>
+					<div class="row mtop15 mbot15"   ng-repeat="feedback in noteFeedback.results">
 	<div class="col-sm-2 col-xs-3 text-center">
-		<img src="img/profile.png" class="img-responsive" alt="Road Warrior's Profile Picture" />
-		<a href="user-profile" class="thin">Road Warrior</a>
+		<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
+		<a href="user-profile" class="thin">{{feedback.created | date}}</a>
 	</div>
 	<div class="col-sm-10 col-xs-9">
-		<p class="muted"><em>Feb 20th, 2015</em></p>
-		<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-			nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-			Ut wisi enim ad minim veniam.</p>
+		<p class="muted"><em>{{feedback.user.username}}</em></p>
+		<p>{{feedback.content}}</p>
 	</div>
 </div>
 <hr>
@@ -85,7 +80,7 @@
 			<div class="col-md-3 col-sm-12 price-holder-details">
 				<main class="col-xs-12 mbot25 hidden-sm hidden-xs">
 					<p class="lead text-center mtop25">Price: {{note.price | currency}}</p>
-					<button class="btn btn-primary btn-block" data-toggle="modal" data-target="#buynow">Buy Now</button>
+					<button class="btn btn-primary btn-block" ng-click="authenticated ? purchaseModal() : signinModal()">Buy Now</button>
 					<hr class="dotted mtop25 mbot25">
 					<p class="muted mbot15 mtop25-xs">NOTE PURCHASE SUPPORTS</p>
 					<img src="http://placehold.it/400x200" class="img-responsive" alt="Charity Picture" />
@@ -95,51 +90,3 @@
 		</section>
 						<div class="clearfix"></div>
 	</div>
-
-<div class="modal fade" id="buynow">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h3 class="modal-title"><div class="row"><div class="col-sm-6 col-xs-8 col-sm-offset-3 col-xs-offset-2"><img src="img/paypal.png" alt="PayPal Logo" class="img-responsive" /></div></div></h3>
-              <p>All payments are handled securely through PayPal.com (no PayPal account required).</p>
-            </div>
-            <div class="modal-body"><div class="row">
-      <div class="col-xs-12 mbot15">
-            <hr>
-            <p class="text-center">$2 from this purchase will go to <strong>Who We Play For</strong>.</p>
-            <p class="text-center buynow-drop"><i class="fa fa-caret-right"></i> <a href="#" data-toggle="collapse" data-target="#collapsedonation">Want to increase the donation?</a></p>
-          </div>
-          <div class="clearfix"></div>
-          <div id="collapsedonation" class="collapse">
-            <div class="col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
-              <div class="input-group mbot25">
-                <span class="input-group-addon">$7.49 + </span>
-                <input type="text" class="form-control" name="addon">
-              </div>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-          <hr class="mleft15 mright15">
-          <div class="col-xs-6 mbot15">
-            <p class="muted text-right">Price:</p>
-            <p class="muted text-right">Service Fee:</p>
-            <p class="muted text-right">Extra Donation:</p>
-            <p class="text-right">Total:</p>
-          </div>
-          <div class="col-xs-6 mbot15">
-            <p class="muted">$7.00</p>
-            <p class="muted">$0.49</p>
-            <p class="muted">$0.00</p>
-            <p>$7.49</p>
-          </div>
-          <div class="clearfix"></div>
-
-          <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
-            <a href="note-purchased-confirmation" type="submit" class="btn btn-primary btn-block">Buy Now</a>
-          </div>
-        </div></div>
-          </div>
-          <p class="text-center mtop25"><a href="#" data-dismiss="modal" aria-label="Close">Cancel</a></p>
-        </div>
-      </div>

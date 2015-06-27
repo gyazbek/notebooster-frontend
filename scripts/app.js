@@ -7,6 +7,7 @@ angular.module('angularNoteboosterApp', [
   'ui.select',
   'ui.bootstrap',
   'angularFileUpload',
+  'cgBusy'
   ])
 .config(function($stateProvider, $urlRouterProvider){
 //  .config(['$routeProvider', function ($routeProvider) {
@@ -318,6 +319,18 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
+  .state('app.organization-register.confirmation', {
+    views: {
+      'content@': {
+        templateUrl: 'views/organization-signup-confirmation.html'
+      }
+    },
+    resolve: {
+      authenticated: ['nbApiService', function(nbApiService){
+        return nbApiService.authenticationStatus();
+      }],
+    }
+  })
   .state('app.organization-donations', {
     url: 'organization-donations',
     views: {
@@ -355,7 +368,7 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
-  .state('passwordReset', {
+  .state('app.passwordReset', {
     url: '/passwordReset',
     templateUrl: 'views/passwordreset.html',
     resolve: {
@@ -364,7 +377,7 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
-  .state('passwordResetConfirm', {
+  .state('app.passwordResetConfirm', {
     url: '/passwordResetConfirm/:firstToken/:passwordResetToken',
     templateUrl: 'views/passwordresetconfirm.html',
     resolve: {
@@ -373,52 +386,8 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
-  .state('login', {
-    url: '/login',
-    templateUrl: 'views/login.html',
-    resolve: {
-      authenticated: ['nbApiService', function(nbApiService){
-        return nbApiService.authenticationStatus();
-      }],
-    }
-  })
-  .state('verifyEmail/:emailVerificationToken', {
-    url: '/verifyEmail/:emailVerificationToken',
-    templateUrl: 'views/verifyemail.html',
-    resolve: {
-      authenticated: ['nbApiService', function(nbApiService){
-        return nbApiService.authenticationStatus();
-      }],
-    }
-  })
-  .state('logout', {
-    url: '/logout',
-    templateUrl: 'views/logout.html',
-    resolve: {
-      authenticated: ['nbApiService', function(nbApiService){
-        return nbApiService.authenticationStatus();
-      }],
-    }
-  })
-  .state('userProfile', {
-    url: '/userProfile',
-    templateUrl: 'views/userprofile.html',
-    resolve: {
-      authenticated: ['nbApiService', function(nbApiService){
-        return nbApiService.authenticationStatus();
-      }],
-    }
-  })
-  .state('passwordChange', {
-    url: '/passwordChange',
-    templateUrl: 'views/passwordchange.html',
-    resolve: {
-      authenticated: ['nbApiService', function(nbApiService){
-        return nbApiService.authenticationStatus();
-      }],
-    }
-  })
-  .state('restricted', {
+  
+  .state('app.restricted', {
     url: '/restricted',
     templateUrl: 'views/restricted.html',
     controller: 'RestrictedCtrl',
@@ -428,7 +397,7 @@ angular.module('angularNoteboosterApp', [
       }],
     }
   })
-  .state('authRequired', {
+  .state('app.authRequired', {
     url: '/authRequired',
     templateUrl: 'views/authrequired.html',
     controller: 'AuthrequiredCtrl',
@@ -448,5 +417,8 @@ angular.module('angularNoteboosterApp', [
   });
 })
 .run(function(nbApiService){
-  nbApiService.initialize('https://notebooster.com/api', false);
+
+  
+   nbApiService.initialize('http://localhost:8000', false);
+  //nbApiService.initialize('https://notebooster.com/api', false);
 });

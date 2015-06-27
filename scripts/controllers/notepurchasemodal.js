@@ -1,9 +1,15 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('LoginCtrl', function ($scope, $location,$state, nbApiService, Validate,$modalInstance) {
+  .controller('PurchaseNoteModalCtrl', function ($scope, $location,$state, nbApiService, Validate,$modalInstance,noteId) {
+
+
+     $scope.isCollapsed = true;
+
+
     $scope.model = {'username':'','password':''};
   	$scope.complete = false;
+
     $scope.login = function(formData){
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);

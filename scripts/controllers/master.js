@@ -41,6 +41,8 @@ angular.module('angularNoteboosterApp')
 // we can put this method in the service class
 // we make use of it as to create a 'dto' so that if we change variable names on the backend, the frontend uses a consistent naming scheme
  function createUserObject(data){
+
+
       var newObj = {};
 
       if(data){

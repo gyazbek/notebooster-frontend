@@ -53,11 +53,9 @@ angular.module('angularNoteboosterApp')
     $scope.searchCourse = function(course) {
       if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
         var params = {search: course, school: $scope.school.selected.id};
-        return $http.get(
-          'http://23.102.158.243/course',
-          {params: params}
-        ).then(function(response) {
-          $scope.courses = response.data.results;
+       nbApiService.getCourses(params
+        ).then(function(data) {
+          $scope.courses = data.results;
         });
       }
     };
@@ -67,7 +65,7 @@ angular.module('angularNoteboosterApp')
     }
 
     $scope.getNotes = function(schoolId, courseId, page, pageOrder){
-      nbApiService.browseNotes(schoolId,courseId,page)
+       $scope.browsePromise = nbApiService.browseNotes(schoolId,courseId,page)
         .then(function(data){
          // success case
           $scope.complete = true;
