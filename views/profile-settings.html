@@ -1,6 +1,6 @@
 
 <div class="results pad15 outline" ng-if="user.account_type != 'organization'" cg-busy="settingsPromise">
-	<h1>Profile Settings</h1>
+	<h1 class="mbot50">Profile Settings</h1>
 	<!-- <p class="muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p> -->
 	<div class="row mtop25">
 		<div class="col-sm-3 col-sm-offset-0 col-xs-8 col-xs-offset-2 mtop25-xs">
@@ -56,7 +56,7 @@
 		<p clas="text-center mtop25"><a href="" ng-click="disableAccount()">Disable My Account</a></p>
 	</form>
 </div>
-				
+
 
 <div class="results pad15 title-block outline" ng-if="user.account_type == 'organization'" cg-busy="settingsPromise">
 	<h1>Profile Settings</h1>
@@ -138,14 +138,14 @@
 
 		<!-- Standar Form -->
 		<h4>Upload a new logo:</h4>
-		
+
 			<div class="form-inline">
 				<div class="form-group">
 					<input type="file" nv-file-select="" uploader="uploader" />
 				</div>
-				
+
 			</div>
-		
+
 
 		<hr class="mtop15 mbot25">
 
@@ -171,7 +171,7 @@
 		<hr class="mtop15 mbot25">
 
 		<a href="#" data-toggle="modal" data-target="#info">Delete My Account</a>
-		
+
 		<hr class="mtop15 mbot25">
 
 		<div class="row">
@@ -180,5 +180,5 @@
 			</div>
 		</div>
 	</form>
-	
+
 </div>

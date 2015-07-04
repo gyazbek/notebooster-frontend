@@ -287,6 +287,12 @@ label {
   font-weight: 300;
   color: #FFF; }
 
+input, .form-control {
+  font-weight: lighter; }
+
+input[type=file] {
+  line-height: 0; }
+
 #js-upload-files {
   font-size: initial;
   font-weight: lighter;
@@ -475,6 +481,10 @@ nav.navbar {
         nav.navbar .nav.status-bar > li.profile > a {
           width: 79px;
           float: left; }
+          nav.navbar .nav.status-bar > li.profile > a img {
+            outline: 4px rgba(1, 1, 1, 0.1) solid;
+            min-height: 49px;
+            background-color: rgba(1, 1, 1, 0.1); }
         nav.navbar .nav.status-bar > li.profile > span {
           float: left;
           display: none; }
@@ -524,6 +534,9 @@ nav.navbar {
 .charity-description {
   position: absolute; }
 
+.tips-list li {
+  margin-bottom: 15px; }
+
 /*
  * Browse Notes
  */
@@ -531,10 +544,20 @@ nav.navbar {
   font-weight: 300; }
 
 .ui-select-match-text {
-  color: #999; }
+  color: #999;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%; }
 
 .home-notes .caret, .caret {
   color: #999; }
+
+.comments-holder {
+  padding-bottom: 20px; }
+
+.report-contact a {
+  padding: 0 20px; }
 
 /*
  * One Fact
@@ -601,7 +624,8 @@ nav.navbar {
 
 .modal-backdrop {
   height: 100%;
-  opacity: 0.8; }
+  opacity: 0.8;
+  position: fixed; }
 
 .modal.fade .modal-dialog {
   -webkit-transform: scale(0.7);
@@ -688,6 +712,8 @@ nav.navbar {
 .error-msg {
   color: #f40000;
   font-size: 85%; }
+  .error-msg span {
+    display: block; }
 
 .solo-btn {
   margin-left: auto;

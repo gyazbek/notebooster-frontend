@@ -253,6 +253,10 @@ label {
 	font-weight: 300;
 	color: #FFF;
 }
+input, .form-control {
+  font-weight: lighter;
+}
+input[type=file] {line-height: 0;}
 #js-upload-files {
 	font-size: initial;
 	font-weight: lighter;
@@ -504,6 +508,12 @@ nav.navbar {
 					>a {
 						width: 79px;
 						float: left;
+						img {
+							outline: 4px rgba(1, 1, 1, 0.1) solid;
+						  	min-height: 49px;
+						  	background-color: rgba(1, 1, 1, 0.1);
+						}
+
 					}
 					>span {
 						float: left;
@@ -578,6 +588,10 @@ nav.navbar {
 	position: absolute;
 }
 
+.tips-list li {
+	margin-bottom: 15px;
+}
+
 /*
  * Browse Notes
  */
@@ -590,10 +604,23 @@ nav.navbar {
 
 .ui-select-match-text {
 	color: #999;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 100%;
 }
 
 .home-notes .caret,.caret
  {color: #999;}
+
+.comments-holder {
+	padding-bottom: 20px;
+}
+
+.report-contact a {
+	padding: 0 20px;
+}
+
 
 
 /*
@@ -674,6 +701,8 @@ margin: auto;
 	.modal-backdrop {
 		height: 100%;
 		opacity: 0.8;
+		position: fixed;
+
 	}
 
 
@@ -803,6 +832,10 @@ margin: auto;
 .error-msg {
   color: #f40000;
   font-size: 85%;
+   	span {
+		display: block
+  	}
+
 }
 
 .solo-btn {
