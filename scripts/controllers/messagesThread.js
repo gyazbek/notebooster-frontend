@@ -6,17 +6,17 @@ angular.module('angularNoteboosterApp')
   	$scope.msg = "";
 
 	$scope.getThread = function(threadId){
-  		nbApiService.getThread(threadId)
+  		$scope.threadPromise = nbApiService.getThread(threadId)
   	 	.then(function(data){
   	 		$scope.thread = data;
   			$scope.msg = "";
   	 	},function(data) {
-  	 		
+  	 	
   	 	});
 	}
 
 	$scope.threadReply = function () {
-    nbApiService.threadReply($scope.threadId, $scope.msg)
+    $scope.threadReplyPromise = nbApiService.threadReply($scope.threadId, $scope.msg)
     .then(function(data) {
       	$scope.getThread($scope.threadId);
     },function(data){

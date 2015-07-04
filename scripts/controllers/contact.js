@@ -9,7 +9,7 @@ angular.module('angularNoteboosterApp')
       Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid){
         
-        nbApiService.contact( $scope.model.email,$scope.model.message,$scope.model.name,$scope.model.subject)
+        $scope.contactPromise = nbApiService.contact( $scope.model.email,$scope.model.message,$scope.model.name,$scope.model.subject)
         .then(function(data){
         	// success case
         	$scope.complete = true;

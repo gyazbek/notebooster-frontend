@@ -31,7 +31,7 @@ angular.module('angularNoteboosterApp')
             courseName = $scope.course.selected.name;
           }
 
-          $state.go('app.browse', {"schoolId": schoolId, "schoolName": schoolName, "courseId": courseId, "courseName": courseName});
+          $state.go('app.browse', {"schoolId": schoolId, "schoolName": schoolName, "courseId": courseId, "courseName": courseName, "school": $scope.school, "course":$scope.course});
       } else {
         $scope.chooseSchool = "Must Select School.";
       }
@@ -53,9 +53,9 @@ angular.module('angularNoteboosterApp')
     };
 
 
-    $http.get('https://notebooster.com/api/organization/').success(function(data) {
-      $scope.organizations = data;
-    });
+    // $http.get('https://notebooster.com/api/organization/').success(function(data) {
+    //   $scope.organizations = data;
+    // });
 
 
 

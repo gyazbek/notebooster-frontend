@@ -2,6 +2,7 @@
 
 angular.module('angularNoteboosterApp')
   .controller('NewNoteCtrl', function ($scope,$http,$modal,nbApiService,Validate) {
+
     $scope.numOfPages = 1;
     $scope.notePreview = "firstOnly";
     $scope.notePrice;
@@ -16,6 +17,70 @@ angular.module('angularNoteboosterApp')
     $scope.professor;
     $scope.paypalEmail;
     $scope.eula = false;
+
+
+    /*
+
+    {
+
+  "title": "",
+  "description": "",
+  "page_count": 0,
+  "price": "",
+  "kind": "",
+  "term": "",
+  "year": 0,
+  "school": {
+    "id": 0,
+    "state": "",
+    "name": "",
+    "city": ""
+  },
+  "user": {
+    "id": 0,
+    "username": ""
+  },
+  "course": {
+    "id": 0,
+    "school": "",
+    "subject": "",
+    "name": "",
+    "title": ""
+  },
+  "instructor": {
+    "id": 0,
+    "name": ""
+  },
+  "files": [
+    ""
+  ],
+  "charity": {
+    "name": "",
+    "contact_email": "",
+    "contact_person": "",
+    "fact": "",
+    "slug": "slug"
+  },
+  "charity_split": 0
+}
+*/
+    
+    $scope.yourAmount = function() { return $scope.price ? ( (1 - ($scope.charity_split/100)) * $scope.price) : 0 };
+    $scope.charityAmount = function() { return $scope.price ? ( ($scope.charity_split/100) * $scope.price) : 0 };
+    
+
+    $scope.organization = {};
+    $scope.organizationList = [];
+    $scope.organizationListRetrieval = nbApiService.getSimpleOrgnizationList().then(function(data) {
+          $scope.organizationList = data;
+          if(data && data.length > 0){
+            $scope.organization.selected = data[0];
+          }
+    });
+
+    $scope.organizationSelected = function(item, model) {
+      alert("I was selected")
+    };
 
     $scope.searchSchool = function(school) {
       var params = {search: school, page: 1};      
@@ -36,12 +101,22 @@ angular.module('angularNoteboosterApp')
     $scope.searchCourse = function(course) {
       if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
         var params = {search: course, school: $scope.school.selected.id};
-        return $http.get(
-          'http://23.102.158.243/course',
-          {params: params}
-        ).then(function(response) {
-          $scope.courses = response.data.results;
+
+        return nbApiService.getCourses(params).then(function(data) {
+          $scope.courses = data.results;
         });
+
+      }
+    };
+
+
+        $scope.searchInstructor = function(course) {
+      if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
+
+        return nbApiService.getInstructors($scope.school.selected.id,course ).then(function(data) {
+          $scope.instructors = data.results;
+        });
+
       }
     };
 
@@ -91,9 +166,51 @@ angular.module('angularNoteboosterApp')
         });
       }
 
+
+      $scope.semesterYears = null;
+      $scope.currentYear = new Date().getFullYear();
+
+      $scope.availableSemesterYears = function(){
+        
+          if(!$scope.semesterYears){
+            
+            var semesters = [];
+            var currentYear = $scope.currentYear;
+
+            for (var i = (currentYear - 1); i <= (currentYear + 1); i++){
+              var semester = {'year':i};
+              semesters.push(semester);
+            }
+            $scope.semesterYears = semesters;
+        }
+
+        return $scope.semesterYears;
+
+      }
+
+
+      $scope.savePaypalSettings = function(){
+      $scope.paypalUpdated = false;
+
+      
+
+      $scope.paypalQuickUpdatePromise = nbApiService.setPaymentSettings($scope.paypalEmailUpdate)
+      .then(function(data){
+        $scope.paypalUpdated = true;
+        $scope.editorEnabled = false;
+        $scope.paypalErrors = null;
+      },function(data){
+        if(data.profile.paypal_email){
+          $scope.paypalErrors = data.profile.paypal_email;
+        }else{
+          $scope.paypalErrors = ['An error has occured, please try again.'];  
+        }
+      });
+    };
+
     init();
     function init(){
-      
+      $scope.paypalEmailUpdate = $scope.user.paypal_email;
     };
     // $scope.errors = {
     //   'numOfPages':[],

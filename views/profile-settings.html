@@ -1,89 +1,184 @@
-<div class="container mtop25 pbot25" cg-busy="settingsPromise">
+
+<div class="results pad15 outline" ng-if="user.account_type != 'organization'" cg-busy="settingsPromise">
+	<h1>Profile Settings</h1>
+	<!-- <p class="muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p> -->
+	<div class="row mtop25">
+		<div class="col-sm-3 col-sm-offset-0 col-xs-8 col-xs-offset-2 mtop25-xs">
+			<img ng-src="{{ profilePic || 'img/profile.png' }}" alt="" class="img-responsive" alt="Profile Picture" />
+			<!-- <button >Upload Image</button> -->
+			<input type="file" nv-file-select="" uploader="uploader" />
+			<div class="has-error-text" id="upload-error">Error</div>
+		</div>
+		<div class="clearfix"></div>
+		<hr>
+	</div>
+	<form ng-submit="saveSettings()">
+		<div class="form-group">
+			<label for="bio">Bio</label>
+			<textarea ng-model="settings.profile.bio" name="bio" class="form-control"></textarea>
+			<div class="has-error-text" id="bio-error">Error</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="username">User Name</label>
+			<input ng-model="settings.username" type="text" name="username" class="form-control">
+			<div class="has-error-text" id="user-error">Error</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="default-school">Default School</label>
+			<ui-select ng-model="settings.profile.school" theme="bootstrap">
+  <ui-select-match placeholder="Search for your school">{{$select.selected.name}}</ui-select-match>
+  <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
+    <span ng-bind-html="school.name | highlight: $select.search"></span>
+  </ui-select-choices>
+</ui-select>
+			<div class="has-error-text" id="school-error">Error</div>
+		</div>
+		<div class="form-group">
+			<label for="email">Email Address</label>
+			<input ng-model="settings.email" type="text" name="email" class="form-control" />
+			<div class="has-error-text" id="terms-error">Error</div>
+		</div>
+		<div class="form-group">
+			<label for="notifications">
+				<input ng-model="settings.profile.email_notification" type="checkbox" name="notifications" id="notifications" />
+				Send notifications by email
+			</label>
+		</div>
+		<hr>
 		<div class="row">
-			<div class="row">
-				<div class="col-sm-9">
-					<div class="results pad15 title-block outline">
-						<h1>Profile Settings</h1>
-						<!-- <p class="muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p> -->
-						<div class="row mtop25">
-							<div class="col-sm-3 col-sm-offset-0 col-xs-8 col-xs-offset-2 mtop25-xs">
-								<img ng-src="{{ profilePic || 'img/profile.png' }}" alt="" class="img-responsive" alt="Profile Picture" />
-								<!-- <button >Upload Image</button> -->
-								<input type="file" nv-file-select="" uploader="uploader" />
-								<div class="has-error-text" id="upload-error">Error</div>
-							</div>
-							<div class="clearfix"></div>
-							<hr>
-						</div>
-						<form ng-submit="saveSettings()">
-							<div class="form-group">
-								<label for="bio">Bio</label>
-								<textarea ng-model="bio" name="bio" class="form-control"></textarea>
-								<div class="has-error-text" id="bio-error">Error</div>
-							</div>
-							<hr>
-							<div class="form-group">
-								<label for="username">User Name</label>
-								<input ng-model="username" type="text" name="username" class="form-control">
-								<div class="has-error-text" id="user-error">Error</div>
-							</div>
-							<hr>
-							<div class="form-group">
-								<label for="default-school">Default School</label>
-								<ui-select ng-model="school.selected" theme="bootstrap">
-		              <ui-select-match placeholder="Search for your school">{{$select.selected.name}}</ui-select-match>
-		              <ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
-		                <span ng-bind-html="school.name | highlight: $select.search"></span>
-		              </ui-select-choices>
-		            </ui-select>
-								<div class="has-error-text" id="school-error">Error</div>
-							</div>
-							<div class="form-group">
-								<label for="email">Email Address</label>
-								<input ng-model="email" type="text" name="email" class="form-control" />
-								<div class="has-error-text" id="terms-error">Error</div>
-							</div>
-							<div class="form-group">
-								<label for="notifications">
-									<input ng-model="notifyByEmail" type="checkbox" name="notifications" id="notifications" />
-									Send notifications by email
-								</label>
-							</div>
-							<hr>
-							<div class="row">
-								<div class="col-sm-6 col-sm-offset-3">
-									<button type="submit" class="btn btn-block btn-primary">Save Settings</button>
-								</div>
-							</div>
-							<hr>
-							<p clas="text-center mtop25"><a href="" ng-click="disableAccount()">Disable My Account</a></p>
-						</form>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="row">
-	<div class="col-md-12 col-sm-6 col-xs-12">
-		<div class="results pad15 mbot25 mtop25-xs">
-			<h3>Settings</h3>
-			<hr>
-			<p><a ui-sref="app.profile-settings">Profile Settings</a></p>
-			<p><a ui-sref="app.password-settings">Passwords</a></p>
-			<p><a ui-sref="app.payment-settings">Payment Info</a></p>
-		</div>
-	</div>
-	<div class="col-md-12 col-sm-6 col-xs-12">
-		<div class="results pad15 mbot25">
-			<h3>Dashboard</h3>
-			<hr>
-			<p><a ui-sref="app.notes-purchased">Notes Purchased</a></p>
-			<p><a ui-sref="app.notes-forsale">Notes for Sale</a></p>
-			<p><a ui-sref="app.watch-list">Watch List</a></p>
-			<p><a ui-sref="app.messages">Messages</a></p>
-		</div>
-	</div>
-</div>				</div>
+			<div class="col-sm-6 col-sm-offset-3">
+				<button type="submit" class="btn btn-block btn-primary">Save Settings</button>
 			</div>
 		</div>
-	</div>
+		<hr>
+		<p clas="text-center mtop25"><a href="" ng-click="disableAccount()">Disable My Account</a></p>
+	</form>
+</div>
+				
 
-	</div>
+<div class="results pad15 title-block outline" ng-if="user.account_type == 'organization'" cg-busy="settingsPromise">
+	<h1>Profile Settings</h1>
+	<a href="/organization-profile" class="pull-right" target="_blank">View Profile</a>
+	<p class="muted mbot50">Lorem ipsum dolor sit amet, consectetuer.</p>
+	<form method="post" ng-submit="saveSettings()">
+
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label for="org-name"  >Organization Name:</label>
+			</div>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="org-name" id="org-name" ng-model="settings.organization.name">
+			</div>
+		</div>
+		<hr>
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label for="username">User Name</label>
+			</div>
+			<div class="col-sm-6">
+				<input ng-model="settings.username" type="text" name="username" class="form-control">
+			</div>
+			<div class="has-error-text" id="user-error">Error</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label for="org-email">Email Address:</label>
+			</div>
+			<div class="col-sm-6">
+				<input type="email" class="form-control" name="org-email" ng-model="settings.email">
+			</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-sm-6 col-sm-offset-6">
+				<label for="org-agree-tc">
+					<input type="checkbox" name="org-agree-tc" id="org-agree-tc" ng-model="settings.profile.email_notification">
+					Send notification via email
+				</label>
+			</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label for="org-website">Website:</label>
+			</div>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="org-website" ng-model="settings.organization.url">
+			</div>
+		</div>
+
+		<hr class="mtop15 mbot25">
+
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label for="org-person-name">Contact Person:</label>
+			</div>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" name="org-person-name" ng-model="settings.organization.contact_person">
+			</div>
+		</div>
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label for="org-person-email">Contact Email:</label>
+			</div>
+			<div class="col-sm-6">
+				<input type="email" class="form-control" name="org-person-email" ng-model="settings.organization.contact_email">
+			</div>
+		</div>
+
+		<hr class="mtop15 mbot25">
+
+		<h2>Logo:</h2>
+
+		<div class="row form-group">
+			<div class="col-sm-3 col-xs-4">
+				<img ng-src="{{ profilePic || 'img/profile.png' }}" alt="" class="img-responsive" alt="Organization Logo" />
+			</div>
+		</div>
+
+		<!-- Standar Form -->
+		<h4>Upload a new logo:</h4>
+		
+			<div class="form-inline">
+				<div class="form-group">
+					<input type="file" nv-file-select="" uploader="uploader" />
+				</div>
+				
+			</div>
+		
+
+		<hr class="mtop15 mbot25">
+
+		<div class="form-group mbot50">
+      		<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-short-description" ng-model="settings.profile.short_bio	">What's this?</a></p>
+      						          		<!-- The short description appears alongside notes which support your cause. It's a brief introduction to your organization. -->
+			<label for="org-short-description">Short Description: <span class="muted">(Max: 140 characters)</span></label>
+			<textarea class="form-control" name="org-short-description"></textarea>
+		</div>
+		<div class="form-group mbot50">
+			<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-full-bio" ng-model="settings.profile.bio">What's this?</a></p>
+											<!-- The Full Bio is your opportunity to describe your organization at length. This will be visible on your public profile page. -->
+			<label for="org-full-description">Full Bio: </label>
+			<textarea class="form-control" name="org-full-description"></textarea>
+		</div>
+		<div class="form-group mbot50">
+      		<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-one-fact">What's this?</a></p>
+      						          		<!-- This is a brief statement visible to students after they make a donation. Use this area to provide a thought provoking statistic or fact about your cause. -->
+			<label for="org-short-description">One Fact: <span class="muted">(Max: 320 characters)</span></label>
+			<textarea class="form-control" name="org-short-description" ng-model="settings.organization.fact"></textarea>
+		</div>
+
+		<hr class="mtop15 mbot25">
+
+		<a href="#" data-toggle="modal" data-target="#info">Delete My Account</a>
+		
+		<hr class="mtop15 mbot25">
+
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<button type="submit" class="btn btn-primary btn-block mbot25 mbot0-xs">Save Settings</button>
+			</div>
+		</div>
+	</form>
+	
+</div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('LoginCtrl', function ($scope, $location,$state, nbApiService, Validate,$modalInstance) {
+  .controller('LoginCtrl', function ($scope, $rootScope,$location,$state, nbApiService, Validate,$modalInstance) {
     $scope.model = {'username':'','password':''};
   	$scope.complete = false;
     $scope.login = function(formData){
@@ -13,7 +13,13 @@ angular.module('angularNoteboosterApp')
         	// success case
         	//$location.path("/");
           $modalInstance.close();
-          $state.go($state.current, {}, {reload: true});
+          if(angular.isDefined($rootScope.stateAfterLogin)){
+            $state.go($rootScope.stateAfterLogin);
+            delete $rootScope.stateAfterLogin;
+          }else{
+              $state.go($state.current, {}, {reload: true});
+          }
+          
         },function(data){
         	// error case
         	$scope.errors = data;
@@ -22,6 +28,15 @@ angular.module('angularNoteboosterApp')
     }
 
       $scope.cancel = function () {
+         delete $rootScope.stateAfterLogin;
     $modalInstance.dismiss('cancel');
   };
+
+    $modalInstance.result.then(function () {
+     
+    }, function () {
+      delete $rootScope.stateAfterLogin;
+    });
+
+
   });

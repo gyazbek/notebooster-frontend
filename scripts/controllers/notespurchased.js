@@ -13,7 +13,7 @@ angular.module('angularNoteboosterApp')
     $scope.maxSize = 10;
 
 	$scope.getNotesPurchased = function(page,order){
-		nbApiService.getNotesPurchased(page,order)
+		$scope.notesPurchasedPromise = nbApiService.getNotesPurchased(page,order)
         .then(function(data){
         	// success case
           	$scope.notesPurchased = data.results;

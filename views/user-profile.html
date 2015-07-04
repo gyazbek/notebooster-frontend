@@ -1,8 +1,8 @@
 
-<div class="container results mtop25 mbot25 outline">
+<div class="container results mtop25 mbot25 outline" cg-busy="profileLoadPromise">
 	<div class="row vertical-align normalize-xs">
 		<div class="col-sm-2 col-xs-3 text-center mtop25-xs">
-			<img class="img-responsive" src="img/profile.png" alt="Gricha2380 Profile Picture" />
+			<img class="img-responsive" ng-src="{{ userInfo.profile.profile_picture || 'img/profile.png' }}" alt="Profile Picture" />
 			<span class="mtop15"><a href="" ng-click="report()">Report Violation</a></span>
 		</div>
 		<div class="col-sm-7 col-xs-9 mbot25-xs">
@@ -32,25 +32,25 @@
 	<div class="row vertical-align mtop50 mbot25">
 		<div class="col-sm-12 text-center">
 			<p class="lead">
-				<a href="" ng-click="getNotesForSale()" aria-controls="posted" role="tab" data-toggle="tab">Notes Posted: {{notesCount}}</a> |
-				<a href="" ng-click="getComments()" aria-controls="comments" role="tab" data-toggle="tab">Comments: {{commentsCount}}</a>
+				<a ng-click="tab=forsale" aria-controls="posted" >Notes Posted: {{notesCount}}</a> |
+				<a ng-click="tab=comments" aria-controls="comments">Comments: {{commentsCount}}</a>
 			</p>
 		</div>
 	</div>
 	<hr>
-	<div class="tab-content">
-		<div ng-if="tab=='forsale'" class="tab-pane active" id="posted" role="tabpanel">
+	<div class="tab-content" cg-busy="notesForSalePromise">
+		<div ng-show="tab == 'forsale'"  >
 			<h2>Notes Posted</h2>
 			<main class="row vertical-align lined less-spacing" ng-repeat="note in notesForSale">
 				<div class="col-sm-2 col-xs-0 hidden-xs text-center">
 					<div class="row mtop5">
 						<div class="col-sm-10 col-sm-offset-1">
 							<a href="user-profile">
-								<img src="img/profile.png" class="img-responsive" alt="Profile Image" />
+								<img ng-src="{{ userInfo.profile.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Image" />
 							</a>
 						</div>
 					</div>
-					<p class="hidden-xs text-center mtop5"><a href="" id="{{note.user.username}}" ng-click="getUserProfile($event)">{{note.user.username}}</a></p>
+					<p class="hidden-xs text-center mtop5">{{note.user.username}}</p>
 				</div>
 				<div class="col-sm-2 col-xs-0 hidden-xs">
 					<p class="large muted hidden-xs text-center">{{note.price | currency}}</p>
@@ -58,7 +58,7 @@
 				<div class="col-sm-6 col-xs-8 mtop15 mbot5">
 					<p class="lead"><a href="" id="{{note.id}}" ng-click="getNoteDetails($event)">{{note.title}}</a></p>
 					<p class="visible-xs">{{note.price | currency}}</p>
-					<p class="visible-xs">Provided by: <a href="user-profile">{{note.user.username}}</a></p>
+					<p class="visible-xs">Provided by: {{note.user.username}}</p>
 					<p>Date: {{note.year}}</p>
 					<p>Course: {{note.course.name}} </p>
 					<p>Instructor: {{note.instructor.name}}</p>
@@ -72,16 +72,16 @@
 				<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
 				<pagination ng-model="page" total-items="notesCount" boundary-links="true" 
 					first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
-					rotate="true" max-size="maxSize" ng-change="getNotesForSale(username,page)">
+					rotate="true" max-size="maxSize" ng-change="getNotesForSale(username,notesPage)">
 				</pagination>
 			</div>
 		</footer>
 	</div>
-	<div ng-if="tab=='comments'" class="tab-pane active" id="comments" role="tabpanel">
+	<div ng-show="tab == 'comments'">
 		<h2>Comments</h2>
-			<div class="row mtop15 mbot15" ng-repeat="comment in comments">
+			<div class="row mtop15 mbot15" ng-repeat="comment in comments" cg-busy="feedbackLoadPromise">
 				<div class="col-sm-2 col-xs-3 text-center">
-					<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
+					<img ng-src="{{ comment.user.profile.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Picture" />
 					<a href="" id="{{comment.user.username}}" ng-click="getUserProfile($event)"class="thin">{{comment.user.username}}</a>
 				</div>
 				<div class="col-sm-10 col-xs-9">
@@ -95,7 +95,7 @@
 			<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
 				<pagination ng-model="page" total-items="commentsCount" boundary-links="true" 
 					first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
-					rotate="true" max-size="maxSize" ng-change="getUserComments(username,page)">
+					rotate="true" max-size="maxSize" ng-change="getUserComments(username,feedbackPage)">
 				</pagination>
 			</div>
 		</footer>

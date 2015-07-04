@@ -1,0 +1,21 @@
+<div class="row">
+	<div class="col-md-12 col-sm-6 col-xs-12">
+		<div class="results pad15 mbot25 mtop25-xs">
+			<h3>Settings</h3>
+			<hr>
+			<p><a ui-sref="app.settings.profile-settings">Profile Settings</a></p>
+			<p><a ui-sref="app.settings.password-settings">Password</a></p>
+			<p><a ui-sref="app.settings.payment">Payment Info</a></p>
+		</div>
+	</div>
+	<div class="col-md-12 col-sm-6 col-xs-12">
+		<div class="results pad15 mbot25">
+			<h3>Dashboard</h3>
+			<hr>
+			<p ng-if="user.account_type != 'organization'"><a ui-sref="app.settings.notes-purchased">Notes Purchased</a></p>
+			<p ng-if="user.account_type != 'organization'"><a ui-sref="app.settings.notes-forsale">Notes for Sale</a></p>
+			<p ng-if="user.account_type != 'organization'"	><a ui-sref="app.settings.watch-list">Watch List</a></p>
+			<p><a ui-sref="app.settings.messages">Messages</a></p>
+		</div>
+	</div>
+</div>

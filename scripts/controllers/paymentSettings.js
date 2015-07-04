@@ -5,7 +5,7 @@ angular.module('angularNoteboosterApp')
     $scope.paypal_email="";
 
     $scope.saveSettings = function(email){
-      nbApiService.setPaymentSettings(email)
+      $scope.paymentPromise = nbApiService.setPaymentSettings(email)
       .then(function(data){
       	console.log('Success');
       },function(data){
@@ -14,7 +14,7 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.getPaypalEmail = function(){
-      nbApiService.profile()
+      $scope.paymentPromise =  nbApiService.profile()
       .then(function(data){
         $scope.paypal_email = data.profile.paypal_email;
       },function(data){

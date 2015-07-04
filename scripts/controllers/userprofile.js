@@ -10,14 +10,15 @@ angular.module('angularNoteboosterApp')
     // Pagination
     $scope.notesCount = 0;
     $scope.commentsCount = 0;
-    $scope.page = 1;
+    $scope.notesPage = 1;
+    $scope.feedbackPage = 1;
     $scope.maxSize = 10;
 
     //tab
-    $scope.tab = "";
+    $scope.tab = "forsale";
 
     $scope.getProfile = function(username){
-      nbApiService.getProfile(username)
+      $scope.profileLoadPromise = nbApiService.getProfile(username)
       .then(function(data){
         $scope.userInfo = data;
       },function(data){
@@ -31,11 +32,11 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.getNotesForSale = function(){
-      $scope.tab = "forsale";
-      nbApiService.getNotesForSale($scope.username, $scope.page)
+      
+      $scope.notesForSalePromise = nbApiService.getNotesForSale($scope.username, $scope.notesPage)
       .then(function(data){
-        $scope.notesForSale = data;
-        $scope.notesCount = $scope.notesForSale.length;
+        $scope.notesForSale = data.results;
+        $scope.notesCount = data.count;
       },function(data){
         $scope.error;
       });
@@ -47,11 +48,11 @@ angular.module('angularNoteboosterApp')
     }
 
     $scope.getComments = function(){
-      $scope.tab = "comments"; 
-      nbApiService.getUserFeedback($scope.username, $scope.page)
+     
+      $scope.feedbackLoadPromise = nbApiService.getUserFeedback($scope.username, $scope.feedbackPage)
       .then(function(data){
-        $scope.comments = data;
-        $scope.commentsCount = $scope.comments.length;
+        $scope.comments = data.results;
+        $scope.commentsCount = data.count;
       },function(data){
         $scope.error;
       });
@@ -129,14 +130,8 @@ angular.module('angularNoteboosterApp')
       $scope.username = $stateParams.username;
       $scope.getProfile($scope.username);
       $scope.getNotesForSale();
+      $scope.getComments();
 
-      nbApiService.getUserFeedback($scope.username, $scope.page)
-      .then(function(data){
-        $scope.comments = data;
-        $scope.commentsCount = $scope.comments.length;
-      },function(data){
-        $scope.error;
-      });
     }
 
     init();

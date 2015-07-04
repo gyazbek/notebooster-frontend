@@ -1,12 +1,5 @@
 'use strict';
-
-angular.module('angularNoteboosterApp')
-  .service('nbApiService', function nbApiService($q, $http, $cookies, $rootScope) {
-
-
-     
-
-
+angular.module('angularNoteboosterApp').service('nbApiService', function nbApiService($q, $http, $cookies, $rootScope) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var service = {
         /* START CUSTOMIZATION HERE */
@@ -19,11 +12,10 @@ angular.module('angularNoteboosterApp')
         /* END OF CUSTOMIZATION */
         'authenticated': null,
         'authPromise': null,
-        '_identity' : undefined,
-
+        '_identity': undefined,
         'request': function(args) {
             // Let's retrieve the token from the cookie, if available
-            if($cookies.token){
+            if ($cookies.token) {
                 $http.defaults.headers.common.Authorization = 'Token ' + $cookies.token;
             }
             // Continue
@@ -39,27 +31,27 @@ angular.module('angularNoteboosterApp')
                 url: url,
                 withCredentials: this.use_session,
                 method: method.toUpperCase(),
-                headers: {'X-CSRFToken': $cookies['csrftoken']},
+                headers: {
+                    'X-CSRFToken': $cookies['csrftoken']
+                },
                 params: params,
                 data: data
-            })
-            .success(angular.bind(this,function(data, status, headers, config) {
+            }).success(angular.bind(this, function(data, status, headers, config) {
                 deferred.resolve(data, status);
-            }))
-            .error(angular.bind(this,function(data, status, headers, config) {
+            })).error(angular.bind(this, function(data, status, headers, config) {
                 console.log("error syncing with: " + url);
                 // Set request status
-                if(data){
+                if (data) {
                     data.status = status;
                 }
-                if(status == 0){
-                    if(data == ""){
+                if (status == 0) {
+                    if (data == "") {
                         data = {};
                         data['status'] = 0;
                         data['non_field_errors'] = ["Could not connect. Please try again."];
                     }
                     // or if the data is null, then there was a timeout.
-                    if(data == null){
+                    if (data == null) {
                         // Inject a non field error alerting the user
                         // that there's been a timeout error.
                         data = {};
@@ -71,141 +63,147 @@ angular.module('angularNoteboosterApp')
             }));
             return deferred.promise;
         },
-        'register': function(username,password1,password2,email,more){
+        'register': function(username, password1, password2, email, more) {
             var data = {
-                'username':username,
-                'password1':password1,
-                'password2':password2,
-                'email':email
+                'username': username,
+                'password1': password1,
+                'password2': password2,
+                'email': email
             }
-            data = angular.extend(data,more);
+            data = angular.extend(data, more);
             return this.request({
                 'method': "POST",
                 'url': "/user/signup",
-                'data' :data
+                'data': data
             });
         },
-        'login': function(username,password){
+        'login': function(username, password) {
             var nbApiService = this;
             return this.request({
                 'method': "POST",
                 'url': "/rest-auth/login/",
-                'data':{
-                    'username':username,
-                    'password':password
+                'data': {
+                    'username': username,
+                    'password': password
                 }
-            }).then(function(data){
-
-
-                if(!nbApiService.use_session){
+            }).then(function(data) {
+                if (!nbApiService.use_session) {
                     $http.defaults.headers.common.Authorization = 'Token ' + data.key;
                     $cookies.token = data.key;
                 }
                 nbApiService.authenticated = true;
-                $rootScope.$broadcast("nbApiService.logged_in", data);
-            
-
+                return nbApiService.authenticationStatus(true, true);
+            }).then(function(data) {
+                $rootScope.$broadcast("nbApiService.logged_in");
             });
         },
-        'logout': function(){
-
+        'logout': function() {
             var nbApiService = this;
             var logoutRequest = this.request({
                 'method': "POST",
                 'url': "/rest-auth/logout/"
             });
-
             this.authPromise = null;
             this._identity = undefined;
-
             delete $http.defaults.headers.common.Authorization;
             delete $cookies.token;
             nbApiService.authenticated = false;
-
             $rootScope.$broadcast("nbApiService.logged_out");
-            
             return logoutRequest;
         },
-        'identity': function(force){
-
+        'identity': function(force) {
             var deferred = $q.defer();
-            var da = this;
-
-            if (force === true) this._identity = undefined;
-
+            // alert('I was called')
             if (angular.isDefined(this._identity)) {
-              deferred.resolve(this._identity);
-              //alert(JSON.stringify(this._identity));
-            
-            }else{
-                 if(this.authPromise == null || force){
-
-                    this.authPromise = this.request({
-                        'method': "GET",
-                        'url': "/rest-auth/user/"
-                    })
-
-                 }
-
-                this.authPromise.then(function(data){
-                    da._identity = data;
-                    deferred.resolve(da._identity);
-                   // alert( alert(JSON.stringify(data)))
-                },function(){
-                    da.authenticated = false;
-                    deferred.resolve();
-                    
-                });
-
-	        }
-
+                nbApiService.authenticated = true;
+                // alert('nice, we are defined')
+                var newObj = {};
+                var data = this._identity;
+                if (data.id) newObj.id = data.id;
+                if (data.username) newObj.username = data.username;
+                if (data.email) newObj.email = data.email;
+                if (data.profile.profile_picture) newObj.profile_picture = data.profile.profile_picture;
+                if (data.profile.user_type) {
+                    newObj.account_type = data.profile.user_type.toLowerCase();
+                } else {
+                    newObj.account_type = 'student'
+                }
+                if (data.profile.paypal_email) {
+                    newObj.paypal_email = data.profile.paypal_email;
+                }
+                deferred.resolve(newObj);
+            } else {
+                deferred.reject("User is not logged in.");
+            }
             return deferred.promise;
+            //    var deferred = $q.defer();
+            //    var da = this;
+            //    if (force === true) this._identity = undefined;
+            //    if (angular.isDefined(this._identity)) {
+            //        deferred.resolve(this._identity);
+            //    }else{
+            //         if(this.authPromise == null || force){
+            //            this.authPromise = this.request({
+            //                'method': "GET",
+            //                'url': "/rest-auth/user/"
+            //            })
+            //         }
+            //        this.authPromise.then(function(data){
+            //            da._identity = data;
+            //            deferred.resolve(da._identity);
+            //           // alert( alert(JSON.stringify(data)))
+            //        },function(){
+            //            da.authenticated = false;
+            //            deferred.resolve();
+            //        });
+            // }
+            //    return deferred.promise;
         },
-        'changePassword': function(password1,password2){
+        'changePassword': function(password1, password2) {
             return this.request({
                 'method': "POST",
                 'url': "/rest-auth/password/change/",
-                'data':{
-                    'new_password1':password1,
-                    'new_password2':password2
+                'data': {
+                    'new_password1': password1,
+                    'new_password2': password2
                 }
             });
         },
-        'resetPassword': function(email){
+        'resetPassword': function(email) {
             return this.request({
                 'method': "POST",
                 'url': "/rest-auth/password/reset/",
-                'data':{
-                    'email':email
+                'data': {
+                    'email': email
                 }
             });
         },
-        'messageCount': function(){
+        'messageCount': function() {
             return this.request({
                 'method': "GET",
                 'url': "/message/newcount"
-            }); 
-        },
-        'profile': function(){
-            return this.request({
-                'method': "GET",
-                'url': "/rest-auth/user/"
-            }); 
-        },
-        'getProfile': function (username) {
-            return this.request({
-                'method': "GET",
-                'url': "/profile/user/" + username + "/?format=json"
             });
         },
-        'updateProfile': function (data) {
+        'profile': function() {
+            return this.request({
+                'method': "GET",
+                'url': "/profile/update"
+            });
+        },
+        'getProfile': function(username) {
+            return this.request({
+                'method': "GET",
+                'url': "/profile/user/" + username
+            });
+        },
+        'updateProfile': function(data) {
             return this.request({
                 'method': "PUT",
                 'url': "/profile/update",
                 'data': data
             });
         },
-        'getNotesForSale': function (username, page) {
+        'getNotesForSale': function(username, page) {
             return this.request({
                 'method': "GET",
                 'url': "/user/" + username + "/forsale",
@@ -214,148 +212,159 @@ angular.module('angularNoteboosterApp')
                 }
             });
         },
-        'verify': function(key){
+        'verify': function(key) {
             return this.request({
                 'method': "POST",
                 'url': "/rest-auth/registration/verify-email/",
-                'data': {'key': key} 
-            });            
-        },
-        'confirmReset': function(uid,token,password1,password2){
-            return this.request({
-                'method': "POST",
-                'url': "/rest-auth/password/reset/confirm/",
-                'data':{
-                    'uid': uid,
-                    'token': token,
-                    'new_password1':password1,
-                    'new_password2':password2
+                'data': {
+                    'key': key
                 }
             });
         },
-        'authenticationStatus': function(restrict, force){
+        'confirmReset': function(uid, token, password1, password2) {
+            return this.request({
+                'method': "POST",
+                'url': "/rest-auth/password/reset/confirm/",
+                'data': {
+                    'uid': uid,
+                    'token': token,
+                    'new_password1': password1,
+                    'new_password2': password2
+                }
+            });
+        },
+        'authenticationStatus': function(restrict, force) {
+            var da = this;
+            var getAuthStatus = $q.defer();
             // Set restrict to true to reject the promise if not logged in
             // Set to false or omit to resolve when status is known
             // Set force to true to ignore stored value and query API
             restrict = restrict || false;
             force = force || false;
-
             //alert('restrict: ' + restrict + ' / force: ' + force);
-
-
-
-            // if($cookies.token){
-            //     alert('Token cookie set')
-            // }else{
-            //     alert('Cookie not set')
-            // }
-
-            if(this.authPromise == null || force){
-
-                
-                this.authPromise = this.request({
-                    'method': "GET",
-                    'url': "/rest-auth/user/"
-                })
-
-
-            }
-            var da = this;
-            var getAuthStatus = $q.defer();
-
-
-            // if not authentication and we aren't forcing recheck
-            if(this.authenticated != null && !force){
-
-                // We have a stored value which means we can pass it back right away.
-                if(this.authenticated == false && restrict){
+            //  alert(this.authenticated);
+            //Check if cookies are set for token, if not we automatically rule authentication out
+            if (!$cookies.token) {
+                if (restrict) {
                     getAuthStatus.reject("User is not logged in.");
                     delete $http.defaults.headers.common.Authorization;
                     delete $cookies.token;
                     nbApiService.authenticated = false;
                     $rootScope.$broadcast("nbApiService.logged_out");
-                }else{
+                } else {
                     getAuthStatus.resolve();
                 }
-            }else{ // if not authenticated or forced to recheck
-                // There isn't a stored value, or we're forcing a request back to
-                // the API to get the authentication status.
-                this.authPromise.then(function(data){
-                	//alert('got here')
-                    da.authenticated = true;
-                    da._identity = data;
-                    getAuthStatus.resolve();
-                   // alert( alert(JSON.stringify(data)))
-                },function(){
-                    da.authenticated = false;
-                    if(restrict){
+            } else { // if token cookie is set
+                // Create auth promise if none exists
+                if (this.authPromise == null || force) {
+                    this.authPromise = this.request({
+                        'method': "GET",
+                        'url': "/rest-auth/user/"
+                    })
+                }
+                // if authenticated and we aren't forcing recheck
+                if (this.authenticated != null && !force) {
+                    // We have a stored value which means we can pass it back right away.
+                    if (this.authenticated == false && restrict) {
                         getAuthStatus.reject("User is not logged in.");
                         delete $http.defaults.headers.common.Authorization;
                         delete $cookies.token;
                         nbApiService.authenticated = false;
                         $rootScope.$broadcast("nbApiService.logged_out");
-                    }else{
+                    } else {
                         getAuthStatus.resolve();
                     }
-                });
+                } else { // if not authenticated or forced to recheck
+                    // There isn't a stored value, or we're forcing a request back to
+                    // the API to get the authentication status.
+                    this.authPromise.then(function(data) {
+                        // alert('success?')
+                        //alert('got here')
+                        da.authenticated = true;
+                        da._identity = data;
+                        getAuthStatus.resolve();
+                        // alert( alert(JSON.stringify(data)))
+                        //$rootScope.$broadcast("nbApiService.logged_out");
+                    }, function() {
+                        da.authenticated = false;
+                         delete $http.defaults.headers.common.Authorization;
+                            delete $cookies.token;
+                            nbApiService.authenticated = false;
+                        if (restrict) {
+                            getAuthStatus.reject("User is not logged in.");
+                            // delete $http.defaults.headers.common.Authorization;
+                            // delete $cookies.token;
+                            //nbApiService.authenticated = false;
+                            $rootScope.$broadcast("nbApiService.logged_out");
+                        } else {
+                            getAuthStatus.resolve();
+                        }
+                    });
+                }
             }
-
             return getAuthStatus.promise;
         },
-        'contact': function(email,message,name,subject, more){
+        'contact': function(email, message, name, subject, more) {
             var data = {
-                'email':email,
-                'message':message,
-                'subject':subject,
-                'name':name
-                
+                'email': email,
+                'message': message,
+                'subject': subject,
+                'name': name
             }
-            data = angular.extend(data,more);
+            data = angular.extend(data, more);
             return this.request({
                 'method': "POST",
                 'url': "/contact",
-                'data' :data
+                'data': data
             });
         },
-        'browseNotes': function(schoolId, courseId, page, more){
+        'browseNotes': function(schoolId, courseId, page,order, more) {
+
+           var orderAppend = (order != '' ? (order == 'newest' ? {'ordering':'-created'} 
+            : (order == 'oldest' ? {'ordering':'-created'}
+                : (order == 'highest' ? {'ordering':'-price'}
+                    : (order == 'lowest' ? {'ordering':'price'} : {'ordering':'-created'})))) : {'ordering':'-created'})
+          
             var data = {
-                'schoolId':schoolId,
-                'courseId':courseId,
-                'page':page
+                'schoolId': schoolId,
+                'courseId': courseId,
+                'page': page
             }
-            data = angular.extend(data,more);
+            data = angular.extend(data, more);
+            data = angular.extend(data, orderAppend);
+
             return this.request({
                 'method': "GET",
                 'url': "/note",
-                'params' :data
+                'params': data
             });
         },
-        'noteDetails': function(noteId){
+        'noteDetails': function(noteId) {
             return this.request({
                 'method': "GET",
                 'url': "/note/" + noteId + "?format=json"
             });
         },
-        'noteFeedbackList': function(noteId){
+        'noteFeedbackList': function(noteId) {
             return this.request({
                 'method': "GET",
                 'url': "/note/" + noteId + "/feedback"
             });
         },
-        'updateNote': function(noteId, data){
+        'updateNote': function(noteId, data) {
             return this.request({
                 'method': "PUT",
                 'url': "/note/" + noteId,
                 'data': data
             });
         },
-        'getNotesPosted': function(username){
+        'getNotesPosted': function(username) {
             return this.request({
                 'method': "GET",
                 'url': "/user/" + username + "/?format=json"
             });
         },
-        'getNotesPurchased': function(page,order){
+        'getNotesPurchased': function(page, order) {
             return this.request({
                 'method': "GET",
                 'url': "/note/purchased",
@@ -365,7 +374,7 @@ angular.module('angularNoteboosterApp')
                 }
             });
         },
-        'getMyNotesForSale': function(page,order){
+        'getMyNotesForSale': function(page, order) {
             return this.request({
                 'method': "GET",
                 'url': "/note/forsale",
@@ -375,13 +384,13 @@ angular.module('angularNoteboosterApp')
                 }
             });
         },
-        'getNote': function(noteId){
+        'getNote': function(noteId) {
             return this.request({
                 'method': "GET",
                 'url': "/note/" + noteId
             });
         },
-        'setNoteStatus': function(noteId, noteStatus){
+        'setNoteStatus': function(noteId, noteStatus) {
             return {};
             // return this.request({
             //     'method': "GET",
@@ -392,18 +401,18 @@ angular.module('angularNoteboosterApp')
             //     }
             // });
         },
-        'getInbox': function(order){
-            var orderAppend = (order != '' ? (order == 'newest' ? '?ordering=latest' : (  order =='oldest' ? '?ordering=-latest' : '') ) : '') 
+        'getInbox': function(page, order) {
+            var orderAppend = (order != '' ? (order == 'newest' ? '?ordering=latest' : (order == 'oldest' ? '?ordering=latest_msg' : '')) : '')
             return this.request({
                 'method': "GET",
                 'url': "/message/inbox" + orderAppend
             });
         },
-        'sendMsg': function(recipient,subject,msg){
+        'sendMsg': function(recipient, subject, msg) {
             var data = {
-                'recipient':recipient,
-                'subject':subject,
-                'message':msg
+                'recipient': recipient,
+                'subject': subject,
+                'message': msg
             }
             return this.request({
                 'method': "POST",
@@ -411,33 +420,50 @@ angular.module('angularNoteboosterApp')
                 'data': data
             });
         },
-        'getThread': function(threadId){
+        'getThread': function(threadId) {
             return this.request({
                 'method': "GET",
                 'url': "/message/thread/" + threadId + "/"
             });
         },
-        'threadReply': function(threadId, msg){
+        'threadReply': function(threadId, msg) {
             return this.request({
                 'method': "POST",
                 'url': "/message/thread/" + threadId + "/reply",
-                'data': {'message': msg}
+                'data': {
+                    'message': msg
+                }
             });
         },
-        'deleteThread': function(threadId){
+        'deleteThread': function(threadId) {
             return this.request({
                 'method': "DELETE",
                 'url': "/message/thread/" + threadId + "/delete"
             });
         },
-        'followUser': function(userId){
+        'getSimpleOrgnizationList': function() {
+            return this.request({
+                'method': "GET",
+                'url': "/organization/simple"
+            });
+        },
+        'getDonations': function(page, order) {
+            var orderAppend = (order != '' ? (order == 'newest' ? '?ordering=latest' : (order == 'oldest' ? '?ordering=latest_msg' : '')) : '')
+            return this.request({
+                'method': "GET",
+                'url': "/organization/donations" + orderAppend
+            });
+        },
+        'followUser': function(userId) {
             return this.request({
                 'method': "POST",
                 'url': "/user/watchlist",
-                'data': {'user_id':userId}
+                'data': {
+                    'user_id': userId
+                }
             });
         },
-        'getWatchlist' : function(order, page){
+        'getWatchlist': function(order, page) {
             return this.request({
                 'method': "GET",
                 'url': "/user/watchlist",
@@ -447,7 +473,7 @@ angular.module('angularNoteboosterApp')
                 }
             });
         },
-        'removeFromWatchlist' : function(userId){
+        'removeFromWatchlist': function(userId) {
             return this.request({
                 'method': "DELETE",
                 'url': "/user/watchlist",
@@ -456,48 +482,61 @@ angular.module('angularNoteboosterApp')
                 }
             });
         },
-        'setPaymentSettings' : function(email){
+        'setPaymentSettings': function(email) {
             return this.request({
                 'method': "PUT",
                 'url': "/profile/update",
                 'data': {
-                    'profile': 
-                    {
+                    'profile': {
                         'paypal_email': email
                     }
                 }
             });
         },
-        'getUserFeedback' : function(username, page){
+        'getUserFeedback': function(username, page) {
             return this.request({
                 'method': "GET",
                 'url': "/profile/" + username + '/feedback',
-                'data': {'page':page}
+                'data': {
+                    'page': page
+                }
             });
         },
-        'getSchools' : function(params){
+        'getSchools': function(params) {
             return this.request({
                 'method': "GET",
                 'url': "/school",
                 'params': params
             });
         },
-        'getCourses' : function(params){
+        'getInstructors': function(school_id, term) {
+            var url = "/school/" + school_id + "/instructor" + (term && term.length > 0 ? '?search=' + term : '');
+            return this.request({
+                'method': "GET",
+                'url': url
+            });
+        },
+        'getCourses': function(params) {
             return this.request({
                 'method': "GET",
                 'url': "/course",
                 'params': params
             });
         },
-        'getBaseApiUrl' : function(){
+        'getNotePaymentDetails': function(noteId) {
+            return this.request({
+                'method': "GET",
+                'url': "/note/" + noteId + "/purchaseDetails"
+            });
+        },
+        'getBaseApiUrl': function() {
             return this.API_URL;
         },
-        'initialize': function(url, sessions){
-            
+        'initialize': function(url, sessions) {
             this.API_URL = url;
             this.use_session = sessions;
             return this.authenticationStatus();
         }
     }
     return service;
-  });
+});

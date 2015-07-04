@@ -11,10 +11,14 @@ angular.module('angularNoteboosterApp')
     // Pagination
     $scope.maxSize = 10;
 
+     
+
     $scope.getDonations = function(page,order){
-        nbApiService.getDonations(page, order)
+        $scope.donationsPromise = nbApiService.getDonations(page, order)
         .then(function(data){
-            setDonations(data);
+            $scope.donationsCount = data.count;
+            $scope.donations = data.results;
+            $scope.totalDonationAmount = data.totalDonationAmount;
         },function(data){
             // Request failed
         });
@@ -29,4 +33,11 @@ angular.module('angularNoteboosterApp')
         var username = event.target.id;
         $state.go('app.viewprofile', {'username': username});   
     };
+
+  function init() {
+    $scope.getDonations($scope.page,$scope.listOrder);
+  }
+  
+
+init();
   });

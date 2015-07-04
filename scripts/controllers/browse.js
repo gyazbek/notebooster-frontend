@@ -6,7 +6,7 @@ angular.module('angularNoteboosterApp')
     $scope.schoolId = '';
     $scope.courseId = '';
     $scope.page = 1;
-    $scope.listOrder = "newest";
+    $scope.pageOrder = "newest";
 
     // Total number of items displayed per page in pagination
     $scope.maxSize = 10;
@@ -65,12 +65,12 @@ angular.module('angularNoteboosterApp')
     }
 
     $scope.getNotes = function(schoolId, courseId, page, pageOrder){
-       $scope.browsePromise = nbApiService.browseNotes(schoolId,courseId,page)
+       $scope.browsePromise = nbApiService.browseNotes(schoolId,courseId,page, pageOrder)
         .then(function(data){
          // success case
           $scope.complete = true;
           $scope.results = data.results;
-          $scope.itemCount = data.results.length;
+          $scope.itemCount = data.count;
         },function(data){
           // error case
           $scope.errors = data;
@@ -88,6 +88,7 @@ angular.module('angularNoteboosterApp')
     };
     
     function init(){
+      
       if(typeof $stateParams.schoolId !== 'undefined') {
         $scope.schoolId = $stateParams.schoolId;
       }
@@ -100,6 +101,23 @@ angular.module('angularNoteboosterApp')
       if(typeof $stateParams.courseName !== 'undefined') {
         $scope.courseName = $stateParams.courseName;
       }
+
+
+      // see if the school and course objects were passed along as parameters, if not we try to get any url parameters for display purposes
+      if(angular.isDefined($stateParams.school)){
+        $scope.school = $stateParams.school;
+      }else if($scope.schoolId && $scope.schoolName){
+        $scope.school.selected = {'name':$scope.schoolName, 'id':$scope.schoolId}
+      }
+
+      if(angular.isDefined($stateParams.course)){
+        $scope.course = $stateParams.course;
+      }else if($scope.courseId && $scope.courseName){
+        $scope.course.selected = {'name':$scope.courseName, 'id':$scope.courseId}
+      }
+      
+
+     
 
       $scope.getNotes($scope.schoolId,$scope.courseId,$scope.page,$scope.pageOrder);
     }

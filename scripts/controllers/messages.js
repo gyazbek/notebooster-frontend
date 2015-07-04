@@ -17,8 +17,8 @@ angular.module('angularNoteboosterApp')
   	$scope.msgSentResponse = "";
 
   	// TODO: current arguments order and page is not being sent. 
-  	$scope.getUserInbox = function(order,page){
-  		nbApiService.getInbox(order)
+  	$scope.getUserInbox = function(page,order){
+  		$scope.inboxPromise = nbApiService.getInbox(page, order)
   	 	.then(function(data){
   	 		$scope.itemCount = data.count;
   	 		$scope.messages = data.results;
@@ -52,7 +52,7 @@ angular.module('angularNoteboosterApp')
       	var threadId = event.target.id;
 		nbApiService.deleteThread(threadId)
 	 	.then(function(data){
-	 		$scope.getUserInbox($scope.listOrder, $scope.page);
+	 		$scope.getUserInbox($scope.page,$scope.listOrder);
 	 	},function(data) {
 
 	 	});
@@ -60,7 +60,7 @@ angular.module('angularNoteboosterApp')
 
 	$scope.view = function(event) {
       	var threadId = event.target.id;
-      	$state.go('app.messagethread', {'threadId': threadId});
+      	$state.go('app.settings.messagethread', {'threadId': threadId});
 	};
 
 	$scope.getUserProfile = function(event){

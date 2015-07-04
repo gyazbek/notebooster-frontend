@@ -20,11 +20,11 @@
 					<div class="col-sm-5 col-xs-12 mbot25">
 						<div class="row">
 							<div class="col-xs-4 text-center">
-								<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
+								<img ng-src="{{ note.user.profile.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Picture" />
 							</div>
 							<p>By: <a href="user-profile">{{note.user.username}}</a></p>
-							<p>Attends: {{"TO DO"}}</p>
-							<p>Joined: {{"TO DO"}}</p>
+							<p ng-if="note.user.profile.school">Attends: {{note.user.profile.school.name}}</p>
+							<p>Joined: {{note.user.date_joined | date}}</p>
 							<div class="clearfix"></div>
 							<div class="col-xs-12 text-center">
 								<button class="btn btn-minor btn-block mtop25-xs" data-toggle="modal" data-target="#followconfirm">Follow</button>
@@ -45,7 +45,7 @@
 								<p>Rating:</p>
 							</div>
 							<div class="col-xs-7">
-								<p>{{"TO DO"}}</p>
+								<p>{{note.created | date}}</p>
 								<p>{{note.term + " " + note.year}}</p>
 								<p>{{note.page_count}}</p>
 								<p>{{note.kind}}</p>
@@ -83,7 +83,8 @@
 					<button class="btn btn-primary btn-block" ng-click="authenticated ? purchaseModal() : signinModal()">Buy Now</button>
 					<hr class="dotted mtop25 mbot25">
 					<p class="muted mbot15 mtop25-xs">NOTE PURCHASE SUPPORTS</p>
-					<img src="http://placehold.it/400x200" class="img-responsive" alt="Charity Picture" />
+					<img ng-if="note.charity.logo" ng-src="{{ note.charity.logo}}" class="img-responsive" alt="Charity Picture" />
+					<p ng-if="note.charity.logo == undefined">{{note.charity.name}}</p>
 					<p class="mtop15 mbot25 text-center"><a href="#" data-toggle="modal" data-target="#charityinfo">Learn More</a></p>
 				</main>
 			</div>

@@ -1,12 +1,8 @@
-<div class="container mtop25 mbot25">
-		<div class="row">
-			<div class="row">
-				<div class="col-md-9">
-					<div class="results pad15 outline">
+					<div class="results pad15 outline" cg-busy="donationsPromise">
 						<section class="row vertical-align normalize-xs normalize-sm">
 							<div class="col-md-6 col-xs-12">
 								<h1>Donations</h1>
-								<p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+								<p class="lead">These are the donations you have received from note sales.</p>
 							</div>
 							<div class="col-xs-3 text-right mtop25-sm mbot25-sm">
 								<p class="lead mbot0">{{donationsCount}} Items</p>
@@ -21,16 +17,16 @@
 							<div class="col-xs-12" ng-repeat="donation in donations">
 									<div class="row lined">
 										<div class="col-sm-2 col-xs-8">
-											<p>{{donation.dateDonated | date}}</p>
+											<p>{{donation.created | date}}</p>
 										</div>
 										<div class="col-sm-2 col-xs-4">
-											<p>{{donation.amount | currency}}</p>
+											<p>{{donation.charity_amt | currency}}</p>
 										</div>
 										<div class="col-sm-4 col-xs-12 text-center">
 											<p>
-												<a id="{{donations.note.id}}" ng-click="getNoteDetails($event)">{{donation.note.title}}</a>
+												<a id="{{donation.note.id}}" ng-click="getNoteDetails($event)">{{donation.note.title}}</a>
 												<span> / </span>
-												<a id="{{donations.donor.id}}" ng-click="getUserProfile($event)">{{donation.donor.name}}</a>
+												<a id="{{donation.buyer.username}}" ng-click="getUserProfile($event)">{{donation.buyer.username}}</a>
 											</p>
 										</div>
 										<div class="clearfix"></div>
@@ -48,28 +44,8 @@
 						</footer>
 						<header class="row ptop25 pbot25 bottom">
 							<div class="col-xs-12 text-align">
-								<p class="lead mbot0">Total Earnings: {{totalEarnings}}</p>
+								<p class="lead mbot0">Total Earnings: {{totalDonationAmount | currency}}</p>
 							</div>
 						</header>
 						<div class="clearfix"></div>
 					</div>
-				</div>
-				<div class="col-md-3 col-sm-12 mtop25-sm mtop0-xs">
-					<div class="row">
-	<div class="col-md-12 col-sm-6 col-xs-12">
-		<div class="results pad15 mbot25 mtop25-xs">
-			<h3>Settings</h3>
-			<hr>
-			<p><a ui-sref="app.organization-profile-settings">Profile Settings</a></p>
-			<p><a ui-sref="app.password-settings">Passwords</a></p>
-			<p><a ui-sref="app.payment-settings">Payment Info</a></p>
-			<p><a ui-sref="app.organization-donations">Donations</a></p>
-			<p><a ui-sref="app.messages">Messages</a></p>
-		</div>
-	</div>
-</div>				</div>
-			</div>
-		</div>
-	</div>
-
-	</div>

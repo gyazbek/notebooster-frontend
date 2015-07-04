@@ -2,43 +2,12 @@
 
 angular.module('angularNoteboosterApp')
   .controller('ProfileSettingsCtrl', function ($scope,$modal,$stateParams,$http,nbApiService,Validate,$cookies,$rootScope, FileUploader) {
-  	$scope.img = "";
-  	$scope.bio = "";
-  	$scope.username = "";
+
   	$scope.school = {};
-  	$scope.email = "";
-  	$scope.notifyByEmail = false;
 
 
     $scope.profilePic = ($scope.user.profile_picture || 'img/profile.png');
-// FileUploader.prototype.uploadItem = function(value) {
-//     var index = this.getIndexOfItem(value),
-//         item = this.queue[index],
-//         self = this;
 
-//     item._prepareToUploading();
-//     if (this.isUploading) {
-//         return;
-//     }
-
-//     this.isUploading = true;
-
-//      	if($cookies.token){
-//          	$http.defaults.headers.common.Authorization = 'Token ' + $cookies.token;
-//         }
-// 	    $http({
-// 	        url: item.url,
-// 	        method: item.method,
-// 	        data: item._file,
-// 	        headers: item.headers
-// 	    }).then(function (response, status, headers) {
-// 	        self._onSuccessItem(item, response, status, headers);
-// 	    }).catch(function (response, status, headers) {
-// 	        self._onErrorItem(item, response, status, headers);
-// 	    }).finally(function (response, status, headers) {
-// 	        self._onCompleteItem(item, response, status, headers);
-// 	    });
-// 	};
 
     var uploader = $scope.uploader = new FileUploader({
             url: nbApiService.getBaseApiUrl() + '/profile/picture',
@@ -114,21 +83,26 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.saveSettings = function(){
-    	$scope.data = {
-        'username': $scope.username,
-        'email': $scope.email,
-        'profile': {
-          'school': $scope.school,
-          'email_notification': $scope.notifyByEmail,
-          'bio': $scope.bio
-        }
-      }
+      $scope.success = false;
+    
+    //alert(JSON.stringify($scope.settings));
 
-    	nbApiService.updateProfile($scope.data)
+
+    	// $scope.data = {
+     //    'username': $scope.username,
+     //    'email': $scope.email,
+     //    'profile': {
+     //      'school': $scope.school,
+     //      'email_notification': $scope.notifyByEmail,
+     //      'bio': $scope.bio
+     //    }
+     //  }
+
+    	nbApiService.updateProfile($scope.settings)
     	.then(function(data){
-
+        $scope.success = true;
     	},function(data){
-        
+        $scope.errors = data;
     	});
     };
 
@@ -178,6 +152,8 @@ angular.module('angularNoteboosterApp')
       $scope.school = {selected: data.profile.school};
       $scope.email = data.email;
       $scope.notifyByEmail = data.profile.email_notification;
+
+      $scope.settings = data;
     },function(data){
 
     });

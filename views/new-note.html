@@ -34,7 +34,7 @@
 						<label for="no_of_pages">Number of Pages:</label>
 					</div>
 					<div class="col-md-2 form-group">
-						<input ng-model="numOfPages" type="number" class="form-control" name="num_of_pages" required max="999" min="1" pattern="[0-9]"/>
+						<input ng-model="note.page_count" type="number" class="form-control" name="num_of_pages" required max="999" min="1" pattern="[0-9]"/>
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-4">
@@ -53,12 +53,12 @@
 					<div class="col-md-5">
 						<div class="input-group form-group">
 							<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-							<input ng-model="notePrice"class="form-control note_price" name="note_price" placeholder="5.00" />
-							<span class="input-group-addon"> + $0.49 fee</span>
+							<input ng-model="price"  type="number" class="form-control note_price" name="note_price" placeholder="i.e. 5.00" />
+							<span class="input-group-addon"> + $1.00 fee</span>
 						</div>
 					</div>
 					<div class="col-md-3 form-group">
-						<label for="free_price">
+						<label for="free_price" >
 							<input ng-model="free" type="checkbox" name="free_price" id="free_price" /> Make it Free!
 						</label>
 					</div>
@@ -67,7 +67,7 @@
 						<label for="charity_split">Charity Split:</label>
 					</div>
 					<div class="col-md-3 form-group">
-						<select ng-model="charitySplit" class="form-control" name="charity_split">
+						<select ng-model="charity_split" class="form-control" name="charity_split">
 							<option value="10">10%</option>
 							<option value="20">20%</option>
 							<option value="25">25%</option>
@@ -87,20 +87,25 @@
 						<label for="select_charity">Select Charity:</label>
 					</div>
 					<div class="col-md-8 form-group">
-						<select class="form-control" name="select_charity">
-							<option>Who We Play For</option>
-						</select>
+						
+						<ui-select ng-model="organization.selected" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval">
+ 								<ui-select-match placeholder="Select or search a Charity in the list...">{{$select.selected.name}}</ui-select-match>
+							   <ui-select-choices repeat="country in organizationList | filter: $select.search">
+							      <span ng-bind-html="country.name | highlight: $select.search"></span>
+							
+							    </ui-select-choices>
+						</ui-select>
 					</div>
-					<div class="col-md-6 col-md-offset-12 form-group charity-description">
-						<p class="muted">Who We Play For</p>
-						<!-- NONPROFIT SHORT BIO GOES HERE -->
-						<p class="muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidun</p>
+					<div class="col-md-6 col-md-offset-12 form-group charity-description" cg-busy="organizationPromise">
+						<p class="muted">{{organization.name}}</p>
+						
+						<p class="muted">{{organization.bio}}</p>
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-8 col-md-offset-4 form-group">
 						<!-- LIVE PAYMENT CALCULATION GOES HERE -->
-						<p class="muted">You Make: $<text>0.00</text></p>
-						<p class="muted">Charity Makes: $<text>0.00</text></p>
+						<p class="muted">You Make: $<text>{{yourAmount()}}</text></p>
+						<p class="muted">Charity Makes: $<text>{{charityAmount()}}</text></p>
 					</div>
 					<div class="clearfix"></div>
 					<hr class="narrower">
@@ -124,7 +129,10 @@
 						<ui-select ng-model="school.selected" data-ng-disabled="disabled" theme="bootstrap" on-select="schoolSelected($item, $model)" ng-change="searchCourse()">
 							<ui-select-match placeholder="Search for your school">{{$select.selected.name}}</ui-select-match>
 							<ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
-							<span ng-bind-html="school.name | highlight: $select.search"></span>
+							<div ng-bind-html="school.name | highlight: $select.search"></div>
+							 <small>
+						      {{school.city}},{{school.state}}
+						      </small>
 						</ui-select-choices>
 					</ui-select>
 					</div>
@@ -142,10 +150,12 @@
 					</div>
 					<div class="col-md-4 form-group">
 						<!-- FLOATING CALCULATION FOR 1 YEAR BACK, CURRENT YEAR, PLUS 1 YEAR FORWARD -->
-						<select ng-model="semesterYear"class="form-control" name="semester-year" required>
-							<option value="2014">2014</option>
-							<option value="2015">2015</option>
-							<option value="2016">2016</option>
+						<select class="form-control" name="semester-year" required>
+							<option ng-selected="{{currentYear == year.year}}"
+            				ng-repeat="year in availableSemesterYears()"
+				            value="{{year.year}}">
+				      {{year.year}}
+				    </option>
 						</select>
 					</div>
 					<div class="clearfix mbot15"></div>
@@ -153,9 +163,10 @@
 						<label for="course">Course:</label>
 					</div>
 					<div class="col-md-8 form-group">
-						<ui-select ng-model="course.selected" data-ng-disabled="disabled" theme="bootstrap" >
+						<ui-select ng-model="course.selected" data-ng-disabled="disabled" theme="bootstrap" ng-change="searchInstructor()">
 								<ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
-								<ui-select-choices repeat="course in courses">
+								<ui-select-choices repeat="course in courses"  refresh="searchCourse($select.search)"
+             refresh-delay="1">
 								<span ng-bind-html="course.name | highlight: $select.search"></span>
 							</ui-select-choices>
 						</ui-select>
@@ -166,13 +177,19 @@
 					</div>
 					<div class="clearfix mbot15"></div>
 					<div class="col-md-4">
-						<label for="professor">Professor:</label>
+						<label for="professor">Instructor:</label>
 					</div>
 					<div class="col-md-8 form-group">
 						<!-- PROFESSOR LIST JSON GOES HERE -->
-						<select ng-model="professor" class="professor-select-box form-control" name="professor" required></select>
+							<ui-select ng-model="instructor.selected" data-ng-disabled="disabled" theme="bootstrap" >
+							<ui-select-match placeholder="Search for your Instructor">{{$select.selected.name}}</ui-select-match>
+							<ui-select-choices repeat="instructor in instructors" refresh="searchInstructor($select.search)"
+             refresh-delay="1">
+							<span ng-bind-html="instructor.name | highlight: $select.search"></span>
+							</ui-select-choices>
+						</ui-select>
 						<div class="add-new">
-							<p><a href="" ng-click="addInstructor()">Don't see your Professor in the list?</a></p>
+							<p><a href="" ng-click="addInstructor()">Don't see your Instructor in the list?</a></p>
 							<!-- new-instructor MODAL GOES HERE -->
 						</div>
 					</div>
@@ -182,7 +199,18 @@
 						<label for="paypal_account">PayPal Account:</label>
 					</div>
 					<div class="col-md-8 form-group">
-						<input ng-model="paypalEmail" class="form-control" name="paypal_account" required />
+					
+
+					<div ng-hide="editorEnabled">
+				      {{paypalEmailUpdate}}
+				      <a ng-click="editorEnabled=!editorEnabled; ">Edit</a>
+				    </div>
+				    <div ng-show="editorEnabled" cg-busy="paypalQuickUpdatePromise">
+				      <input ng-model="paypalEmailUpdate" class="form-control" name="paypal_account" ng-enter="savePaypalSettings()" />
+				      <a ng-click="savePaypalSettings()" style="cursor:pointer">Save</a>
+				      <span ng-repeat="error in paypalErrors"><p>{{error}}</p></span>
+				    </div>
+
 						<span class="muted">All payments are delivered to you securely via Paypal. <br><a href="https://www.paypal.com/signup/account" target="_blank">Need an account?</a></span>
 					</div>
 					<div class="clearfix"></div>

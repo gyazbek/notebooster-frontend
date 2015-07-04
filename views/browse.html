@@ -34,7 +34,7 @@
 	</div>
 	<div ng-if="schoolId" class="col-md-4 col-sm-4 col-xs-6">
 		<select class="form-control" ng-model="pageOrder" ng-change="getNotes(shcoolId,courseId,page,pageOrder)">
-			<option value="newest" selected="selected">Newest First</option>
+			<option value="newest">Newest First</option>
 			<option value="lowest">Lowest Price</option>
 			<option value="highest">Highest Price</option>
 		</select>
@@ -48,12 +48,12 @@
 			<div class="col-md-2 col-sm-3 col-xs-0 hidden-xs text-center">
 				<div class="row mtop5">
 					<div class="col-sm-10 col-sm-offset-1">
-						<a href="user-profile">
-							<img src="img/profile.png" class="img-responsive" alt="Profile Image">
+						<a ui-sref="app.viewprofile({username:note.user.username})">
+							<img ng-src="{{ note.user.profile.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Image">
 						</a>
 					</div>
 				</div>
-				<p class="hidden-xs text-center mbot5"><a id="{{msg.sender.username}}" href="" ng-click="getUserProfile($event)">{{note.user.username}}</a></p>
+				<p class="hidden-xs text-center mbot5"><a id="{{msg.sender.username}}"  ui-sref="app.viewprofile({username:note.user.username})">{{note.user.username}}</a></p>
 			</div>
 			<div class="col-md-1 col-sm-0 hidden-sm hidden-xs">
 				<p class="large muted hidden-xs text-center">{{note.price | currency}}</p>
@@ -61,8 +61,8 @@
 			<div class="col-sm-6 col-xs-12 mtop5 mbot15-xs less-spacing">
 				<p class="lead"><a id="{{note.id}}" ng-click="getNoteDetails($event)">{{note.title}}</a></p>
 				<p class="visible-sm visible-xs">{{note.price | currency}}</p>
-				<p class="visible-xs">Provided by: <a id="{{note.user.username}}" href="" ng-click="getUserProfile($event)">{note.user.username}}</a></p>
-				<p>Date: {{note.year}}</p>
+				<p class="visible-xs">Provided by: <a id="{{note.user.username}}"  ui-sref="app.viewprofile({username:note.user.username})">{{note.user.username}}</a></p>
+				<p>Date: {{note.created | date}}</p>
 				<p>Course: {{note.course.name}} </p>
 				<p>Instructor: {{note.instructor.name}}</p>
 			</div>
