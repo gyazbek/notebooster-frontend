@@ -43,8 +43,8 @@
         </a>
 
 
-        <span>{{user.username}}</span>
-        <span class="user-email-minor">{{user.email}}</span>
+        <div class="user-name-minor user-info">{{user.username}}</div>
+        <div class="user-email-minor user-info">{{user.email}}</div>
         <ul class="dropdown-menu">
 
 
@@ -52,7 +52,7 @@
           <li ng-if="user.account_type != 'organization'"><a ui-sref="app.settings.notes-forsale">Notes for Sale</a></li>
           <li ng-if="user.account_type != 'organization'"><a ui-sref="app.settings.watch-list">Watch List</a></li>
           <li><a ui-sref="app.settings.messages">Messages <span class="notification" ng-if="notificationCount">{{notificationCount}}</span></a></li>
- 
+
 
           <li ng-if="user.account_type == 'organization'"><a ui-sref="app.settings.payment">Payment Info</a></li>
           <li ng-if="user.account_type == 'organization'"> <a ui-sref="app.settings.password-settings">Password</a></li>
