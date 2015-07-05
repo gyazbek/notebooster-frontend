@@ -68,7 +68,7 @@
 			</div>
 			<div class="col-md-2 col-sm-3 col-xs-12 text-center">
 				<a class="btn btn-primary btn-block" id="{{note.id}}" ng-click="getNoteDetails($event)">Details</a>
-				<p class="muted mtop15"><i class="fa fa-heart-o"> For Charity</i></p>
+				<p class="muted mtop15"><i class="fa fa-heart"> For Charity</i></p>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -76,8 +76,8 @@
 </main>
 <footer class="row">
 	<div class="col-sm-12 col-xs-12 text-center">
-		<pagination ng-model="page" total-items="itemCount" boundary-links="true" 
-		first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
+		<pagination ng-model="page" total-items="itemCount" boundary-links="true"
+		first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;"
 		rotate="true" max-size="maxSize" ng-change="getNotes(schoolId,courseId,page,pageOrder)">
 	</pagination>
 </div>

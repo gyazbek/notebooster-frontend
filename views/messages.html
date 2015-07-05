@@ -25,7 +25,6 @@
           </header>
           <main class="row tab-content">
             <div class="col-xs-12 tab-pane active" id="inbox" role="tabpanel">
-              <h3 class="text-center">Inbox</h3>
               <div class="row vertical-align normalize-xs lined" ng-repeat="msg in messages">
                 <div class="col-sm-2 col-xs-0 hidden-xs text-center">
                   <div class="row mtop15">
@@ -33,7 +32,7 @@
                       <img ng-src="{{ msg.sender.profile.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Picture" />
                     </div>
                   </div>
-                  <p class="mtop15"><a id="{{msg.sender.username}}" href="" ng-click="getUserProfile($event)">{{msg.sender.username}}</a></p>
+                  <p><a id="{{msg.sender.username}}" href="" ng-click="getUserProfile($event)">{{msg.sender.username}}</a></p>
                 </div>
                 <div class="col-sm-5 col-xs-8 mtop15 mbot5">
                   <p class="lead"><a id="{{msg.id}}" ng-click="view($event)" href="">{{msg.subject}}</a></p>
@@ -51,12 +50,11 @@
           </main>
           <footer class="row">
             <div class="col-sm-12 col-xs-12 text-center">
-              <pagination ng-model="page" total-items="itemCount" boundary-links="true" 
-                first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
+              <pagination ng-model="page" total-items="itemCount" boundary-links="true"
+                first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;"
                 rotate="true" max-size="maxSize" items-per-page="itemPerPage" ng-change="getUserInbox(page)">
               </pagination>
             </div>
           </footer>
           <div class="clearfix"></div>
         </div>
-     

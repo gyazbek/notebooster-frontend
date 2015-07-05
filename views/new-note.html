@@ -2,7 +2,7 @@
 	<section class="row">
 		<div class="col-xs-12 mbot25">
 			<h1>Create New Note</h1>
-			<p class="muted">Have good notes? Share them with the rest of your class.</p>
+			<p class="muted">Do you have good notes? Share them with the rest of your class!</p>
 		</div>
 		<div class="col-md-8 col-sm-12 hr-right">
 
@@ -81,19 +81,30 @@
 						<label for="select_charity">Select Charity:</label>
 					</div>
 					<div class="col-md-8 form-group">
+<<<<<<< HEAD
 						
 						<ui-select ng-model="organization.selected" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval" on-select="loadOrganization($item, $model)">
+=======
+
+						<ui-select ng-model="organization.selected" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval">
+>>>>>>> f96ea747fe2c0f20223c732f157a9c87df54b5bc
  								<ui-select-match placeholder="Select or search a Charity in the list...">{{$select.selected.name}}</ui-select-match>
 							   <ui-select-choices repeat="country in organizationList | filter: $select.search">
 							      <span ng-bind-html="country.name | highlight: $select.search"></span>
-							
+
 							    </ui-select-choices>
 						</ui-select>
 					</div>
 					<div class="col-md-6 col-md-offset-12 form-group charity-description" cg-busy="organizationPromise">
+<<<<<<< HEAD
 						<p class="muted">{{organizationInfo.organization.name}}</p>
 						
 						<p class="muted">{{organizationInfo.profile.bio}}</p>
+=======
+						<p class="muted">{{organization.name}}</p>
+
+						<p class="muted">{{organization.bio}}</p>
+>>>>>>> f96ea747fe2c0f20223c732f157a9c87df54b5bc
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-8 col-md-offset-4 form-group">
@@ -193,7 +204,7 @@
 						<label for="paypal_account">PayPal Account:</label>
 					</div>
 					<div class="col-md-8 form-group">
-					
+
 
 					<div ng-hide="editorEnabled">
 				      {{paypalEmailUpdate}}
@@ -226,7 +237,7 @@
 		<div class="col-md-4 col-xs-12 mbot25">
 			<p class="lead">TIPS FOR BETTER SALES</p>
 			<p class="mbot15">Sharing your notes can be a good way to earn some quick cash. Just make sure not to break any rules in the process!</p>
-			<ul>
+			<ul class="tips-list">
 				<li>Write a good note description</li>
 				<!-- <li>Make sure you're not uploading copyrighted material</li> -->
 				<li>Email your classmates, if your school policy allows it</li>

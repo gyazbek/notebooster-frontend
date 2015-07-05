@@ -1,8 +1,8 @@
 					<div class="results pad15 outline" cg-busy="donationsPromise">
 						<section class="row vertical-align normalize-xs normalize-sm">
-							<div class="col-md-6 col-xs-12">
+							<div class="col-md-6 col-xs-12 title-block">
 								<h1>Donations</h1>
-								<p class="lead">These are the donations you have received from note sales.</p>
+								<p class="muted">These are the donations you have received from note sales.</p>
 							</div>
 							<div class="col-xs-3 text-right mtop25-sm mbot25-sm">
 								<p class="lead mbot0">{{donationsCount}} Items</p>
@@ -36,8 +36,8 @@
 						</div>
 						<footer class="row">
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-              <pagination ng-model="page" total-items="donationsCount" boundary-links="true" 
-                first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
+              <pagination ng-model="page" total-items="donationsCount" boundary-links="true"
+                first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;"
                 rotate="true" max-size="maxSize" ng-change="getDonations(page,order)">
               </pagination>
             </div>

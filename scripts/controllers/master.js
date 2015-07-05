@@ -88,10 +88,10 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     // If the user attempts to access a restricted page, redirect them back to the main page.
     $scope.$on('$stateChangeError', function(ev, current, previous, rejection) {
         console.error("Unable to change routes.  Error: ", rejection)
-        
+
         $rootScope.stateAfterLogin = current.name;
 //        $location.path("/");
-        
+
         $scope.signinModal();
         $state.go('app');
         //  $location.path('/authRequired').replace();
@@ -121,10 +121,10 @@ angular.module('angularNoteboosterApp').controller('DropdownCtrl', function($htt
             $('li.profile').animate({
                 width: "260px"
             }, 400, function() {
-                $('li.profile>span').fadeIn('slow');
+                $('li.profile .user-info').fadeIn('slow');
             });
         } else {
-            $('li.profile>span').fadeIn('slow');
+            $('li.profile .user-info').fadeIn('slow');
         }
     }
 
@@ -132,7 +132,7 @@ angular.module('angularNoteboosterApp').controller('DropdownCtrl', function($htt
         $('.dropdown').data('open', false);
         $('.overlay-trans').removeClass('visible');
         if ($(window).width() > 768) {
-            $('li.profile>span').fadeOut('fast', function() {
+            $('li.profile .user-info').fadeOut('fast', function() {
                 $('li.profile').animate({
                     width: "79px"
                 }, 400, function() {
