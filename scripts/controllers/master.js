@@ -28,7 +28,7 @@ angular.module('angularNoteboosterApp').filter('propsFilter', function() {
 angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope, $rootScope, $location, $state, nbApiService, $modal, $log, $timeout) {
     var refreshNotificationCountData = function() {
         nbApiService.messageCount().then(function(data) {
-            //alert(JSON.stringify(data));
+            //alert(JSON.stringify(data)); bla bla bla
             $scope.notificationCount = (data.count ? data.count : 0)
         });
     };

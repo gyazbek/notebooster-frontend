@@ -78,8 +78,15 @@ angular.module('angularNoteboosterApp')
           }
     });
 
-    $scope.organizationSelected = function(item, model) {
-      alert("I was selected")
+    $scope.loadOrganization = function(item, model) {
+      if(item.user.username){
+        $scope.organizationPromise = nbApiService.getOrganizationProfile(item.user.username)
+        .then(function(data){
+          $scope.organizationInfo = data;
+        },function(data){
+          $scope.error;
+        });
+      }
     };
 
     $scope.searchSchool = function(school) {

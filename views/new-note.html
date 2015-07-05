@@ -22,12 +22,6 @@
 				...or drag and drop files here!
 			</div>
 
-			<!-- Upload Finished -->
-			<div class="js-upload-finished">
-				<h3>Processed files</h3>
-				<div class="list-group"><p class="muted"><em>No uploaded files</em></p></div>
-			</div>
-
 			<form ng-submit="create()">
 				<div class="row">
 					<div class="col-md-4">
@@ -88,7 +82,7 @@
 					</div>
 					<div class="col-md-8 form-group">
 						
-						<ui-select ng-model="organization.selected" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval">
+						<ui-select ng-model="organization.selected" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval" on-select="loadOrganization($item, $model)">
  								<ui-select-match placeholder="Select or search a Charity in the list...">{{$select.selected.name}}</ui-select-match>
 							   <ui-select-choices repeat="country in organizationList | filter: $select.search">
 							      <span ng-bind-html="country.name | highlight: $select.search"></span>
@@ -97,9 +91,9 @@
 						</ui-select>
 					</div>
 					<div class="col-md-6 col-md-offset-12 form-group charity-description" cg-busy="organizationPromise">
-						<p class="muted">{{organization.name}}</p>
+						<p class="muted">{{organizationInfo.organization.name}}</p>
 						
-						<p class="muted">{{organization.bio}}</p>
+						<p class="muted">{{organizationInfo.profile.bio}}</p>
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-8 col-md-offset-4 form-group">

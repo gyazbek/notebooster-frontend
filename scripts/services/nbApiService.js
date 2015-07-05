@@ -41,7 +41,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             })).error(angular.bind(this, function(data, status, headers, config) {
                 console.log("error syncing with: " + url);
                 // Set request status
-                if (data) {
+                if (data.status) {
                     data.status = status;
                 }
                 if (status == 0) {
@@ -201,6 +201,12 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'method': "PUT",
                 'url': "/profile/update",
                 'data': data
+            });
+        },
+        'getOrganizationProfile': function(username) {
+            return this.request({
+                'method': "GET",
+                'url': "/profile/organization/" + username
             });
         },
         'getNotesForSale': function(username, page) {
