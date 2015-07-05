@@ -81,13 +81,9 @@
 						<label for="select_charity">Select Charity:</label>
 					</div>
 					<div class="col-md-8 form-group">
-<<<<<<< HEAD
-						
-						<ui-select ng-model="organization.selected" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval" on-select="loadOrganization($item, $model)">
-=======
 
-						<ui-select ng-model="organization.selected" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval">
->>>>>>> f96ea747fe2c0f20223c732f157a9c87df54b5bc
+					<ui-select ng-model="organization.selected" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval" on-select="loadOrganization($item, $model)">
+
  								<ui-select-match placeholder="Select or search a Charity in the list...">{{$select.selected.name}}</ui-select-match>
 							   <ui-select-choices repeat="country in organizationList | filter: $select.search">
 							      <span ng-bind-html="country.name | highlight: $select.search"></span>
@@ -96,15 +92,11 @@
 						</ui-select>
 					</div>
 					<div class="col-md-6 col-md-offset-12 form-group charity-description" cg-busy="organizationPromise">
-<<<<<<< HEAD
+
 						<p class="muted">{{organizationInfo.organization.name}}</p>
 						
 						<p class="muted">{{organizationInfo.profile.bio}}</p>
-=======
-						<p class="muted">{{organization.name}}</p>
 
-						<p class="muted">{{organization.bio}}</p>
->>>>>>> f96ea747fe2c0f20223c732f157a9c87df54b5bc
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-8 col-md-offset-4 form-group">
