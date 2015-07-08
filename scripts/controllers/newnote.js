@@ -215,6 +215,41 @@ angular.module('angularNoteboosterApp')
       });
     };
 
+
+
+
+      $scope.openSaveNoteModal = function(size) {
+        $scope.statusList = [];
+        $scope.statusList.push('test');
+        var modalInstance = $modal.open({
+        animation: true,
+        templateUrl: '/views/partials/note_save_modal.html',
+        backdrop: 'static', /*  this prevent user interaction with the background  */
+        keyboard: false,
+        controller: 'openSaveNoteModalInstanceCtrl',
+        size: size,
+         resolve: {
+        statusList: function () {
+          return $scope.statusList;
+          
+        }
+        });
+          
+
+
+        modalInstance.result.then(function (res) {
+         
+        }, function () {
+          // Modal closed.
+        });
+
+        setTimeout(function(){  $scope.statusList.push('boo'); }, 2000);
+      }
+
+      $scope.create = function(){
+        $scope.openSaveNoteModal();
+      }
+
     init();
     function init(){
       $scope.paypalEmailUpdate = $scope.user.paypal_email;
@@ -235,3 +270,8 @@ angular.module('angularNoteboosterApp')
     //   'eula':[]
     // };
   });
+
+angular.module('angularNoteboosterApp').controller('openSaveNoteModalInstanceCtrl', function ($scope, $modalInstance, statusList) {
+
+  $scope.statusList = statusList;
+});

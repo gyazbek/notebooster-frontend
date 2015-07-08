@@ -160,7 +160,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.settings.profile-settings', {
@@ -173,7 +173,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.settings.password-settings', {
@@ -186,7 +186,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.settings.organization-donations', {
@@ -199,20 +199,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
-            }],
-        }
-    }).state('app.settings.organization-profile-settings', {
-        url: 'organization-profile-settings',
-        views: {
-            'settings-content@app.settings': {
-                controller: 'OrganizationProfileSettingsCtrl',
-                templateUrl: 'views/organization-profile-settings.html'
-            }
-        },
-        resolve: {
-            authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.new-note', {
@@ -238,7 +225,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.viewprofile', {
