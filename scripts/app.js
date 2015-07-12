@@ -215,12 +215,25 @@ config(function($stateProvider, $urlRouterProvider) {
                 return nbApiService.authenticationStatus(true);
             }],
         }
-    }).state('app.update-note', {
-        url: 'update-note?noteId',
+    }).
+    state('app.new-note.confirmation', {
         views: {
             'content@': {
-                controller: 'UpdateNoteCtrl',
-                templateUrl: 'views/update-note.html'
+                templateUrl: 'views/note-posted-confirmation.html'
+            }
+        }}).
+     state('app.new-note.draft-confirmation', {
+        views: {
+            'content@': {
+                templateUrl: 'views/note-draft-confirmation.html'
+            }
+        }})
+        .state('app.update-note', {
+        url: 'edit-note?noteId',
+        views: {
+            'content@': {
+                controller: 'NewNoteCtrl',
+                templateUrl: 'views/new-note.html'
             }
         },
         resolve: {

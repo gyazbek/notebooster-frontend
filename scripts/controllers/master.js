@@ -25,7 +25,11 @@ angular.module('angularNoteboosterApp').filter('propsFilter', function() {
         return out;
     };
 });
+
 angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope, $rootScope, $location, $state, nbApiService, $modal, $log, $timeout) {
+    
+    $scope.siteStats = {}
+
     var refreshNotificationCountData = function() {
         nbApiService.messageCount().then(function(data) {
             //alert(JSON.stringify(data)); bla bla bla
@@ -46,6 +50,9 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
             refreshNotificationCountDataPromise = $timeout(refreshNotificationCountData, 1000);
         });
     }
+
+    
+
     // if($scope.authenticated ){
     //   nbApiService.identity().then(function(data){
     //       $scope.user = data;
@@ -111,7 +118,12 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
             console.log(reason);
         });
     };
+
+    nbApiService.siteStats().then(function(data) {
+        $scope.siteStats = data;
+    });
 });
+
 angular.module('angularNoteboosterApp').controller('DropdownCtrl', function($http, $state, $scope, $cookies, $location, nbApiService) {
     function openDropdown() {
         $('.dropdown').data('open', true);

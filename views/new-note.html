@@ -1,4 +1,4 @@
-<div class="container results mtop25 mbot25 outline">
+<div class="container results mtop25 mbot25 outline" cg-busy="existingNoteRetrievalPromise">
 	<section class="row">
 		<div class="col-xs-12 mbot25">
 			<h1>Create New Note</h1>
@@ -8,21 +8,44 @@
 
 			<!-- Standard Form -->
 			<h4>Select notes from your computer</h4>
-			<form action="" method="post" enctype="multipart/form-data" id="js-upload-form">
+			
 				<div class="form-inline">
 					<div class="form-group">
-						<input type="file" name="files[]" id="js-upload-files" multiple>
+						<input type="file"  id="js-upload-files" multiple  nv-file-select="" uploader="uploader">
 					</div>
-					<button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
+					
 				</div>
-			</form>
+		
 
 			<!-- Drop Zone -->
-			<div class="upload-drop-zone mtop15" id="drop-zone">
+			<div class="upload-drop-zone mtop15" id="drop-zone"  nv-file-drop="" nv-file-over="" uploader="uploader">
 				...or drag and drop files here!
 			</div>
 
-			<form ng-submit="create()">
+			 <div ng-repeat="item in uploader.queue">
+			 	<strong>{{ item.file.name }}</strong>
+			 	<div ng-show="item.isError">Could not upload {{item.file.name}}, please try again</div>
+                <div ng-show="uploader.isHTML5">
+					<div class="progress" style="margin-bottom: 0;"  ng-hide="item.isError || item.isSuccess">
+					    <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+					</div>	
+	                 <div>
+	                    <button ng-click="item.remove()"  ng-show="item.isSuccess || item.isError">Remove</button>
+	                </div>
+            	</div>
+
+			 </div>
+
+			 <div ng-repeat="item in note.file">
+			 	
+			 	<strong>{{ item.file_name }}</strong>
+                <div>
+                    <button ng-click="removeFile(item)">Remove</button>
+                </div>
+            
+			 </div>
+
+			<form novalidate>
 				<div class="row">
 					<div class="col-md-4">
 						<label for="no_of_pages">Number of Pages:</label>
@@ -35,7 +58,7 @@
 						<label for="note_preview">Note Preview:</label>
 					</div>
 					<div class="col-md-4 form-group">
-						<select ng-model="notePreview" class="form-control" name="note_preview">
+						<select ng-model="note.notePreview" class="form-control" name="note_preview">
 							<option value="firstOnly">First Page Only</option>
 						</select>
 					</div>
@@ -47,13 +70,13 @@
 					<div class="col-md-5">
 						<div class="input-group form-group">
 							<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-							<input ng-model="price"  type="number" class="form-control note_price" name="note_price" placeholder="i.e. 5.00" />
+							<input ng-model="note.price"  type="number" class="form-control note_price" name="note_price" placeholder="i.e. 5.00" />
 							<span class="input-group-addon"> + $1.00 fee</span>
 						</div>
 					</div>
 					<div class="col-md-3 form-group">
 						<label for="free_price" >
-							<input ng-model="free" type="checkbox" name="free_price" id="free_price" /> Make it Free!
+							<input type="checkbox" name="free_price" id="free_price" /> Make it Free!
 						</label>
 					</div>
 					<div class="clearfix"></div>
@@ -61,7 +84,7 @@
 						<label for="charity_split">Charity Split:</label>
 					</div>
 					<div class="col-md-3 form-group">
-						<select ng-model="charity_split" class="form-control" name="charity_split">
+						<select ng-model="note.charity_split" class="form-control" name="charity_split">
 							<option value="10">10%</option>
 							<option value="20">20%</option>
 							<option value="25">25%</option>
@@ -82,7 +105,7 @@
 					</div>
 					<div class="col-md-8 form-group">
 
-					<ui-select ng-model="organization.selected" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval" on-select="loadOrganization($item, $model)">
+					<ui-select ng-model="note.charity" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval" on-select="loadOrganization($item, $model)">
 
  								<ui-select-match placeholder="Select or search a Charity in the list...">{{$select.selected.name}}</ui-select-match>
 							   <ui-select-choices repeat="country in organizationList | filter: $select.search">
@@ -109,12 +132,12 @@
 					<div class="col-xs-12 mbot15 form-group">
 						<label for="note_title">Note Title: <span class="muted">(Max: 50 characters)</span></label>
 						<!-- SOME TYPE OF CHARACTER COUNTER GOES HERE -->
-						<input ng-model="noteTitle" class="form-control" name="note_title" required maxlength="50" />
+						<input ng-model="note.title" class="form-control" name="note_title" required maxlength="50" />
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-xs-12 form-group">
 						<label for="note_description">Note Description:</label>
-						<textarea ng-model="noteDesc" class="form-control" name="note_description" required maxlength="10000"></textarea>
+						<textarea ng-model="note.description" class="form-control" name="note_description" required maxlength="10000"></textarea>
 					</div>
 					<div class="clearfix"></div>
 					<hr class="narrower">
@@ -138,7 +161,7 @@
 						<label for="semester">Semester:</label>
 					</div>
 					<div class="col-md-4 form-group">
-						<select ng-model="semester" class="form-control" name="semester" required>
+						<select ng-model="note.term" class="form-control" name="semester" required>
 							<option value="Spring">Spring</option>
 							<option value="Summer">Summer</option>
 							<option value="Fall">Fall</option>
@@ -147,7 +170,7 @@
 					</div>
 					<div class="col-md-4 form-group">
 						<!-- FLOATING CALCULATION FOR 1 YEAR BACK, CURRENT YEAR, PLUS 1 YEAR FORWARD -->
-						<select class="form-control" name="semester-year" required>
+						<select class="form-control" name="semester-year" required ng-model="note.year">
 							<option ng-selected="{{currentYear == year.year}}"
             				ng-repeat="year in availableSemesterYears()"
 				            value="{{year.year}}">
@@ -160,7 +183,7 @@
 						<label for="course">Course:</label>
 					</div>
 					<div class="col-md-8 form-group">
-						<ui-select ng-model="course.selected" data-ng-disabled="disabled" theme="bootstrap" ng-change="searchInstructor()">
+						<ui-select ng-model="note.course" data-ng-disabled="disabled" theme="bootstrap" ng-change="searchInstructor()">
 								<ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
 								<ui-select-choices repeat="course in courses"  refresh="searchCourse($select.search)"
              refresh-delay="1">
@@ -178,7 +201,7 @@
 					</div>
 					<div class="col-md-8 form-group">
 						<!-- PROFESSOR LIST JSON GOES HERE -->
-							<ui-select ng-model="instructor.selected" data-ng-disabled="disabled" theme="bootstrap" >
+							<ui-select ng-model="note.instructor" data-ng-disabled="disabled" theme="bootstrap" >
 							<ui-select-match placeholder="Search for your Instructor">{{$select.selected.name}}</ui-select-match>
 							<ui-select-choices repeat="instructor in instructors" refresh="searchInstructor($select.search)"
              refresh-delay="1">
@@ -212,15 +235,17 @@
 					</div>
 					<div class="clearfix"></div>
 					<hr class="narrower">
+					<div class="alert alert-danger" ng-repeat="error in errors">{{error}}</div>
 					<div class="col-md-12 form-group">
 						<label for="agree_terms">
 							<input ng-model="eula" type="checkbox" name="agree_terms" id="agree_terms" required /> I have read and agree to the <a ui-sref="app.legal" target="_blank">Terms of Use</a>
 						</label>
 					</div>
+
 					<div class="clearfix"></div>
-					<div class="col-md-12 form-group text-center mtop25 mbot50 form-action-holder">
-						<a href="note-draft-confirmation" id="save" class="btn btn-minor col-sm-5">Save as Draft</a>
-						<button type="submit" id="submit" class="btn btn-primary col-sm-5">Create!</button>
+					<div class="col-md-12 form-group text-center mtop25 mbot50 form-action-holder" cg-busy="saveNotePromise">
+						<button id="save" class="btn btn-minor col-sm-5" ng-click="saveNote('draft')">Save as Draft</button>
+						<button type="submit" id="submit" class="btn btn-primary col-sm-5" ng-click="saveNote('final')">Create!</button>
 					</div>
 				</div>
 			</form>

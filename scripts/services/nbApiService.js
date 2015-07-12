@@ -184,6 +184,12 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'url': "/message/newcount"
             });
         },
+        'siteStats': function() {
+            return this.request({
+                'method': "GET",
+                'url': "/stats"
+            });
+        },
         'profile': function() {
             return this.request({
                 'method': "GET",
@@ -351,10 +357,24 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'url': "/note/" + noteId + "?format=json"
             });
         },
+        'noteEditDetails': function(noteId) {
+            return this.request({
+                'method': "GET",
+                'url': "/note/" + noteId + "/editDetails"
+            });
+        },
         'noteFeedbackList': function(noteId) {
             return this.request({
                 'method': "GET",
                 'url': "/note/" + noteId + "/feedback"
+            });
+        },
+
+        'newNote': function(data) {
+            return this.request({
+                'method': "POST",
+                'url': "/note/new",
+                'data': data
             });
         },
         'updateNote': function(noteId, data) {
@@ -512,6 +532,13 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             return this.request({
                 'method': "GET",
                 'url': "/school",
+                'params': params
+            });
+        },
+        'getCourseSubject': function(params) {
+            return this.request({
+                'method': "GET",
+                'url': "/subject",
                 'params': params
             });
         },

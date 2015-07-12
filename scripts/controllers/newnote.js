@@ -1,22 +1,84 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('NewNoteCtrl', function ($scope,$http,$modal,nbApiService,Validate) {
+  .controller('NewNoteCtrl', function ($scope,$http,$modal,nbApiService,$stateParams,Validate,$cookies, FileUploader) {
 
-    $scope.numOfPages = 1;
-    $scope.notePreview = "firstOnly";
-    $scope.notePrice;
-    $scope.free = false;
-    $scope.charitySplit = "10";
-    $scope.noteTitle = "";
-    $scope.noteDesc = "";
-    $scope.school = {};
-    $scope.course = {};
-    $scope.semester = "Spring";
-    $scope.semesterYear = "2015";
-    $scope.professor;
-    $scope.paypalEmail;
-    $scope.eula = false;
+    
+    $scope.note = {};
+    $scope.note.course = {};
+    $scope.note.instructor = {};
+    $scope.note.file = [];
+
+    var uploader = $scope.uploader = new FileUploader({
+            url: nbApiService.getBaseApiUrl() + '/note/file/upload',
+            autoUpload: true,
+
+            headers: {'X-CSRFToken': $cookies['csrftoken'],
+                'Authorization': 'Token ' + $cookies.token},
+        });
+
+        // FILTERS
+
+      uploader.filters.push({
+          name: 'customFilter',
+          fn: function(item /*{File|FileLikeObject}*/, options) {
+              return this.queue.length < 5;
+          }
+      });
+
+       // CALLBACKS
+
+        uploader.onWhenAddingFileFailed = function(item /*{File|FileLikeObject}*/, filter, options) {
+            console.info('onWhenAddingFileFailed', item, filter, options);
+        };
+        uploader.onAfterAddingFile = function(fileItem) {
+            console.info('onAfterAddingFile', fileItem);
+        };
+        uploader.onAfterAddingAll = function(addedFileItems) {
+            console.info('onAfterAddingAll', addedFileItems);
+        };
+        uploader.onBeforeUploadItem = function(item) {
+
+            uploader.headers =  {'X-CSRFToken': $cookies['csrftoken'],
+                'Authorization': 'Token ' + $cookies.token};
+
+            console.info('onBeforeUploadItem', item);
+        };
+        uploader.onProgressItem = function(fileItem, progress) {
+            console.info('onProgressItem', fileItem, progress);
+        };
+        uploader.onProgressAll = function(progress) {
+            console.info('onProgressAll', progress);
+        };
+        uploader.onSuccessItem = function(fileItem, response, status, headers) {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+        };
+        uploader.onErrorItem = function(fileItem, response, status, headers) {
+
+            console.info('onErrorItem', fileItem, response, status, headers);
+        };
+        uploader.onCancelItem = function(fileItem, response, status, headers) {
+            console.info('onCancelItem', fileItem, response, status, headers);
+        };
+        uploader.onCompleteItem = function(fileItem, response, status, headers) {
+            console.info('onCompleteItem', fileItem, response, status, headers);
+
+          if(status==200 || status == 200){
+            if(angular.isDefined(response.id)){
+              $scope.note.file.push(response);
+              fileItem.remove();
+            }
+          }
+        };
+        uploader.onCompleteAll = function() {
+            console.info('onCompleteAll');
+            //alert(JSON.stringify($scope.note.file));
+
+        };
+
+        console.info('uploader', uploader);
+
+
 
 
     /*
@@ -68,7 +130,7 @@ angular.module('angularNoteboosterApp')
     $scope.yourAmount = function() { return $scope.price ? ( (1 - ($scope.charity_split/100)) * $scope.price) : 0 };
     $scope.charityAmount = function() { return $scope.price ? ( ($scope.charity_split/100) * $scope.price) : 0 };
     
-
+    $scope.school = {};
     $scope.organization = {};
     $scope.organizationList = [];
     $scope.organizationListRetrieval = nbApiService.getSimpleOrgnizationList().then(function(data) {
@@ -77,6 +139,11 @@ angular.module('angularNoteboosterApp')
             $scope.organization.selected = data[0];
           }
     });
+
+    $scope.removeFile = function(item) {
+       var index = $scope.note.file.indexOf(item);
+        $scope.note.file.splice(index, 1);     
+    };
 
     $scope.loadOrganization = function(item, model) {
       if(item.user.username){
@@ -88,6 +155,8 @@ angular.module('angularNoteboosterApp')
         });
       }
     };
+
+
 
     $scope.searchSchool = function(school) {
       var params = {search: school, page: 1};      
@@ -102,7 +171,7 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.schoolSelected = function(item, model) {
-      $scope.course = {};
+      $scope.note.course = {};
     };
 
     $scope.searchCourse = function(course) {
@@ -218,60 +287,69 @@ angular.module('angularNoteboosterApp')
 
 
 
-      $scope.openSaveNoteModal = function(size) {
-        $scope.statusList = [];
-        $scope.statusList.push('test');
-        var modalInstance = $modal.open({
-        animation: true,
-        templateUrl: '/views/partials/note_save_modal.html',
-        backdrop: 'static', /*  this prevent user interaction with the background  */
-        keyboard: false,
-        controller: 'openSaveNoteModalInstanceCtrl',
-        size: size,
-         resolve: {
-        statusList: function () {
-          return $scope.statusList;
-          
-        }
-        });
-          
+    $scope.saveNote = function(type){
 
+      $scope.success = false;
 
-        modalInstance.result.then(function (res) {
-         
-        }, function () {
-          // Modal closed.
-        });
+      // {edit out}
+      // we copy the note to do some basic transformation
+      // this won't be needed when we match the model on API side as well as view side
+      // we use course_id and instructor_id right now, purely due to time constraints when pouring over the documentation for api framework when it comes to deserializing existing nested objects
+      // var noteObj = {};
+      // angular.copy($scope.note, noteObj)
+      
+      // alert(JSON.stringify(noteObj));
+      // if(angular.isDefined(noteObj.course.id)){
 
-        setTimeout(function(){  $scope.statusList.push('boo'); }, 2000);
+      //   alert(noteObj.course.id)
+      //   delete noteObj.course;
+      //   alert(JSON.stringify(noteObj));
+      // }
+
+      if(type == 'draft'){
+
+        $scope.note.draft = true;
+   
+      }else {
+        delete $scope.note.draft;
       }
 
-      $scope.create = function(){
-        $scope.openSaveNoteModal();
-      }
+     
+
+      $scope.saveNotePromise = nbApiService.newNote($scope.note)
+      .then(function(data){
+         if(type == 'draft'){
+          $state.go('app.new-note.draft-confirmation');
+         }else{
+           $state.go('app.new-note.confirmation');
+         }
+      },function(data){
+        $scope.errors = data;
+      });
+    };
+      // $scope.create = function(){
+      //   $scope.openSaveNoteModal();
+      // }
 
     init();
     function init(){
       $scope.paypalEmailUpdate = $scope.user.paypal_email;
+       if(typeof $stateParams.noteId !== 'undefined') {
+        $scope.noteId = $stateParams.noteId;
+
+         $scope.existingNoteRetrievalPromise = nbApiService.noteEditDetails($scope.noteId)
+        .then(function(data){
+          // success case
+          $scope.note = data;
+        },function(data){
+          // error case
+          $scope.errors = data;
+        });  
+        
+      }
     };
-    // $scope.errors = {
-    //   'numOfPages':[],
-    //   'notePreview':[],
-    //   'notePrice':[],
-    //   'charitySplit':[],
-    //   'noteTitle':[],
-    //   'noteDesc':[],
-    //   'school':[],
-    //   'course':[],
-    //   'semester':[],
-    //   'semesterYear':[],
-    //   'professor':[],
-    //   'paypalEmail':[],
-    //   'eula':[]
-    // };
+
+
+
   });
 
-angular.module('angularNoteboosterApp').controller('openSaveNoteModalInstanceCtrl', function ($scope, $modalInstance, statusList) {
-
-  $scope.statusList = statusList;
-});
