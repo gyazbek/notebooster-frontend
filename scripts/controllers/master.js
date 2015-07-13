@@ -103,11 +103,28 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
         $state.go('app');
         //  $location.path('/authRequired').replace();
     });
+
     $scope.signinModal = function(size) {
         var modalInstance = $modal.open({
             animation: true,
             templateUrl: '/views/partials/signin_modal.html',
             controller: 'LoginCtrl',
+            size: size
+        });
+        modalInstance.result.then(function() {
+            //TODO: disable account and log user out
+            console.log('disable it');
+        }, function(reason) {
+            // Modal closed.
+            console.log(reason);
+        });
+    };
+
+    $scope.signupModal = function(size) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: '/views/partials/signup_modal.html',
+            controller: 'RegisterCtrl',
             size: size
         });
         modalInstance.result.then(function() {

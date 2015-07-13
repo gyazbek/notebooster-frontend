@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('RegisterCtrl', function ($scope, nbApiService, Validate, $http) {
+  .controller('RegisterCtrl', function ($scope, nbApiService, Validate, $http,$modalInstance) {
   	$scope.model = {'username':'','password1':'','password2':'','email':''};
 
 
@@ -23,6 +23,7 @@ angular.module('angularNoteboosterApp')
           .then(function(data){
           	// success case
           	$scope.complete = true;
+            $modalInstance.close();
           },function(data){
           	// error case
           	$scope.errors = data;
@@ -36,6 +37,11 @@ angular.module('angularNoteboosterApp')
     $scope.signupForm = function() {
       console.log('signed up.');
     }
+
+
+      $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
 
     $scope.checkPasswordMatch = function(){
       $scope.isNotPasswordMatch = ($scope.model.password1 == $scope.model.password2) ? false: true;
