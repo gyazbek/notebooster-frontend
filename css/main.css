@@ -535,7 +535,9 @@ nav.navbar {
   position: absolute; }
 
 .tips-list li {
-  margin-bottom: 15px; }
+  margin-bottom: 15px;
+  color: #a0a6aa;
+  font-weight: lighter; }
 
 /*
  * Browse Notes

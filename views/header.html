@@ -60,6 +60,8 @@
 
           <li class="divider"></li>
           <li><a ui-sref="app.settings.profile-settings" >Profile Settings</a></li>
+          <li ng-if="user.account_type != 'organization'"><a ui-sref="app.settings.password-settings">Change Password</a></li>
+          <li ng-if="user.account_type != 'organization'"><a ui-sref="app.settings.payment">Payment Info</a></li>
           <li class="divider"></li>
           <li><a ui-sref="app.contact">Contact Us</a></li>
           <li class="divider"></li>
