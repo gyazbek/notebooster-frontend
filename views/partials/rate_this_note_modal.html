@@ -6,22 +6,29 @@
     <h3 class="modal-title">Rate This Note</h3>
     <p>Leave feedback on this note</p>
   </div>
-  <div class="modal-body">
-    <form ng-submit="send()">
-    <h4 class="mbot15">{{noteTitle}}</h4>
+  <div class="modal-body" cg-busy="submitNoteRatingPromise">
+  <div class="form-group">
+  <div ng-show="success">Thank you for your valuable feedback.</div>
+    <form ng-hide="success">
+    <span ng-show="errors" >An error has occured, please try again in a few</span>
+    <h4 class="mbot15">{{noteSale.note.title}}</h4>
     <div class="form-group">
       <label for="note-rating">Select Rating:</label>
-      <select name="note-rating" class="form-control">
-        <option value="0">Select Rating</option>
+      <select ng-model="feedback.rating" class="form-control">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
       </select>
     </div>
     <div class="form-group">
       <label for="note-feedback">Leave Feedback: <span class="muted">(Max 500 words)</span></label>
-      <textarea ng-model="feedback" name="note-feedback" class="form-control"></textarea>
+      <textarea ng-model="feedback.content" name="note-feedback" class="form-control"></textarea>
     </div>
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
-        <button type="submit" class="btn btn-primary btn-block">Send</button>
+        <button class="btn btn-primary btn-block" ng-click="rateNote()">Send</button>
       </div>
     </div>
   </form>

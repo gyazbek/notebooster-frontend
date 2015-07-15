@@ -17,7 +17,7 @@ angular.module('angularNoteboosterApp')
         .then(function(data){
         	// success case
           	$scope.notesPurchased = data.results;
-          	$scope.notesCount = data.results.length;
+          	$scope.notesCount = data.count;
         },function(data){
           	// error case
           	$scope.errors = data;
@@ -34,17 +34,16 @@ angular.module('angularNoteboosterApp')
       $state.go('app.note-details', {'noteId': noteId});
     };
 
-  	$scope.rateNote = function($event,size) {
+  	$scope.rateNote = function(noteSale) {
   		$scope.msgSentResponse = "";
-  		$scope.noteTitle = event.target.id;
+  		
 		var modalInstance = $modal.open({
 			animation: true,
 			templateUrl: '/views/partials/rate_this_note_modal.html',
 			controller: 'RateNoteCtrl',
-			size: size,
 			resolve: {
-				noteTitle: function () {
-		  			return $scope.noteTitle;
+				noteSale: function () {
+		  			return noteSale;
 				}
 			}
 		});
@@ -55,9 +54,76 @@ angular.module('angularNoteboosterApp')
 			// Modal closed.
 		});
 	};
+
+
+    $scope.fileListingModal = function(id) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: '/views/partials/note_file_listing_modal.html',
+            controller: 'DownloadFileListingCtrl',
+            resolve: {
+	         noteId: function () {
+	           return id;
+	         }
+	       }
+        });
+        modalInstance.result.then(function() {
+            //TODO: disable account and log user out
+            console.log('disable it');
+        }, function(reason) {
+            // Modal closed.
+            console.log(reason);
+        });
+    };
+
+	
   
 	init();
 	function init(){
 		$scope.getNotesPurchased($scope.order);
 	};
+});
+
+
+
+angular.module('angularNoteboosterApp')
+.controller('DownloadFileListingCtrl', function ($scope,$state,$modalInstance,nbApiService,$http, noteId) {
+
+
+
+	$scope.cancel = function () {
+   		$modalInstance.dismiss('cancel');
+  	};
+
+	$scope.downloadFile = function (id) {
+   		var url = nbApiService.getBaseApiUrl() + '/note/file/' + id + '/download';
+   		var hiddenElement = document.createElement('a');
+
+	    hiddenElement.href = url;
+	    hiddenElement.target = '_blank';
+	    hiddenElement.download = '';
+	    hiddenElement.click();
+  	};
+
+	$scope.downloadAllFiles = function () {
+   		var url = nbApiService.getBaseApiUrl() + '/note/' + noteId + '/download';
+   		var hiddenElement = document.createElement('a');
+
+	    hiddenElement.href = url;
+	    hiddenElement.target = '_blank';
+	    hiddenElement.download = '';
+	    hiddenElement.click();
+  	};
+
+
+	if (angular.isDefined(noteId)){
+		$scope.listingRetrievalPromise = nbApiService.getNoteFileListing(noteId)
+        .then(function(data){
+        	// success case
+          	$scope.fileListing = data;
+        },function(data){
+          	// error case
+          	$scope.errors = data;
+      });
+	}
 });

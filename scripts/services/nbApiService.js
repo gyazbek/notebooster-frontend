@@ -366,9 +366,18 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'noteFeedbackList': function(noteId) {
             return this.request({
                 'method': "GET",
-                'url': "/note/" + noteId + "/feedback"
+                'url': "/note/" + noteId + "/feedback/"
             });
         },
+
+        'leaveNoteFeedback': function(saleId, data) {
+            return this.request({
+                'method': "POST",
+                'url': "/note/sale/" + saleId + "/feedback",
+                'data':data
+            });
+        },
+
 
         'newNote': function(data) {
             return this.request({
@@ -398,6 +407,12 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                     'page': page,
                     'order': order
                 }
+            });
+        },
+        'getNoteFileListing': function(nid) {
+            return this.request({
+                'method': "GET",
+                'url': "/note/" + nid + "/file"
             });
         },
         'getMyNotesForSale': function(page, order) {
