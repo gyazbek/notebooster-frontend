@@ -53,15 +53,15 @@
           <li ng-if="user.account_type != 'organization'"><a ui-sref="app.settings.watch-list">Watch List</a></li>
           <li><a ui-sref="app.settings.messages">Messages <span class="notification" ng-if="notificationCount">{{notificationCount}}</span></a></li>
 
-
-          <li ng-if="user.account_type == 'organization'"><a ui-sref="app.settings.payment">Payment Info</a></li>
-          <li ng-if="user.account_type == 'organization'"> <a ui-sref="app.settings.password-settings">Password</a></li>
-
-
           <li class="divider"></li>
           <li><a ui-sref="app.settings.profile-settings" >Profile Settings</a></li>
           <li ng-if="user.account_type != 'organization'"><a ui-sref="app.settings.password-settings">Change Password</a></li>
           <li ng-if="user.account_type != 'organization'"><a ui-sref="app.settings.payment">Payment Info</a></li>
+
+          <li ng-if="user.account_type == 'organization'"> <a ui-sref="app.settings.password-settings">Change Password</a></li>
+          <li ng-if="user.account_type == 'organization'"><a ui-sref="app.settings.payment">Payment Info</a></li>
+          <li ng-if="user.account_type == 'organization'"><a ui-sref="app.settings.profile-settings" >Profile Settings</a></li>
+
           <li class="divider"></li>
           <li><a ui-sref="app.contact">Contact Us</a></li>
           <li class="divider"></li>
