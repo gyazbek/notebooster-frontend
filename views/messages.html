@@ -25,7 +25,10 @@
           </header>
           <main class="row tab-content">
             <div class="col-xs-12 tab-pane active" id="inbox" role="tabpanel">
-              <div class="row vertical-align normalize-xs lined" ng-repeat="msg in messages">
+              <div ng-show="itemCount == 0" class="row vertical-align lined noresults" ng-show="!results">
+                <p>No Results Found</p>
+              </div>
+              <div ng-show="itemCount > 0" class="row vertical-align normalize-xs lined" ng-repeat="msg in messages">
                 <div class="col-sm-2 col-xs-0 hidden-xs text-center">
                   <div class="row mtop15">
                     <div class="col-xs-10 col-xs-offset-1">
@@ -54,6 +57,7 @@
                 first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;"
                 rotate="true" max-size="maxSize" items-per-page="itemPerPage" ng-change="getUserInbox(page)">
               </pagination>
+              <pagination ng-show="itemCount <= itemsPerPage" ng-model="page" direction-links="false"></pagination>
             </div>
           </footer>
           <div class="clearfix"></div>
