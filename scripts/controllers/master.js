@@ -27,7 +27,7 @@ angular.module('angularNoteboosterApp').filter('propsFilter', function() {
 });
 
 angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope, $rootScope, $location, $state, nbApiService, $modal, $log, $timeout) {
-    
+
     $scope.siteStats = {}
 
     var refreshNotificationCountData = function() {
@@ -51,7 +51,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
         });
     }
 
-    
+
 
     // if($scope.authenticated ){
     //   nbApiService.identity().then(function(data){
@@ -170,6 +170,7 @@ angular.module('angularNoteboosterApp').controller('DropdownCtrl', function($htt
             });
         } else {
             $('li.profile>span').hide();
+            $('li.profile .user-info').hide();
             $('li.notification').fadeIn('fast');
         }
     }

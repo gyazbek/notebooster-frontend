@@ -561,6 +561,8 @@ nav.navbar {
 	label {
 		color: $light-blue;
 	}
+	//input:focus {color: red;border: 5px solid #000;}
+	//.ui-select-match:focus,.ui-select-container:focus {  outline: 10px solid #00FFFF; color:green!important;border: 4px solid #7FFFD4;}
 }
 
 .panel-heading {
