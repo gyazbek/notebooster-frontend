@@ -226,6 +226,15 @@ hr {
 	-webkit-font-smoothing: antialiased;
 }
 
+.noresults {
+	display: block!important;
+  	text-align: center;
+  	padding: 40px 0!important;
+  	p {
+  		margin-bottom: 0;
+  	}
+}
+
 /*
  * Forms
  */
