@@ -109,7 +109,8 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
             animation: true,
             templateUrl: '/views/partials/signin_modal.html',
             controller: 'LoginCtrl',
-            size: size
+            size: size,
+            scope:$scope
         });
         modalInstance.result.then(function() {
             //TODO: disable account and log user out
@@ -125,7 +126,8 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
             animation: true,
             templateUrl: '/views/partials/signup_modal.html',
             controller: 'RegisterCtrl',
-            size: size
+            size: size,
+            scope:$scope
         });
         modalInstance.result.then(function() {
             //TODO: disable account and log user out

@@ -5,9 +5,8 @@ angular.module('angularNoteboosterApp')
   	$scope.model = {'username':'','password1':'','password2':'','email':''};
 
 
- 
     $scope.school = {};
-  	$scope.complete = false;
+  
     $scope.register = function(formData){
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);
@@ -22,7 +21,7 @@ angular.module('angularNoteboosterApp')
           nbApiService.register($scope.model.username,$scope.model.password1,$scope.model.password2,$scope.model.email,moreData )
           .then(function(data){
           	// success case
-          	$scope.complete = true;
+        
             $modalInstance.close();
           },function(data){
           	// error case
@@ -34,9 +33,6 @@ angular.module('angularNoteboosterApp')
       }
     }
 
-    $scope.signupForm = function() {
-      console.log('signed up.');
-    }
 
 
       $scope.cancel = function () {

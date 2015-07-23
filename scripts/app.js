@@ -34,6 +34,14 @@ config(function($stateProvider, $urlRouterProvider) {
                 templateUrl: 'views/about.html'
             }
         }
+    }).state('app.forgotpassword', {
+        url: 'forgot',
+        views: {
+            'content@': {
+                controller: 'PasswordresetCtrl',
+                templateUrl: 'views/forgotpassword.html'
+            }
+        }
     }).state('app.contact', {
         url: 'contact',
         views: {
@@ -349,14 +357,6 @@ config(function($stateProvider, $urlRouterProvider) {
     }).state('register', {
         url: '/register',
         templateUrl: 'views/register.html',
-        resolve: {
-            authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
-            }],
-        }
-    }).state('app.passwordReset', {
-        url: '/passwordReset',
-        templateUrl: 'views/passwordreset.html',
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
                 return nbApiService.authenticationStatus();
