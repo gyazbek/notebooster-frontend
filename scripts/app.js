@@ -61,12 +61,28 @@ config(function($stateProvider, $urlRouterProvider) {
                 return nbApiService.authenticationStatus();
             }],
         }
+
+        
+
     }).state('app.note-details', {
         url: 'note-details?noteId',
         views: {
             'content@': {
                 controller: 'NoteDetailsCtrl',
                 templateUrl: 'views/notedetails.html'
+            }
+        },
+        resolve: {
+            authenticated: ['nbApiService', function(nbApiService) {
+                return nbApiService.authenticationStatus();
+            }],
+        }
+    }).state('app.note-purchased-confirmation', {
+        url: 'note-purchased?noteId',
+        views: {
+            'content@': {
+                controller: 'NotePurchasedConfirmationCtrl',
+                templateUrl: 'views/note-purchased-confirmation.html'
             }
         },
         resolve: {
@@ -364,9 +380,9 @@ config(function($stateProvider, $urlRouterProvider) {
     });
 }).run(function($state, $stateParams, $rootScope, nbApiService) {
 
-	nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
+    //nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
 
-   // nbApiService.initialize('http://localhost:8000', false).then(function(data) {
+   nbApiService.initialize('http://localhost:8000', false).then(function(data) {
         // nbApiService.identity().then(function(data){$rootScope.user = data;
         // });
     });

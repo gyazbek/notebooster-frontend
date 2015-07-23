@@ -378,6 +378,21 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             });
         },
 
+        'initialNotePurchase': function(nid, data) {
+            return this.request({
+                'method': "POST",
+                'url': "/note/" + nid + "/purchase/initial",
+                'data':data
+            });
+        },
+
+		'notePurchaseConfirmation': function(nid, data) {
+			return this.request({
+			'method': "GET",
+			'url': "/note/" + nid + "/purchase/confirmation",
+			'data':data
+			});
+		},
 
         'newNote': function(data) {
             return this.request({

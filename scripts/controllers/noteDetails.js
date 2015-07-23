@@ -4,7 +4,7 @@ angular.module('angularNoteboosterApp')
   .controller('NoteDetailsCtrl', function ($scope, $stateParams, nbApiService, Validate,$modal) {
     $scope.noteId = $stateParams.noteId;
   	$scope.complete = false;
-
+    $scope.note = {}
     $scope.getNoteDetails = function(noteId){
       $scope.notePromise = nbApiService.noteDetails(noteId)
       .then(function(data){
@@ -43,8 +43,8 @@ angular.module('angularNoteboosterApp')
       controller: 'PurchaseNoteModalCtrl',
       size: size,
       resolve: {
-      noteId: function () {
-          return $scope.noteId;
+      note: function () {
+          return $scope.note;
       }
     }
    
@@ -60,4 +60,8 @@ angular.module('angularNoteboosterApp')
   };
 
 
+
+
+
 });
+

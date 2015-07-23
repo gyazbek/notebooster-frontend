@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<script type="text/javascript" charset="utf-8">
+          function handleEmbeddedFlow() {
+                    if (top && top.opener && top.opener.top) {
+                         top.opener.top.embeddedPPFlow.closeFlow();
+                         window.close();
+                    } else if (top.embeddedPPFlow) {
+                         top.embeddedPPFlow.closeFlow();
+                    } else {
+                         alert('Transaction Cancelled. Please close the window and reload to continue');
+                    }
+          }
+</script>
+<body onLoad='handleEmbeddedFlow()'>
+</head>
+<body>
+</body>
+</html>
