@@ -34,14 +34,6 @@ config(function($stateProvider, $urlRouterProvider) {
                 templateUrl: 'views/about.html'
             }
         }
-    }).state('app.forgotpassword', {
-        url: 'forgot',
-        views: {
-            'content@': {
-                controller: 'PasswordresetCtrl',
-                templateUrl: 'views/forgotpassword.html'
-            }
-        }
     }).state('app.contact', {
         url: 'contact',
         views: {
@@ -354,21 +346,21 @@ config(function($stateProvider, $urlRouterProvider) {
                 return nbApiService.authenticationStatus();
             }],
         }
-    }).state('register', {
-        url: '/register',
-        templateUrl: 'views/register.html',
-        resolve: {
-            authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
-            }],
+    }).state('app.forgotpassword', {
+        url: 'forgot',
+        views: {
+            'content@': {
+                controller: 'PasswordresetCtrl',
+                templateUrl: 'views/forgotpassword.html'
+            }
         }
-    }).state('app.passwordResetConfirm', {
-        url: '/passwordResetConfirm/:firstToken/:passwordResetToken',
-        templateUrl: 'views/passwordresetconfirm.html',
-        resolve: {
-            authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
-            }],
+    }).state('app.forgotpasswordConfirm', {
+        url: 'resetConfirm/:firstToken/:passwordResetToken',
+        views: {
+            'content@': {
+                controller: 'PasswordresetconfirmCtrl',
+                templateUrl: 'views/forgotpasswordconfirm.html'
+            }
         }
     }).state("modals", {
         views: {
