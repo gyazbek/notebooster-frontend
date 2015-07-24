@@ -447,15 +447,14 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             });
         },
         'setNoteStatus': function(noteId, noteStatus) {
-            return {};
-            // return this.request({
-            //     'method': "GET",
-            //     'url': "/note/status",
-            //     'data': {
-            //         'noteId': noteId;
-            //         'noteStatus': noteStatus
-            //     }
-            // });
+           
+            return this.request({
+                'method': "PUT",
+                'url': "/note/" + noteId,
+                'data': {
+                    'status': noteStatus
+                }
+            });
         },
         'getInbox': function(page, order) {
             var orderAppend = (order != '' ? (order == 'newest' ? '?ordering=latest' : (order == 'oldest' ? '?ordering=latest_msg' : '')) : '')

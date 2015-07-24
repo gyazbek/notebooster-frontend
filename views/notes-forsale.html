@@ -1,4 +1,4 @@
-        <div class="results pad15 outline" cg-busy="forsalePromise">
+        <div class="results pad15 outline" cg-busy="[forsalePromise,noteUpdatePromise]">
           <section class="row vertical-align normalize-xs normalize-sm">
             <div class="col-md-6 col-xs-12 title-block">
               <h1>Notes For Sale</h1>
@@ -39,11 +39,11 @@
                   </div>
                 </div>
                 <div class="col-sm-4 col-xs-12 text-center form-group">
-                  <select id="{{note.id}}" ng-click="setNoteStatus($event)" class="form-control" name="note-status">
+                  <select ng-click="setNoteStatus($event, note)" class="form-control" name="note-status">
                     <option value="active">Active</option>
                     <option value="disabled">Disabled</option>
                   </select>
-                  <a href="" id="{{note.id}}" ng-click="updateNote($event)" class="btn btn-minor btn-block mtop5">Edit</a>
+                  <a href="" id="{{note.id}}" ng-click="updateNote(note)" class="btn btn-minor btn-block mtop5">Edit</a>
                   <button class="btn btn-primary btn-block" id="{{note.title}}" ng-click="promote($event)">Promote</button>
                 </div>
               </div>

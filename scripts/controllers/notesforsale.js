@@ -10,7 +10,7 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
     $scope.getMyNotesForSale = function(page, order) {
         $scope.forsalePromise = nbApiService.getMyNotesForSale().then(function(data) {
             $scope.results = data.results;
-            $scope.notesCount = data.results.length;
+            $scope.notesCount = data.count;
             $scope.totalEarnings = getTotalEarnings($scope.results);
         }, function(data) {});
     }
@@ -20,16 +20,16 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
             'noteId': noteId
         });
     }
-    $scope.setNoteStatus = function(event) {
-        var noteId = event.target.id;
+    $scope.setNoteStatus = function(event, note) {
+        var noteId = note.id;
         var noteStatus = event.target.value;
-        console.log("note id:\t" + noteId);
-        console.log("note status:\t" + noteStatus);
-        // nbApiService.setNoteStatus(noteId, noteStatus)
-        // .then(function(data){
-        //     console.log();
-        // }, function(data){
-        // });
+       
+       $scope.noteUpdatePromise = nbApiService.setNoteStatus(noteId, noteStatus)
+        .then(function(data){
+         
+        }, function(data){
+
+        });
     }
     $scope.getNoteDetails = function(event) {
         var noteId = event.target.id;
