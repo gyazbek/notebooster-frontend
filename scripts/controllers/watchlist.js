@@ -14,6 +14,7 @@ angular.module('angularNoteboosterApp')
   	 	.then(function(data){
   	 		$scope.results = data;
 			$scope.watchlistCount = data.length;
+			console.log($scope.watchlistCount);
   	 	},function(data) {
   	 		$scope.unableToGetList = true;
   	 	});

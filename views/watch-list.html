@@ -20,7 +20,7 @@
           </section>
           <main class="row">
             <div class="col-xs-12">
-              <div ng-show="watchlistCount == 0" class="row vertical-align lined noresults" ng-show="!results">
+              <div ng-if="watchlistCount == 0" class="row vertical-align lined noresults">
                 <p>No Results Found</p>
               </div>
               <div ng-show="watchlistCount > 0" class="row vertical-align lined" ng-repeat="user in results">
@@ -54,7 +54,6 @@
                 first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
                 rotate="true" max-size="maxSize" ng-change="getWatchlist(user.username,page)">
               </pagination>
-              <pagination ng-show="watchlistCount <= maxSize" ng-model="page" direction-links="false"></pagination>
             </div>
           </footer>
           <div class="clearfix"></div>
@@ -81,9 +80,8 @@
               <p><a ui-sref="app.messages">Messages</a></p>
             </div>
           </div>
-        </div>        </div>
+        </div>        
+      </div>
       </div>
     </div>
   </div>
-
-</div>
