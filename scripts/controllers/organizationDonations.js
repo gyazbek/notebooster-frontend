@@ -2,21 +2,20 @@
 
 angular.module('angularNoteboosterApp')
   .controller('OrganizationDonationsCtrl', function ($scope,$state,$modal,nbApiService,Validate) {
-    $scope.donationsCount = 0;
-    $scope.totalEarnings = 0;
+    $scope.itemsCount = 0;
+    $scope.totalDonationAmount = 0;
     $scope.page = 1;
     $scope.donations = {};
     $scope.order = "date";
 
     // Pagination
-    $scope.maxSize = 10;
-
-     
+    $scope.itemsPerPage = 10;
+    $scope.maxSize = 5;
 
     $scope.getDonations = function(page,order){
         $scope.donationsPromise = nbApiService.getDonations(page, order)
         .then(function(data){
-            $scope.donationsCount = data.count;
+            $scope.itemsCount = data.count;
             $scope.donations = data.results;
             $scope.totalDonationAmount = data.totalDonationAmount;
         },function(data){

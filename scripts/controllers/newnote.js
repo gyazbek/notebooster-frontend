@@ -315,17 +315,27 @@ angular.module('angularNoteboosterApp')
       }
 
      
+      if(angular.isDefined($scope.note.id)){
 
-      $scope.saveNotePromise = nbApiService.newNote($scope.note)
-      .then(function(data){
-         if(type == 'draft'){
-          $state.go('app.new-note.draft-confirmation');
-         }else{
-           $state.go('app.new-note.confirmation');
-         }
-      },function(data){
-        $scope.errors = data;
-      });
+
+        $scope.saveNotePromise = nbApiService.updateNote($scope.note.id $scope.note)
+        .then(function(data){
+           
+        },function(data){
+          $scope.errors = data;
+        });
+      }else{
+        $scope.saveNotePromise = nbApiService.newNote($scope.note)
+        .then(function(data){
+           if(type == 'draft'){
+            $state.go('app.new-note.draft-confirmation');
+           }else{
+             $state.go('app.new-note.confirmation');
+           }
+        },function(data){
+          $scope.errors = data;
+        });
+      }
     };
       // $scope.create = function(){
       //   $scope.openSaveNoteModal();

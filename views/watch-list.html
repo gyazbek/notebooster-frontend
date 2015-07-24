@@ -9,7 +9,7 @@
               <!-- <p class="lead muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> -->
             </div>
             <div class="col-xs-3 text-right mtop25-sm mbot25-sm">
-              <p class="lead mbot0">{{watchlistCount}} Items</p>
+              <p class="lead mbot0">{{items}} Items</p>
             </div>
             <div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
               <select ng-model="order" ng-change="getWatchlist(order,page)" class="form-control" ng-model="orderListValue">
@@ -20,10 +20,10 @@
           </section>
           <main class="row">
             <div class="col-xs-12">
-              <div ng-show="watchlistCount == 0" class="row vertical-align lined noresults" ng-show="!results">
-                <p>No Results Found</p>
+              <div ng-if="items == 0" class="row vertical-align lined noresults">
+                <p>Nothing here yet!</p>
               </div>
-              <div ng-show="watchlistCount > 0" class="row vertical-align lined" ng-repeat="user in results">
+              <div class="row vertical-align lined" ng-repeat="user in results">
                 <div class="col-sm-2 col-xs-0 hidden-xs text-center">
                   <div class="row">
                     <div class="col-xs-10 col-xs-offset-1">
@@ -50,40 +50,13 @@
           </main>
           <footer class="row">
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-              <pagination ng-show="watchlistCount > maxSize"ng-model="page" total-items="watchlistCount" boundary-links="true" 
-                first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
-                rotate="true" max-size="maxSize" ng-change="getWatchlist(user.username,page)">
+              <pagination ng-show="items > itemsPerpage" ng-model="page" total-items="itemsPerPage" boundary-links="true" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" rotate="true" max-size="maxSize" ng-change="getWatchlist(user.username,page)">
               </pagination>
-              <pagination ng-show="watchlistCount <= maxSize" ng-model="page" direction-links="false"></pagination>
             </div>
           </footer>
           <div class="clearfix"></div>
         </div>
       </div>
-      <div class="col-md-3 col-sm-12 mtop25-sm mtop0-xs">
-        <div class="row">
-          <div class="col-md-12 col-sm-6 col-xs-12">
-            <div class="results pad15 mbot25 mtop25-xs">
-              <h3>Settings</h3>
-              <hr>
-              <p><a ui-sref="app.profile-settings">Profile Settings</a></p>
-              <p><a ui-sref="app.password-settings">Passwords</a></p>
-              <p><a ui-sref="app.payment-settings">Payment Info</a></p>
-            </div>
-          </div>
-          <div class="col-md-12 col-sm-6 col-xs-12">
-            <div class="results pad15 mbot25">
-              <h3>Dashboard</h3>
-              <hr>
-              <p><a ui-sref="app.notes-purchased">Notes Purchased</a></p>
-              <p><a ui-sref="app.notes-forsale">Notes for Sale</a></p>
-              <p><a ui-sref="app.watch-list">Watch List</a></p>
-              <p><a ui-sref="app.messages">Messages</a></p>
-            </div>
-          </div>
-        </div>        </div>
       </div>
     </div>
   </div>
-
-</div>

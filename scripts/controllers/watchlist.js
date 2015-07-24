@@ -5,15 +5,16 @@ angular.module('angularNoteboosterApp')
 	$scope.order = "activity";
 
 	// Pagination
-	$scope.watchlistCount = 0;
+	$scope.items = 0;
 	$scope.page = 1;
-	$scope.maxSize = 10;
+	$scope.maxSize = 5;
+	$scope.itemsPerPage = 10;
 
 	$scope.getWatchlist = function(order,page){
 		nbApiService.getWatchlist(order, page)
   	 	.then(function(data){
   	 		$scope.results = data;
-			$scope.watchlistCount = data.length;
+			$scope.items = data.length;
   	 	},function(data) {
   	 		$scope.unableToGetList = true;
   	 	});
