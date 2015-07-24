@@ -5,7 +5,7 @@
 								<p class="muted">These are the donations you have received from note sales.</p>
 							</div>
 							<div class="col-xs-3 text-right mtop25-sm mbot25-sm">
-								<p class="lead mbot0">{{donationsCount}} Items</p>
+								<p class="lead mbot0">{{itemsCount}} Items</p>
 							</div>
 							<div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
 								<select ng-model="order" ng-change="getDonations(page,order)" class="form-control" disabled>
@@ -13,7 +13,10 @@
 								</select>
 							</div>
 						</section>
-						<div class="row">
+						<main class="row">
+				              <div ng-if="itemsCount == 0" class="row vertical-align lined noresults">
+				                <p>Nothing here yet!</p>
+				              </div>
 							<div class="col-xs-12" ng-repeat="donation in donations">
 									<div class="row lined">
 										<div class="col-sm-2 col-xs-8">
@@ -33,19 +36,17 @@
 									</div>
 									<hr class="mtop0">
 								</div>
-						</div>
-						<footer class="row">
+						</main>
+			<footer class="row">
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-              <pagination ng-model="page" total-items="donationsCount" boundary-links="true"
-                first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;"
-                rotate="true" max-size="maxSize" ng-change="getDonations(page,order)">
+              <pagination ng-if="itemsCount > maxSize" ng-model="page" total-items="itemsPerPage" boundary-links="true" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;" last-text="&raquo;" rotate="true" max-size="maxSize" ng-change="getDonations(page,order)">
               </pagination>
             </div>
-						</footer>
-						<header class="row ptop25 pbot25 bottom">
-							<div class="col-xs-12 text-align">
-								<p class="lead mbot0">Total Earnings: {{totalDonationAmount | currency}}</p>
-							</div>
-						</header>
-						<div class="clearfix"></div>
-					</div>
+			</footer>
+			<header class="row ptop25 pbot25 bottom">
+				<div class="col-xs-12 text-align">
+					<p class="lead mbot0">Total Earnings: {{totalDonationAmount | currency}}</p>
+				</div>
+			</header>
+			<div class="clearfix"></div>
+		</div>
