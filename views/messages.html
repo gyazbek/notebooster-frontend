@@ -25,8 +25,8 @@
           </header>
           <main class="row tab-content">
             <div class="col-xs-12 tab-pane active" id="inbox" role="tabpanel">
-              <div ng-show="itemCount == 0" class="row vertical-align lined noresults" ng-show="!results">
-                <p>No Results Found</p>
+              <div ng-if="itemCount == 0" class="row vertical-align lined noresults">
+                <p>Nothing here yet!</p>
               </div>
               <div ng-show="itemCount > 0" class="row vertical-align normalize-xs lined" ng-repeat="msg in messages">
                 <div class="col-sm-2 col-xs-0 hidden-xs text-center">
@@ -53,11 +53,9 @@
           </main>
           <footer class="row">
             <div class="col-sm-12 col-xs-12 text-center">
-              <pagination ng-model="page" total-items="itemCount" boundary-links="true"
-                first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;"
+              <pagination ng-if="itemCount > itemsPerPage" ng-model="page" total-items="itemCount" boundary-links="true" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;"
                 rotate="true" max-size="maxSize" items-per-page="itemPerPage" ng-change="getUserInbox(page)">
               </pagination>
-              <pagination ng-show="itemCount <= itemsPerPage" ng-model="page" direction-links="false"></pagination>
             </div>
           </footer>
           <div class="clearfix"></div>
