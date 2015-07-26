@@ -8,8 +8,8 @@ angular.module('angularNoteboosterApp')
     $scope.page = 1;
     $scope.pageOrder = "newest";
 
-    // Total number of items displayed per page in pagination
-    $scope.maxSize = 10;
+    $scope.itemsPerPage = 10; // Total number of items displayed per page in pagination
+    $scope.maxSize = 5; // Selection size option for pagination (currently allowing max 5 #s to be shown)
 
     // Variable for performing new search
     $scope.school = {};

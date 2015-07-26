@@ -62,7 +62,7 @@
 				<p class="large muted hidden-xs text-center">{{note.price | currency}}</p>
 			</div>
 			<div class="col-sm-6 col-xs-12 mtop5 mbot15-xs less-spacing">
-				<p class="lead"><a id="{{note.id}}" ng-click="getNoteDetails($event)">{{note.title}}</a></p>
+				<p class="lead"><a id="{{note.id}}" href="" ng-click="getNoteDetails($event)">{{note.title}}</a></p>
 				<p class="visible-sm visible-xs">{{note.price | currency}}</p>
 				<p class="visible-xs">Provided by: <a id="{{note.user.username}}"  ui-sref="app.viewprofile({username:note.user.username})">{{note.user.username}}</a></p>
 				<p>Date: {{note.created | date}}</p>
@@ -79,7 +79,7 @@
 </main>
 <footer class="row">
 	<div class="col-sm-12 col-xs-12 text-center">
-		<pagination ng-model="page" total-items="itemCount" boundary-links="true"
+		<pagination ng-if="itemCount > itemsPerPage" ng-model="page" total-items="itemCount" boundary-links="true"
 		first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;"
 		rotate="true" max-size="maxSize" ng-change="getNotes(schoolId,courseId,page,pageOrder)">
 	</pagination>
