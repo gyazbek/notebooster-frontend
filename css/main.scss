@@ -711,13 +711,19 @@ margin: auto;
 	}
 }
 
-	.modal-backdrop {
+	.modal-backdrop,.modal-backdrop.in {
 		height: 100%;
 		opacity: 0.8;
 		position: fixed;
 
 	}
-
+.forgot-modal-link {
+	position: absolute;
+    width: 100%;
+    a {
+    	color: white;
+    }
+}
 
 // custom modal transition code
 .modal.fade .modal-dialog {

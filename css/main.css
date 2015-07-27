@@ -631,10 +631,16 @@ nav.navbar {
     margin-top: 0;
     border-color: #c2cdd6; }
 
-.modal-backdrop {
+.modal-backdrop, .modal-backdrop.in {
   height: 100%;
   opacity: 0.8;
   position: fixed; }
+
+.forgot-modal-link {
+  position: absolute;
+  width: 100%; }
+  .forgot-modal-link a {
+    color: white; }
 
 .modal.fade .modal-dialog {
   -webkit-transform: scale(0.7);
