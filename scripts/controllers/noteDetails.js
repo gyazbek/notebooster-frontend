@@ -1,10 +1,18 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('NoteDetailsCtrl', function ($scope, $stateParams, nbApiService, Validate,$modal) {
+  .controller('NoteDetailsCtrl', function ($scope, $stateParams, nbApiService, Validate,$modal, $sce) {
     $scope.noteId = $stateParams.noteId;
   	$scope.complete = false;
-    $scope.note = {}
+    $scope.note = {};
+
+    $scope.getPreviewLink = function(){
+      if($scope.note && $scope.note.preview){
+        return $sce.trustAsResourceUrl("http://docs.google.com/viewer?embedded=true&url=" + encodeURIComponent($scope.note.preview));
+      }
+      return $sce.trustAsResourceUrl("http://docs.google.com/viewer?embedded=true&url=");
+    }
+
     $scope.getNoteDetails = function(noteId){
       $scope.notePromise = nbApiService.noteDetails(noteId)
       .then(function(data){
