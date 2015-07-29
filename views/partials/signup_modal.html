@@ -1,9 +1,9 @@
-<div class="modal-header" cg-busy="loginPromise">
+<div class="modal-header" >
           <button type="button" class="close"  aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
           <h3 class="modal-title">Register</h3>
           <p></p>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" cg-busy="signupPromise">
           <form ng-submit="register(registerForm)" name="registerForm" role="form">
             <div class="form-group">
               <label for="username">Username:</label>
