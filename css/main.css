@@ -720,10 +720,6 @@ nav.navbar {
       color: #000; }
 
 /* Alert  */
-.alert-success {
-  max-width: 400px;
-  display: none; }
-
 .error-msg {
   color: #f40000;
   font-size: 85%; }
