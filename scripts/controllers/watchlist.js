@@ -9,12 +9,13 @@ angular.module('angularNoteboosterApp')
 	$scope.page = 1;
 	$scope.maxSize = 5;
 	$scope.itemsPerPage = 10;
-
+	$scope.success = false;
 	$scope.getWatchlist = function(order,page){
-		nbApiService.getWatchlist(order, page)
+		$scope.watchListPromise = nbApiService.getWatchlist(order, page)
   	 	.then(function(data){
-  	 		$scope.results = data;
-			$scope.items = data.length;
+  	 		$scope.results = data.results;
+			$scope.items = data.count;
+			$scope.success = true;
   	 	},function(data) {
   	 		$scope.unableToGetList = true;
   	 	});

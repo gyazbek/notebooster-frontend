@@ -18,10 +18,10 @@
               </select>
             </div>
           </section>
-          <main class="row">
+          <main class="row" cg-busy="watchListPromise">
             <div class="col-xs-12">
               <div ng-if="items == 0" class="row vertical-align lined noresults">
-                <p>Nothing here yet!</p>
+                <p ng-if="success">Nothing here yet!</p>
               </div>
               <div class="row vertical-align lined" ng-repeat="user in results">
                 <div class="col-sm-2 col-xs-0 hidden-xs text-center">
