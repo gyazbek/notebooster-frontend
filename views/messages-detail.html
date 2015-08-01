@@ -18,7 +18,7 @@
 								<div class="row mtop15 mbot15" ng-repeat="msg in thread.all_msgs">
 									<div class="col-sm-2 col-xs-3 text-center">
 										<img ng-src="{{ msg.sender.profile.profile_picture || 'img/profile.png' }}"  class="img-responsive" alt="Profile Picture" />
-										<p><a  id="{{msg.sender.username}}" href="" ng-click="getUserProfile($event)">{{msg.sender.username}}</a></p>
+										<p><a   ui-sref="app.viewprofile({username:msg.sender.username})">{{msg.sender.username}}</a></p>
 									</div>
 									<div class="col-sm-10 col-xs-9">
 										<div class="row">

@@ -24,7 +24,7 @@
 							<div class="col-xs-4 text-center">
 								<img ng-src="{{ note.user.profile.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Picture" />
 							</div>
-							<p>By: <a href="user-profile">{{note.user.username}}</a></p>
+							<p>By: <a ui-sref="app.viewprofile({username:note.user.username})">{{note.user.username}}</a></p>
 							<p ng-if="note.user.profile.school">Attends: {{note.user.profile.school.name}}</p>
 							<p>Joined: {{note.user.date_joined | date}}</p>
 							<div class="clearfix"></div>

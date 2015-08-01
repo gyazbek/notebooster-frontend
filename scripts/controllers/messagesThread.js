@@ -24,11 +24,6 @@ angular.module('angularNoteboosterApp')
     });
   };
 
-  $scope.getUserProfile = function(event){
-      var username = event.target.id;
-      $state.go('app.viewprofile', {'username': username});
-  };
-
 	init();
 	function init(){
 		$scope.threadId = $stateParams.threadId;
