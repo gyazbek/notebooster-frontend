@@ -159,13 +159,14 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             // }
             //    return deferred.promise;
         },
-        'changePassword': function(password1, password2) {
+        'changePassword': function(password1, password2,old_password) {
             return this.request({
                 'method': "POST",
                 'url': "/rest-auth/password/change/",
                 'data': {
                     'new_password1': password1,
-                    'new_password2': password2
+                    'new_password2': password2,
+                    'old_password': old_password
                 }
             });
         },
@@ -222,6 +223,12 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'data': {
                     'page': page
                 }
+            });
+        },
+        'getNoteEarnings': function() {
+            return this.request({
+                'method': "GET",
+                'url': "/note/totalEarnings"
             });
         },
         'verify': function(key) {
@@ -431,10 +438,11 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             });
         },
         'getMyNotesForSale': function(page, order) {
+
             return this.request({
                 'method': "GET",
                 'url': "/note/forsale",
-                'data': {
+                'params': {
                     'page': page,
                     'order': order
                 }
@@ -460,7 +468,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             var orderAppend = (order != '' ? (order == 'newest' ? '?ordering=latest' : (order == 'oldest' ? '?ordering=latest_msg' : '')) : '')
             return this.request({
                 'method': "GET",
-                'url': "/message/inbox" + orderAppend
+                'url': "/message/inbox" + orderAppend,
+                'params' : {'page': page}
             });
         },
         'sendMsg': function(recipient, subject, msg) {
@@ -502,7 +511,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'url': "/organization/simple"
             });
         },
-        'getDonations': function(page, order) {
+        'getDonations': function(page, order) { // convert to a param object in request
             var orderAppend = (order != '' ? (order == 'newest' ? '?ordering=latest' : (order == 'oldest' ? '?ordering=latest_msg' : '')) : '')
             return this.request({
                 'method': "GET",
@@ -552,7 +561,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             return this.request({
                 'method': "GET",
                 'url': "/profile/" + username + '/feedback',
-                'data': {
+                'params': {
                     'page': page
                 }
             });

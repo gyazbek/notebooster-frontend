@@ -8,27 +8,43 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
     // Pagination
     $scope.maxSize = 10;
     $scope.getMyNotesForSale = function(page, order) {
-        $scope.forsalePromise = nbApiService.getMyNotesForSale().then(function(data) {
+        $scope.forsalePromise = nbApiService.getMyNotesForSale(page, order).then(function(data) {
             $scope.results = data.results;
             $scope.notesCount = data.count;
-            $scope.totalEarnings = getTotalEarnings($scope.results);
+           
         }, function(data) {});
     }
-    $scope.updateNote = function(event) {
-        var noteId = event.target.id;
+    $scope.updateNote = function(note) {
+        var noteId = note.id;
         $state.go('app.update-note', {
             'noteId': noteId
         });
     }
-    $scope.setNoteStatus = function(event, note) {
+    $scope.setNoteStatus = function(note) {
         var noteId = note.id;
-        var noteStatus = event.target.value;
-       
+        var noteStatus = note.status;//event.target.value;
+      
        $scope.noteUpdatePromise = nbApiService.setNoteStatus(noteId, noteStatus)
         .then(function(data){
          
         }, function(data){
-
+            if(angular.isDefined(data.non_field_errors)){
+                data = data.non_field_errors;
+            }
+            note.status = 'DRAFT';
+            var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: '/views/partials/note_update_error_modal.html',
+            controller: 'NoteUpdateErrorModalCtrl',
+            resolve: {
+            noteId: function () {
+            return noteId;
+            },
+            issues: function(){
+                return data;
+            }
+            }
+            });
         });
     }
     $scope.getNoteDetails = function(event) {
@@ -63,16 +79,49 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
         });
     };
 
-    function getTotalEarnings(results) {
-        var totalEarnings = 0;
-        for (var i = 0; i < results.length; i++) {
-            totalEarnings += results[i].sold_count * results[i].price;
-        };
-        return totalEarnings;
+    function getTotalEarnings() {
+
+        $scope.earningsRetrievalPromise = nbApiService.getNoteEarnings()
+        .then(function(data){
+            if(angular.isDefined(data.total_earnings)){
+                $scope.totalEarnings =  data.total_earnings;
+            }
+        }, function(data){
+    
+        });
     }
     init()
 
     function init() {
         $scope.getMyNotesForSale($scope.page, $scope.order);
+        $scope.totalEarnings = getTotalEarnings($scope.results);
     };
+});
+
+
+
+
+angular.module('angularNoteboosterApp')
+.controller('NoteUpdateErrorModalCtrl', function ($scope,$state,$modalInstance,nbApiService,$http, noteId, issues) {
+
+
+
+    $scope.cancel = function () {
+   
+        $modalInstance.dismiss('cancel');
+
+    };
+
+  
+    
+    $scope.updateNote = function() {
+        $state.go('app.update-note', {
+            'noteId': noteId
+        });
+        $modalInstance.dismiss('cancel');
+    }
+
+    if (angular.isDefined(noteId) && angular.isDefined(issues)){
+        $scope.errors = issues;
+    }
 });

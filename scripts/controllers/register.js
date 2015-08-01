@@ -18,7 +18,7 @@ angular.module('angularNoteboosterApp')
                 'profile': $scope.profileModel,
             });
 
-          nbApiService.register($scope.model.username,$scope.model.password1,$scope.model.password2,$scope.model.email,moreData )
+          $scope.signupPromise = nbApiService.register($scope.model.username,$scope.model.password1,$scope.model.password2,$scope.model.email,moreData )
           .then(function(data){
           	// success case
         
