@@ -65,7 +65,7 @@ config(function($stateProvider, $urlRouterProvider) {
         
 
     }).state('app.note-details', {
-        url: 'note-details?noteId',
+        url: 'note/{noteId}/{slug}',
         views: {
             'content@': {
                 controller: 'NoteDetailsCtrl',

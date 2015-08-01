@@ -62,7 +62,7 @@
 				<p class="large muted hidden-xs text-center">{{note.price | currency}}</p>
 			</div>
 			<div class="col-sm-6 col-xs-12 mtop5 mbot15-xs less-spacing">
-				<p class="lead"><a id="{{note.id}}" href="" ng-click="getNoteDetails($event)">{{note.title}}</a></p>
+				<p class="lead"><a ui-sref="app.note-details({noteId:note.id, slug:note.slug})">{{note.title}}</a></p>
 				<p class="visible-sm visible-xs">{{note.price | currency}}</p>
 				<p class="visible-xs">Provided by: <a id="{{note.user.username}}"  ui-sref="app.viewprofile({username:note.user.username})">{{note.user.username}}</a></p>
 				<p>Date: {{note.created | date}}</p>
@@ -70,7 +70,7 @@
 				<p>Instructor: {{note.instructor.name}}</p>
 			</div>
 			<div class="col-md-2 col-sm-3 col-xs-12 text-center">
-				<a class="btn btn-primary btn-block" id="{{note.id}}" ng-click="getNoteDetails($event)">Details</a>
+				<a class="btn btn-primary btn-block" ui-sref="app.note-details({noteId:note.id, slug:note.slug})">Details</a>
 				<p class="muted mtop15"><i class="fa fa-heart"> For Charity</i></p>
 			</div>
 		</div>

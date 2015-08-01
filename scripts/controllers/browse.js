@@ -76,16 +76,9 @@ angular.module('angularNoteboosterApp')
           $scope.errors = data;
       });
     }
+ 
 
-    $scope.getNoteDetails = function(event){
-      var noteId = event.target.id;
-      $state.go('app.note-details', {'noteId': noteId});
-    }
 
-    $scope.getUserProfile = function(event){
-        var username = event.target.id;
-        $state.go('app.viewprofile', {'username': username});   
-    };
     
     function init(){
       
