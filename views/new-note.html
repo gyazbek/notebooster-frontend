@@ -236,6 +236,7 @@
 					<div class="clearfix"></div>
 					<hr class="narrower">
 					<div class="alert alert-danger" ng-repeat="error in errors">{{error}}</div>
+					<div class="alert alert-success" ng-show="noteSaveSuccess == true">Note Saved</div>
 					<div class="col-md-12 form-group">
 						<label for="agree_terms">
 							<input ng-model="eula" type="checkbox" name="agree_terms" id="agree_terms" required /> I have read and agree to the <a ui-sref="app.legal" target="_blank">Terms of Use</a>

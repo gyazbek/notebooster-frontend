@@ -40,8 +40,8 @@
                 </div>
                 <div class="col-sm-4 col-xs-12 text-center form-group">
                   <select ng-change="setNoteStatus(note)" class="form-control" name="note-status" ng-model="note.status">
-                    <option value="ACTIVE">Active</option>
-                    <option value="DRAFT">Disabled</option>
+                    <option value="active">Active</option>
+                    <option value="draft">Disabled</option>
                   </select>
                   <a href="" id="{{note.id}}" ng-click="updateNote(note)" class="btn btn-minor btn-block mtop5">Edit</a>
                   <button class="btn btn-primary btn-block" id="{{note.title}}" ng-click="promote($event)">Promote</button>

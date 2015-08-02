@@ -31,7 +31,7 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
             if(angular.isDefined(data.non_field_errors)){
                 data = data.non_field_errors;
             }
-            note.status = 'DRAFT';
+            note.status = 'draft';
             var modalInstance = $modal.open({
             animation: true,
             templateUrl: '/views/partials/note_update_error_modal.html',

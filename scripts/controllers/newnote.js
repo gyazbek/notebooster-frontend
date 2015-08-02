@@ -290,7 +290,7 @@ angular.module('angularNoteboosterApp')
     $scope.saveNote = function(type){
 
       $scope.success = false;
-
+      $scope.errors = {};
       // {edit out}
       // we copy the note to do some basic transformation
       // this won't be needed when we match the model on API side as well as view side
@@ -308,21 +308,28 @@ angular.module('angularNoteboosterApp')
 
       if(type == 'draft'){
 
-        $scope.note.draft = true;
+        $scope.note.status = 'draft';
+        $scope.noteSaveSuccess = false;
    
       }else {
-        delete $scope.note.draft;
+        $scope.note.status = 'active';
+        //delete $scope.note.draft;
       }
 
-     
+ 
       if(angular.isDefined($scope.note.id)){
 
 
-        $scope.saveNotePromise = nbApiService.updateNote($scope.note.id $scope.note)
+        $scope.saveNotePromise = nbApiService.updateNote($scope.note.id, $scope.note)
         .then(function(data){
-           
+           $scope.noteSaveSuccess = true;
         },function(data){
-          $scope.errors = data;
+           if(angular.isDefined(data.non_field_errors)){
+              data = data.non_field_errors;
+            }
+        
+            $scope.errors = data;
+      
         });
       }else{
         $scope.saveNotePromise = nbApiService.newNote($scope.note)
@@ -333,7 +340,13 @@ angular.module('angularNoteboosterApp')
              $state.go('app.new-note.confirmation');
            }
         },function(data){
-          $scope.errors = data;
+          
+         if(angular.isDefined(data.non_field_errors)){
+              data = data.non_field_errors;
+            }
+        
+            $scope.errors = data;
+      
         });
       }
     };
