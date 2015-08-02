@@ -373,7 +373,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'noteFeedbackList': function(noteId) {
             return this.request({
                 'method': "GET",
-                'url': "/note/" + noteId + "/feedback/"
+                'url': "/note/" + noteId + "/feedback"
             });
         },
 

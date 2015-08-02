@@ -8,9 +8,9 @@ angular.module('angularNoteboosterApp')
 
     $scope.getPreviewLink = function(){
       if($scope.note && $scope.note.preview){
-        return $sce.trustAsResourceUrl("http://docs.google.com/viewer?embedded=true&url=" + encodeURIComponent($scope.note.preview));
+        return $sce.trustAsResourceUrl("//docs.google.com/viewer?embedded=true&url=" + encodeURIComponent($scope.note.preview));
       }
-      return $sce.trustAsResourceUrl("http://docs.google.com/viewer?embedded=true&url=");
+      return $sce.trustAsResourceUrl("//docs.google.com/viewer?embedded=true&url=");
     }
 
     $scope.getNoteDetails = function(noteId){
@@ -47,7 +47,7 @@ angular.module('angularNoteboosterApp')
     
     var modalInstance = $modal.open({
       animation: true,
-      templateUrl: '/views/partials/purchasenote_modal.html',
+      templateUrl: 'views/partials/purchasenote_modal.html',
       controller: 'PurchaseNoteModalCtrl',
       size: size,
       resolve: {

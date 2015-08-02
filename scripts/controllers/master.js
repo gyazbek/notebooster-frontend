@@ -107,7 +107,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     $scope.signinModal = function(size) {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: '/views/partials/signin_modal.html',
+            templateUrl: 'views/partials/signin_modal.html',
             controller: 'LoginCtrl',
             size: size,
             scope:$scope
@@ -124,7 +124,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     $scope.signupModal = function(size) {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: '/views/partials/signup_modal.html',
+            templateUrl: 'views/partials/signup_modal.html',
             controller: 'RegisterCtrl',
             size: size,
             scope:$scope

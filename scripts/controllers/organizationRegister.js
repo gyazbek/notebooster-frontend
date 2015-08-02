@@ -10,7 +10,7 @@ angular.module('angularNoteboosterApp')
   	$scope.whatsthis = function(descriptor,size) {
 		var modalInstance = $modal.open({
 			animation: true,
-			templateUrl: '/views/partials/'+ descriptor +'_modal.html',
+			templateUrl: 'views/partials/'+ descriptor +'_modal.html',
 			controller: 'WhatsThisCtrl',
 			size: size
 		});

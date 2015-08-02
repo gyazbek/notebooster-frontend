@@ -109,7 +109,7 @@ angular.module('angularNoteboosterApp')
   	$scope.disableAccount = function(size) {
 		var modalInstance = $modal.open({
 			animation: true,
-			templateUrl: '/views/partials/disable_account_modal.html',
+			templateUrl: 'views/partials/disable_account_modal.html',
 			controller: 'DisableAccountCtrl',
 			size: size
 		});

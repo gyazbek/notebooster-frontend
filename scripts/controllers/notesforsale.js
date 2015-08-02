@@ -34,7 +34,7 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
             note.status = 'draft';
             var modalInstance = $modal.open({
             animation: true,
-            templateUrl: '/views/partials/note_update_error_modal.html',
+            templateUrl: 'views/partials/note_update_error_modal.html',
             controller: 'NoteUpdateErrorModalCtrl',
             resolve: {
             noteId: function () {
@@ -63,7 +63,7 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
         $scope.title = event.target.id;
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: '/views/partials/promote_modal.html',
+            templateUrl: 'views/partials/promote_modal.html',
             controller: 'PromoteCtrl',
             size: size,
             resolve: {

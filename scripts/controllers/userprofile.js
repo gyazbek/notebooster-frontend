@@ -62,7 +62,7 @@ angular.module('angularNoteboosterApp')
       $scope.msgSentResponse = "";
       var modalInstance = $modal.open({
         animation: true,
-        templateUrl: '/views/partials/report_violation_modal.html',
+        templateUrl: 'views/partials/report_violation_modal.html',
         controller: 'ReportViolationCtrl',
         size: size,
         resolve: {
@@ -84,7 +84,7 @@ angular.module('angularNoteboosterApp')
       .then(function(data){
         var modalInstance = $modal.open({
           animation: true,
-          templateUrl: '/views/partials/follow_modal.html',
+          templateUrl: 'views/partials/follow_modal.html',
           controller: 'FollowCtrl',
           size: size,
           resolve: {
@@ -109,7 +109,7 @@ angular.module('angularNoteboosterApp')
     $scope.contactUser = function(size){
       var modalInstance = $modal.open({
         animation: true,
-        templateUrl: '/views/partials/contact_user_modal.html',
+        templateUrl: 'views/partials/contact_user_modal.html',
         controller: 'ContactUserCtrl',
         size: size,
         resolve: {

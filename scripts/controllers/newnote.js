@@ -199,7 +199,7 @@ angular.module('angularNoteboosterApp')
     $scope.learnMore = function(size) {
       var modalInstance = $modal.open({
         animation: true,
-        templateUrl: '/views/partials/learn_more_modal.html',
+        templateUrl: 'views/partials/learn_more_modal.html',
         controller: 'CloseOnlyCtrl',
         size: size
       });
@@ -208,7 +208,7 @@ angular.module('angularNoteboosterApp')
     $scope.addCourse = function(size) {
       var modalInstance = $modal.open({
         animation: true,
-        templateUrl: '/views/partials/add_course_modal.html',
+        templateUrl: 'views/partials/add_course_modal.html',
         controller: 'AddCourseCtrl',
         size: size, 
         resolve: {
@@ -229,7 +229,7 @@ angular.module('angularNoteboosterApp')
     $scope.addInstructor = function(size) {
       var modalInstance = $modal.open({
         animation: true,
-        templateUrl: '/views/partials/add_instructor_modal.html',
+        templateUrl: 'views/partials/add_instructor_modal.html',
         controller: 'AddInstructorCtrl',
         size: size
       });

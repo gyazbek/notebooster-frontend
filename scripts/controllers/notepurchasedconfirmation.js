@@ -97,7 +97,7 @@ $scope.attemptVerification = function(){
   		
 		var modalInstance = $modal.open({
 			animation: true,
-			templateUrl: '/views/partials/rate_this_note_modal.html',
+			templateUrl: 'views/partials/rate_this_note_modal.html',
 			controller: 'RateNoteCtrl',
 			resolve: {
 				noteSale: function () {
@@ -117,7 +117,7 @@ $scope.attemptVerification = function(){
     $scope.fileListingModal = function(id) {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: '/views/partials/note_file_listing_modal.html',
+            templateUrl: 'views/partials/note_file_listing_modal.html',
             controller: 'DownloadFileListingCtrl',
             resolve: {
 	         noteId: function () {
