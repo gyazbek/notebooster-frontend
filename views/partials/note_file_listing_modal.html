@@ -10,7 +10,7 @@
     <ul>
       <li  ng-repeat="file in fileListing"><a href="javascript:void(0)" ng-click="downloadFile(file.id)">{{file.file_name}}</a></li>
     </ul>
-    <br><br><a ng-show="fileListing.length > 1" href="javascript:void(0)" ng-click="downloadAllFiles()">Download All Files</a>
+    <br><br><a ng-show="fileListing.length > 1" href="javascript:void(0)" ng-click="downloadAllFiles()" class="downloadAllFiles mbot15 mtop15">Download All Files</a>
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
         <button ng-click="cancel()" class="btn btn-primary btn-block" data-dismiss="modal" aria-label="Close">Close</button>
