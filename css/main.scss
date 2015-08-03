@@ -589,7 +589,6 @@ nav.navbar {
 .middle-bar .lead {margin-bottom: 10px;}
 
 
-
 /*
  * New Note
  */
@@ -651,24 +650,36 @@ margin: auto;
  * Accordion
  */
 
-.panel-group .panel {
-	border: 0;
-	background: transparent;
-	@include border-radius(0px);
-	@include box-shadow(none);
-	margin-bottom: 50px;
+.panel-group {
+	.faq-section {
+		margin-bottom: 50px;
 
-	.panel-heading {
-		background: transparent;
-		border-bottom: 1px solid $bg-grey-dark;
-		.panel-title a:hover {
-			text-decoration: none;
+		.panel {
+			border: 0;
+			background: transparent;
+			@include border-radius(0px);
+			@include box-shadow(none);
+
+				.panel-heading {
+					background: transparent;
+					border-bottom: 1px solid $bg-grey-dark;
+					.panel-title a{
+						&:hover {
+							text-decoration: none;
+						}
+						&.accordion-toggle {
+							color: #000;
+							display: block;
+						}
+					}
+				}
+				.panel-body {
+					border: 0;
+				}
 		}
 	}
-	.panel-body {
-		border: 0;
-	}
 }
+
 
 /*
  * Modals

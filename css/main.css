@@ -580,25 +580,29 @@ nav.navbar {
 /*
  * Accordion
  */
-.panel-group .panel {
-  border: 0;
-  background: transparent;
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  -ms-border-radius: 0px;
-  border-radius: 0px;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -ms-box-shadow: none;
-  box-shadow: none;
+.panel-group .faq-section {
   margin-bottom: 50px; }
-  .panel-group .panel .panel-heading {
+  .panel-group .faq-section .panel {
+    border: 0;
     background: transparent;
-    border-bottom: 1px solid #c2cdd6; }
-    .panel-group .panel .panel-heading .panel-title a:hover {
-      text-decoration: none; }
-  .panel-group .panel .panel-body {
-    border: 0; }
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    box-shadow: none; }
+    .panel-group .faq-section .panel .panel-heading {
+      background: transparent;
+      border-bottom: 1px solid #c2cdd6; }
+      .panel-group .faq-section .panel .panel-heading .panel-title a:hover {
+        text-decoration: none; }
+      .panel-group .faq-section .panel .panel-heading .panel-title a.accordion-toggle {
+        color: #000;
+        display: block; }
+    .panel-group .faq-section .panel .panel-body {
+      border: 0; }
 
 /*
  * Modals
