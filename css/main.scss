@@ -521,6 +521,7 @@ nav.navbar {
 							outline: 4px rgba(1, 1, 1, 0.1) solid;
 						  	min-height: 49px;
 						  	background-color: rgba(1, 1, 1, 0.1);
+						  	object-fit: contain;
 						}
 
 					}
@@ -771,6 +772,12 @@ margin: auto;
 
 .price-holder-details {
 	margin-top: 94px;
+}
+
+.note-details-img {
+	max-width: 100px;
+    float: left;
+    margin: 0 15px;
 }
 
 /*

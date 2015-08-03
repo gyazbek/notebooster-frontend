@@ -35,7 +35,7 @@
 		<p ng-if="schoolId" class="lead muted">for {{courseName}} - {{schoolName}}</p>
 		<p ng-if="!schoolId" class="lead muted"> Select a school, course and click search on the form above.</p>
 	</div>
-	<div ng-if="schoolId" class="col-md-4 col-sm-4 col-xs-6">
+	<div class="col-md-4 col-sm-4 col-xs-6">
 		<select class="form-control" ng-model="pageOrder" ng-change="getNotes(shcoolId,courseId,page,pageOrder)">
 			<option value="newest">Newest First</option>
 			<option value="lowest">Lowest Price</option>

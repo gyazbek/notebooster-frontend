@@ -6,7 +6,7 @@
 				<div class="row">
 					<div class="col-sm-7 col-xs-12 mbot25">
 					<iframe ng-if="note.preview" ng-src="{{getPreviewLink()}}"   alt="Note Snapshot" class="img-responsive" style="width:600px; height:500px;" frameborder="0"></iframe>
-				
+
 						<p class="large text-center mbot25 mtop25 visible-sm visible-xs">Price: {{note.price | currency}}</p>
 						<button class="btn btn-primary btn-block mbot25 visible-sm visible-xs" ng-click="authenticated ? purchaseModal() : signinModal()">Buy Now</button>
 						<main class="col-xs-12 mbot25 visible-xs visible-sm">
@@ -21,8 +21,8 @@
 					</div>
 					<div class="col-sm-5 col-xs-12 mbot25">
 						<div class="row">
-							<div class="col-xs-4 text-center">
-								<img ng-src="{{ note.user.profile.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Picture" />
+							<div>
+								<img ng-src="{{ note.user.profile.profile_picture || 'img/profile.png' }}" class="img-responsive note-details-img" alt="Profile Picture" />
 							</div>
 							<p>By: <a ui-sref="app.viewprofile({username:note.user.username})">{{note.user.username}}</a></p>
 							<p ng-if="note.user.profile.school">Attends: {{note.user.profile.school.name}}</p>
@@ -52,12 +52,15 @@
 								<p>{{note.page_count}}</p>
 								<p>{{note.kind}}</p>
 								<p>{{note.sold_count}}</p>
-								<p>Rating:
-												<i ng-repeat=" i in [] | range:note.user.rating" class="fa fa-star"></i>
-												<i ng-repeat=" i in [] | range:(5 - note.user..rating)" class="fa fa-star off"></i>
-											</p>
+								<p>
+									<i ng-repeat=" i in [] | range:note.user.rating" class="fa fa-star"></i>
+									<i ng-repeat=" i in [] | range:(5 - note.user..rating)" class="fa fa-star off"></i>
+								</p>
 							</div>
 						</div>
+
+					</div>
+					<div class="col-xs-12">
 						<hr>
 						<h2>Details</h2>
 						<p>{{note.description}}</p>
@@ -68,7 +71,7 @@
 					<h2>Comments</h2>
 					<div class="row mtop15 mbot15"   ng-repeat="feedback in noteFeedback.results">
 	<div class="col-sm-2 col-xs-3 text-center">
-		<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
+		<img src="img/profile.png" class="img-responsive note-details-img" alt="Profile Picture" />
 		<a href="user-profile" class="thin">{{feedback.created | date}}</a>
 	</div>
 	<div class="col-sm-10 col-xs-9">
