@@ -492,7 +492,7 @@ nav.navbar {
             outline: 4px rgba(1, 1, 1, 0.1) solid;
             min-height: 49px;
             background-color: rgba(1, 1, 1, 0.1);
-            object-fit: contain; }
+            object-fit: cover; }
         nav.navbar .nav.status-bar > li.profile .user-info {
           text-align: left;
           display: none; }
