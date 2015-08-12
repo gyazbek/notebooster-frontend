@@ -107,13 +107,23 @@ a {
 	}
 }
 .overlay-dark {
-	background: $dark-grey;
+	// background: $dark-grey;
+	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.24);
+	background: #FFF;
+	position: relative;
 }
 .overlay-mid {
 	background: $mid-grey;
 }
 .overlay-light {
 	background: $light-grey;
+	color: $dark-text;
+	p, a {
+		color: $dark-text;
+	}
+	a:hover {
+		color: darken( $dark-text, 30% );
+	}
 }
 
 $allsteps: 0 5 15 25 50 100 200;
@@ -180,7 +190,7 @@ img.img-responsive {
 	transition: .5s all;
 }
 hr {
-	border-color: #44494E;
+	border-color: darken($light-grey, 5%);
 	&.dotted {
 		border-style: dashed;
 	}
@@ -233,6 +243,10 @@ hr {
   	p {
   		margin-bottom: 0;
   	}
+}
+
+.outline {
+	outline: 10px rgba(0, 0, 0, 0.1) solid;
 }
 
 /*
@@ -329,6 +343,10 @@ input[type=file] {line-height: 0;}
 	font-weight: 300;
 	transition: all .3s;
 
+	&:hover:after {
+	    -webkit-animation: circle 1.5s ease-in forwards;
+	}
+
 	&:hover, &:focus, &.focus {
 		color: #FFF;
 	}
@@ -361,7 +379,7 @@ input[type=file] {line-height: 0;}
 }
 
 .overlay-trans {
-	background-color: rgba(0,0,0,0.8);
+	background-color: rgba(0,0,0,0.5);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -396,13 +414,14 @@ nav.navbar {
 
 	.sub-navbar {
 		height: 33px;
-		background-color: $dark-blue;
+		// background-color: $dark-blue;
+		background-color: transparent;
 	}
 
 	.navbar-brand {
 		height: auto;
-		width: 232px;
-		padding: 7px 15px 7px 0;
+		width: 217px;
+		padding: 9px 15px 7px 0;
 		position: relative;
 		z-index: 1000;
 
@@ -413,6 +432,10 @@ nav.navbar {
 				opacity: .8;
 			}
 		}
+	}
+
+	li a {
+		-webkit-font-smoothing: antialiased;
 	}
 
 	.nav {
@@ -503,11 +526,13 @@ nav.navbar {
 					>a {
 						padding: 5px 8px;
 						margin: 9px 0;
-						background-color: $dark-blue;
+						background-color: #fff;
+						color: $main-blue;
 						@include border-radius(8px);
 
 						&:hover, &:focus {
-							background-color: rgba(0,0,0,0.2);
+							background-color: darken(#fff,10%);
+							transition: .5s all;
 						}
 					}
 				}
@@ -568,6 +593,7 @@ nav.navbar {
 .home-notes {
 	padding: 15px 0 25px;
 	background-color: $bg-grey-light;
+	outline: 10px rgba(0, 0, 0, 0.1) solid;
 	label {
 		color: $light-blue;
 	}
@@ -586,7 +612,10 @@ nav.navbar {
 
 .overlay-light a:hover {color: darken( #fff, 10% )}
 
-.middle-bar .lead {margin-bottom: 10px;}
+.middle-bar .lead {
+	margin-bottom: 10px;
+	color: $dark-text;
+}
 
 
 /*
@@ -632,6 +661,31 @@ nav.navbar {
 
 .report-contact a {
 	padding: 0 20px;
+}
+
+
+nav.circle ul li a {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+nav.circle ul li a:after {
+  display: block;
+  position: absolute;
+  margin: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '.';
+  color: transparent;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  background: transparent;
+}
+nav.circle ul li a:hover:after {
+  -webkit-animation: circle 1.5s ease-in forwards;
 }
 
 
@@ -730,6 +784,14 @@ margin: auto;
 
 	}
 .forgot-modal-link {
+	position: absolute;
+    width: 100%;
+    a {
+    	color: white;
+    }
+}
+
+.already-registered-link {
 	position: absolute;
     width: 100%;
     a {
@@ -887,6 +949,9 @@ margin: auto;
 footer.footer {
 	display: table-row;
 	height: 1px;
+	&.overlay-mid {
+		background: darken($main-blue, 10%);
+	}
 	ul.footer-nav {
 		padding-left: 0;
 		display: inline-block;
@@ -917,6 +982,10 @@ footer.footer {
 		line-height: 1.6em;
 		margin: 0 5px;
 		color: rgba(255,255,255,0.2);
+	}
+
+	.sub-footer.overlay-dark {
+		background: darken($main-blue, 20%);
 	}
 
 }
@@ -1119,10 +1188,14 @@ footer.footer {
 	}
     nav.navbar {
 		margin: 0;
+		background: darken($main-blue, 10%);
+		.sub-navbar {
+			background: darken($main-blue, 20%);
+		}
 
 		.navbar-brand {
 			  width: 150px;
-			  padding: 15px 15px 10px 0;
+			  padding: 10px 15px 10px 0;
 			  height: 65px;
 		}
 		.nav.navbar-nav {
