@@ -25,18 +25,18 @@
 													<img ng-src="{{ noteSale.note.user.profile.profile_picture || 'img/profile.png' }}"class="img-responsive" alt="Profile Picture" />
 												</div>
 											</div>
-											<p class="mtop15"><a id="{{noteSale.note.user.username}}" href="" ng-click="getUserProfile($event)">{{noteSale.note.user.username}}</a></p>
+											<p class="mtop15"><a ui-sref="app.viewprofile({username:noteSale.note.user.username})">{{noteSale.note.user.username}}</a></p>
 										</div>
 										<div class="col-sm-2 col-xs-0 hidden-xs">
 											<p class="large muted hidden-xs text-center">{{noteSale.note.price | currency}}</p>
 										</div>
 										<div class="col-md-5 col-sm-7 col-xs-12 mtop15 mbot5">
-											<p class="lead"><a id="{{note.note.title}}" ng-click="getNoteDetails($event)">{{noteSale.note.title}}</a></p>
+											<p class="lead"><a ui-sref="app.note-details({noteId:noteSale.note.id, slug:noteSale.note.slug})">{{noteSale.note.title}}</a></p>
 											<p class="visible-xs lead">{{noteSale.note.price | currency}}</p>
-											<p class="visible-xs muted">Provided by: <a id="{{note.user.username}}" href="" ng-click="getUserProfile($event)">{{noteSale.user.username}}</a></p>
-											<p>Date: {{noteSale.date}}</p>
-											<p>Course: {{noteSale.course.name}}</p>
-											<p>Instructor: {{noteSale.instructor.name}}</p>
+											<p class="visible-xs muted">Provided by: <a ui-sref="app.viewprofile({username:noteSale.note.user.username})">{{noteSale.note.user.username}}</a></p>
+											<p>Date: {{noteSale.created | date}}</p>
+											<p>Course: {{noteSale.note.course.name}}</p>
+											<p>Instructor: {{noteSale.note.instructor.name}}</p>
 										</div>
 										<div class="col-sm-3 col-xs-12 text-center mtop5 mbot5 mtop25-xs">
 											<button class="btn btn-minor btn-block" ng-show="!noteSale.isFeedbackLeft" ng-click="rateNote(noteSale)">Rate</button>

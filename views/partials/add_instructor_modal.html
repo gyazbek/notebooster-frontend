@@ -6,12 +6,13 @@
     <h3 class="modal-title">Add New Instructor</h3>
     <p></p>
   </div>
-  <div class="modal-body"><form ng-submit="addInstructor()">
+  <div class="modal-body" cg-busy="addInstructorPromise"><form ng-submit="addInstructor()" >
     <div class="form-group">
       <label for="instructor-name">Instructor Name:</label>
-      <input ng-model="name" type="text" class="form-control" name="instructor-name">
+      <input ng-model="name" type="text" class="form-control" name="instructor-name" required>
     </div>
     <div class="row">
+     <span ng-repeat="error in errors">{{error}}</span>
       <div class="col-sm-6 col-sm-offset-3">
         <button type="submit" class="btn btn-primary btn-block">Add Instructor</button>
       </div>

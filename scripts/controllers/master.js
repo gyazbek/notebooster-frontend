@@ -60,8 +60,10 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     // }
     // Wait and respond to the logout event.
     $scope.$on('nbApiService.logged_out', function() {
+
         $scope.authenticated = false;
         $scope.user = {};
+       
         if (angular.isDefined(refreshNotificationCountDataPromise)) {
             $timeout.cancel(refreshNotificationCountDataPromise);
             refreshNotificationCountDataPromise = undefined;
@@ -75,6 +77,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
         // });
         nbApiService.identity().then(function(data) {
             $scope.user = data;
+            
         });
     });
     // // Wait for the status of authentication, set scope var to true if it resolves

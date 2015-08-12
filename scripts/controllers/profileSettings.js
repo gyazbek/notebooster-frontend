@@ -98,7 +98,7 @@ angular.module('angularNoteboosterApp')
      //    }
      //  }
 
-    	nbApiService.updateProfile($scope.settings)
+    $scope.settingsPromise = nbApiService.updateProfile($scope.settings)
     	.then(function(data){
         $scope.success = true;
     	},function(data){

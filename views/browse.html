@@ -64,7 +64,7 @@
 			<div class="col-sm-6 col-xs-12 mtop5 mbot15-xs less-spacing">
 				<p class="lead"><a ui-sref="app.note-details({noteId:note.id, slug:note.slug})">{{note.title}}</a></p>
 				<p class="visible-sm visible-xs">{{note.price | currency}}</p>
-				<p class="visible-xs">Provided by: <a id="{{note.user.username}}"  ui-sref="app.viewprofile({username:note.user.username})">{{note.user.username}}</a></p>
+				<p class="visible-xs">Provided by: <a ui-sref="app.viewprofile({username:note.user.username})">{{note.user.username}}</a></p>
 				<p>Date: {{note.created | date}}</p>
 				<p>Course: {{note.course.name}} </p>
 				<p>Instructor: {{note.instructor.name}}</p>

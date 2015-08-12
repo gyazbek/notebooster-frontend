@@ -12,8 +12,8 @@
 			<p>Joined: {{userInfo.date_joined | date}}</p>
 			<p>Sales: {{userInfo.sales_quantity}}</p>
 			<p>Rating:
-				<i ng-repeat=" i in [] | range:userInfo.profile.rating" class="fa fa-star"></i>
-				<i ng-repeat=" i in [] | range:(5 - userInfo.profile.rating)" class="fa fa-star off"></i>
+				<i ng-repeat=" i in [] | range:userInfo.profile.average_rating" class="fa fa-star"></i>
+				<i ng-repeat=" i in [] | range:(5 - userInfo.profile.average_rating)" class="fa fa-star off"></i>
 			</p>
 		</div>
 		<div class="clearfix visible-xs"></div>
@@ -32,8 +32,8 @@
 	<div class="row vertical-align mtop50 mbot25">
 		<div class="col-sm-12 text-center">
 			<p class="lead">
-				<a ng-click="tab=forsale" aria-controls="posted" >Notes Posted: {{notesCount}}</a> |
-				<a ng-click="tab=comments" aria-controls="comments">Comments: {{commentsCount}}</a>
+				<a href="javascript:void(0);" ng-click="tab='forsale'" aria-controls="posted" >Notes Posted: {{notesCount}}</a> |
+				<a href="javascript:void(0);" ng-click="tab='comments'" aria-controls="comments">Comments: {{commentsCount}}</a>
 			</p>
 		</div>
 	</div>

@@ -24,15 +24,6 @@ angular.module('angularNoteboosterApp')
       });
 	};
 
-    $scope.getUserProfile = function(event){
-        var username = event.target.id;
-        $state.go('app.viewprofile', {'username': username});   
-    };
-
-    $scope.getNoteDetails = function(event){
-      var noteId = event.target.id;
-      $state.go('app.note-details', {'noteId': noteId});
-    };
 
   	$scope.rateNote = function(noteSale) {
   		$scope.msgSentResponse = "";

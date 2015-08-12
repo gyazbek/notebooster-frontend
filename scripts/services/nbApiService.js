@@ -14,10 +14,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'authPromise': null,
         '_identity': undefined,
         'request': function(args) {
-            // Let's retrieve the token from the cookie, if available
-            if ($cookies.token) {
-                $http.defaults.headers.common.Authorization = 'Token ' + $cookies.token;
-            }
+            
             // Continue
             params = args.params || {}
             args = args || {};
@@ -25,15 +22,40 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 url = this.API_URL + args.url,
                 method = args.method || "GET",
                 params = params,
-                data = args.data || {};
+                data = args.data || {},
+                fresh = (typeof args.fresh !== 'undefined' ? args.fresh :  false),
+                useAuthToken = (typeof args.useAuthToken !== 'undefined' ? args.useAuthToken : true);
+            
+
+            // Let's retrieve the token from the cookie, if available
+            if (useAuthToken && $cookies.token) {
+                $http.defaults.headers.common.Authorization = 'Token ' + $cookies.token;
+            }else if($http.defaults.headers.common.Authorization){
+            	delete $http.defaults.headers.common.Authorization;
+            }
+
+
+
+            var headersSend = {
+                    'X-CSRFToken': $cookies['csrftoken']
+                };
+
+             if(fresh){
+       
+            	headersSend = angular.extend(headersSend, {
+                "Pragma": "no-cache",
+                "Expires": -1,
+                "Cache-Control": "no-cache"
+            	});
+
+
+            }
             // Fire the request, as configured.
             $http({
                 url: url,
                 withCredentials: this.use_session,
                 method: method.toUpperCase(),
-                headers: {
-                    'X-CSRFToken': $cookies['csrftoken']
-                },
+                headers: headersSend,
                 params: params,
                 data: data
             }).success(angular.bind(this, function(data, status, headers, config) {
@@ -41,9 +63,13 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             })).error(angular.bind(this, function(data, status, headers, config) {
                 console.log("error syncing with: " + url);
                 // Set request status
-                if (data.status) {
+                if (data && status && status != 500) {
                     data.status = status;
+                }else if(status && status > 200){
+                	data = {};
+                	data.status = status;
                 }
+
                 if (status == 0) {
                     if (data == "") {
                         data = {};
@@ -105,6 +131,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             });
             this.authPromise = null;
             this._identity = undefined;
+
             delete $http.defaults.headers.common.Authorization;
             delete $cookies.token;
             nbApiService.authenticated = false;
@@ -188,7 +215,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'siteStats': function() {
             return this.request({
                 'method': "GET",
-                'url': "/stats"
+                'url': "/stats",
+                'cache':false
             });
         },
         'profile': function() {
@@ -200,7 +228,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'getProfile': function(username) {
             return this.request({
                 'method': "GET",
-                'url': "/profile/user/" + username
+                'url': "/profile/user/" + username,
+                'useAuthToken':false
             });
         },
         'updateProfile': function(data) {
@@ -213,7 +242,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'getOrganizationProfile': function(username) {
             return this.request({
                 'method': "GET",
-                'url': "/profile/organization/" + username
+                'url': "/profile/organization/" + username,
+                'useAuthToken':false
             });
         },
         'getNotesForSale': function(username, page) {
@@ -222,7 +252,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'url': "/user/" + username + "/forsale",
                 'data': {
                     'page': page
-                }
+                },
+                'useAuthToken':false
             });
         },
         'getNoteEarnings': function() {
@@ -278,7 +309,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 if (this.authPromise == null || force) {
                     this.authPromise = this.request({
                         'method': "GET",
-                        'url': "/rest-auth/user/"
+                        'url': "/rest-auth/user/",
+                        'fresh':true
                     })
                 }
                 // if authenticated and we aren't forcing recheck
@@ -451,7 +483,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'getNote': function(noteId) {
             return this.request({
                 'method': "GET",
-                'url': "/note/" + noteId
+                'url': "/note/" + noteId,
+                'useAuthToken':false
             });
         },
         'setNoteStatus': function(noteId, noteStatus) {
@@ -508,7 +541,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'getSimpleOrgnizationList': function() {
             return this.request({
                 'method': "GET",
-                'url': "/organization/simple"
+                'url': "/organization/simple",
+                'useAuthToken':false
             });
         },
         'getDonations': function(page, order) { // convert to a param object in request
@@ -570,30 +604,55 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             return this.request({
                 'method': "GET",
                 'url': "/school",
-                'params': params
+                'params': params,
+                'useAuthToken':false
             });
         },
         'getCourseSubject': function(params) {
             return this.request({
                 'method': "GET",
                 'url': "/subject",
-                'params': params
+                'params': params,
+                'useAuthToken':false
             });
         },
-        'getInstructors': function(school_id, term) {
-            var url = "/school/" + school_id + "/instructor" + (term && term.length > 0 ? '?search=' + term : '');
+        'getInstructors': function(params) {
+            //var url = "/school/" + school_id + "/instructor" + (term && term.length > 0 ? '?search=' + term : '');
             return this.request({
                 'method': "GET",
-                'url': url
+                'url': "/instructor",
+                'params':params,
+                'useAuthToken':false
             });
         },
         'getCourses': function(params) {
             return this.request({
                 'method': "GET",
                 'url': "/course",
-                'params': params
+                'params': params,
+                'useAuthToken':false
             });
         },
+        'saveCourse': function(school_id, name, title, subject_id) {
+            return this.request({
+                'method': "POST",
+                'url': "/course",
+                'data': {'school_id':school_id,
+            			'name':name,
+            			'title':title,
+            			'subject_id':subject_id}
+            });
+        },
+        'saveInstructor': function(school_id, name) {
+            return this.request({
+                'method': "POST",
+                'url': "/instructor",
+                'data': {'school_id':school_id,
+            			'name':name
+            			}
+            });
+        },
+
         'getNotePaymentDetails': function(noteId) {
             return this.request({
                 'method': "GET",
@@ -602,6 +661,9 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         },
         'getBaseApiUrl': function() {
             return this.API_URL;
+        },
+        'randomDateString': function(){
+			return new Date().getTime() + Math.random();
         },
         'initialize': function(url, sessions) {
             this.API_URL = url;

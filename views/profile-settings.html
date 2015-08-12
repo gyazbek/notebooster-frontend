@@ -21,7 +21,7 @@
 		<hr>
 		<div class="form-group">
 			<label for="username">User Name</label>
-			<input ng-model="settings.username" type="text" name="username" class="form-control">
+			<input ng-model="settings.username" type="text" name="username" class="form-control" required>
 			<div class="has-error-text" id="user-error">Error</div>
 		</div>
 		<hr>
@@ -37,7 +37,7 @@
 		</div>
 		<div class="form-group">
 			<label for="email">Email Address</label>
-			<input ng-model="settings.email" type="text" name="email" class="form-control" />
+			<input ng-model="settings.email" type="text" name="email" class="form-control" required/>
 			<div class="has-error-text" id="terms-error">Error</div>
 		</div>
 		<div class="form-group">
@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		<hr>
-		<p clas="text-center mtop25"><a href="" ng-click="disableAccount()">Disable My Account</a></p>
+		<p ng-hide="1" clas="text-center mtop25"><a href="" ng-click="disableAccount()">Disable My Account</a></p>
 	</form>
 </div>
 
@@ -69,7 +69,7 @@
 				<label for="org-name"  >Organization Name:</label>
 			</div>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" name="org-name" id="org-name" ng-model="settings.organization.name">
+				<input type="text" class="form-control" name="org-name" id="org-name" ng-model="settings.organization.name" required>
 			</div>
 		</div>
 		<hr>
@@ -78,7 +78,7 @@
 				<label for="username">User Name</label>
 			</div>
 			<div class="col-sm-6">
-				<input ng-model="settings.username" type="text" name="username" class="form-control">
+				<input ng-model="settings.username" type="text" name="username" class="form-control" required>
 			</div>
 			<div class="has-error-text" id="user-error">Error</div>
 		</div>
@@ -87,7 +87,7 @@
 				<label for="org-email">Email Address:</label>
 			</div>
 			<div class="col-sm-6">
-				<input type="email" class="form-control" name="org-email" ng-model="settings.email">
+				<input type="email" class="form-control" name="org-email" ng-model="settings.email" required>
 			</div>
 		</div>
 		<div class="row form-group">
@@ -114,7 +114,7 @@
 				<label for="org-person-name">Contact Person:</label>
 			</div>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" name="org-person-name" ng-model="settings.organization.contact_person">
+				<input type="text" class="form-control" name="org-person-name" ng-model="settings.organization.contact_person" required>
 			</div>
 		</div>
 		<div class="row form-group">
@@ -122,7 +122,7 @@
 				<label for="org-person-email">Contact Email:</label>
 			</div>
 			<div class="col-sm-6">
-				<input type="email" class="form-control" name="org-person-email" ng-model="settings.organization.contact_email">
+				<input type="email" class="form-control" name="org-person-email" ng-model="settings.organization.contact_email" required>
 			</div>
 		</div>
 
@@ -150,16 +150,16 @@
 		<hr class="mtop15 mbot25">
 
 		<div class="form-group mbot50">
-      		<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-short-description" ng-model="settings.profile.short_bio	">What's this?</a></p>
+      		<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-short-description" >What's this?</a></p>
       						          		<!-- The short description appears alongside notes which support your cause. It's a brief introduction to your organization. -->
 			<label for="org-short-description">Short Description: <span class="muted">(Max: 140 characters)</span></label>
-			<textarea class="form-control" name="org-short-description"></textarea>
+			<textarea class="form-control" name="org-short-description" ng-model="settings.profile.short_bio"></textarea>
 		</div>
 		<div class="form-group mbot50">
-			<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-full-bio" ng-model="settings.profile.bio">What's this?</a></p>
+			<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-full-bio" >What's this?</a></p>
 											<!-- The Full Bio is your opportunity to describe your organization at length. This will be visible on your public profile page. -->
 			<label for="org-full-description">Full Bio: </label>
-			<textarea class="form-control" name="org-full-description"></textarea>
+			<textarea class="form-control" name="org-full-description" ng-model="settings.profile.bio"></textarea>
 		</div>
 		<div class="form-group mbot50">
       		<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-one-fact">What's this?</a></p>
@@ -170,11 +170,12 @@
 
 		<hr class="mtop15 mbot25">
 
-		<a href="#" data-toggle="modal" data-target="#info">Delete My Account</a>
+		<a ng-hide="1" href="#" data-toggle="modal" data-target="#info">Disable My Account</a>
 
 		<hr class="mtop15 mbot25">
 
 		<div class="row">
+
 			<div class="col-sm-6 col-sm-offset-3">
 				<button type="submit" class="btn btn-primary btn-block mbot25 mbot0-xs">Save Settings</button>
 			</div>

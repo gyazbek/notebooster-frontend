@@ -4,24 +4,29 @@
         <span aria-hidden="true">×</span>
     </button>
     <h3 class="modal-title">Add New Course</h3>
-    <p></p>
+    <p>{{school.selected.name}}</p>
   </div>
-  <div class="modal-body"><form ng-submit="addCourse()">
+  <div class="modal-body" cg-busy="addSubjectPromise"><form ng-submit="addCourse()">
     <div class="form-group">
       <label for="course-title">Course Title:</label>
-      <input ng-model="title" type="text" class="form-control" name="course-title" placeholder="eg: English Composition">
+      <input ng-model="title" type="text" class="form-control" name="course-title" placeholder="eg: English Composition" required>
     </div>
     <div class="form-group">
       <label for="course-code">Course Code:</label>
-      <input ng-model="courseCode" type="text" class="form-control" name="course-code" placeholder="eg: ENC1101">
+      <input ng-model="name" type="text" class="form-control" name="course-code" placeholder="eg: ENC1101" required>
     </div>
     <div class="form-group">
       <label for="course-subject">Subject (optional):</label>
-      <select name="course-subject" class="form-control">
-        <option>Optional...</option>
-      </select>
+      <ui-select ng-model="subject.selected" data-ng-disabled="disabled" theme="bootstrap" >
+              <ui-select-match placeholder="Search for Subject">{{$select.selected.subject}}</ui-select-match>
+              <ui-select-choices refresh="searchSubject($select.search)" refresh-delay="300" repeat="subject in subjects">
+              <div ng-bind-html="subject.subject | highlight: $select.search"></div>
+           
+            </ui-select-choices>
+          </ui-select>
     </div>
     <div class="row">
+    <span ng-repeat="error in errors">{{error}}</span>
       <div class="col-sm-6 col-sm-offset-3">
         <button type="submit" class="btn btn-primary btn-block">Add Course</button>
       </div>

@@ -1,13 +1,18 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('NewNoteCtrl', function ($scope,$http,$modal,nbApiService,$stateParams,Validate,$cookies, FileUploader) {
+  .controller('NewNoteCtrl', function ($scope,$http,$modal,nbApiService,$stateParams,$state,Validate,$cookies, FileUploader) {
 
     
     $scope.note = {};
+    $scope.note.school={};
     $scope.note.course = {};
     $scope.note.instructor = {};
     $scope.note.file = [];
+
+
+    $scope.semesterYears = null;
+    $scope.currentYear = new Date().getFullYear();
 
     var uploader = $scope.uploader = new FileUploader({
             url: nbApiService.getBaseApiUrl() + '/note/file/upload',
@@ -130,7 +135,6 @@ angular.module('angularNoteboosterApp')
     $scope.yourAmount = function() { return $scope.price ? ( (1 - ($scope.charity_split/100)) * $scope.price) : 0 };
     $scope.charityAmount = function() { return $scope.price ? ( ($scope.charity_split/100) * $scope.price) : 0 };
     
-    $scope.school = {};
     $scope.organization = {};
     $scope.organizationList = [];
     $scope.organizationListRetrieval = nbApiService.getSimpleOrgnizationList().then(function(data) {
@@ -159,6 +163,7 @@ angular.module('angularNoteboosterApp')
 
 
     $scope.searchSchool = function(school) {
+
       var params = {search: school, page: 1};      
       nbApiService.getSchools(params)
         .then(function(data){
@@ -171,12 +176,13 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.schoolSelected = function(item, model) {
-      $scope.note.course = {};
+        $scope.note.course = {};
+        $scope.schoolRequired = false;
     };
 
     $scope.searchCourse = function(course) {
-      if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
-        var params = {search: course, school: $scope.school.selected.id};
+      if (angular.isDefined($scope.note.school.selected) && $scope.note.school!==null  && angular.isDefined($scope.note.school.id)){
+        var params = {search: course, school: $scope.note.school.id};
 
         return nbApiService.getCourses(params).then(function(data) {
           $scope.courses = data.results;
@@ -186,10 +192,11 @@ angular.module('angularNoteboosterApp')
     };
 
 
-        $scope.searchInstructor = function(course) {
-      if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
+        $scope.searchInstructor = function(instructor) {
+      if (angular.isDefined($scope.note.school) && $scope.note.school!==null  && angular.isDefined($scope.note.school.id)){
+        var params = {search: instructor, school: $scope.note.school.id};
 
-        return nbApiService.getInstructors($scope.school.selected.id,course ).then(function(data) {
+        return nbApiService.getInstructors(params ).then(function(data) {
           $scope.instructors = data.results;
         });
 
@@ -206,32 +213,44 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.addCourse = function(size) {
-      var modalInstance = $modal.open({
-        animation: true,
-        templateUrl: 'views/partials/add_course_modal.html',
-        controller: 'AddCourseCtrl',
-        size: size, 
-        resolve: {
-            school: function () {
-                return $scope.school;
-            }
-          }
-        });
-          
 
-        modalInstance.result.then(function (msgResponse) {
-          $scope.msgSentResponse = msgResponse;
-        }, function (reason) {
-          // Modal closed.
-        });
+      if (angular.isDefined($scope.note.school) && $scope.note.school!==null  && angular.isDefined($scope.note.school.id)){
+        var modalInstance = $modal.open({
+          animation: true,
+          templateUrl: 'views/partials/add_course_modal.html',
+          controller: 'AddCourseCtrl',
+          size: size, 
+          resolve: {
+              masterScope: function () {
+                  return $scope;
+              }
+            }
+          });
+            
+
+          modalInstance.result.then(function (msgResponse) {
+            $scope.msgSentResponse = msgResponse;
+          }, function (reason) {
+            // Modal closed.
+          });
+        }else{
+          $scope.schoolRequired = true;
+        }
       }
 
     $scope.addInstructor = function(size) {
+      if (angular.isDefined($scope.note.school) && $scope.note.school!==null  && angular.isDefined($scope.note.school.id)){
+    
       var modalInstance = $modal.open({
         animation: true,
         templateUrl: 'views/partials/add_instructor_modal.html',
         controller: 'AddInstructorCtrl',
-        size: size
+        size: size,
+          resolve: {
+      masterScope: function () {
+          return $scope;
+      }
+    }
       });
           
 
@@ -240,11 +259,13 @@ angular.module('angularNoteboosterApp')
         }, function (reason) {
           // Modal closed.
         });
+
+        }else{
+          $scope.schoolRequired = true;
+        }
       }
 
 
-      $scope.semesterYears = null;
-      $scope.currentYear = new Date().getFullYear();
 
       $scope.availableSemesterYears = function(){
         

@@ -26,7 +26,10 @@
           data-ng-disabled="disabled"   theme="bootstrap" >
           <ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices refresh="searchCourse($select.search)"  refresh-delay="300" repeat="course in courses">
-          <span ng-bind-html="course.name | highlight: $select.search"></span>
+           <div ng-bind-html="course.name | highlight: $select.search"></div>
+               <small>
+                  {{course.title}}
+                </small>
         </ui-select-choices>
       </ui-select>
     </div>
