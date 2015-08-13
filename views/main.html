@@ -14,7 +14,7 @@
               <div ng-bind-html="school.name | highlight: $select.search"></div>
                <small>
                 {{school.city}},{{school.state}}
-                </small>
+              </small>
             </ui-select-choices>
           </ui-select>
           <span ng-show="!school.selected" class="error-msg">{{chooseSchool}}</span>
@@ -27,9 +27,9 @@
           <ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
           <ui-select-choices refresh="searchCourse($select.search)"  refresh-delay="300" repeat="course in courses">
            <div ng-bind-html="course.name | highlight: $select.search"></div>
-               <small>
-                  {{course.title}}
-                </small>
+            <small>
+              {{course.title}}
+            </small>
         </ui-select-choices>
       </ui-select>
     </div>

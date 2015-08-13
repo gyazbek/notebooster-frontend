@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('RegisterCtrl', function ($scope, $state, nbApiService, Validate, $http,$modalInstance) {
+  .controller('RegisterCtrl', function ($scope, $rootScope, $state, nbApiService, Validate, $http,$modalInstance) {
   	$scope.model = {'username':'','password1':'','password2':'','email':''};
 
 
