@@ -14,7 +14,7 @@
               </select>
             </div>
           </section>
-          <main class="row" cg-busy="watchListPromise">
+          <main class="row" cg-busy="[watchListPromise, userWatchListRemovePromise]">
             <div class="col-xs-12">
               <div ng-if="items == 0" class="row vertical-align lined noresults">
                 <p ng-if="success">Nothing here yet!</p>
@@ -38,8 +38,8 @@
                   </p>
                 </div>
                 <div class="col-sm-3 col-xs-5 text-center">
-                  <button id="{{user.user_watched.username}}" ng-click="removeFromWatchlist($event)" class="btn btn-minor btn-block">Remove</button>
-                  <a id="{{user.user_watched.username}}" href="" ng-click="getUserProfile($event)"class="btn btn-primary btn-block">View Profile</a>
+                  <button ng-click="removeFromWatchlist(user.user_watched)" class="btn btn-minor btn-block">Remove</button>
+                  <a ui-sref="app.viewprofile({username:user.user_watched.username})" class="btn btn-primary btn-block">View Profile</a>
                 </div>
               </div>
             </div>

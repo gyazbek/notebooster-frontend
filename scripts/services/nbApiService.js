@@ -25,7 +25,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 data = args.data || {},
                 fresh = (typeof args.fresh !== 'undefined' ? args.fresh :  false),
                 useAuthToken = (typeof args.useAuthToken !== 'undefined' ? args.useAuthToken : true);
-            
+                
 
             // Let's retrieve the token from the cookie, if available
             if (useAuthToken && $cookies.token) {
@@ -48,8 +48,12 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 "Cache-Control": "no-cache"
             	});
 
-
             }
+
+            if(typeof args.extraHeader !== 'undefined'){
+                headersSend = angular.extend(headersSend, args.extraHeader);
+            }
+
             // Fire the request, as configured.
             $http({
                 url: url,
@@ -577,7 +581,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'url': "/user/watchlist",
                 'data': {
                     'user_id': userId,
-                }
+                },
+                'extraHeader' : {'Content-Type': 'application/json'}
             });
         },
         'setPaymentSettings': function(email) {

@@ -21,20 +21,17 @@ angular.module('angularNoteboosterApp')
   	 	});
 	};
 
-	$scope.removeFromWatchlist = function(event){
-		var username = event.target.id;
-		nbApiService.removeFromWatchlist(username)
+	$scope.removeFromWatchlist = function(user){
+	
+		$scope.userWatchListRemovePromise = nbApiService.removeFromWatchlist(user.id)
   	 	.then(function(data){
   	 		$scope.removed = true;
+  	 		$scope.getWatchlist($scope.order,$scope.page);
   	 	},function(data) {
   	 		$scope.removed = false;
   	 	});
 	};
 
-	$scope.getUserProfile = function(event){
-	  	var username = event.target.id;
-      	$state.go('app.viewprofile', {'username': username});		
-	};
 
 	function init(){
 		$scope.getWatchlist($scope.order,$scope.page);
