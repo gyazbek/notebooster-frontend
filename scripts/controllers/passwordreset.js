@@ -8,7 +8,7 @@ angular.module('angularNoteboosterApp')
       $scope.errors = [];
       Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid){
-        nbApiService.resetPassword($scope.model.email)
+        $scope.resetPasswordPromise = nbApiService.resetPassword($scope.model.email)
         .then(function(data){
         	// success case
         	$scope.complete = true;
