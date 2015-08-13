@@ -5,13 +5,14 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
     $scope.order = 'newest';
     $scope.results = {};
     $scope.totalEarnings = 0;
+    $scope.success = false;
     // Pagination
     $scope.maxSize = 10;
     $scope.getMyNotesForSale = function(page, order) {
         $scope.forsalePromise = nbApiService.getMyNotesForSale(page, order).then(function(data) {
             $scope.results = data.results;
             $scope.notesCount = data.count;
-           
+            $scope.success = true;           
         }, function(data) {});
     }
     $scope.updateNote = function(note) {
