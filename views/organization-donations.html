@@ -39,7 +39,7 @@
 						</main>
 			<footer class="row">
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-              <pagination ng-if="itemsCount > maxSize" ng-model="page" total-items="itemsPerPage" boundary-links="true" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;" last-text="&raquo;" rotate="true" max-size="maxSize" ng-change="getDonations(page,order)">
+              <pagination ng-if="itemsCount > 10" ng-model="page" total-items="itemsCount" boundary-links="true" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;" last-text="&raquo;" rotate="true" max-size="maxSize" ng-change="getDonations(page,order)">
               </pagination>
             </div>
 			</footer>

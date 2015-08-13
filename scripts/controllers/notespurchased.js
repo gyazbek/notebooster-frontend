@@ -3,21 +3,23 @@
 angular.module('angularNoteboosterApp')
 .controller('NotesPurchasedCtrl', function ($scope,$state,$modal,nbApiService,$http) {
 	$scope.notesPurchased = {};
-	$scope.notesCount = 0;
 	$scope.order = 'newest';
-
 	$scope.noteTitle = "";
 
     // Pagination
+	$scope.items = 0;
     $scope.page = 1;
-    $scope.maxSize = 10;
+    $scope.maxSize = 5;
+	$scope.itemsPerPage = 10;
+	$scope.success = false;
 
 	$scope.getNotesPurchased = function(page,order){
 		$scope.notesPurchasedPromise = nbApiService.getNotesPurchased(page,order)
         .then(function(data){
         	// success case
           	$scope.notesPurchased = data.results;
-          	$scope.notesCount = data.count;
+          	$scope.items = data.count;
+			$scope.success = true;
         },function(data){
           	// error case
           	$scope.errors = data;
