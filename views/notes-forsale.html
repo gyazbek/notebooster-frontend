@@ -52,11 +52,10 @@
               </div>
             </div>
           </main>
+          <div ng-show="notesCount > itemsPerPage">
           <footer class="row">
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-              <pagination ng-model="page" total-items="notesCount" boundary-links="true" 
-                first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
-                rotate="true" max-size="maxSize" ng-change="getMyNotesForSale(page,order)">
+              <pagination ng-model="page" items-per-page="itemsPerPage" total-items="notesCount" boundary-links="true" first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" rotate="true" max-size="maxSize" ng-change="getMyNotesForSale(page,order)">
               </pagination>
             </div>
           </footer>
@@ -65,5 +64,6 @@
               <p class="lead mbot0" cg-busy="earningsRetrievalPromise">Total Earnings: {{totalEarnings | currency}}</p>
             </div>
           </header>
+          </div>
           <div class="clearfix"></div>
         </div>
