@@ -26,7 +26,7 @@ angular.module('angularNoteboosterApp').filter('propsFilter', function() {
     };
 });
 
-angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope, $rootScope, $location, $state, nbApiService, $modal, $log, $timeout) {
+angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope, $window, $rootScope, $location, $state, nbApiService, $modal, $log, $timeout) {
 
     $scope.siteStats = {}
 
@@ -105,6 +105,11 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
         $scope.signinModal();
         $state.go('app');
         //  $location.path('/authRequired').replace();
+    });
+
+    // global scroll to top when view change so that we include the header in the view
+    $scope.$on("$stateChangeSuccess", function (event, currentState, previousState) {
+        $window.scrollTo(0, 0);
     });
 
     $scope.signinModal = function(size) {
