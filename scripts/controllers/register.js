@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('RegisterCtrl', function ($scope, nbApiService, Validate, $http,$modalInstance) {
+  .controller('RegisterCtrl', function ($scope, $state, nbApiService, Validate, $http,$modalInstance) {
   	$scope.model = {'username':'','password1':'','password2':'','email':''};
 
 
@@ -21,8 +21,22 @@ angular.module('angularNoteboosterApp')
           $scope.signupPromise = nbApiService.register($scope.model.username,$scope.model.password1,$scope.model.password2,$scope.model.email,moreData )
           .then(function(data){
           	// success case
-        
-            $modalInstance.close();
+            nbApiService.login($scope.model.username, $scope.model.password1)
+            .then(function(data){
+              // success case
+              //$location.path("/");
+              $modalInstance.close();
+                if(angular.isDefined($rootScope.stateAfterLogin)){
+                  $state.go($rootScope.stateAfterLogin);
+                  delete $rootScope.stateAfterLogin;
+                }else{
+                    $state.go($state.current, {}, {reload: true});
+                }
+                  $modalInstance.close();
+                },function(data){
+                $modalInstance.close();
+             });
+            
           },function(data){
           	// error case
           	$scope.errors = data;
