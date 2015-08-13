@@ -502,11 +502,12 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             });
         },
         'getInbox': function(page, order) {
-            var orderAppend = (order != '' ? (order == 'newest' ? '?ordering=latest' : (order == 'oldest' ? '?ordering=latest_msg' : '')) : '')
+            var orderS = (order != '' ? (order == 'newest' ? '-latest_msg' : (order == 'oldest' ? 'latest_msg' : '-latest_msg')) : '-latest_msg')
             return this.request({
                 'method': "GET",
-                'url': "/message/inbox" + orderAppend,
-                'params' : {'page': page}
+                'url': "/message/inbox",
+                'params' : {'page': page,
+                            'ordering' : orderS}
             });
         },
         'sendMsg': function(recipient, subject, msg) {

@@ -69,7 +69,7 @@ angular.module('angularNoteboosterApp')
 	};
 
   	function init(){
-    	$scope.getUserInbox($scope.listOrder, $scope.page);
+    	$scope.getUserInbox($scope.page, $scope.listOrder);
   	};
 
   	init();

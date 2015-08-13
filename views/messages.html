@@ -9,7 +9,7 @@
               <p class="lead mbot0">{{itemCount}} Items</p>
             </div>
             <div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
-              <select class="form-control" ng-model="listOrder" ng-change="getUserInbox(listOrder,page)">
+              <select class="form-control" ng-model="listOrder" ng-change="getUserInbox(page, listOrder)">
                 <option value="newest">Newest First</option>
                 <option value="oldest">Oldest First</option>
               </select>
@@ -39,11 +39,11 @@
                 </div>
                 <div class="col-sm-5 col-xs-8 mtop15 mbot5">
                   <p class="lead"><a id="{{msg.id}}" ng-click="view($event)" href="">{{msg.subject}}</a></p>
-                  <p class="visible-xs muted"><a id="{{msg.sender.username}}" href="" ng-click="getUserProfile($event)">{{msg.sender.username}}</a></p>
+                  <p class="visible-xs muted"><a ui-sref="app.viewprofile({username:msg.sender.username})">{{msg.sender.username}}</a></p>
                   <p>{{msg.latest_msg.body}}</p>
                 </div>
                 <div class="col-sm-2 col-xs-4 mtop15 mbot5 date-item">
-                  <p>{{msg.latest_msg.sent_at | date}}</p>
+                  <p>{{msg.latest_msg.sent_at | date:'medium'}}</p>
                 </div>
                 <div class="col-sm-3 col-xs-12 text-center mbot25-xs">
                   <button id="{{msg.id}}" ng-click="deleteMsg($event)" class="btn btn-minor btn-block">Delete</button>
