@@ -68,7 +68,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 console.log("error syncing with: " + url);
                 // Set request status
                 if (data && status && status != 500) {
-                    data.status = status;
+                    //data.status = status;
                 }else if(status && status > 200){
                 	data = {};
                 	data.status = status;
@@ -254,6 +254,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             return this.request({
                 'method': "GET",
                 'url': "/user/" + username + "/forsale",
+                'fresh':true,
                 'data': {
                     'page': page
                 },
@@ -433,7 +434,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
 			return this.request({
 			'method': "GET",
 			'url': "/note/" + nid + "/purchase/confirmation",
-			'data':data
+			'data':data,
+            'fresh':true
 			});
 		},
 
@@ -454,7 +456,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'getNotesPosted': function(username) {
             return this.request({
                 'method': "GET",
-                'url': "/user/" + username + "/?format=json"
+                'url': "/user/" + username + "/?format=json",
+                'fresh':true
             });
         },
         'getNotesPurchased': function(page, order) {
@@ -464,13 +467,15 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'data': {
                     'page': page,
                     'order': order
-                }
+                },
+                'fresh':true
             });
         },
         'getNoteFileListing': function(nid) {
             return this.request({
                 'method': "GET",
-                'url': "/note/" + nid + "/file"
+                'url': "/note/" + nid + "/file",
+                'fresh':true
             });
         },
         'getMyNotesForSale': function(page, order) {
@@ -481,7 +486,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'params': {
                     'page': page,
                     'order': order
-                }
+                },
+                'fresh':true
             });
         },
         'getNote': function(noteId) {
@@ -507,7 +513,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'method': "GET",
                 'url': "/message/inbox",
                 'params' : {'page': page,
-                            'ordering' : orderS}
+                            'ordering' : orderS},
+                'fresh':true,
             });
         },
         'sendMsg': function(recipient, subject, msg) {
@@ -525,7 +532,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         'getThread': function(threadId) {
             return this.request({
                 'method': "GET",
-                'url': "/message/thread/" + threadId + "/"
+                'url': "/message/thread/" + threadId + "/",
+                'fresh':true
             });
         },
         'threadReply': function(threadId, msg) {
@@ -573,7 +581,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'data': {
                     'order': order,
                     'page': page
-                }
+                },
+                'fresh':true
             });
         },
         'removeFromWatchlist': function(userId) {
