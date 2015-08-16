@@ -29,6 +29,7 @@ angular.module('angularNoteboosterApp').filter('propsFilter', function() {
 angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope, $window, $rootScope, $location, $state, nbApiService, $modal, $log, $timeout) {
 
     $scope.siteStats = {}
+    $scope.organizationFacts = [];
 
     var refreshNotificationCountData = function() {
         nbApiService.messageCount().then(function(data) {
@@ -149,6 +150,18 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     nbApiService.siteStats().then(function(data) {
         $scope.siteStats = data;
     });
+
+    nbApiService.organizationFacts().then(function(data) {
+        $scope.organizationFacts = data;
+    });
+
+    $scope.getRandomFact = function(){
+        if($scope.organizationFacts.length>0){
+            return $scope.organizationFacts[Math.floor(Math.random() * $scope.organizationFacts.length)].fact;
+        }else{
+            return "When snakes are born with two heads, they fight each other for food.";
+        }
+    }
 });
 
 angular.module('angularNoteboosterApp').controller('DropdownCtrl', function($http, $state, $scope, $cookies, $location, nbApiService) {

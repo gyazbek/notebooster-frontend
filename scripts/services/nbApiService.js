@@ -22,6 +22,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 url = this.API_URL + args.url,
                 method = args.method || "GET",
                 params = params,
+                angularCache = (typeof args.cache !== 'undefined' ? args.cache : false),
                 data = args.data || {},
                 fresh = (typeof args.fresh !== 'undefined' ? args.fresh :  false),
                 useAuthToken = (typeof args.useAuthToken !== 'undefined' ? args.useAuthToken : true);
@@ -56,6 +57,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
 
             // Fire the request, as configured.
             $http({
+                cache: angularCache,
                 url: url,
                 withCredentials: this.use_session,
                 method: method.toUpperCase(),
@@ -221,6 +223,13 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'method': "GET",
                 'url': "/stats",
                 'cache':false
+            });
+        },
+        'organizationFacts': function() {
+            return this.request({
+                'method': "GET",
+                'url': "/organization_facts",
+                'cache':true
             });
         },
         'profile': function() {

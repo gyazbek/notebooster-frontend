@@ -87,7 +87,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.settings', {
@@ -98,7 +98,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.settings.payment', {
@@ -111,7 +111,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.settings.notes-purchased', {
@@ -124,7 +124,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.settings.watch-list', {
@@ -137,7 +137,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.settings.messages', {
@@ -163,7 +163,7 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         resolve: {
             authenticated: ['nbApiService', function(nbApiService) {
-                return nbApiService.authenticationStatus();
+                return nbApiService.authenticationStatus(true);
             }],
         }
     }).state('app.settings.notes-forsale', {
