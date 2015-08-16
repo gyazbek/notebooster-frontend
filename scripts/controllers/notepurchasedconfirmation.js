@@ -78,7 +78,7 @@ $scope.attemptVerification = function(){
           	$scope.notesCount = data.count;
         },function(data){
           	// error case
-          	$scope.errors = data;
+          	$scope.errors = data.data;
       });
 	};
 

@@ -2,7 +2,7 @@
 angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function($scope, $state, nbApiService, Validate, $modal) {
     $scope.notesCount = 0;
     $scope.page = 1;
-    $scope.order = 'newest';
+    $scope.order = '-created';
     $scope.results = {};
     $scope.totalEarnings = 0;
     $scope.success = false;
@@ -30,8 +30,8 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
         .then(function(data){
          
         }, function(data){
-            if(angular.isDefined(data.non_field_errors)){
-                data = data.non_field_errors;
+            if(angular.isDefined(data.data.non_field_errors)){
+                data.data = data.data.non_field_errors;
             }
             note.status = 'draft';
             var modalInstance = $modal.open({
@@ -43,7 +43,7 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
             return noteId;
             },
             issues: function(){
-                return data;
+                return data.data;
             }
             }
             });

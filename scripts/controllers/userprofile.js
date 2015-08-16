@@ -38,7 +38,7 @@ angular.module('angularNoteboosterApp')
         $scope.notesForSale = data.results;
         $scope.notesCount = data.count;
       },function(data){
-        $scope.error;
+        $scope.error = data.data;
       });
     };
 
@@ -54,7 +54,7 @@ angular.module('angularNoteboosterApp')
         $scope.comments = data.results;
         $scope.commentsCount = data.count;
       },function(data){
-        $scope.error;
+        $scope.error = data.data;
       });
     };
 
@@ -101,8 +101,8 @@ angular.module('angularNoteboosterApp')
         });
       },function(data){
         // error case
-        $scope.error = data;
-        console.log(data);
+        $scope.error = data.data;
+        console.log(data.data);
       });
     };
 

@@ -22,7 +22,7 @@ angular.module('angularNoteboosterApp')
           
         },function(data){
         	// error case
-        	$scope.errors = data;
+        	$scope.errors = data.data;
         });
       }
     }

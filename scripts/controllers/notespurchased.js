@@ -22,7 +22,7 @@ angular.module('angularNoteboosterApp')
 			$scope.success = true;
         },function(data){
           	// error case
-          	$scope.errors = data;
+          	$scope.errors = data.data;
       });
 	};
 
@@ -116,7 +116,7 @@ angular.module('angularNoteboosterApp')
           	$scope.fileListing = data;
         },function(data){
           	// error case
-          	$scope.errors = data;
+          	$scope.errors = data.data;
       });
 	}
 });

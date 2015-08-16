@@ -13,7 +13,7 @@ angular.module('angularNoteboosterApp')
          $scope.schools = data.results;
         },function(data){
           // error case
-          $scope.errors = data;
+          $scope.errors = data.data;
       });
   };
 

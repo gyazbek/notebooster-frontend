@@ -24,11 +24,11 @@ angular.module('angularNoteboosterApp')
         	$scope.complete = true;
         },function(data){
         	// error case
-  	         if(angular.isDefined(data.non_field_errors)){
-              data = data.non_field_errors;
+  	         if(angular.isDefined(data.data.non_field_errors)){
+              data.data = data.data.non_field_errors;
             }
             $scope.failed = true;
-            $scope.errors = data;
+            $scope.errors = data.data;
         });
       }
     }

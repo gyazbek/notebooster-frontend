@@ -41,7 +41,7 @@ angular.module('angularNoteboosterApp')
              $state.go('app.organization-register.confirmation');
           },function(data){
             // error case
-            $scope.errors = data;
+            $scope.errors = data.data;
           }); 
     
 

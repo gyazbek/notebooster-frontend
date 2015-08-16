@@ -15,7 +15,7 @@ angular.module('angularNoteboosterApp')
         	$scope.complete = true;
         },function(data){
         	// error case
-        	$scope.errors = data;
+        	$scope.errors = data.data;
         });
       
       }

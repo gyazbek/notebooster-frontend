@@ -39,7 +39,7 @@ angular.module('angularNoteboosterApp')
             
           },function(data){
           	// error case
-          	$scope.errors = data;
+          	$scope.errors = data.data;
           }); 
         } else {
             $scope.chooseSchool = "Must Select School.";
@@ -66,7 +66,7 @@ angular.module('angularNoteboosterApp')
          $scope.schools = data.results;
         },function(data){
           // error case
-          $scope.errors = data;
+          $scope.errors = data.data;
       });
     }
   });

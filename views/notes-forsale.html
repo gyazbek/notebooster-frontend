@@ -9,9 +9,9 @@
             </div>
             <div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
               <select ng-model="order" ng-change="getMyNotesForSale(page,order)" class="form-control" ng-model="orderListValue">
-                <option value="newest">Newest First</option>
-                <option value="lowest">Lowest Price</option>
-                <option value="highest">Highest Price</option>
+                <option value="-created">Newest First</option>
+                <option value="price">Lowest Price</option>
+                <option value="-price">Highest Price</option>
               </select>
             </div>
           </section>

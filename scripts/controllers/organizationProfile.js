@@ -9,7 +9,7 @@ angular.module('angularNoteboosterApp')
       .then(function(data){
         $scope.profile = data;
       },function(data){
-        $scope.error;
+        $scope.error = data.data;
       });
     };
 

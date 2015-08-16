@@ -11,7 +11,7 @@ angular.module('angularNoteboosterApp')
   };
 
 
-
+$scope.extraDonation = 0;
  
 $scope.totalAmount = function() { return +$scope.note.price + ($scope.extraDonation ?  +$scope.extraDonation : 0) };
 $scope.charityAmount = function() { return $scope.note.price ? (+$scope.note.charity_split/100) * +$scope.note.price + ($scope.extraDonation ?  +$scope.extraDonation : 0) : 0 };

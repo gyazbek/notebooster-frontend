@@ -46,7 +46,7 @@ angular.module('angularNoteboosterApp')
          $scope.schools = data.results;
         },function(data){
           // error case
-          $scope.errors = data;
+          $scope.errors = data.data;
       });
     };
 
@@ -73,7 +73,7 @@ angular.module('angularNoteboosterApp')
           $scope.itemCount = data.count;
         },function(data){
           // error case
-          $scope.errors = data;
+          $scope.errors = data.data;
       });
     }
  

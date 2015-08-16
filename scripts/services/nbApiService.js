@@ -68,13 +68,10 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 deferred.resolve(data, status);
             })).error(angular.bind(this, function(data, status, headers, config) {
                 console.log("error syncing with: " + url);
-                // Set request status
-                if (data && status && status != 500) {
-                    //data.status = status;
-                }else if(status && status > 200){
-                	data = {};
-                	data.status = status;
-                }
+
+                
+                var reason = {};       
+                reason.status = status;
 
                 if (status == 0) {
                     if (data == "") {
@@ -91,7 +88,9 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                         data['non_field_errors'] = ["Server timed out. Please try again."];
                     }
                 }
-                deferred.reject(data, status, headers, config);
+                reason.data = data;
+        
+                deferred.reject(reason, status, headers, config);
             }));
             return deferred.promise;
         },
@@ -494,7 +493,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'url': "/note/forsale",
                 'params': {
                     'page': page,
-                    'order': order
+                    'ordering': order
                 },
                 'fresh':true
             });

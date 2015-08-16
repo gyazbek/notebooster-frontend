@@ -45,7 +45,7 @@
 
 			 </div>
 
-			<form novalidate>
+			<form name="noteForm" >
 				<div class="row">
 					<div class="col-md-4">
 						<label for="no_of_pages">Number of Pages:</label>
@@ -54,10 +54,10 @@
 						<input ng-model="note.page_count" type="number" class="form-control" name="num_of_pages" required max="999" min="1" pattern="[0-9]"/>
 					</div>
 					<div class="clearfix"></div>
-					<div class="col-md-4">
+					<div class="col-md-4" ng-hide="1">
 						<label for="note_preview">Note Preview:</label>
 					</div>
-					<div class="col-md-4 form-group">
+					<div class="col-md-4 form-group" ng-hide="1">
 						<select ng-model="note.notePreview" class="form-control" name="note_preview">
 							<option value="firstOnly">First Page Only</option>
 						</select>
@@ -70,13 +70,13 @@
 					<div class="col-md-5">
 						<div class="input-group form-group">
 							<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-							<input ng-model="note.price"  type="number" class="form-control note_price" name="note_price" placeholder="i.e. 5.00" />
-							<span class="input-group-addon"> + $1.00 fee</span>
+							<input ng-model="note.price" min="0" max="1000"  type="number" class="form-control note_price" name="note_price" placeholder="i.e. 5.00" ng-disabled="priceToggle"/>
+							<span class="input-group-addon" ng-hide="priceToggle"> + $1.00 fee</span>
 						</div>
 					</div>
 					<div class="col-md-3 form-group">
 						<label for="free_price" >
-							<input type="checkbox" name="free_price" id="free_price" /> Make it Free!
+							<input type="checkbox" id="free_price" value="free" ng-model="priceToggle" ng-change="freeNoteToggle()"/> Make it Free!
 						</label>
 					</div>
 					<div class="clearfix"></div>
@@ -85,7 +85,7 @@
 					</div>
 					<div class="col-md-3 form-group">
 						<select ng-model="note.charity_split" class="form-control" name="charity_split">
-							<option value="20" selected>20%</option>
+							<option value="20">20%</option>
 							<option value="24">24%</option>
 							<option value="30">30%</option>
 							<option value="50">50%</option>
@@ -183,7 +183,7 @@
 						<label for="course">Course:</label>
 					</div>
 					<div class="col-md-8 form-group">
-						<ui-select ng-model="note.course" data-ng-disabled="disabled" theme="bootstrap" ng-change="searchInstructor()" ng-enter>
+						<ui-select ng-model="note.course" data-ng-disabled="disabled" theme="bootstrap" ng-enter>
 								<ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
 								<ui-select-choices repeat="course in courses"  refresh="searchCourse($select.search)"
              refresh-delay="1">
@@ -238,7 +238,7 @@
 					</div>
 					<div class="clearfix"></div>
 					<hr class="narrower">
-					<div class="alert alert-danger" ng-repeat="error in errors">{{error}}</div>
+					<div class="alert alert-danger" ng-repeat="(key,error) in errors" ng-repeat="error in errors">{{key}} - {{error}}</div>
 					<div class="alert alert-success" ng-show="noteSaveSuccess == true">Note Saved</div>
 					<div class="col-md-12 form-group">
 						<label for="agree_terms">
@@ -249,7 +249,7 @@
 					<div class="clearfix"></div>
 					<div class="col-md-12 form-group text-center mtop25 mbot50 form-action-holder" cg-busy="saveNotePromise">
 						<button id="save" class="btn btn-minor col-sm-5" ng-click="saveNote('draft')">Save as Draft</button>
-						<button type="submit" id="submit" class="btn btn-primary col-sm-5 mleft50" ng-click="saveNote('final')">Create!</button>
+						<button type="submit" id="submit" class="btn btn-primary col-sm-5 mleft50" ng-click="saveNote('final')" >Create!</button>
 					</div>
 				</div>
 			</form>

@@ -27,15 +27,45 @@ angular.module('angularNoteboosterApp')
 
         },function(data){
           // error case
-          $scope.errors = data;
+          $scope.errors = data.data;
         });  
       },function(data){
         // error case
-        $scope.errors = data;
+        $scope.errors = data.data;
     
       });  
     }
+
+      $scope.followUser = function(size){
+      if($scope.note.user.id){
+      nbApiService.followUser($scope.note.user.id)
+      .then(function(data){
+        var modalInstance = $modal.open({
+          animation: true,
+          templateUrl: 'views/partials/follow_modal.html',
+          controller: 'FollowCtrl',
+          size: size,
+          resolve: {
+            username: function () {
+                return $scope.username;
+            }
+          }
+        });
+
+        modalInstance.result.then(function (msgResponse) {
+          $scope.msgSentResponse = msgResponse;
+        }, function (reason) {
+          // Modal closed.
+        });
+      },function(reason){
     
+         if(reason && reason.status==409){
+          alert('You already follow this user');
+         }
+      });
+    }
+    };
+
     function init(){
       $scope.getNoteDetails($scope.noteId);
       // console.log($scope.noteId);
