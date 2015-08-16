@@ -66,21 +66,22 @@
 						<p>{{note.description}}</p>
 					</div>
 				</div>
-				<div class="comments-holder" cg-busy="noteFeedbackPromise">
+				<div class="comments-holder" cg-busy="noteFeedbackPromise" ng-if="noteFeedback.results">
 					<hr>
 					<h2>Comments</h2>
 					<div class="row mtop15 mbot15"   ng-repeat="feedback in noteFeedback.results">
-	<div class="col-sm-2 col-xs-3 text-center">
-		<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
-		<a href="user-profile" class="thin">{{feedback.created | date}}</a>
-	</div>
-	<div class="col-sm-10 col-xs-9">
-		<p class="muted"><em>{{feedback.user.username}}</em></p>
-		<p>{{feedback.content}}</p>
-	</div>
-</div>
-<hr>
-<div class="clearfix"></div>				</div>
+				<div class="col-sm-2 col-xs-3 text-center">
+					<img src="img/profile.png" class="img-responsive" alt="Profile Picture" />
+					<a href="user-profile" class="thin">{{feedback.created | date}}</a>
+				</div>
+				<div class="col-sm-10 col-xs-9">
+					<p class="muted"><em>{{feedback.user.username}}</em></p>
+					<p>{{feedback.content}}</p>
+				</div>
+			</div>
+			<hr>
+			<div class="clearfix"></div>				
+			</div>
 			</div>
 			<div class="col-md-3 col-sm-12 price-holder-details">
 				<main class="col-xs-12 mbot25 hidden-sm hidden-xs">
