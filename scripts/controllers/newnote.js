@@ -9,6 +9,8 @@ angular.module('angularNoteboosterApp')
     $scope.note.course = {};
     $scope.note.instructor = {};
     $scope.note.file = [];
+    $scope.note.charity_split = 24;
+    $scope.note.charity = {"user":{"id":2606,"username":"WhoWePlayForFSU"},"name":"Who We Play for FSU","slug":"who-we-play-for-fsu2606"};
 
 
     $scope.semesterYears = null;
@@ -155,7 +157,7 @@ angular.module('angularNoteboosterApp')
         .then(function(data){
           $scope.organizationInfo = data;
         },function(data){
-          $scope.error;
+       
         });
       }
     };
@@ -171,7 +173,7 @@ angular.module('angularNoteboosterApp')
          $scope.schools = data.results;
         },function(data){
           // error case
-          $scope.errors = data;
+          $scope.errors = data.data;
       });
     };
 
@@ -181,7 +183,7 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.searchCourse = function(course) {
-      if (angular.isDefined($scope.note.school.selected) && $scope.note.school!==null  && angular.isDefined($scope.note.school.id)){
+      if (angular.isDefined($scope.note.school) && $scope.note.school!==null  && angular.isDefined($scope.note.school.id)){
         var params = {search: course, school: $scope.note.school.id};
 
         return nbApiService.getCourses(params).then(function(data) {
@@ -296,9 +298,9 @@ angular.module('angularNoteboosterApp')
         $scope.paypalUpdated = true;
         $scope.editorEnabled = false;
         $scope.paypalErrors = null;
-      },function(data){
-        if(data.profile.paypal_email){
-          $scope.paypalErrors = data.profile.paypal_email;
+      },function(reason){
+        if(reason.data.profile.paypal_email){
+          $scope.paypalErrors = reason.data.profile.paypal_email;
         }else{
           $scope.paypalErrors = ['An error has occured, please try again.'];  
         }
@@ -345,11 +347,11 @@ angular.module('angularNoteboosterApp')
         .then(function(data){
            $scope.noteSaveSuccess = true;
         },function(data){
-           if(angular.isDefined(data.non_field_errors)){
-              data = data.non_field_errors;
+           if(angular.isDefined(data.data.non_field_errors)){
+              data.data = data.data.non_field_errors;
             }
         
-            $scope.errors = data;
+            $scope.errors = data.data;
       
         });
       }else{
@@ -362,22 +364,30 @@ angular.module('angularNoteboosterApp')
            }
         },function(data){
           
-         if(angular.isDefined(data.non_field_errors)){
-              data = data.non_field_errors;
+         if(angular.isDefined(data.data.non_field_errors)){
+              data.data = data.data.non_field_errors;
             }
         
-            $scope.errors = data;
+            $scope.errors = data.data;
       
         });
       }
     };
-      // $scope.create = function(){
-      //   $scope.openSaveNoteModal();
-      // }
+
+    $scope.freeNoteToggle = function(){
+      if($scope.priceToggle){
+        $scope.note.price = 0;
+      }else{
+        
+      }
+    }
+
 
     init();
     function init(){
       $scope.paypalEmailUpdate = $scope.user.paypal_email;
+
+      // if edit note instead of new
        if(typeof $stateParams.noteId !== 'undefined') {
         $scope.noteId = $stateParams.noteId;
 
@@ -387,7 +397,7 @@ angular.module('angularNoteboosterApp')
           $scope.note = data;
         },function(data){
           // error case
-          $scope.errors = data;
+          $scope.errors = data.data;
         });  
         
       }
