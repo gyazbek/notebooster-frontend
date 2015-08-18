@@ -270,6 +270,9 @@ select {
 }
 .form-group {
 	max-width: 500px;
+	&.full-width{
+		max-width: initial;
+	}
 }
 label {
 	font-size: 1.2em;
@@ -844,13 +847,22 @@ margin: auto;
 }
 
 .price-holder-details {
-	margin-top: 94px;
+	margin-top: 90px;
 }
 
 .note-details-img {
-	max-width: 100px;
+	max-width: 115px;
     float: left;
     margin: 0 15px;
+}
+
+.file-info p {
+	min-height: 20px;
+}
+
+.note-preview {
+	background-color: #D1D1D1;
+	height: 500px;
 }
 
 /*

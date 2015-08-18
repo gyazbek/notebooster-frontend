@@ -5,7 +5,9 @@
 				<p class="muted">{{note.school.name}} / {{note.course.name}} - {{note.course.title}}</p>
 				<div class="row">
 					<div class="col-sm-7 col-xs-12 mbot25">
-					<iframe ng-if="note.preview" ng-src="{{getPreviewLink()}}"   alt="Note Snapshot" class="img-responsive" style="width:600px; height:500px;" frameborder="0"></iframe>
+					<div class="note-preview">
+						<iframe ng-if="note.preview" ng-src="{{getPreviewLink()}}"   alt="Note Snapshot" class="img-responsive" style="width:600px; height:500px;" frameborder="0"></iframe>
+					</div>
 
 						<p class="large text-center mbot25 mtop25 visible-sm visible-xs">Price: {{note.price | currency}}</p>
 						<button class="btn btn-primary btn-block mbot25 visible-sm visible-xs" ng-click="authenticated ? purchaseModal() : signinModal()">Buy Now</button>
@@ -16,7 +18,7 @@
 							<p class="mtop15 mbot25 text-center"><a href="#" data-toggle="modal" data-target="#charityinfo">Learn More</a></p>
 						</main>
 						<p class="text-center mtop15 report-contact">
-							<a href="#" data-toggle="modal" data-target="#violation">Report Violation</a> | <a href="#" data-toggle="modal" data-target="#contactseller">Contact Seller</a>
+							<a href="" ng-click="report()">Report Violation</a> | <a ng-click="contactUser()" href="">Contact Seller</a>
 						</p>
 					</div>
 					<div class="col-sm-5 col-xs-12 mbot25">
@@ -28,12 +30,12 @@
 							<p ng-if="note.user.profile.school">Attends: {{note.user.profile.school.name}}</p>
 							<p>Joined: {{note.user.date_joined | date}}</p>
 							<div class="clearfix"></div>
-							<div class="col-xs-12 text-center">
+							<div class="col-xs-12 text-center mtop15">
 								<button class="btn btn-minor btn-block mtop25-xs" ng-click="followUser()">Follow</button>
 															</div>
 						</div>
 						<hr>
-						<div class="row">
+						<div class="row file-info">
 							<div class="col-xs-12">
 								<div class="fb-like" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
 								<h2>File Info</h2>
@@ -60,7 +62,7 @@
 						</div>
 
 					</div>
-					<div class="col-xs-12">
+					<div class="col-xs-12 mbot25">
 						<hr>
 						<h2>Details</h2>
 						<p>{{note.description}}</p>
@@ -80,7 +82,7 @@
 				</div>
 			</div>
 			<hr>
-			<div class="clearfix"></div>				
+			<div class="clearfix"></div>
 			</div>
 			</div>
 			<div class="col-md-3 col-sm-12 price-holder-details">

@@ -22,7 +22,7 @@
 				...or drag and drop files here!
 			</div>
 
-			 <div ng-repeat="item in uploader.queue">
+			 <div ng-repeat="item in uploader.queue" class="mbot25 mtop25">
 			 	<strong>{{ item.file.name }}</strong>
 			 	<div ng-show="item.isError">Could not upload {{item.file.name}}, please try again</div>
                 <div ng-show="uploader.isHTML5">
@@ -36,7 +36,7 @@
 
 			 </div>
 
-			 <div ng-repeat="item in note.file">
+			 <div ng-repeat="item in note.file" class="mbot25 mtop25">
 
 			 	<strong>{{ item.file_name }}</strong>
                 <div>
@@ -70,7 +70,7 @@
 					<div class="col-md-5">
 						<div class="input-group form-group">
 							<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-							<input ng-model="note.price" min="0" max="1000"  type="number" class="form-control note_price" name="note_price" placeholder="i.e. 5.00" ng-disabled="priceToggle"/>
+							<input ng-model="note.price" min="0" max="1000"  type="number" class="form-control note_price" name="note_price" placeholder="5.00" ng-disabled="priceToggle"/>
 							<span class="input-group-addon" ng-hide="priceToggle"> + $1.00 fee</span>
 						</div>
 					</div>
@@ -129,13 +129,13 @@
 					</div>
 					<div class="clearfix"></div>
 					<hr class="narrower">
-					<div class="col-xs-12 mbot15 form-group">
+					<div class="col-xs-12 mbot15 form-group full-width">
 						<label for="note_title">Note Title: <span class="muted">(Max: 50 characters)</span></label>
 						<!-- SOME TYPE OF CHARACTER COUNTER GOES HERE -->
 						<input ng-model="note.title" class="form-control" name="note_title" required maxlength="50" />
 					</div>
 					<div class="clearfix"></div>
-					<div class="col-xs-12 form-group">
+					<div class="col-xs-12 form-group full-width">
 						<label for="note_description">Note Description:</label>
 						<textarea ng-model="note.description" class="form-control" name="note_description" required maxlength="10000"></textarea>
 					</div>
