@@ -71,7 +71,7 @@
 						<div class="input-group form-group">
 							<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
 							<input ng-model="note.price" min="0" max="1000"  type="number" class="form-control note_price" name="note_price" placeholder="5.00" ng-disabled="priceToggle"/>
-							<span class="input-group-addon" ng-hide="priceToggle"> + $1.00 fee</span>
+							<span class="input-group-addon" ng-hide="priceToggle"> + $0.99 fee</span>
 						</div>
 					</div>
 					<div class="col-md-3 form-group">
@@ -81,7 +81,7 @@
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-4">
-						<label for="charity_split">Charity Split:</label>
+						<label for="charity_split">Organization Split:</label>
 					</div>
 					<div class="col-md-3 form-group">
 						<select ng-model="note.charity_split" class="form-control" name="charity_split">
@@ -94,20 +94,20 @@
 						</select>
 					</div>
 					<div class="col-md-5 form-group">
-						<p class="muted">Choose the percent of your sales to be given to the nonprofit of your choosing.</p>
+						<p class="muted">Choose the percent of your sales to be given to the student organization of your choosing.</p>
 						<p><a href="" ng-click="learnMore()">Learn More</a></p>
 						<!-- charitysupport MODAL GOES HERE -->
 
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-4">
-						<label for="select_charity">Select Charity:</label>
+						<label for="select_charity">Select Organization:</label>
 					</div>
 					<div class="col-md-8 form-group">
 
 					<ui-select ng-model="note.charity" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval" on-select="loadOrganization($item, $model)">
 
- 								<ui-select-match placeholder="Select or search a Charity in the list...">{{$select.selected.name}}</ui-select-match>
+ 								<ui-select-match placeholder="Select an organization from the list...">{{$select.selected.name}}</ui-select-match>
 							   <ui-select-choices repeat="country in organizationList | filter: $select.search">
 							      <span ng-bind-html="country.name | highlight: $select.search"></span>
 
@@ -125,7 +125,7 @@
 					<div class="col-md-8 col-md-offset-4 form-group">
 						<!-- LIVE PAYMENT CALCULATION GOES HERE -->
 						<p class="muted">You Make: $<text>{{yourAmount()}}</text></p>
-						<p class="muted">Charity Makes: $<text>{{charityAmount()}}</text></p>
+						<p class="muted">Organization Makes: $<text>{{charityAmount()}}</text></p>
 					</div>
 					<div class="clearfix"></div>
 					<hr class="narrower">
