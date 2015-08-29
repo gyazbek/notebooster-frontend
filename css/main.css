@@ -45,6 +45,9 @@ a {
   a:visited {
     color: #187a05; }
 
+.inherit {
+  width: inherit; }
+
 .overlay-dark {
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.24);
   background: #FFF;
@@ -566,6 +569,12 @@ nav.navbar {
   margin-bottom: 15px;
   color: #a0a6aa;
   font-weight: lighter; }
+
+/*
+ * Browse Notes
+ */
+.settings-sidebar {
+  min-width: 200px; }
 
 /*
  * Browse Notes

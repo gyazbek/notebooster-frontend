@@ -106,8 +106,13 @@ a {
 		color: darken($main-green, 10%);
 	}
 }
+
+.inherit {
+	width: inherit;
+}
+
 .overlay-dark {
-	// background: $dark-grey;
+	// background: $dark-gray;
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.24);
 	background: #FFF;
 	position: relative;
@@ -636,6 +641,16 @@ nav.navbar {
 	color: #a0a6aa;
 	font-weight: lighter;
 }
+
+/*
+ * Browse Notes
+ */
+
+.settings-sidebar {
+	min-width: 200px;
+}
+
+
 
 /*
  * Browse Notes
