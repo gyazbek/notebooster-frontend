@@ -49,18 +49,7 @@ angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function(
             });
         });
     }
-    $scope.getNoteDetails = function(event) {
-        var noteId = event.target.id;
-        $state.go('app.note-details', {
-            'noteId': noteId
-        });
-    }
-    $scope.getUserProfile = function(event) {
-        var username = event.target.id;
-        $state.go('app.viewprofile', {
-            'username': username
-        });
-    };
+  
     $scope.promote = function(event, size) {
         $scope.title = event.target.id;
         var modalInstance = $modal.open({
