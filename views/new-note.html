@@ -204,7 +204,7 @@
 						<label for="professor">Instructor:</label>
 					</div>
 					<div class="col-md-8 form-group" ng-class="{'has-error': (noteForm.instructors.$dirty || noteForm.submitted) && noteForm.instructors.$invalid}">
-						<!-- PROFESSOR LIST JSON GOES HERE -->
+						
 						<ui-select ng-model="note.instructor" data-ng-disabled="disabled" theme="bootstrap" name="instructors" required ng-enter>
 							<ui-select-match placeholder="Search for your Instructor">{{$select.selected.name}}</ui-select-match>
 							<ui-select-choices repeat="instructor in instructors" refresh="searchInstructor($select.search)"

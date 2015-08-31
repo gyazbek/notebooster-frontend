@@ -6,9 +6,9 @@ angular.module('angularNoteboosterApp')
     $scope.submitted = false;
 
     $scope.note = {};
-    $scope.note.school={};
-    $scope.note.course = {};
-    $scope.note.instructor = {};
+    $scope.note.school=null;
+    $scope.note.course = null;
+    $scope.note.instructor = null;
     $scope.note.file = [];
     $scope.note.charity_split = 24;
     $scope.note.charity = {"user":{"id":2606,"username":"WhoWePlayForFSU"},"name":"Who We Play for FSU","slug":"who-we-play-for-fsu2606"};
