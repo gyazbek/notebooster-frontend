@@ -235,7 +235,6 @@ img.img-responsive {
 .has-error-text {
   color: #a94442;
   font-weight: lighter;
-  display: none;
   transition: .5s all; }
 
 hr {
