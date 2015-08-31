@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('PasswordresetCtrl', function ($scope, nbApiService, Validate) {
+  .controller('PasswordresetCtrl', function ($scope, nbApiService) {
     $scope.model = {'email':''};
   	$scope.complete = false;
     $scope.resetPassword = function(formData){
-      $scope.errors = [];
-      Validate.form_validation(formData,$scope.errors);
+      //$scope.errors = [];
+      //Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid){
         $scope.resetPasswordPromise = nbApiService.resetPassword($scope.model.email)
         .then(function(data){

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
- .controller('BrowseCtrl', function ($scope, $state, $stateParams, nbApiService, Validate, $http) {
+ .controller('BrowseCtrl', function ($scope, $state, $stateParams, nbApiService, $http) {
     // Variables for getting notes
     $scope.schoolId = '';
     $scope.courseId = '';
@@ -22,8 +22,8 @@ angular.module('angularNoteboosterApp')
     $scope.complete = false;
 
     $scope.search = function(formData){
-      $scope.errors = [];
-      Validate.form_validation(formData,$scope.errors);
+      // $scope.errors = [];
+      // Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid && angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
         
         $scope.schoolId = $scope.school.selected.id;

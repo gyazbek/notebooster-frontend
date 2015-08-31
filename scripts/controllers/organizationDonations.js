@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('OrganizationDonationsCtrl', function ($scope,$state,$modal,nbApiService,Validate) {
+  .controller('OrganizationDonationsCtrl', function ($scope,$state,$modal,nbApiService) {
     $scope.itemsCount = 0;
     $scope.totalDonationAmount = 0;
     $scope.page = 1;

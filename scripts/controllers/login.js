@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('LoginCtrl', function ($scope, $rootScope,$location,$state, nbApiService, Validate,$modalInstance) {
+  .controller('LoginCtrl', function ($scope, $rootScope,$location,$state, nbApiService,$modalInstance) {
     $scope.model = {'username':'','password':''};
   	$scope.complete = false;
     $scope.login = function(formData){
       $scope.errors = [];
-      Validate.form_validation(formData,$scope.errors);
+      //Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid){
        $scope.loginPromise = nbApiService.login($scope.model.username, $scope.model.password)
         .then(function(data){

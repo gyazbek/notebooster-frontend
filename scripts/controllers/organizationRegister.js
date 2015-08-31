@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('OrganizationRegisterCtrl', function ($scope,$state,$modal,nbApiService,Validate) {
+  .controller('OrganizationRegisterCtrl', function ($scope,$state,$modal,nbApiService) {
 
     $scope.eulaCheck = false;
 
@@ -22,8 +22,7 @@ angular.module('angularNoteboosterApp')
 
     $scope.complete = false;
     $scope.register = function(formData){
-      $scope.errors = [];
-      Validate.form_validation(formData,$scope.errors);
+     
       if(!formData.$invalid){
             
             var moreData = {};

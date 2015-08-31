@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('RegisterCtrl', function ($scope, $rootScope, $state, nbApiService, Validate, $http,$modalInstance) {
+  .controller('RegisterCtrl', function ($scope, $rootScope, $state, nbApiService, $http,$modalInstance) {
   	$scope.model = {'username':'','password1':'','password2':'','email':''};
 
 
@@ -9,7 +9,7 @@ angular.module('angularNoteboosterApp')
   
     $scope.register = function(formData){
       $scope.errors = [];
-      Validate.form_validation(formData,$scope.errors);
+      //Validate.form_validation(formData,$scope.errors);
       if(!formData.$invalid){
         if (angular.isDefined($scope.school.selected) && Object.keys($scope.school.selected).length > 0 && angular.isDefined($scope.school.selected.id)){
           $scope.profileModel = {'school_id':$scope.school.selected.id, 'user_type':'STUDENT'};

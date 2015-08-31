@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('ProfileSettingsCtrl', function ($scope,$modal,$stateParams,$http,nbApiService,Validate,$cookies,$rootScope, FileUploader) {
+  .controller('ProfileSettingsCtrl', function ($scope,$modal,$stateParams,$http,nbApiService,$cookies,$rootScope, FileUploader) {
 
   	$scope.school = {};
 

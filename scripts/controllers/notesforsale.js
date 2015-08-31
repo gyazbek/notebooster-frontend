@@ -1,5 +1,5 @@
 'use strict';
-angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function($scope, $state, nbApiService, Validate, $modal) {
+angular.module('angularNoteboosterApp').controller('NotesForSaleCtrl', function($scope, $state, nbApiService, $modal) {
     $scope.notesCount = 0;
     $scope.page = 1;
     $scope.order = '-created';

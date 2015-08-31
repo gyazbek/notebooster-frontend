@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('OrganizationProfileCtrl', function ($scope,$modal,$state,$stateParams, nbApiService,Validate) {
+  .controller('OrganizationProfileCtrl', function ($scope,$modal,$state,$stateParams, nbApiService) {
 
 
     $scope.getProfile = function(username){

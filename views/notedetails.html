@@ -18,7 +18,7 @@
 							<p class="mtop15 mbot25 text-center"><a href="#" data-toggle="modal" data-target="#charityinfo">Learn More</a></p>
 						</main>
 						<p class="text-center mtop15 report-contact">
-							<a href="" ng-click="report()">Report Violation</a> | <a ng-click="contactUser()" href="">Contact Seller</a>
+							<a href="" ng-click="report()">Report Violation</a> | <a ng-click="authenticated ? contactUser(note.user.username) : signinModal()" href="">Contact Seller</a>
 						</p>
 					</div>
 					<div class="col-sm-5 col-xs-12 mbot25">

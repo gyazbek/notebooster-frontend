@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('PurchaseNoteModalCtrl', function ($scope, $location,$state, nbApiService, Validate,$modalInstance,note) {
+  .controller('PurchaseNoteModalCtrl', function ($scope, $location,$state, nbApiService,$modalInstance,note) {
 
     $scope.note = note;
      $scope.isCollapsed = true;

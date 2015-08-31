@@ -3,7 +3,7 @@
 	<div class="row vertical-align normalize-xs">
 		<div class="col-sm-2 col-xs-3 text-center mtop25-xs">
 			<img class="img-responsive" ng-src="{{ userInfo.profile.profile_picture || 'img/profile.png' }}" alt="Profile Picture" />
-			<span class="mtop15"><a href="" ng-click="report()">Report Violation</a></span>
+			<span class="mtop15"><a href="javascript:void(0);" ng-click="report()">Report Violation</a></span>
 		</div>
 		<div class="col-sm-7 col-xs-9 mbot25-xs">
 			<h1>{{userInfo.username}}</h1>
@@ -19,7 +19,7 @@
 		<div class="clearfix visible-xs"></div>
 		<div class="col-sm-3 col-xs-12">
 			<a href="" class="btn btn-minor btn-block" ng-click="followUser()">Follow</a>
-			<a href="" class="btn btn-primary btn-block" ng-click="contactUser()">Contact</a>
+			<a href="" class="btn btn-primary btn-block" ng-click="contactUser(userInfo.username)">Contact</a>
 		</div>
 	</div>
 	<div class="clearfix"></div>

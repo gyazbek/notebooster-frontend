@@ -1,5 +1,5 @@
 'use strict';
-angular.module('angularNoteboosterApp', ['ui.router', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.select', 'ui.bootstrap', 'angularFileUpload', 'cgBusy']).
+angular.module('angularNoteboosterApp', ['ui.router', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.select', 'ui.bootstrap', 'angularFileUpload', 'cgBusy','validation', 'validation.rule']).
 config(function($stateProvider, $urlRouterProvider) {
     //  .config(['$routeProvider', function ($routeProvider) {
     $stateProvider.state('users', {
@@ -372,9 +372,9 @@ config(function($stateProvider, $urlRouterProvider) {
     });
 }).run(function($state, $stateParams, $rootScope, nbApiService) {
 
-    nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
+    //nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
 
-   //nbApiService.initialize('http://localhost:8000', false).then(function(data) {
+   nbApiService.initialize('http://localhost:8000', false).then(function(data) {
         // nbApiService.identity().then(function(data){$rootScope.user = data;
         // });
     });

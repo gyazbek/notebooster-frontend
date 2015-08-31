@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('angularNoteboosterApp')
-  .controller('UserprofileCtrl', function ($scope,$state,$modal,$stateParams,nbApiService,Validate) {
+  .controller('UserprofileCtrl', function ($scope,$state,$modal,$stateParams,nbApiService) {
     $scope.username = "";
     $scope.userInfo = "";
     $scope.notesForSale = {};
@@ -58,26 +58,7 @@ angular.module('angularNoteboosterApp')
       });
     };
 
-    $scope.report = function(size) {
-      $scope.msgSentResponse = "";
-      var modalInstance = $modal.open({
-        animation: true,
-        templateUrl: 'views/partials/report_violation_modal.html',
-        controller: 'ReportViolationCtrl',
-        size: size,
-        resolve: {
-          username: function () {
-              return $scope.username;
-          }
-        }
-      });
 
-      modalInstance.result.then(function (msgResponse) {
-        $scope.msgSentResponse = msgResponse;
-      }, function (reason) {
-        // Modal closed.
-      });
-    };
 
     $scope.followUser = function(size){
       nbApiService.followUser($scope.userInfo.id)
@@ -106,25 +87,6 @@ angular.module('angularNoteboosterApp')
       });
     };
 
-    $scope.contactUser = function(size){
-      var modalInstance = $modal.open({
-        animation: true,
-        templateUrl: 'views/partials/contact_user_modal.html',
-        controller: 'ContactUserCtrl',
-        size: size,
-        resolve: {
-          username: function () {
-              return $scope.username;
-          }
-        }
-      });
-
-      modalInstance.result.then(function (msgResponse) {
-        $scope.msgSentResponse = msgResponse;
-      }, function (reason) {
-        // Modal closed.
-      });
-    };
 
     function init() {
       $scope.username = $stateParams.username;

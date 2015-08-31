@@ -7,14 +7,14 @@
             <div class="modal-body"><div class="row">
       <div class="col-xs-12 mbot15">
             <hr>
-            <p class="text-center" ng-show="note.charity.name">${{charityAmount()}} from this purchase will go to <strong>{{note.charity.name}}</strong>.</p>
+            <p class="text-center" ng-show="note.charity.name">{{charityAmount() | currency}} from this purchase will go to <strong>{{note.charity.name}}</strong>.</p>
             <p class="text-center buynow-drop"><i class="fa fa-caret-right"></i> <a ng-click="isCollapsed = !isCollapsed" href="javascript:void(0);">Want to increase the donation?</a></p>
           </div>
           <div class="clearfix"></div>
           <div id="collapsedonation" class="collapse" collapse="isCollapsed">
             <div class="col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
               <div class="input-group mbot25">
-                <span class="input-group-addon">${{note.price}} + </span>
+                <span class="input-group-addon">{{note.price | currency}} + </span>
                 <input ng-model="extraDonation" type="number" class="form-control" min="0" max="9999" aria-valuetext="4" value="6" aria-valuenow="8">
               </div>
             </div>
@@ -27,9 +27,9 @@
             <p class="text-right">Total:</p>
           </div>
           <div class="col-xs-6 mbot15">
-            <p class="muted">${{note.price}}</p>
-            <p class="muted">${{extraDonation}}</p>
-            <p>${{totalAmount()}}</p>
+            <p class="muted">{{note.price | currency}}</p>
+            <p class="muted">{{extraDonation | currency}}</p>
+            <p>{{totalAmount() | currency}}</p>
           </div>
           <div class="clearfix"></div>
 

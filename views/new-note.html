@@ -45,7 +45,7 @@
 
 			 </div>
 
-			<form name="noteForm" >
+			<form name="noteForm" novalidate>
 				<div class="row">
 					<div class="col-md-4">
 						<label for="no_of_pages">Number of Pages:</label>
@@ -68,11 +68,12 @@
 						<label for="note_price">Note Price:</label>
 					</div>
 					<div class="col-md-5">
-						<div class="input-group form-group">
+						<div class="input-group form-group" ng-class="{'has-error': noteForm.note_price.$dirty && noteForm.note_price.$invalid}">
 							<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-							<input ng-model="note.price" min="0" max="1000"  type="number" class="form-control note_price" name="note_price" placeholder="5.00" ng-disabled="priceToggle"/>
-							<span class="input-group-addon" ng-hide="priceToggle"> + $0.99 fee</span>
+							<input ng-model="note.price" min="3" max="999"  type="number" class="form-control note_price" name="note_price" placeholder="0.00" ng-disabled="priceToggle"/>
+							<span class="input-group-addon" ng-hide="priceToggle"> + {{noteFee | currency}} fee</span>
 						</div>
+						<div class="has-error-text mbot15" style="display: block;" ng-show="!priceToggle && (noteForm.note_price.$touched || noteForm.submitted || noteForm.note_price.$dirty) && noteForm.note_price.$invalid">Please input a valid price between $3 and $999.</div>
 					</div>
 					<div class="col-md-3 form-group">
 						<label for="free_price" >
@@ -83,7 +84,7 @@
 					<div class="col-md-4">
 						<label for="charity_split">Organization Split:</label>
 					</div>
-					<div class="col-md-3 form-group">
+					<div class="col-md-3 form-group" ng-class="{'has-error': noteForm.charity_split.$dirty && noteForm.charity_split.$invalid}">
 						<select ng-model="note.charity_split" class="form-control" name="charity_split">
 							<!-- <option value="20">20%</option> -->
 							<option value="24">24%</option>
@@ -103,9 +104,9 @@
 					<div class="col-md-4">
 						<label for="select_charity">Select Organization:</label>
 					</div>
-					<div class="col-md-8 form-group">
+					<div class="col-md-8 form-group" ng-class="{'has-error': noteForm.charity.$dirty && noteForm.charity.$invalid}">
 
-					<ui-select ng-model="note.charity" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval" on-select="loadOrganization($item, $model)">
+					<ui-select ng-model="note.charity" name="charity" theme="bootstrap" ng-disabled="disabled" cg-busy="organizationListRetrieval" on-select="loadOrganization($item, $model)" required>
 
  								<ui-select-match placeholder="Select an organization from the list...">{{$select.selected.name}}</ui-select-match>
 							   <ui-select-choices repeat="country in organizationList | filter: $select.search">
@@ -117,25 +118,28 @@
 					<div class="col-md-6 col-md-offset-12 form-group charity-description" cg-busy="organizationPromise">
 
 						<p class="muted">{{organizationInfo.organization.name}}</p>
-
 						<p class="muted">{{organizationInfo.profile.bio}}</p>
 
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-8 col-md-offset-4 form-group">
 						<!-- LIVE PAYMENT CALCULATION GOES HERE -->
-						<p class="muted">You Make: $<text>{{yourAmount()}}</text></p>
-						<p class="muted">Organization Makes: $<text>{{charityAmount()}}</text></p>
+						<p class="muted">You Make: <text>{{yourAmount() | currency}}</text></p>
+						<p class="muted">Organization Makes: <text>{{charityAmount() | currency}}</text></p>
 					</div>
 					<div class="clearfix"></div>
 					<hr class="narrower">
-					<div class="col-xs-12 mbot15 form-group full-width">
+					<div class="col-xs-12 mbot15 form-group full-width" ng-class="{'has-error': (noteForm.note_title.$dirty || noteForm.submitted) && noteForm.note_title.$invalid}">
 						<label for="note_title">Note Title: <span class="muted">(Max: 50 characters)</span></label>
 						<!-- SOME TYPE OF CHARACTER COUNTER GOES HERE -->
-						<input ng-model="note.title" class="form-control" name="note_title" required maxlength="50" />
+						<input ng-model="note.title" class="form-control" name="note_title" ng-minlength=3 ng-maxlength=50 required />
+						<div ng-show="noteForm.note_title.$dirty">
+							<div class="has-error-text" id="title-error" ng-show="noteForm.note_title.$error.minlength">Title must be between 3 and 50 characters</div>
+							<div class="has-error-text" id="title-error" ng-show="noteForm.note_title.$error.required">A title is required</div>
+						</div>
 					</div>
 					<div class="clearfix"></div>
-					<div class="col-xs-12 form-group full-width">
+					<div class="col-xs-12 form-group full-width" ng-class="{'has-error': (noteForm.note_description.$dirty || noteForm.submitted) && noteForm.note_description.$invalid}">
 						<label for="note_description">Note Description:</label>
 						<textarea ng-model="note.description" class="form-control" name="note_description" required maxlength="10000"></textarea>
 					</div>
@@ -144,8 +148,8 @@
 					<div class="col-md-4">
 						<label for="school">School:</label>
 					</div>
-					<div class="col-md-8 form-group">
-						<ui-select ng-model="note.school" data-ng-disabled="disabled" theme="bootstrap" on-select="schoolSelected($item, $model)" ng-change="searchCourse()" ng-enter>
+					<div class="col-md-8 form-group" ng-class="{'has-error': (noteForm.school.$dirty || noteForm.submitted) && noteForm.school.$invalid}">
+						<ui-select ng-model="note.school" name="school" data-ng-disabled="disabled" theme="bootstrap" on-select="schoolSelected($item, $model)" ng-change="searchCourse()" ng-enter required>
 							<ui-select-match placeholder="Search for your school">{{$select.selected.name}}</ui-select-match>
 							<ui-select-choices refresh="searchSchool($select.search)" refresh-delay="300" repeat="school in schools">
 							<div ng-bind-html="school.name | highlight: $select.search"></div>
@@ -160,30 +164,27 @@
 					<div class="col-md-4">
 						<label for="semester">Semester:</label>
 					</div>
-					<div class="col-md-4 form-group">
+					<div class="col-md-4 form-group" ng-class="{'has-error': (noteForm.semester.$dirty || noteForm.submitted) && noteForm.semester.$invalid}">
 						<select ng-model="note.term" class="form-control" name="semester" required>
 							<option value="Spring">Spring</option>
 							<option value="Summer">Summer</option>
 							<option value="Fall">Fall</option>
 							<option value="Winter">Winter</option>
 						</select>
+						<div class="has-error-text" id="semester-error" style="display: block;" ng-show="(noteForm.semester.$touched || noteForm.submitted || noteForm.semester.$dirty) && noteForm.semester.$invalid">Please select a semester.</div>
 					</div>
-					<div class="col-md-4 form-group">
+					<div class="col-md-4 form-group" ng-class="{'has-error': (noteForm.semester_year.$dirty || noteForm.submitted) && noteForm.semester_year.$invalid}">
 						<!-- FLOATING CALCULATION FOR 1 YEAR BACK, CURRENT YEAR, PLUS 1 YEAR FORWARD -->
-						<select class="form-control" name="semester-year" required ng-model="note.year">
-							<option ng-selected="{{currentYear == year.year}}"
-            				ng-repeat="year in availableSemesterYears()"
-				            value="{{year.year}}">
-				      {{year.year}}
-				    </option>
+						<select class="form-control" name="semester_year" required ng-model="note.year" ng-options="year for year in semesterYears track by year">
 						</select>
+						
 					</div>
 					<div class="clearfix mbot15"></div>
 					<div class="col-md-4">
 						<label for="course">Course:</label>
 					</div>
-					<div class="col-md-8 form-group">
-						<ui-select ng-model="note.course" data-ng-disabled="disabled" theme="bootstrap" ng-enter>
+					<div class="col-md-8 form-group" ng-class="{'has-error': (noteForm.course.$dirty || noteForm.submitted) && noteForm.course.$invalid}">
+						<ui-select ng-model="note.course" data-ng-disabled="disabled" theme="bootstrap" name="course" required ng-enter>
 								<ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
 								<ui-select-choices repeat="course in courses"  refresh="searchCourse($select.search)"
              refresh-delay="1">
@@ -202,9 +203,9 @@
 					<div class="col-md-4">
 						<label for="professor">Instructor:</label>
 					</div>
-					<div class="col-md-8 form-group">
+					<div class="col-md-8 form-group" ng-class="{'has-error': (noteForm.instructors.$dirty || noteForm.submitted) && noteForm.instructors.$invalid}">
 						<!-- PROFESSOR LIST JSON GOES HERE -->
-							<ui-select ng-model="note.instructor" data-ng-disabled="disabled" theme="bootstrap"  ng-enter>
+						<ui-select ng-model="note.instructor" data-ng-disabled="disabled" theme="bootstrap" name="instructors" required ng-enter>
 							<ui-select-match placeholder="Search for your Instructor">{{$select.selected.name}}</ui-select-match>
 							<ui-select-choices repeat="instructor in instructors" refresh="searchInstructor($select.search)"
              refresh-delay="1">
@@ -215,6 +216,7 @@
 							<p><a href="" ng-click="addInstructor()">Don't see your Instructor in the list?</a></p>
 							<!-- new-instructor MODAL GOES HERE -->
 						</div>
+						<div class="has-error-text" id="description-error" style="display: block;" ng-show="noteForm.submitted && noteForm.instructors.$invalid">Please identify the instructor.</div>
 					</div>
 					<div class="clearfix"></div>
 					<hr class="narrower">
@@ -244,12 +246,13 @@
 						<label for="agree_terms">
 							<input ng-model="eula" type="checkbox" name="agree_terms" id="agree_terms" required /> I have read and agree to the <a ui-sref="app.legal" target="_blank">Terms of Use</a>
 						</label>
+						<div class="has-error-text" id="terms-error" style="display: block;" ng-show="(noteForm.agree_terms.$touched || noteForm.submitted || noteForm.agree_terms.$dirty) && noteForm.agree_terms.$invalid">You must agree to our terms before creating an account.</div>
 					</div>
 
 					<div class="clearfix"></div>
 					<div class="col-md-12 form-group text-center mtop25 mbot50 form-action-holder" cg-busy="saveNotePromise">
 						<button id="save" class="btn btn-minor col-sm-5" ng-click="saveNote('draft')">Save as Draft</button>
-						<button type="submit" id="submit" class="btn btn-primary col-sm-5 mleft50" ng-click="saveNote('final')" >Create!</button>
+						<button type="button" id="submit" class="btn btn-primary col-sm-5 mleft50" ng-click="saveNote('final')" >Create!</button>
 					</div>
 				</div>
 			</form>

@@ -30,7 +30,8 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
 
     $scope.siteStats = {}
     $scope.organizationFacts = [];
-
+    $scope.noteFee = 0.99;
+    
     var refreshNotificationCountData = function() {
         nbApiService.messageCount().then(function(data) {
             //alert(JSON.stringify(data)); bla bla bla
@@ -154,6 +155,47 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     nbApiService.organizationFacts().then(function(data) {
         $scope.organizationFacts = data;
     });
+
+
+    $scope.contactUser = function(username){
+      var modalInstance = $modal.open({
+        animation: true,
+        templateUrl: 'views/partials/contact_user_modal.html',
+        controller: 'ContactUserCtrl',
+        resolve: {
+          username: function () {
+              return username;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (msgResponse) {
+        $scope.msgSentResponse = msgResponse;
+      }, function (reason) {
+        // Modal closed.
+      });
+    };
+
+    $scope.report = function(size) {
+      $scope.msgSentResponse = "";
+      var modalInstance = $modal.open({
+        animation: true,
+        templateUrl: 'views/partials/report_violation_modal.html',
+        controller: 'ReportViolationCtrl',
+        size: size,
+        resolve: {
+          username: function () {
+              return $scope.username;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (msgResponse) {
+        $scope.msgSentResponse = msgResponse;
+      }, function (reason) {
+        // Modal closed.
+      });
+    };
 
     $scope.getRandomFact = function(){
         if($scope.organizationFacts.length>0){

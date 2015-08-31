@@ -1,50 +1,53 @@
-'use strict';
+(function() {
+    angular.module('validation.rule', ['validation'])
+        .config(['$validationProvider',
+            function($validationProvider) {
 
-angular.module('angularNoteboosterApp')
-  .service('Validate', function Validate() {
-    return {
-        'message': {
-            'minlength': 'This value is not long enough.',
-            'maxlength': 'This value is too long.',
-            'email': 'A properly formatted email address is required.',
-            'required': 'This field is required.'
-        },
-        'more_messages': {
-            'demo': {
-                'required': 'Here is a sample alternative required message.'
-            }
-        },
-        'check_more_messages': function(name,error){
-            return (this.more_messages[name] || [])[error] || null;
-        },
-        validation_messages: function(field,form,error_bin){
-            var messages = [];
-            for(var e in form[field].$error){
-                if(form[field].$error[e]){
-                    var special_message = this.check_more_messages(field,e);
-                    if(special_message){
-                        messages.push(special_message);
-                    }else if(this.message[e]){
-                        messages.push(this.message[e]);
-                    }else{
-                        messages.push("Error: " + e)
+                var expression = {
+                    required: function(value) {
+                        return !!value;
+                    },
+                    url: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/,
+                    email: /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
+                    number: /^\d+$/,
+                    minlength: function(value, scope, element, attrs, param) {
+                        return value.length >= param;
+                    },
+                    maxlength: function(value, scope, element, attrs, param) {
+                        return value.length <= param;
                     }
-                }
+                };
+
+                var defaultMsg = {
+                    required: {
+                        error: 'This is required!!',
+                        success: 'It\'s Required'
+                    },
+                    url: {
+                        error: 'This should be Url',
+                        success: 'It\'s Url'
+                    },
+                    email: {
+                        error: 'This should be an Email',
+                        success: 'It\'s Email'
+                    },
+                    number: {
+                        error: 'This should be a Number',
+                        success: 'It\'s Number'
+                    },
+                    minlength: {
+                        error: 'This should be longer',
+                        success: 'Long enough!'
+                    },
+                    maxlength: {
+                        error: 'This should be shorter',
+                        success: 'Short enough!'
+                    }
+                };
+
+                $validationProvider.setExpression(expression).setDefaultMsg(defaultMsg);
+
             }
-            var deduped_messages = [];
-            angular.forEach(messages, function(el, i){
-                if(deduped_messages.indexOf(el) === -1) deduped_messages.push(el);
-            });
-            if(error_bin){
-                error_bin[field] = deduped_messages;
-            }
-        },
-        'form_validation': function(form,error_bin){
-            for(var field in form){
-                if(field.substr(0,1) != "$"){
-                    this.validation_messages(field,form,error_bin);
-                }
-            }
-        }
-    }
-});
+        ]);
+
+}).call(this);
