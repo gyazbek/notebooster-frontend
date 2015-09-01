@@ -13,9 +13,9 @@
 						<button class="btn btn-primary btn-block mbot25 visible-sm visible-xs" ng-click="authenticated ? purchaseModal() : signinModal()">Buy Now</button>
 						<main class="col-xs-12 mbot25 visible-xs visible-sm">
 							<p class="muted mbot15 mtop25-sm">NOTE PURCHASE SUPPORTS</p>
-							<img ng-if="note.charity.logo" ng-src="{{note.charity.logo}}" class="img-responsive" alt="Organization Picture" />
-							<p ng-if="note.charity.logo == undefined">{{note.charity.name}}</p>
-							<p class="mtop15 mbot25 text-center"><a href="#" data-toggle="modal" data-target="#charityinfo">Learn More</a></p>
+							<img ng-if="note.charity.user.profile.profile_picture" ng-src="{{note.charity.user.profile.profile_picture}}" class="img-responsive" alt="Organization Picture" />
+							<p ng-if="note.charity.user.profile.profile_picture == undefined">{{note.charity.name}}</p>
+							<p class="mtop15 mbot25 text-center"><a href="javascript:void(0);" ng-click="learnMoreOrganizationModal(note.charity.user.username)">Learn More</a></p>
 						</main>
 						<p class="text-center mtop15 report-contact">
 							<a href="" ng-click="report()">Report Violation</a> | <a ng-click="authenticated ? contactUser(note.user.username) : signinModal()" href="">Contact Seller</a>
@@ -44,7 +44,7 @@
 								<p>Created:</p>
 								<p>Term:</p>
 								<p>Pages:</p>
-								<p>Format:</p>
+								<!-- <p>Format:</p> -->
 								<p>Purchases:</p>
 								<p>Rating:</p>
 							</div>
@@ -52,7 +52,7 @@
 								<p>{{note.created | date}}</p>
 								<p>{{note.term + " " + note.year}}</p>
 								<p>{{note.page_count}}</p>
-								<p>{{note.kind}}</p>
+								<!-- <p>{{note.kind}}</p> -->
 								<p>{{note.sold_count}}</p>
 								<p>
 									<i ng-repeat=" i in [] | range:note.user.rating" class="fa fa-star"></i>
@@ -91,9 +91,9 @@
 					<button class="btn btn-primary btn-block" ng-click="authenticated ? purchaseModal() : signinModal()">Buy Now</button>
 					<hr class="dotted mtop25 mbot25">
 					<p class="muted mbot15 mtop25-xs">NOTE PURCHASE SUPPORTS</p>
-					<img ng-if="note.charity.logo" ng-src="{{ note.charity.logo}}" class="img-responsive" alt="Charity Picture" />
-					<p ng-if="note.charity.logo == undefined">{{note.charity.name}}</p>
-					<p class="mtop15 mbot25 text-center"><a href="#" data-toggle="modal" data-target="#charityinfo">Learn More</a></p>
+					<img ng-if="note.charity.user.profile.profile_picture" ng-src="{{ note.charity.user.profile.profile_picture}}" class="img-responsive" alt="Charity Picture" />
+					<p ng-if="note.charity.user.profile.profile_picture == undefined">{{note.charity.name}}</p>
+					<p class="mtop15 mbot25 text-center"><a href="javascript:void(0);" ng-click="learnMoreOrganizationModal(note.charity.user.username)">Learn More</a></p>
 				</main>
 			</div>
 		</section>

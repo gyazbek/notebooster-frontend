@@ -10,12 +10,15 @@ angular.module('angularNoteboosterApp')
     $scope.note.course = null;
     $scope.note.instructor = null;
     $scope.note.file = [];
+    $scope.note.fileDelete = [];
     $scope.note.charity_split = 24;
     $scope.note.charity = {"user":{"id":2606,"username":"WhoWePlayForFSU"},"name":"Who We Play for FSU","slug":"who-we-play-for-fsu2606"};
     $scope.note.year = new Date().getFullYear();
-
     $scope.semesterYears = null;
     $scope.currentYear = new Date().getFullYear();
+    
+    $scope.organization = {};
+    $scope.organizationList = [];
 
     var uploader = $scope.uploader = new FileUploader({
             url: nbApiService.getBaseApiUrl() + '/note/file/upload',
@@ -74,6 +77,7 @@ angular.module('angularNoteboosterApp')
           if(status==200 || status == 200){
             if(angular.isDefined(response.id)){
               $scope.note.file.push(response);
+
               fileItem.remove();
             }
           }
@@ -138,8 +142,7 @@ angular.module('angularNoteboosterApp')
     $scope.yourAmount = function() { return $scope.note.price ? ( (1 - ($scope.note.charity_split/100)) * $scope.note.price) : 0 };
     $scope.charityAmount = function() { return $scope.note.price ? ( ($scope.note.charity_split/100) * $scope.note.price) : 0 };
     
-    $scope.organization = {};
-    $scope.organizationList = [];
+  
     $scope.organizationListRetrieval = nbApiService.getSimpleOrgnizationList().then(function(data) {
           $scope.organizationList = data;
           if(data && data.length > 0){
@@ -148,8 +151,16 @@ angular.module('angularNoteboosterApp')
     });
 
     $scope.removeFile = function(item) {
+      $scope.note.fileDelete.push(item);    
        var index = $scope.note.file.indexOf(item);
         $scope.note.file.splice(index, 1);     
+    };
+
+
+    $scope.undoRemoveFile = function(item) {
+      $scope.note.file.push(item);    
+       var index = $scope.note.fileDelete.indexOf(item);
+      $scope.note.fileDelete.splice(index, 1);     
     };
 
     $scope.loadOrganization = function(item, model) {
@@ -179,7 +190,7 @@ angular.module('angularNoteboosterApp')
     };
 
     $scope.schoolSelected = function(item, model) {
-        $scope.note.course = {};
+        $scope.note.course = null;
         $scope.schoolRequired = false;
     };
 
@@ -270,7 +281,7 @@ angular.module('angularNoteboosterApp')
 
 
       function sortNumber(a,b) {
-          return a.year - b.year;
+          return a - b;
       }
       $scope.availableSemesterYears = function(force){
         
@@ -283,6 +294,7 @@ angular.module('angularNoteboosterApp')
               var semester = i;//{'year':i};
               semesters.push(semester);
             }
+
             // check if whatever we have saved is not on our list of 3 years
             if(angular.isDefined($scope.note.year) && $scope.note.year){
            
@@ -290,12 +302,12 @@ angular.module('angularNoteboosterApp')
               for(var i = 0; i < semesters.length; i++){
                   if($scope.note.year == semesters[i]) {
                       matched = true;
-                      return;
                   }
               }
               if(matched==false){
                 
                 semesters.push($scope.note.year);//{'year':$scope.note.year});
+ 
                 semesters.sort(sortNumber);
               }
             }
@@ -349,11 +361,14 @@ angular.module('angularNoteboosterApp')
         //   delete noteObj.course;
         //   alert(JSON.stringify(noteObj));
         // }
+         $scope.noteSaveSuccess = false;
+
+        var previousStatus = angular.isDefined($scope.note.status) ? $scope.note.status : null;
 
         if(type == 'draft'){
 
           $scope.note.status = 'draft';
-          $scope.noteSaveSuccess = false;
+         
      
         }else {
           $scope.note.status = 'active';
@@ -366,7 +381,19 @@ angular.module('angularNoteboosterApp')
 
           $scope.saveNotePromise = nbApiService.updateNote($scope.note.id, $scope.note)
           .then(function(data){
-             $scope.noteSaveSuccess = true;
+           
+              $scope.noteSaveSuccess = true;
+
+              if($scope.note.status == 'active' && previousStatus!=null && previousStatus =='draft' && angular.isDefined(data.status) && data.status =='active'  ){
+                
+                 $state.go('app.new-note.confirmation', {
+                'noteId': $scope.note.id
+               });
+              }
+
+
+             $scope.note = data;
+
           },function(data){
              if(angular.isDefined(data.data.non_field_errors)){
                 data.data = data.data.non_field_errors;
@@ -379,9 +406,12 @@ angular.module('angularNoteboosterApp')
           $scope.saveNotePromise = nbApiService.newNote($scope.note)
           .then(function(data){
              if(type == 'draft'){
-              $state.go('app.new-note.draft-confirmation');
+              //$state.go('app.new-note.draft-confirmation');
              }else{
-               $state.go('app.new-note.confirmation');
+               $state.go('app.new-note.confirmation', {
+              'noteId': noteId
+             });
+
              }
           },function(data){
             
@@ -413,13 +443,14 @@ angular.module('angularNoteboosterApp')
       $scope.paypalEmailUpdate = $scope.user.paypal_email;
 
       // if edit note instead of new
-       if(typeof $stateParams.noteId !== 'undefined') {
+       if(typeof $stateParams.noteId !== 'undefined' && $stateParams.noteId.length) {
         $scope.noteId = $stateParams.noteId;
 
          $scope.existingNoteRetrievalPromise = nbApiService.noteEditDetails($scope.noteId)
         .then(function(data){
           // success case
           $scope.note = data;
+          $scope.note.fileDelete = [];
           $scope.availableSemesterYears(true);
         },function(data){
           // error case
@@ -429,6 +460,8 @@ angular.module('angularNoteboosterApp')
       }else{
         $scope.availableSemesterYears(false);
       }
+
+      
     };
 
 

@@ -9,7 +9,11 @@
 					<div class="form-group">
 					 <div class="alert alert-danger" ng-repeat="error in errors.message">{{error}}</div>
 						<label for="cont-message">Message:</label>
-						<textarea name="message" class="form-control" ng-model="model.message" required ></textarea>
+						<textarea name="message" class="form-control" ng-model="model.message" required ng-minlength="10" ng-maxlength="10000"></textarea>
+						  <div ng-show="formSubmitted || contactForm.message.$dirty">
+		                <div class="has-error-text" ng-show="contactForm.message.$error.minlength || contactForm.message.$error.maxlength">Message must be between 10 and 10000 characters</div>
+		                <div class="has-error-text" ng-show="contactForm.message.$error.required">Please write a description of the issue.</div>
+		            </div>
 					</div>
 					<div class="form-group">
 					 <div class="alert alert-danger" ng-repeat="error in errors.subject">{{error}}</div>
@@ -20,14 +24,16 @@
 							<option value="Idea">Question</option>
 							<option value="Idea">Praise</option>
 						</select>
+						<div class="has-error-text" id="subject-error" ng-show="contactForm.subject.$error.required">Please select a subject.</div>
 					</div>
 					<div class="form-group">
 						<label for="cont-name">Your Name:</label>
-						<input type="text" name="name" class="form-control"  ng-model="model.name" />
+						<input type="text" name="name" class="form-control"  ng-model="model.name" ng-maxlength="245"/>
 					</div>
 					<div class="form-group">
 						<label for="cont-email">Your Email:</label>
 						<input type="email" name="email" class="form-control" ng-model="model.email" />
+						<div class="has-error-text" id="subject-error" ng-show="contactForm.email.$error.email">Please enter a valid email</div>
 					</div>
 						<div class="row">
 							<div class="col-sm-6 col-sm-offset-3">

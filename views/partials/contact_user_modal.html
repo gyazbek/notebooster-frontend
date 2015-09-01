@@ -6,21 +6,45 @@
 		<h3 class="modal-title">Compose Message</h3>
 		<p></p>
 	</div>
-	<div class="modal-body"><form ng-submit+"send()">
-		<label class="mbot15">To: {{to}}</label>
+	<div class="modal-body">
+	<form name="messageForm" ng-submit="send()" novalidate cg-busy="sendMessagePromise">
+		<label class="mbot15" ng-if="to">To: {{to}}</label>
+		
+		<div class="form-group" ng-if="!to">
+		
+	
+				<label for="cont-subject">To:</label>
+			
+			
+				
+				<ui-select ng-model="userTo.selected" data-ng-disabled="disabled" theme="bootstrap" name="userInput" required>
+					<ui-select-match placeholder="Search User">{{$select.selected.username}}</ui-select-match>
+					<ui-select-choices repeat="user in users" refresh="searchUsers($select.search)"
+     refresh-delay="1">
+					<span ng-bind-html="user.username | highlight: $select.search"></span>
+					</ui-select-choices>
+				</ui-select>
+			<div class="has-error-text" ng-show="messageForm.submitted && messageForm.userInput.$invalid">Please choose a user</div>
+			
+		</div>
 		<div class="form-group">
 			<label for="cont-subject">Subject:</label>
-			<input ng-model="subject" type="text" name="cont-subject" class="form-control">
-			<div class="has-error-text" id="subject-error">Please enter a subject.</div>
+			<input ng-model="subject" type="text" name="subject" class="form-control" ng-maxlength="100" required>
+			<div class="has-error-text" id="subject-error" ng-show="messageForm.submitted && messageForm.subject.$error.maxlength">Subject must be 100 characters or less</div>
+			<div class="has-error-text" ng-show="messageForm.subject.$error.required">Please enter a subject.</div>
 		</div>
 		<div class="form-group">
 			<label for="cont-message">Message:</label>
-			<textarea required ng-model="msg" name="cont-message" class="form-control"></textarea>
-			<div class="has-error-text" id="email-error">Please enter a message.</div>
+			<textarea required ng-model="msg" name="message" class="form-control" ng-minlength="2" ng-maxlength="5000"></textarea>
+			<div ng-show="messageForm.message.$dirty || messageForm.submitted">
+				<div class="has-error-text" ng-show="messageForm.message.$error.minlength || messageForm.message.$error.maxlength">Message must be between 2 and 5000 characters</div>
+				<div class="has-error-text" ng-show="messageForm.message.$error.required">Please enter a message.</div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
-				<button ng-click="send()" class="btn btn-primary btn-block">Send</button>
+				<button type="submit" class="btn btn-primary btn-block">Send</button>
+				<div class="has-error-text" ng-show="failed">Unable to send message, please try again</div>
 			</div>
 		</div></form></div>
 	</div>          

@@ -263,7 +263,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'method': "GET",
                 'url': "/user/" + username + "/forsale",
                 'fresh':true,
-                'data': {
+                'params': {
                     'page': page
                 },
                 'useAuthToken':false
@@ -382,6 +382,20 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'data': data
             });
         },
+        'reportViolation': function(email, message, subject,url, more) {
+            var data = {
+                'email': email,
+                'comment': message,
+                'kind': subject,
+                'url': url
+            }
+            data = angular.extend(data, more);
+            return this.request({
+                'method': "POST",
+                'url': "/violation",
+                'data': data
+            });
+        },
         'browseNotes': function(schoolId, courseId, page,order, more) {
 
            var orderAppend = (order != '' ? (order == 'newest' ? {'ordering':'-created'} 
@@ -472,7 +486,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             return this.request({
                 'method': "GET",
                 'url': "/note/purchased",
-                'data': {
+                'params': {
                     'page': page,
                     'order': order
                 },
@@ -586,7 +600,7 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             return this.request({
                 'method': "GET",
                 'url': "/user/watchlist",
-                'data': {
+                'params': {
                     'order': order,
                     'page': page
                 },
@@ -621,6 +635,14 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 'params': {
                     'page': page
                 }
+            });
+        },
+        'getUsers': function(term,page) {
+            return this.request({
+                'method': "GET",
+                'url': "/user",
+                'params': {'page':page, 'search':term},
+                'useAuthToken':false
             });
         },
         'getSchools': function(params) {

@@ -46,7 +46,7 @@
                     <option value="active">Active</option>
                     <option value="draft">Disabled</option>
                   </select>
-                  <a href="" id="{{note.id}}" ng-click="updateNote(note)" class="btn btn-minor btn-block mtop5">Edit</a>
+                  <a ui-sref="app.update-note({noteId:note.id})" class="btn btn-minor btn-block mtop5">Edit</a>
                   <button class="btn btn-primary btn-block" id="{{note.title}}" ng-click="promote($event)">Promote</button>
                 </div>
               </div>

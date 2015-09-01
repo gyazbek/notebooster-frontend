@@ -1,7 +1,7 @@
 <div class="container results mtop25 mbot25 outline" cg-busy="existingNoteRetrievalPromise">
 	<section class="row">
 		<div class="col-xs-12 mbot25">
-			<h1>Create New Note</h1>
+			<h1>{{note.id ? 'Edit Note' : 'Create New Note'}}</h1>
 			<p class="muted">Do you have good notes? Share them with the rest of your class!</p>
 		</div>
 		<div class="col-md-8 col-sm-12 hr-right">
@@ -22,7 +22,7 @@
 				...or drag and drop files here!
 			</div>
 
-			 <div ng-repeat="item in uploader.queue" class="mbot25 mtop25">
+			 <div ng-repeat="item in uploader.queue" class="mbot25 mtop25 notes-uploading">
 			 	<strong>{{ item.file.name }}</strong>
 			 	<div ng-show="item.isError">Could not upload {{item.file.name}}, please try again</div>
                 <div ng-show="uploader.isHTML5">
@@ -35,14 +35,24 @@
             	</div>
 
 			 </div>
+			 <div class="notes-uploaded">
+				 <div ng-repeat="item in note.file" class="mbot25 mtop25">
 
-			 <div ng-repeat="item in note.file" class="mbot25 mtop25">
+				 	<strong>{{ item.file_name }}</strong>
+	                <div>
+	                    <button ng-click="removeFile(item)">Remove</button>
+	                </div>
 
-			 	<strong>{{ item.file_name }}</strong>
-                <div>
-                    <button ng-click="removeFile(item)">Remove</button>
-                </div>
-
+				 </div>
+			 </div>
+			 <div class="to-be-deleted" ng-show="note.fileDelete.length">
+				 <h3>Files to be Deleted</h3>
+				 <div ng-repeat="item in note.fileDelete" class="mbot25 mtop25">
+				 	<strong>{{ item.file_name }}</strong>
+	                <div>
+	                    <button ng-click="undoRemoveFile(item)">Undo</button>
+	                </div>
+				 </div>
 			 </div>
 
 			<form name="noteForm" novalidate>
@@ -67,10 +77,10 @@
 					<div class="col-md-4">
 						<label for="note_price">Note Price:</label>
 					</div>
-					<div class="col-md-5">
-						<div class="input-group form-group" ng-class="{'has-error': noteForm.note_price.$dirty && noteForm.note_price.$invalid}">
+					<div class="col-md-4">
+						<div class="input-group form-group" ng-class="{'has-error': noteForm.note_price.$dirty && noteForm.note_price.$invalid}" >
 							<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-							<input ng-model="note.price" min="3" max="999"  type="number" class="form-control note_price" name="note_price" placeholder="0.00" ng-disabled="priceToggle"/>
+							<input ng-model="note.price" ng-pattern="/^(0|[3-9]|[1-9][0-9]|[1-9][0-9][0-9])$/" type="number" class="form-control note_price" name="note_price" placeholder="0.00" ng-disabled="priceToggle"/>
 							<span class="input-group-addon" ng-hide="priceToggle"> + {{noteFee | currency}} fee</span>
 						</div>
 						<div class="has-error-text mbot15" style="display: block;" ng-show="!priceToggle && (noteForm.note_price.$touched || noteForm.submitted || noteForm.note_price.$dirty) && noteForm.note_price.$invalid">Please input a valid price between $3 and $999.</div>
@@ -85,7 +95,7 @@
 						<label for="charity_split">Organization Split:</label>
 					</div>
 					<div class="col-md-3 form-group" ng-class="{'has-error': noteForm.charity_split.$dirty && noteForm.charity_split.$invalid}">
-						<select ng-model="note.charity_split" class="form-control" name="charity_split">
+						<select ng-model="note.charity_split" class="form-control" name="charity_split" required>
 							<!-- <option value="20">20%</option> -->
 							<option value="24">24%</option>
 							<option value="30">30%</option>
@@ -134,14 +144,19 @@
 						<!-- SOME TYPE OF CHARACTER COUNTER GOES HERE -->
 						<input ng-model="note.title" class="form-control" name="note_title" ng-minlength=3 ng-maxlength=50 required />
 						<div ng-show="noteForm.note_title.$dirty">
-							<div class="has-error-text" id="title-error" ng-show="noteForm.note_title.$error.minlength">Title must be between 3 and 50 characters</div>
+							<div class="has-error-text" id="title-error" ng-show="noteForm.note_title.$error.minlength || noteForm.note_title.$error.maxlength">Title must be between 3 and 50 characters</div>
 							<div class="has-error-text" id="title-error" ng-show="noteForm.note_title.$error.required">A title is required</div>
 						</div>
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-xs-12 form-group full-width" ng-class="{'has-error': (noteForm.note_description.$dirty || noteForm.submitted) && noteForm.note_description.$invalid}">
 						<label for="note_description">Note Description:</label>
-						<textarea ng-model="note.description" class="form-control" name="note_description" required maxlength="10000"></textarea>
+						<textarea ng-model="note.description" class="form-control" name="note_description" required ng-minlength="10" ng-maxlength="10000"></textarea>
+						
+							<div ng-show="noteForm.note_description.$dirty || noteForm.submitted">
+							<div class="has-error-text" ng-show="noteForm.note_description.$error.minlength || noteForm.note_description.$error.maxlength">Description must be between 10 and 10000 characters</div>
+							<div class="has-error-text" ng-show="noteForm.note_description.$error.required">Please write a description.</div>
+						</div>
 					</div>
 					<div class="clearfix"></div>
 					<hr class="narrower">
@@ -158,7 +173,7 @@
 						      </small>
 						</ui-select-choices>
 					</ui-select>
-					<span ng-if="schoolRequired">Please select a school</span>
+					<div class="has-error-text" id="description-error" style="display: block;" ng-show="noteForm.submitted && noteForm.school.$invalid">Please select a school.</div>
 					</div>
 					<div class="clearfix mbot15"></div>
 					<div class="col-md-4">
@@ -174,7 +189,6 @@
 						<div class="has-error-text" id="semester-error" style="display: block;" ng-show="(noteForm.semester.$touched || noteForm.submitted || noteForm.semester.$dirty) && noteForm.semester.$invalid">Please select a semester.</div>
 					</div>
 					<div class="col-md-4 form-group" ng-class="{'has-error': (noteForm.semester_year.$dirty || noteForm.submitted) && noteForm.semester_year.$invalid}">
-						<!-- FLOATING CALCULATION FOR 1 YEAR BACK, CURRENT YEAR, PLUS 1 YEAR FORWARD -->
 						<select class="form-control" name="semester_year" required ng-model="note.year" ng-options="year for year in semesterYears track by year">
 						</select>
 						
@@ -198,6 +212,7 @@
 							<p><a href="" ng-click="addCourse()">Don't see your Course in the list?</a></p>
 							<!-- new-course MODAL GOES HERE -->
 						</div>
+						<div class="has-error-text" id="description-error" ng-show="noteForm.submitted && noteForm.course.$invalid">Please identify the course.</div>
 					</div>
 					<div class="clearfix mbot15"></div>
 					<div class="col-md-4">
@@ -252,7 +267,7 @@
 					<div class="clearfix"></div>
 					<div class="col-md-12 form-group text-center mtop25 mbot50 form-action-holder" cg-busy="saveNotePromise">
 						<button id="save" class="btn btn-minor col-sm-5" ng-click="saveNote('draft')">Save as Draft</button>
-						<button type="button" id="submit" class="btn btn-primary col-sm-5 mleft50" ng-click="saveNote('final')" >Create!</button>
+						<button type="button" id="submit" class="btn btn-primary col-sm-5 mleft50" ng-click="saveNote('final')" >{{(note.id && note.status == 'active') ? 'Save' : 'Publish'}}</button>
 					</div>
 				</div>
 			</form>

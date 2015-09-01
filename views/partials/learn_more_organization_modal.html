@@ -1,0 +1,21 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button ng-click="close()" type="button" class="close">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h3 class="modal-title">Charity Supported Note</h3>
+    <p>Proceeds from this note are shared with:</p>
+  </div>
+  <div class="modal-body" cg-busy="organizationPromise"><p></p>
+        <h4>{{organizationInfo.organization.name}}</h4>
+        <p class="muted">{{organizationInfo.profile.short_bio}}</p>
+        <div class="row">
+          <div class="col-xs-8 col-xs-offset-2">
+            <img ng:if="organizationInfo.profile.profile_picture" ng:src="{{organizationInfo.profile.profile_picture}}" class="img-responsive" alt="Organization Profile Picture">
+            <p class="mtop25 mbot15 text-center"><a ui-sref="app.vieworganization({username:organizationInfo.username})" target="_blank">View Profile</a></p>
+          </div>
+          <div class="col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+            <button class="btn btn-primary btn-block" ng-click="cancel()">Close</button>
+          </div>
+        </div></div>
+      </div>

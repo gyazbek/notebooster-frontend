@@ -26,30 +26,33 @@ angular.module('angularNoteboosterApp').filter('propsFilter', function() {
     };
 });
 
-angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope, $window, $rootScope, $location, $state, nbApiService, $modal, $log, $timeout) {
+angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope, $window, $rootScope, $location, $state, nbApiService, $modal, $log, $timeout, $interval) {
 
     $scope.siteStats = {}
     $scope.organizationFacts = [];
     $scope.noteFee = 0.99;
-    
-    var refreshNotificationCountData = function() {
+    $scope.notificationCountRefreshRate = 120000;
+    // Assume user is not logged in until we hear otherwise
+    $scope.authenticated = false; //nbApiService.authenticated;
+    $scope.refreshNotificationCountDataPromise = null;
+
+    $scope.refreshNotificationCountData = function() {
+        
         nbApiService.messageCount().then(function(data) {
             //alert(JSON.stringify(data)); bla bla bla
             $scope.notificationCount = (data.count ? data.count : 0)
         });
     };
-    var refreshNotificationCountDataPromise = null;
-    // Assume user is not logged in until we hear otherwise
-
-    $scope.authenticated = false; //nbApiService.authenticated;
-
+    
+   
     if (nbApiService.authPromise != null && angular.isDefined(nbApiService.authPromise)) {
         nbApiService.authPromise.then(function(data) {
             $scope.authenticated = true;
             nbApiService.identity().then(function(data) {
                 $scope.user = data;
             });
-            refreshNotificationCountDataPromise = $timeout(refreshNotificationCountData, 1000);
+
+            $scope.refreshNotificationCountDataPromise = $interval($scope.refreshNotificationCountData, $scope.notificationCountRefreshRate);
         });
     }
 
@@ -66,9 +69,9 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
         $scope.authenticated = false;
         $scope.user = {};
        
-        if (angular.isDefined(refreshNotificationCountDataPromise)) {
-            $timeout.cancel(refreshNotificationCountDataPromise);
-            refreshNotificationCountDataPromise = undefined;
+        if (angular.isDefined($scope.refreshNotificationCountDataPromise)) {
+            $timeout.cancel($scope.refreshNotificationCountDataPromise);
+            $scope.refreshNotificationCountDataPromise = undefined;
         }
     });
     // Wait and respond to the log in event.
@@ -79,8 +82,8 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
         // });
         nbApiService.identity().then(function(data) {
             $scope.user = data;
-            
         });
+        $scope.refreshNotificationCountDataPromise = $interval(refreshNotificationCountData, $scope.notificationCountRefreshRate);
     });
     // // Wait for the status of authentication, set scope var to true if it resolves
     // nbApiService.authenticationStatus(true).then(function(){

@@ -98,6 +98,29 @@ angular.module('angularNoteboosterApp')
     });
   };
 
+    $scope.learnMoreOrganizationModal = function(username) {
+     
+    var modalInstance = $modal.open({
+      animation: true,
+      templateUrl: 'views/partials/learn_more_organization_modal.html',
+      controller: 'LearnMoreOrganization',
+     // size: size,
+      resolve: {
+      username: function () {
+          return username;
+      }
+    }
+   
+    });
+
+    modalInstance.result.then(function () {
+      //TODO: disable account and log user out
+      console.log('disable it');
+    }, function (reason) {
+      // Modal closed.
+      console.log(reason);
+    });
+  };
 
 
 });

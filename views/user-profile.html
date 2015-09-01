@@ -70,9 +70,9 @@
 			</main>
 			<footer class="row">
 				<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-				<pagination ng-model="page" total-items="notesCount" boundary-links="true" 
+				<pagination ng-model="notesPage" total-items="notesCount" boundary-links="true" 
 					first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
-					rotate="true" max-size="maxSize" ng-change="getNotesForSale(username,notesPage)">
+					rotate="true" max-size="maxSize" ng-change="getNotesForSale()">
 				</pagination>
 			</div>
 		</footer>
@@ -93,7 +93,7 @@
 			<div class="clearfix"></div>
 			<footer class="row">
 			<div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
-				<pagination ng-model="page" total-items="commentsCount" boundary-links="true" 
+				<pagination ng-model="feedbackPage" total-items="commentsCount" boundary-links="true" 
 					first-text="&laquo;" previous-text="&lsaquo;" next-text="&rsaquo;"  last-text="&raquo;" 
 					rotate="true" max-size="maxSize" ng-change="getUserComments(username,feedbackPage)">
 				</pagination>

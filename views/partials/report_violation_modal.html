@@ -6,32 +6,31 @@
         <h3 class="modal-title">Report Violation</h3>
         <p>We take violations of our Terms &amp; Policies very seriously. Please report this violation only if you have a strong certainty.</p>
     </div>
-    <div class="modal-body"><form ng-submit="send()">
+    <div class="modal-body" cg-busy="reportPromise">
+    <form name="violationForm" ng-submit="send()" novalidate>
         <div class="form-group">
-            <label for="vio-name">Your Name:</label>
-            <input required ng-model="name" type="text" class="form-control" name="vio-name">
+            <label for="email">Email Address:</label>
+            <input ng-model="email" type="email" class="form-control" name="email">
+            <div class="has-error-text" id="subject-error" ng-show="violationForm.email.$error.email">Please enter a valid email</div>
         </div>
         <div class="form-group">
-            <label for="vio-email">Email Address:</label>
-            <input required ng-model="email" type="text" class="form-control" name="vio-email">
-            <div class="has-error-text" id="subject-error">Please enter your name.</div>
-        </div>
-        <div class="form-group">
-            <label for="vio-subject">Subject:</label>
-            <select required ng-model="reason" name="vio-subject" class="form-control">
-                <option>Please select one</option>
+            <label for="subject">Subject:</label>
+            <select required ng-model="subject" name="subject" class="form-control" placeholder="Please select a Violation type">             
                 <option>These notes are stolen.</option>
                 <option>This comment is offensive.</option>
                 <option>I am a professor and do not want notes for my class posted.</option>
                 <option>These notes have significant errors.</option>
                 <option>Spam</option>
             </select>
-            <div class="has-error-text" id="subject-error">Please select a subject.</div>
+            <div class="has-error-text" id="subject-error" ng-show="violationForm.subject.$error.required">Please select a subject.</div>
         </div>
         <div class="form-group">
-            <label for="vio-message">Message:</label>
-            <textarea required ng-model="msg" class="form-control" name="vio-message"></textarea>
-            <div class="has-error-text" id="email-error">Please enter a message.</div>
+            <label for="message">Message:</label>
+            <textarea required ng-model="message" class="form-control" name="message" required ng-minlength="10" ng-maxlength="10000"></textarea>
+            <div ng-show="formSubmitted || violationForm.message.$dirty">
+                <div class="has-error-text" ng-show="violationForm.message.$error.minlength || violationForm.message.$error.maxlength">Message must be between 10 and 10000 characters</div>
+                <div class="has-error-text" ng-show="violationForm.message.$error.required">Please write a description of the issue.</div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">

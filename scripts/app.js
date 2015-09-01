@@ -236,7 +236,8 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 templateUrl: 'views/note-posted-confirmation.html'
-            }
+            },
+            params: { noteId: null, }
         }}).
      state('app.new-note.draft-confirmation', {
         views: {
@@ -245,7 +246,7 @@ config(function($stateProvider, $urlRouterProvider) {
             }
         }})
         .state('app.update-note', {
-        url: 'edit-note?noteId',
+        url: 'edit-note/{noteId}',
         views: {
             'content@': {
                 controller: 'NewNoteCtrl',
@@ -370,9 +371,11 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         abstract: true
     });
-}).run(function($state, $stateParams, $rootScope, nbApiService) {
+}).run(function($state, $stateParams, $rootScope,$location, nbApiService) {
 
-    //nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
+    //$rootScope.location = $location;
+
+   // nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
 
    nbApiService.initialize('http://localhost:8000', false).then(function(data) {
         // nbApiService.identity().then(function(data){$rootScope.user = data;

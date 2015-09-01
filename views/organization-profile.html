@@ -10,7 +10,7 @@
 					<div class="fb-like" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
 				</p>
 				<p>Joined: {{profile.date_joined | date }}</p>
-				<p ng-if="profile.organization.url">Website: <a href="{{profile.organization.url}}">{{profile.organization.url}}</a></p>
+				<p ng-if="profile.organization.url">Website: <a href="{{profile.organization.url}}" target="_blank">{{profile.organization.url}}</a></p>
 			</div>
 			<div class="col-sm-3">
 				<button class="btn btn-minor btn-block mbot25" ng-click="contactUser()">Contact</button>
@@ -47,7 +47,7 @@
 				<p class="muted mtop25-xs">{{profile.organization.fact}}</p>
 			</main>
 		</div>
-		<hr class="mtop25 mbot25">
+		<!-- <hr class="mtop25 mbot25">
 		<h2>Things to Know</h2>
 		<ul class="mbot25">
 							<li><p>Investigationes demonstraverunt lectores legere me lius</p></li>
@@ -55,7 +55,7 @@
 							<li><p>Investigationes demonstraverunt lectores legere me lius</p></li>
 							<li><p>Investigationes demonstraverunt lectores legere me lius</p></li>
 							<li><p>Investigationes demonstraverunt lectores legere me lius</p></li>
-					</ul>
+					</ul> -->
 	</div>
 
 	</div>
