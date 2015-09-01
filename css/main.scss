@@ -211,7 +211,9 @@ hr {
 	border-right: 1px solid;
 	border-color: #44494E;
 }
-
+.col-space{
+	&:last-of-type {}
+}
 .row {
 	&.vertical-align {
 		display: table;

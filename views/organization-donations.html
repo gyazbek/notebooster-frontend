@@ -13,19 +13,19 @@
 								</select>
 							</div>
 						</section>
-						<main class="row">
+						<main class="row ptop15">
 				              <div ng-if="itemsCount == 0" class="row vertical-align lined noresults">
 				                <p>Nothing here yet!</p>
 				              </div>
-							<div class="col-xs-12" ng-repeat="donation in donations">
-									<div class="row lined">
+							<div class="col-xs-12 lined" ng-repeat="donation in donations">
+									<div class="row lined mbot15">
 										<div class="col-sm-2 col-xs-8">
 											<p>{{donation.created | date}}</p>
 										</div>
 										<div class="col-sm-2 col-xs-4">
 											<p>{{donation.charity_amt | currency}}</p>
 										</div>
-										<div class="col-sm-4 col-xs-12 text-center">
+										<div class="col-sm-4 col-xs-12 col-md-8">
 											<p>
 												<a id="{{donation.note.id}}" ng-click="getNoteDetails($event)">{{donation.note.title}}</a>
 												<span> / </span>
@@ -34,7 +34,7 @@
 										</div>
 										<div class="clearfix"></div>
 									</div>
-									<hr class="mtop0">
+									<div class="col-space"></div>
 								</div>
 						</main>
 			<footer class="row">
