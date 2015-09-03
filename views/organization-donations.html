@@ -2,7 +2,8 @@
 						<section class="row vertical-align normalize-xs normalize-sm">
 							<div class="col-md-6 col-xs-12 title-block">
 								<h1>Donations</h1>
-								<p class="muted">These are the donations you have received from note sales.</p>
+								<p class="lead">Total Earnings: {{totalDonationAmount | currency}}</p>
+								<!-- <p class="muted">These are the donations you have received from note sales.</p> -->
 							</div>
 							<div class="col-xs-3 text-right mtop25-sm mbot25-sm">
 								<p class="lead mbot0">{{itemsCount}} Items</p>
@@ -13,12 +14,12 @@
 								</select>
 							</div>
 						</section>
-						<main class="row ptop15">
+						<main class="row table-row">
 				              <div ng-if="itemsCount == 0" class="row vertical-align lined noresults">
 				                <p>Nothing here yet!</p>
 				              </div>
-							<div class="col-xs-12 lined" ng-repeat="donation in donations">
-									<div class="row lined mbot15">
+							<div class="col-xs-12 lined mtop15" ng-repeat="donation in donations">
+									<div class="row lined">
 										<div class="col-sm-2 col-xs-8">
 											<p>{{donation.created | date}}</p>
 										</div>
