@@ -33,6 +33,15 @@ function isNumber(n) {
       .then(function(data){
         // success case
         $scope.initialPurchaseData = data;
+        // check if transaction already compelted, usually indicating free note
+        if($scope.initialPurchaseData.status && $scope.initialPurchaseData.status.length > 1 && $scope.initialPurchaseData.status =='completed'){
+
+                  
+                  $state.go('app.note-purchased-confirmation', {'noteId':note.id});
+                  $modalInstance.dismiss('cancel');
+                  return;
+        }
+
         if($scope.initialPurchaseData.url && $scope.initialPurchaseData.url.length > 1){
           window.location.href = $scope.initialPurchaseData.url;
         }

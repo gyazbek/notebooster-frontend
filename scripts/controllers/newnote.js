@@ -409,7 +409,7 @@ angular.module('angularNoteboosterApp')
               //$state.go('app.new-note.draft-confirmation');
              }else{
                $state.go('app.new-note.confirmation', {
-              'noteId': noteId
+              'noteId': (data.id ? data.id : '')
              });
 
              }
