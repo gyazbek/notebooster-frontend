@@ -101,6 +101,19 @@ config(function($stateProvider, $urlRouterProvider) {
                 return nbApiService.authenticationStatus(true);
             }],
         }
+    }).state('app.settings.goalCalculator', {
+        url: 'goal-calculator',
+        views: {
+            'settings-content@app.settings': {
+                controller: 'GoalCalculatorCtrl',
+                templateUrl: 'views/goalCalculator.html'
+            }
+        },
+        resolve: {
+            authenticated: ['nbApiService', function(nbApiService) {
+                return nbApiService.authenticationStatus(true);
+            }],
+        }
     }).state('app.settings.payment', {
         url: 'payment-settings',
         views: {
@@ -375,9 +388,9 @@ config(function($stateProvider, $urlRouterProvider) {
 
     //$rootScope.location = $location;
 
-   // nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
+   nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
 
-   nbApiService.initialize('http://localhost:8000', false).then(function(data) {
+   //nbApiService.initialize('http://localhost:8000', false).then(function(data) {
         // nbApiService.identity().then(function(data){$rootScope.user = data;
         // });
     });

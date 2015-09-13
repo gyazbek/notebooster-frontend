@@ -1,0 +1,55 @@
+<div class="results pad15 title-block outline">
+                                                <h1>Donation Goal Calculator</h1>
+                                                <p class="muted mbot50">Use this to calculate the number of note sales necessary for your goals</p>
+                                                <form method="post" action="">
+
+                                                        <div class="row form-group">
+                                                                <div class="col-sm-6">
+                                                                        <label>Target Donation Total:</label>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                        <div class="input-group form-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                                                        <input class="form-control note_price" ng-model="calc_donation_total" name="note_price" placeholder="5.00" type="number" min="3" step="1" value="300" />
+                                                                </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                                <div class="col-sm-6">
+                                                                        <label>Average Note Price:</label>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                        <div class="input-group form-group">
+                                                                            <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                                                        <input ng-model="calc_note_price" class="form-control note_price" name="note_price" placeholder="5.00" type="number" min="3" max="100" step="1" value="5.00"/>
+                                                                </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                                <div class="col-sm-6">
+                                                                        <label>Donation Percentage:</label>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                        <select class="form-control" name="calc_donation_split" ng-model="calc_donation_split">
+                                                                        <option value="24">24%</option>
+                                                                        <option value="30">30%</option>
+                                                                        <option value="50">50%</option>
+                                                                        <option value="75">75%</option>
+                                                                        <option value="100">100%</option>
+                                                                </select>
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="row form-group">
+                                                                <div class="col-sm-6">
+
+                                                                </div>
+                                                                <div class="col-sm-6 mtop0">
+                                                                        <!-- <h2>42 sales required</h2> -->
+                                                                        <h2>{{(salesRequired() | number:0) + ' sales required'}}</h2>
+                                                                       
+                                                                </div>
+                                                        </div>
+
+                                                </form>
+                                        </div>

@@ -207,6 +207,15 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
             return "When snakes are born with two heads, they fight each other for food.";
         }
     }
+
+    $scope.whatsthis = function(descriptor,size) {
+        var modalInstance = $modal.open({
+            animation: true,
+            templateUrl: 'views/partials/'+ descriptor +'_modal.html',
+            controller: 'WhatsThisCtrl',
+            size: size
+        });
+    };
 });
 
 angular.module('angularNoteboosterApp').controller('DropdownCtrl', function($http, $state, $scope, $cookies, $location, nbApiService) {
