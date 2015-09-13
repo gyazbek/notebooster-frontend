@@ -279,6 +279,13 @@ hr {
 .outline {
   outline: 10px rgba(0, 0, 0, 0.1) solid; }
 
+.row-line li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 5px;
+  padding-bottom: 5px; }
+  .row-line li:last-child {
+    border-bottom: none; }
+
 /*
  * Forms
  */
@@ -918,6 +925,10 @@ footer.footer {
 
 /* End Tooltip */
 /* Donations */
+/* Organization sort fields */
+.edit-in-place input {
+  display: none; }
+
 /*
  * Media Queries
  */

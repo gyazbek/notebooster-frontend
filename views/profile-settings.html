@@ -152,28 +152,41 @@
 
 		<hr class="mtop15 mbot25">
 
+		<div class="row form-group">
+			<div class="col-sm-6">
+				<label for="org-person-name">Introduction Video:</label>
+			</div>
+			<div class="col-sm-6">
+				<input required ng-model="organizationModel.intro_video" type="text" class="form-control">
+				<span class="muted">Provide a link to a 30 second video explaining your cause. (optional)</span>
+			</div>
+		</div>
+		<hr class="mtop15 mbot25">
+
+
 		<div class="form-group mbot50">
-      		<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-short-description" >What's this?</a></p>
+      		<p class="pull-right"><a href="" ng-click="whatsthis('shortbio')">What's this?</a></p>
       						          		<!-- The short description appears alongside notes which support your cause. It's a brief introduction to your organization. -->
 			<label for="org-short-description">Short Description: <span class="muted">(Max: 140 characters)</span></label>
 			<textarea class="form-control" name="org-short-description" ng-model="settings.profile.short_bio"></textarea>
 		</div>
 		<div class="form-group mbot50">
-			<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-full-bio" >What's this?</a></p>
+			<p class="pull-right"><a href="" ng-click="whatsthis('fullbio')">What's this?</a></p>
 											<!-- The Full Bio is your opportunity to describe your organization at length. This will be visible on your public profile page. -->
 			<label for="org-full-description">Full Bio: </label>
 			<textarea class="form-control" name="org-full-description" ng-model="settings.profile.bio"></textarea>
 		</div>
-		<div class="form-group mbot50">
-      		<p class="pull-right"><a href="#" data-toggle="modal" data-target="#charity-one-fact">What's this?</a></p>
+		<div class="form-group mbot25">
+      		<p class="pull-right"><a href="" ng-click="whatsthis('onefact')">What's this?</a></p>
       						          		<!-- This is a brief statement visible to students after they make a donation. Use this area to provide a thought provoking statistic or fact about your cause. -->
 			<label for="org-short-description">One Fact: <span class="muted">(Max: 320 characters)</span></label>
 			<textarea class="form-control" name="org-short-description" ng-model="settings.organization.fact"></textarea>
 		</div>
 
-		<hr class="mtop15 mbot25">
+		<!-- <hr class="mtop15 mbot25"> -->
 
 		<a ng-hide="1" href="#" data-toggle="modal" data-target="#info">Disable My Account</a>
+
 
 		<hr class="mtop15 mbot25">
 

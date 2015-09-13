@@ -256,6 +256,17 @@ hr {
 	outline: 10px rgba(0, 0, 0, 0.1) solid;
 }
 
+.row-line li {
+	// border-bottom: 1px solid $bg-grey-light;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	margin-bottom: 5px;
+    padding-bottom: 5px;
+
+	&:last-child {
+		border-bottom: none;
+	}
+}
+
 /*
  * Forms
  */
@@ -1111,6 +1122,14 @@ footer.footer {
 
 /* Donations */
 .table-row:last-of-type {}
+
+
+/* Organization sort fields */
+
+.edit-in-place input {
+    display: none;
+}
+
 
 
 /*

@@ -60,9 +60,9 @@
 					<div class="col-sm-6">
 						<input required ng-model="model.password2" type="password" name="password2" class="form-control" data-matcher="model.password1" >
 		      	      <div class="error-msg" ng-repeat="error in errors.password2">{{error}}</div>
-      	               
-      	            
-      	               
+
+
+
 					</div>
 				</div>
 
@@ -100,6 +100,16 @@
 					</div>
 				</div>
 
+				<hr class="mtop15 mbot25">
+				<div class="row form-group">
+					<div class="col-sm-6">
+						<label for="org-person-name">Introduction Video:</label>
+					</div>
+					<div class="col-sm-6">
+						<input required ng-model="organizationModel.intro_video" type="text" class="form-control">
+						<span class="muted">Provide a link to a 30 second video explaining your cause. (optional)</span>
+					</div>
+				</div>
 				<hr class="mtop15 mbot25">
 
 				<div class="form-group mbot50">
