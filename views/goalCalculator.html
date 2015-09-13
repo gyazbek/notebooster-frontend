@@ -2,7 +2,7 @@
                                                 <h1>Donation Goal Calculator</h1>
                                                 <p class="muted mbot50">Use this to calculate the number of note sales necessary for your goals</p>
                                                 <form method="post" action="">
-
+                                                        <p class="pull-right"><a href="" ng-click="whatsthis('targetdonation')">What's this?</a></p>
                                                         <div class="row form-group">
                                                                 <div class="col-sm-6">
                                                                         <label>Target Donation Total:</label>
@@ -12,8 +12,10 @@
                                                                             <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
                                                                         <input class="form-control note_price" ng-model="calc_donation_total" name="note_price" placeholder="5.00" type="number" min="3" step="1" value="300" />
                                                                 </div>
+
                                                                 </div>
                                                         </div>
+                                                        <p class="pull-right"><a href="" ng-click="whatsthis('averagenoteprice')">What's this?</a></p>
                                                         <div class="row form-group">
                                                                 <div class="col-sm-6">
                                                                         <label>Average Note Price:</label>
@@ -25,6 +27,7 @@
                                                                 </div>
                                                                 </div>
                                                         </div>
+                                                        <p class="pull-right"><a href="" ng-click="whatsthis('donationpercentage')">What's this?</a></p>
                                                         <div class="row form-group">
                                                                 <div class="col-sm-6">
                                                                         <label>Donation Percentage:</label>
@@ -47,7 +50,7 @@
                                                                 <div class="col-sm-6 mtop0">
                                                                         <!-- <h2>42 sales required</h2> -->
                                                                         <h2>{{(salesRequired() | number:0) + ' sales required'}}</h2>
-                                                                       
+
                                                                 </div>
                                                         </div>
 
