@@ -267,6 +267,11 @@ hr {
 	}
 }
 
+.pre {
+	white-space: pre-wrap; /* Chrome; W3C standard */
+	word-wrap: break-word; /* IE */
+}
+
 /*
  * Forms
  */
