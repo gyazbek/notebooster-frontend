@@ -5,12 +5,18 @@ angular.module('angularNoteboosterApp')
     $scope.paypal_email="";
 
     $scope.saveSettings = function(email){
+      if ($scope.paymentSettingsForm.$valid) {
+      
       $scope.paymentPromise = nbApiService.setPaymentSettings(email)
       .then(function(data){
       	console.log('Success');
       },function(data){
       	console.log('Failed');
       });
+
+    }else{
+      $scope.paymentSettingsForm.submitted = true;
+    }
     };
 
     $scope.getPaypalEmail = function(){

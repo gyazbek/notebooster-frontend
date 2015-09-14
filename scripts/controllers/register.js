@@ -17,7 +17,7 @@ angular.module('angularNoteboosterApp')
             moreData = angular.extend(moreData, {
                 'profile': $scope.profileModel,
             });
-
+          }
           $scope.signupPromise = nbApiService.register($scope.model.username,$scope.model.password1,$scope.model.password2,$scope.model.email,moreData )
           .then(function(data){
           	// success case
@@ -41,9 +41,7 @@ angular.module('angularNoteboosterApp')
           	// error case
           	$scope.errors = data.data;
           }); 
-        } else {
-            $scope.chooseSchool = "Must Select School.";
-        }
+      
       }
     }
 

@@ -4,14 +4,15 @@
 
 	<div class="row">
 		<div class="col-sm-7 hr-right">
-			<form ng-submit="register(registerForm)" name="registerForm" role="form">
+			<form ng-submit="register(registerForm)" name="registerForm" role="form" novalidate cg-busy="orgSignupPromise">
 				<div class="row form-group">
 					<div class="col-sm-6">
 						<label for="org-name">Organization Name:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="organizationModel.name" type="text" class="form-control">
-						<div class="has-error-text" id="org-name">Please enter an organization name.</div>
+						<input required ng-model="organizationModel.name" type="text" name="orgName" class="form-control">
+						<div class="has-error-text" id="org-name" ng-show="registerForm.submitted && registerForm.orgName.$error.required" ng-minlength=3 ng-maxlength=100>Please enter an organization name.</div>
+						<div class="has-error-text" id="title-error" ng-show="registerForm.username.$error.minlength || registerForm.username.$error.maxlength">Organization name length must be between 3 and 100 characters</div>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -19,8 +20,8 @@
 						<label for="org-name">Tax Exemption Number:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="organizationModel.tax_exemption_number" type="text" class="form-control">
-						<div class="has-error-text" id="org-tax-number">Please enter a valid tax exemption number.</div>
+						<input required ng-model="organizationModel.tax_exemption_number" name="taxexemption" type="text" class="form-control" ng-maxlength=50>
+						<div class="has-error-text" id="org-tax-number" ng-show="registerForm.submitted && registerForm.taxexemption.$error.required">Please enter a valid tax exemption number.</div>
 					</div>
 				</div>
 
@@ -31,8 +32,9 @@
 						<label for="org-email">Email Address:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="model.email" type="email" class="form-control">
-						<div class="has-error-text" id="org-email">Please enter a valid email address.</div>
+						<input required ng-model="model.email" type="email" class="form-control" name="email">
+						<div class="has-error-text" ng-show="registerForm.submitted && registerForm.email.$error.required">A email address is required</div>
+						<div class="has-error-text" ng-show="registerForm.email.$error.email">Please enter a valid email address.</div>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -40,8 +42,10 @@
 						<label for="org-email">Username:</label>
 					</div>
 					<div class="col-sm-6">
-						<input ng-model="model.username" type="text" class="form-control" required>
-			           <div class="has-error-text" ng-repeat="error in errors.username">{{error}}</div>
+						<input ng-model="model.username" type="text" name="username" class="form-control" required ng-minlength=3 ng-maxlength=50>
+						<div class="has-error-text" ng-show="registerForm.submitted && registerForm.username.$error.required" >Please enter a username</div>
+						<div class="has-error-text" id="title-error" ng-show="registerForm.username.$error.minlength || registerForm.username.$error.maxlength">Username length must be between 3 and 50 characters</div>
+			           	<div class="has-error-text" ng-repeat="error in errors.username">{{error}}</div>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -49,8 +53,9 @@
 						<label for="org-password">Password:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="model.password1" name="password1" type="password" class="form-control" >
-						<div class="has-error-text">Please enter a valid password.</div>
+						<input required ng-model="model.password1" name="password1" type="password" class="form-control" required ng-minlength=6 ng-maxlength=50>
+						<div class="has-error-text" ng-show="registerForm.submitted && registerForm.password1.$error.required">Please enter a valid password</div>
+						<div class="has-error-text" id="title-error" ng-show="registerForm.password1.$error.minlength || registerForm.password1.$error.maxlength">Password length must be between 6 and 50 characters</div>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -58,9 +63,10 @@
 						<label for="org-confirm-password">Confirm Password:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="model.password2" type="password" name="password2" class="form-control" data-matcher="model.password1" >
+						<input required ng-model="model.password2" type="password" name="password2" class="form-control" data-matcher="model.password1" ng-minlength=6 ng-maxlength=50>
 		      	      <div class="error-msg" ng-repeat="error in errors.password2">{{error}}</div>
-
+		      	      <div class="has-error-text" ng-show="registerForm.submitted && registerForm.password2.$error.required">Please enter a valid password</div>
+		      	      <div class="has-error-text" ng-show="registerForm.submitted && registerForm.password2.$error.match">Passwords must match</div>
 
 
 					</div>
@@ -73,8 +79,8 @@
 						<label for="org-person-name">Contact Person:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="organizationModel.contact_person" type="text" class="form-control">
-						<div class="has-error-text" id="org-person-name">Please designate a contact person.</div>
+						<input required ng-model="organizationModel.contact_person" name="contactPerson" type="text" class="form-control">
+						<div class="has-error-text" id="org-person-name" ng-show="registerForm.submitted && registerForm.contactPerson.$error.required">Please designate a contact person.</div>
 					</div>
 				</div>
 				<div class="row form-group">
@@ -82,8 +88,10 @@
 						<label for="org-person-email">Contact Email:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="organizationModel.contact_email" type="email" class="form-control">
-						<div class="has-error-text" id="org-email">Please enter a valid email address.</div>
+						<input required ng-model="organizationModel.contact_email" name="contactEmail" type="email" class="form-control">
+					
+						<div class="has-error-text" ng-show="registerForm.submitted && registerForm.contactEmail.$error.required">A email is required</div>
+						<div class="has-error-text" ng-show="registerForm.contactEmail.$error.email">Please enter a valid email address.</div>
 					</div>
 				</div>
 
@@ -94,9 +102,10 @@
 						<label for="org-paypal">PayPal Account:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="profileModel.paypal_email" type="email" class="form-control">
+						<input required ng-model="profileModel.paypal_email" name="paypalEmail" type="email" class="form-control">
 						<span class="muted">All payments are delivered to you securely via Paypal. <br><a href="https://www.paypal.com/signup/account" target="_blank">Need an account?</a></span>
-						<div class="has-error-text" id="paypal-error">Please input your Paypal email address.</div>
+						<div class="has-error-text" ng-show="registerForm.submitted && registerForm.paypalEmail.$error.required">Please input your Paypal email address.</div>
+						<div class="has-error-text" ng-show="registerForm.paypalEmail.$error.email">Please enter a valid email address.</div>
 					</div>
 				</div>
 
@@ -106,7 +115,7 @@
 						<label for="org-person-name">Introduction Video:</label>
 					</div>
 					<div class="col-sm-6">
-						<input required ng-model="organizationModel.intro_video" type="text" class="form-control">
+						<input ng-model="organizationModel.intro_video" type="text" class="form-control">
 						<span class="muted">Provide a link to a 30 second video explaining your cause. (optional)</span>
 					</div>
 				</div>
@@ -116,30 +125,33 @@
 					<p class="pull-right"><a href="" ng-click="whatsthis('shortbio')">What's this?</a></p>
 					<!-- The short description appears alongside notes which support your cause. It's a brief introduction to your organization. -->
 					<label for="org-short-description">Short Description: <span class="muted">(Max: 140 characters)</span></label>
-					<textarea ng-model="profileModel.short_bio" class="form-control" ></textarea>
-					<div class="has-error-text" id="org-short-description-error">Please write a description.</div>
+					<textarea ng-model="profileModel.short_bio" class="form-control" name="orgShortBio" ng-maxlength=140 required></textarea>
+					<div class="has-error-text" id="org-short-description-error"  ng-show="registerForm.submitted && registerForm.orgShortBio.$error.required">Please write a description.</div>
 				</div>
 				<div class="form-group mbot50">
 					<p class="pull-right"><a href="" ng-click="whatsthis('fullbio')">What's this?</a></p>
 					<!-- The Full Bio is your opportunity to describe your organization at length. This will be visible on your public profile page. -->
 					<label for="org-full-description">Full Bio: </label>
-					<textarea ng-model="profileModel.bio" class="form-control" name="org-full-description"></textarea>
-					<div class="has-error-text" id="org-full-description-error">Please write a description.</div>
+					<textarea ng-model="profileModel.bio" class="form-control"name="orgBio" required ng-maxlength=4000></textarea>
+					<div class="has-error-text" id="org-full-description-error"  ng-show="registerForm.submitted && registerForm.orgBio.$error.required" >Please write a description.</div>
+					<div class="has-error-text" id="org-full-description-error" ng-show="registerForm.orgBio.$error.maxlength" >Description length must be less than or equal to 4000 characters</div>
 				</div>
 				<div class="form-group mbot50">
 					<p class="pull-right"><a href="" ng-click="whatsthis('onefact')">What's this?</a></p>
 					<!-- This is a brief statement visible to students after they make a donation. Use this area to provide a thought provoking statistic or fact about your cause. -->
 					<label for="org-short-description">One Fact: <span class="muted">(Max: 320 characters)</span></label>
-					<textarea ng-model="organizationModel.fact" class="form-control" ></textarea>
-					<div class="has-error-text" id="one-fact-error">Please write a fact.</div>
+					<textarea ng-model="organizationModel.fact" name="fact" class="form-control" required ></textarea>
+					<div class="has-error-text" id="one-fact-error" ng-show="registerForm.submitted && registerForm.fact.$error.required" >Please write a fact.</div>
 				</div>
 
 				<hr class="mtop15 mbot25">
 
 				<label for="org-agree-tc">
-					<input ng-model="eulaCheck" type="checkbox" id="org-agree-tc">
+					<input ng-model="eulaCheck" type="checkbox" id="org-agree-tc" name="terms" required>
 					I have read and agree to the <a target="_blank" ui-sref="app.legal">Terms of Use</a>
 				</label>
+				 <div class="has-error-text" ng-show="registerForm.submitted && registerForm.terms.$error.required">You must agree to the terms and conditions</div>
+
 
 				<hr class="mtop15 mbot25">
 

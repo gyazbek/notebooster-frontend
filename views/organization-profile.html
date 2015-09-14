@@ -11,6 +11,7 @@
 				</p>
 				<p>Joined: {{profile.date_joined | date }}</p>
 				<p ng-if="profile.organization.url">Website: <a href="{{profile.organization.url}}" target="_blank">{{profile.organization.url}}</a></p>
+				<p ng-if="profile.organization.video_url"><a href="{{profile.organization.video_url}}" target="_blank">Watch Video</a></p>
 			</div>
 			<div class="col-sm-3">
 				<button class="btn btn-minor btn-block mbot25" ng-click="contactUser()">Contact</button>

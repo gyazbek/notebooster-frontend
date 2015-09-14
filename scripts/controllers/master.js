@@ -83,7 +83,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
         nbApiService.identity().then(function(data) {
             $scope.user = data;
         });
-        $scope.refreshNotificationCountDataPromise = $interval(refreshNotificationCountData, $scope.notificationCountRefreshRate);
+        $scope.refreshNotificationCountDataPromise = $interval($scope.refreshNotificationCountData, $scope.notificationCountRefreshRate);
     });
     // // Wait for the status of authentication, set scope var to true if it resolves
     // nbApiService.authenticationStatus(true).then(function(){

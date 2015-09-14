@@ -7,11 +7,12 @@
 								<img src="img/paypal.png" alt="PayPal Logo" class="img-responsive">
 							</div>
 						</div>
-						<form ng-submit="saveSettings(paypal_email)">
+						<form ng-submit="saveSettings(paypal_email)" name="paymentSettingsForm" novalidate>
 							<div class="form-group">
 								<label for="paypal">PayPal Account</label>
-								<input ng-model="paypal_email" type="text" name="paypal" class="form-control" />
-								<div class="has-error-text" id="bio-error">Error</div>
+								<input ng-model="paypal_email" type="email" name="paypal" class="form-control" required>
+								<div class="has-error-text" ng-show="paymentSettingsForm.submitted && paymentSettingsForm.paypal.$error.required">A paypal email is required</div>
+								<div class="has-error-text" ng-show="paymentSettingsForm.paypal.$error.email">Must be a valid email</div>
 								<p class="mtop25 mbot15"><a href="https://www.paypal.com/webapps/mpp/account-setup" target="_blank">Click here to create a PayPal Account</a></p>
 							</div>
 							<hr>

@@ -231,6 +231,19 @@ config(function($stateProvider, $urlRouterProvider) {
                 return nbApiService.authenticationStatus(true);
             }],
         }
+    }).state('app.settings.marketing-tools', {
+        url: 'marketing-tools',
+        views: {
+            'settings-content@app.settings': {
+                controller: 'MarketingToolsOrganizationCtrl',
+                templateUrl: 'views/marketing-tools.html'
+            }
+        },
+        resolve: {
+            authenticated: ['nbApiService', function(nbApiService) {
+                return nbApiService.authenticationStatus(true);
+            }],
+        }
     }).state('app.new-note', {
         url: 'new-note',
         views: {
@@ -389,7 +402,6 @@ config(function($stateProvider, $urlRouterProvider) {
     //$rootScope.location = $location;
 
    nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
-
    //nbApiService.initialize('http://localhost:8000', false).then(function(data) {
         // nbApiService.identity().then(function(data){$rootScope.user = data;
         // });
