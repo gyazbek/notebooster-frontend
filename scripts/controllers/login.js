@@ -17,7 +17,11 @@ angular.module('angularNoteboosterApp')
             $state.go($rootScope.stateAfterLogin);
             delete $rootScope.stateAfterLogin;
           }else{
+            if($scope.user.account_type == 'organization'){
+              $state.go('app.settings.organization-donations');
+            }else{
               $state.go($state.current, {}, {reload: true});
+            }
           }
           
         },function(data){
