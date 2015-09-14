@@ -30,7 +30,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
 
     $scope.siteStats = {}
     $scope.organizationFacts = [];
-    $scope.noteFee = 0.99;
+    $scope.noteFee = 1.00;
     $scope.notificationCountRefreshRate = 120000;
     // Assume user is not logged in until we hear otherwise
     $scope.authenticated = false; //nbApiService.authenticated;
