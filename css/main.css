@@ -612,6 +612,9 @@ nav.navbar {
 .note-price-col {
   max-width: 101px; }
 
+.results-section {
+  width: 100%; }
+
 /*
  * Browse Notes
  */
