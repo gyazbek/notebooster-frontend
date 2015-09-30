@@ -660,6 +660,31 @@ nav.navbar {
 	font-weight: lighter;
 }
 
+.notes-uploaded {
+	background-color: $bg-grey-dark;
+	padding: 0 20px;
+	margin-bottom: 20px;
+	strong {
+		display: block;
+		padding-top: 15px;
+	}
+	div {
+		padding-bottom: 15px;
+	}
+	button {
+		font-size: inherit;
+	}
+}
+
+.file-delete {
+	background-color: $bg-grey-dark;
+	padding: 0 20px;
+	button {
+		font-size: inherit;
+	}
+}
+
+
 /*
  * Browse Notes
  */
@@ -668,6 +693,13 @@ nav.navbar {
 	min-width: 200px;
 }
 
+.browse-user-icon {
+	max-width: 161px;
+}
+
+.note-price-col {
+	max-width: 101px;
+}
 
 
 /*
@@ -896,6 +928,10 @@ margin: auto;
 .note-preview {
 	background-color: #D1D1D1;
 	height: 500px;
+}
+
+.downloadAllFiles {
+	display: block;
 }
 
 /*
@@ -1149,6 +1185,12 @@ footer.footer {
 		}
 	}
 }
+@media (min-width: 992px) {
+	.for-sale-row {
+		min-width: 720px;
+	}
+}
+
 @media (min-width: 768px) {
     .navbar  {
     	.navbar-nav {
@@ -1161,7 +1203,7 @@ footer.footer {
 	        text-align: center;
 	    }
 	}
-	.user-email-minor{
+	.user-email-minor, .user-name-minor{
 		max-width: 175px;
 		white-space: nowrap;
 		overflow: hidden;

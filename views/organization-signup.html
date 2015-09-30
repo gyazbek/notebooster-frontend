@@ -89,7 +89,7 @@
 					</div>
 					<div class="col-sm-6">
 						<input required ng-model="organizationModel.contact_email" name="contactEmail" type="email" class="form-control">
-					
+
 						<div class="has-error-text" ng-show="registerForm.submitted && registerForm.contactEmail.$error.required">A email is required</div>
 						<div class="has-error-text" ng-show="registerForm.contactEmail.$error.email">Please enter a valid email address.</div>
 					</div>
@@ -165,7 +165,10 @@
 		</div>
 		<div class="col-sm-5 mbot25">
 			<p class="lead text-uppercase">How it works</p>
-			<p>You provide us with details of your Organization. We review your information and get in contact with your representative to verify that we are a perfect match. As soon we you get approved, students will be able to choose your organization to receive the funds. </p><br><p>Make sure your paypal address is correct! If not, you can always login to update it.</p>
+			<p>You provide us with details of your Organization. We review your information and get in contact with your representative to verify that we are a perfect match. As soon as you get approved, students will be able to choose your organization to receive the funds.
+			</p>
+			<br><p>Make sure your Paypal address is correct! If not, you can always login to update it.</p>
+
 					<p><a target="_blank" ui-sref="app.contact">Contact Us</a></p>
 				</div>
 			</div>

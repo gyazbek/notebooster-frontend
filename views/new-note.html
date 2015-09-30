@@ -47,7 +47,7 @@
 			 </div>
 			 <div class="to-be-deleted" ng-show="note.fileDelete.length">
 				 <h3>Files to be Deleted</h3>
-				 <div ng-repeat="item in note.fileDelete" class="mbot25 mtop25">
+				 <div ng-repeat="item in note.fileDelete" class="mbot25 file-delete">
 				 	<strong>{{ item.file_name }}</strong>
 	                <div>
 	                    <button ng-click="undoRemoveFile(item)">Undo</button>
