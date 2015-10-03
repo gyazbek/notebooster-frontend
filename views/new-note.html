@@ -47,7 +47,7 @@
 			 </div>
 			 <div class="to-be-deleted" ng-show="note.fileDelete.length">
 				 <h3>Files to be Deleted</h3>
-				 <div ng-repeat="item in note.fileDelete" class="mbot25 file-delete">
+				 <div ng-repeat="item in note.fileDelete" class="file-delete">
 				 	<strong>{{ item.file_name }}</strong>
 	                <div>
 	                    <button ng-click="undoRemoveFile(item)">Undo</button>
@@ -81,11 +81,11 @@
 						<div class="input-group form-group" ng-class="{'has-error': noteForm.note_price.$dirty && noteForm.note_price.$invalid}" >
 							<span class="input-group-addon"><i class="fa fa-dollar"></i></span>
 							<input ng-model="note.price" ng-pattern="/^(0|[3-9]|[1-9][0-9]|[1-9][0-9][0-9])$/" type="number" class="form-control note_price" name="note_price" placeholder="0.00" ng-disabled="priceToggle"/>
-							<span class="input-group-addon" ng-hide="priceToggle"> + {{noteFee | currency}} fee</span>
+							<span class="input-group-addon" ng-hide="priceToggle"> + {{noteFee | currency}}</span>
 						</div>
 						<div class="has-error-text mbot15" style="display: block;" ng-show="!priceToggle && (noteForm.note_price.$touched || noteForm.submitted || noteForm.note_price.$dirty) && noteForm.note_price.$invalid">Please input a valid price between $3 and $999.</div>
 					</div>
-					<div class="col-md-3 form-group">
+					<div class="col-md-3 form-group lh35 mbot0">
 						<label for="free_price" >
 							<input type="checkbox" id="free_price" value="free" ng-model="priceToggle" ng-change="freeNoteToggle()"/> Make it Free!
 						</label>

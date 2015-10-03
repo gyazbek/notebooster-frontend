@@ -196,6 +196,9 @@ a {
 .mbot-25 {
   margin-bottom: -25px; }
 
+.lh35 {
+  line-height: 35px; }
+
 p {
   color: white;
   font-weight: 300; }
@@ -596,9 +599,11 @@ nav.navbar {
 
 .file-delete {
   background-color: #c2cdd6;
-  padding: 0 20px; }
+  padding: 20px; }
   .file-delete button {
     font-size: inherit; }
+  .file-delete:last-of-type {
+    margin-bottom: 25px; }
 
 /*
  * Browse Notes

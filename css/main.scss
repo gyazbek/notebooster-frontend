@@ -147,6 +147,9 @@ $mobilesteps: 0 15 25 50 100;
 .mbot-25 {
 	margin-bottom: -25px;
 }
+.lh35 {
+	line-height: 35px;
+}
 p {
 	color: white;
 	font-weight: 300;
@@ -678,9 +681,12 @@ nav.navbar {
 
 .file-delete {
 	background-color: $bg-grey-dark;
-	padding: 0 20px;
+	padding: 20px;
 	button {
 		font-size: inherit;
+	}
+	&:last-of-type {
+		margin-bottom: 25px;
 	}
 }
 
