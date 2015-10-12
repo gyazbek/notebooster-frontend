@@ -1,0 +1,69 @@
+<div class="container results mtop25 mbot25 outline" >
+		<h1>Contact Us</h1>
+		<p class="muted">Tell us whatever is on your mind. We welcome all feedback.</p>
+		<hr class="mtop25 mbot15">
+		<div class="row" cg-busy="contactPromise">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="thin mbot25 mtop15">Fill out the form below and our support team will get in touch with you as soon as possible.</div>
+				<form ng-controller="ContactCtrl" name="contactForm" role="form" ng-submit="contact(contactForm)" novalidate>
+					<div class="form-group">
+					 <div class="alert alert-danger" ng-repeat="error in errors.message">{{error}}</div>
+						<label for="cont-message">Message:</label>
+						<textarea name="message" class="form-control" ng-model="model.message" required ng-minlength="10" ng-maxlength="10000"></textarea>
+						  <div ng-show="formSubmitted || contactForm.message.$dirty">
+		                <div class="has-error-text" ng-show="contactForm.message.$error.minlength || contactForm.message.$error.maxlength">Message must be between 10 and 10000 characters</div>
+		                <div class="has-error-text" ng-show="contactForm.message.$error.required">Please write a description of the issue.</div>
+		            </div>
+					</div>
+					<div class="form-group">
+					 <div class="alert alert-danger" ng-repeat="error in errors.subject">{{error}}</div>
+						<label name="cont-subject">Subject:</label>
+						<select class="form-control" name="subject" ng-model="model.subject" required placeholder="Please select a subject">
+							<option value="Idea">Idea</option>
+							<option value="Problem">Problem</option>
+							<option value="Idea">Question</option>
+							<option value="Idea">Praise</option>
+						</select>
+						<div class="has-error-text" id="subject-error" ng-show="contactForm.subject.$error.required">Please select a subject.</div>
+					</div>
+					<div class="form-group">
+						<label for="cont-name">Your Name:</label>
+						<input type="text" name="name" class="form-control"  ng-model="model.name" ng-maxlength="245"/>
+					</div>
+					<div class="form-group">
+						<label for="cont-email">Your Email:</label>
+						<input type="email" name="email" class="form-control" ng-model="model.email" />
+						<div class="has-error-text" id="subject-error" ng-show="contactForm.email.$error.email">Please enter a valid email</div>
+					</div>
+						<div class="row">
+							<div class="col-sm-6 col-sm-offset-3">
+								<button type="submit" class="btn btn-primary btn-block">Send</button>
+							</div>
+						</div>
+						<div ng-if="complete == true">
+        <div class="alert alert-success">Message Sent!</div>
+    </div>
+					      <div class="alert alert-danger" ng-repeat="error in errors.non_field_errors">{{error}}</div>
+					      <div class="alert alert-danger" ng-if="error">{{error}}</div>
+				</form>
+			</div>
+		</div>
+
+		<hr class="mtop25 mbot15">
+		<h2>Contact Information</h2>
+
+		<div class="row mtop25 mbot25">
+			<div class="col-sm-10">
+				<div class="row">
+					<div class="col-sm-4 col-xs-12">
+						<!-- <p class="lead mbot15">Nam liber tempor</p> -->
+						<p>PO Box 612331 North Miami, FL 33181</p>
+						<p>(650) 564-7104</p>
+						<p>contact@notebooster.com</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
