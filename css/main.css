@@ -1210,3 +1210,15 @@ footer.footer {
     left: -220%; }
   .middle-bar .toolHolder:nth-of-type(3) .tooltip:after {
     left: 81%; } }
+@media (max-width: 480px) {
+  nav.navbar .container.ng-scope[ng-show="authenticated"] .navbar-brand img {
+    width: 100%;
+    margin-top: 0;
+    margin-left: 0; }
+  nav.navbar .navbar-brand img {
+    width: 137px;
+    margin-top: 7px;
+    margin-left: -10px; }
+
+  .ui-select-bootstrap .ui-select-choices-row > a {
+    white-space: normal; } }
