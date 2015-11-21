@@ -22,6 +22,7 @@ $dark-text: #494949;
 $light-text: #fff;
 $lightest-bg: #fff;
 $light-grey: #E7E7E7;
+$fb-blue: #3b5998;
 
 
 @mixin border-radius($radius) {
@@ -132,8 +133,8 @@ a {
 	}
 }
 
-$allsteps: 0 5 15 25 50 100 200;
-$mobilesteps: 0 15 25 50 100;
+$allsteps: 0 5 15 25 35 50 100 200;
+$mobilesteps: 0 15 25 35 50 100;
 @each $s in $allsteps {
 	.mtop#{$s} { margin-top: #{$s}px; }
 	.mbot#{$s} { margin-bottom: #{$s}px; }
@@ -431,6 +432,29 @@ input[type=file] {line-height: 0;}
 	h1{
 		margin-top: 0;
 	}
+}
+
+.fb-blue {
+	background-color: $fb-blue!important;
+}
+
+.or-block {
+	background-color: $bg-grey-light;
+	display: inline-block;
+    margin-top: -10px;
+    position: absolute;
+    padding: 0 10px;
+    left: 50%;
+    margin-left: -18px;
+    // margin-left: -12px;
+}
+
+.or-line {
+	clear: both;
+	left: 50%;
+	margin: -12px auto;
+	border-top: 1px solid #c2cdd6;
+	margin-bottom: 15px;
 }
 
 /*
