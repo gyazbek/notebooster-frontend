@@ -10,7 +10,7 @@
                                                                 <div class="col-sm-6">
                                                                         <div class="input-group form-group">
                                                                             <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                                                                        <input class="form-control note_price" ng-model="calc_donation_total" name="note_price" placeholder="5.00" type="number" min="3" step="1" value="300" />
+                                                                        <input class="form-control note_price" ng-model="calc_donation_total" name="note_price" placeholder="5.00" type="number" min="3" step="1" value="2000" />
                                                                 </div>
 
                                                                 </div>
@@ -23,7 +23,7 @@
                                                                 <div class="col-sm-6">
                                                                         <div class="input-group form-group">
                                                                             <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                                                                        <input ng-model="calc_note_price" class="form-control note_price" name="note_price" placeholder="5.00" type="number" min="3" max="100" step="1" value="5.00"/>
+                                                                        <input ng-model="calc_note_price" class="form-control note_price" name="note_price" placeholder="5.00" type="number" min="3" max="100" step="1" value="10.00"/>
                                                                 </div>
                                                                 </div>
                                                         </div>
@@ -48,8 +48,26 @@
 
                                                                 </div>
                                                                 <div class="col-sm-6 mtop0">
-                                                                        <!-- <h2>42 sales required</h2> -->
                                                                         <h2>{{(salesRequired() | number:0) + ' sales required'}}</h2>
+
+                                                                </div>
+                                                        </div>
+
+                                                        <div class="row form-group mtop50">
+                                                            <div class="col-sm-6">
+                                                                <label>Average Sales per Note:</label>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <input type="number" name="avg_note_sales"  ng-model="calc_avg_note_sales" class="form-control">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row form-group">
+                                                                <div class="col-sm-6">
+
+                                                                </div>
+                                                                <div class="col-sm-6 mtop0">
+                                                                        <h2>{{(uploadsRequired() | number:0) + ' note uploads'}}</h2>
 
                                                                 </div>
                                                         </div>

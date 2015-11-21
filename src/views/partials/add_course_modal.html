@@ -8,20 +8,20 @@
   </div>
   <div class="modal-body" cg-busy="addSubjectPromise"><form ng-submit="addCourse()">
     <div class="form-group">
-      <label for="course-title">Course Title:</label>
-      <input ng-model="title" type="text" class="form-control" name="course-title" placeholder="eg: English Composition" required>
+      <label for="course-title">Course Title: <span class="muted">(e.g., English Composition)</span></label>
+      <input ng-model="title" type="text" class="form-control" name="course-title" required>
     </div>
     <div class="form-group">
-      <label for="course-code">Course Code:</label>
-      <input ng-model="name" type="text" class="form-control" name="course-code" placeholder="eg: ENC1101" required>
+      <label for="course-code">Course Code: <span class="muted">(e.g., ENC1101)</span></label>
+      <input ng-model="name" type="text" class="form-control" name="course-code" required>
     </div>
     <div class="form-group">
-      <label for="course-subject">Subject (optional):</label>
+      <label for="course-subject">Subject: <span class="muted">(optional)</span></label>
       <ui-select ng-model="subject.selected" data-ng-disabled="disabled" theme="bootstrap" >
               <ui-select-match placeholder="Search for Subject">{{$select.selected.subject}}</ui-select-match>
               <ui-select-choices refresh="searchSubject($select.search)" refresh-delay="300" repeat="subject in subjects">
               <div ng-bind-html="subject.subject | highlight: $select.search"></div>
-           
+
             </ui-select-choices>
           </ui-select>
     </div>

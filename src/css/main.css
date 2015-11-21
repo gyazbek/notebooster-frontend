@@ -364,6 +364,9 @@ input[type=file] {
   .form-action-holder a, .form-action-holder button {
     float: none; }
 
+.impact-director-form .form-group {
+  margin-bottom: 30px; }
+
 .select2-results li {
   color: #000; }
   .select2-results li .secondaryschoolinfo {
