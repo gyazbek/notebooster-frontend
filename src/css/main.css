@@ -1268,10 +1268,12 @@ footer.footer {
     width: 100%;
     margin-top: 0;
     margin-left: 0; }
-  nav.navbar .navbar-brand img {
-    width: 137px;
-    margin-top: 7px;
-    margin-left: -10px; }
+  nav.navbar .navbar-brand {
+    width: inherit !important; }
+    nav.navbar .navbar-brand img {
+      width: 149px;
+      margin-top: 7px;
+      margin-left: -10px; }
 
   .ui-select-bootstrap .ui-select-choices-row > a {
     white-space: normal; } }
