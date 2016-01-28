@@ -21,7 +21,7 @@ angular.module('angularNoteboosterApp')
     $scope.organizationList = [];
 
     var uploader = $scope.uploader = new FileUploader({
-            url: nbApiService.getBaseApiUrl() + '/note/file/upload',
+            url: nbApiService.getBaseApiUrl() + '/note/file/upload?format=json',
             autoUpload: true,
 
             headers: {'X-CSRFToken': $cookies['csrftoken'],
@@ -90,54 +90,6 @@ angular.module('angularNoteboosterApp')
 
         console.info('uploader', uploader);
 
-
-
-
-    /*
-
-    {
-
-  "title": "",
-  "description": "",
-  "page_count": 0,
-  "price": "",
-  "kind": "",
-  "term": "",
-  "year": 0,
-  "school": {
-    "id": 0,
-    "state": "",
-    "name": "",
-    "city": ""
-  },
-  "user": {
-    "id": 0,
-    "username": ""
-  },
-  "course": {
-    "id": 0,
-    "school": "",
-    "subject": "",
-    "name": "",
-    "title": ""
-  },
-  "instructor": {
-    "id": 0,
-    "name": ""
-  },
-  "files": [
-    ""
-  ],
-  "charity": {
-    "name": "",
-    "contact_email": "",
-    "contact_person": "",
-    "fact": "",
-    "slug": "slug"
-  },
-  "charity_split": 0
-}
-*/
     
     $scope.yourAmount = function() { return $scope.note.price ? ( (1 - ($scope.note.charity_split/100)) * $scope.note.price) : 0 };
     $scope.charityAmount = function() { return $scope.note.price ? ( ($scope.note.charity_split/100) * $scope.note.price) : 0 };
@@ -191,6 +143,7 @@ angular.module('angularNoteboosterApp')
 
     $scope.schoolSelected = function(item, model) {
         $scope.note.course = null;
+        $scope.note.instructor = null;
         $scope.schoolRequired = false;
     };
 
@@ -383,14 +336,12 @@ angular.module('angularNoteboosterApp')
           .then(function(data){
            
               $scope.noteSaveSuccess = true;
-
+              // if note was previously a draft, and is now active, we redirect the user to a confirmation page
               if($scope.note.status == 'active' && previousStatus!=null && previousStatus =='draft' && angular.isDefined(data.status) && data.status =='active'  ){
-                
                  $state.go('app.new-note.confirmation', {
                 'noteId': $scope.note.id
                });
               }
-
 
              $scope.note = data;
 
@@ -398,7 +349,6 @@ angular.module('angularNoteboosterApp')
              if(angular.isDefined(data.data.non_field_errors)){
                 data.data = data.data.non_field_errors;
               }
-          
               $scope.errors = data.data;
         
           });
@@ -406,7 +356,7 @@ angular.module('angularNoteboosterApp')
           $scope.saveNotePromise = nbApiService.newNote($scope.note)
           .then(function(data){
              if(type == 'draft'){
-              //$state.go('app.new-note.draft-confirmation');
+              $state.go('app.new-note.draft-confirmation');
              }else{
                $state.go('app.new-note.confirmation', {
               'noteId': (data.id ? data.id : '')
@@ -414,11 +364,9 @@ angular.module('angularNoteboosterApp')
 
              }
           },function(data){
-            
            if(angular.isDefined(data.data.non_field_errors)){
                 data.data = data.data.non_field_errors;
               }
-          
               $scope.errors = data.data;
         
           });
