@@ -10,7 +10,7 @@ angular.module('angularNoteboosterApp')
 
 
     var uploader = $scope.uploader = new FileUploader({
-            url: nbApiService.getBaseApiUrl() + '/profile/picture',
+            url: nbApiService.getBaseApiUrl() + '/profile/picture?format=json',
             autoUpload: true,
 
             headers: {'X-CSRFToken': $cookies['csrftoken'],
