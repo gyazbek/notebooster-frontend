@@ -109,7 +109,7 @@ angular.module('angularNoteboosterApp')
   	$scope.disableAccount = function(size) {
 		var modalInstance = $modal.open({
 			animation: true,
-			templateUrl: 'views/partials/disable_account_modal.html',
+			templateUrl: '/views/partials/disable_account_modal.html',
 			controller: 'DisableAccountCtrl',
 			size: size
 		});
@@ -147,12 +147,14 @@ angular.module('angularNoteboosterApp')
   function getUserProfile(){
     $scope.settingsPromise = nbApiService.profile()
     .then(function(data){
-      $scope.bio = data.profile.bio;
+      
       $scope.username = data.username;
-      $scope.school = {selected: data.profile.school};
       $scope.email = data.email;
-      $scope.notifyByEmail = data.profile.email_notification;
-
+      if(data.profile){
+        $scope.bio = data.profile.bio;
+        $scope.school = {selected: data.profile.school};
+        $scope.notifyByEmail = data.profile.email_notification;
+     }
       $scope.settings = data;
     },function(data){
 

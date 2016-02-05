@@ -31,7 +31,7 @@ angular.module('angularNoteboosterApp')
   		$scope.msgSentResponse = "";
 		var modalInstance = $modal.open({
 			animation: true,
-			templateUrl: 'views/partials/contact_user_modal.html',
+			templateUrl: '/views/partials/contact_user_modal.html',
 			controller: 'ContactUserCtrl',
 			size: size,
 			resolve: {

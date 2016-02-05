@@ -31,9 +31,9 @@ angular.module('angularNoteboosterApp')
       }
     }
 
-      $scope.cancel = function () {
-         delete $rootScope.stateAfterLogin;
-    $modalInstance.dismiss('cancel');
+    $scope.cancel = function () {
+      delete $rootScope.stateAfterLogin;
+      $modalInstance.dismiss('cancel');
   };
 
     $modalInstance.result.then(function () {

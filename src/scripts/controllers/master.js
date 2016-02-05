@@ -35,6 +35,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     // Assume user is not logged in until we hear otherwise
     $scope.authenticated = false; //nbApiService.authenticated;
     $scope.refreshNotificationCountDataPromise = null;
+    $scope.loginModalInstance = null;
 
     $scope.refreshNotificationCountData = function() {
         
@@ -84,6 +85,11 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
             $scope.user = data;
         });
         $scope.refreshNotificationCountDataPromise = $interval($scope.refreshNotificationCountData, $scope.notificationCountRefreshRate);
+
+        if($scope.loginModalInstance!=null){
+            $scope.loginModalInstance.close();
+            $scope.loginModalInstance = null;
+        }
     });
     // // Wait for the status of authentication, set scope var to true if it resolves
     // nbApiService.authenticationStatus(true).then(function(){
@@ -125,6 +131,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
             size: size,
             scope:$scope
         });
+        $scope.loginModalInstance = modalInstance;
         modalInstance.result.then(function() {
             //TODO: disable account and log user out
             console.log('disable it');
@@ -163,7 +170,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     $scope.contactUser = function(username){
       var modalInstance = $modal.open({
         animation: true,
-        templateUrl: 'views/partials/contact_user_modal.html',
+        templateUrl: '/views/partials/contact_user_modal.html',
         controller: 'ContactUserCtrl',
         resolve: {
           username: function () {
@@ -183,7 +190,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
       $scope.msgSentResponse = "";
       var modalInstance = $modal.open({
         animation: true,
-        templateUrl: 'views/partials/report_violation_modal.html',
+        templateUrl: '/views/partials/report_violation_modal.html',
         controller: 'ReportViolationCtrl',
         size: size,
         resolve: {
@@ -211,11 +218,36 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     $scope.whatsthis = function(descriptor,size) {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'views/partials/'+ descriptor +'_modal.html',
+            templateUrl: '/views/partials/'+ descriptor +'_modal.html',
             controller: 'WhatsThisCtrl',
             size: size
         });
     };
+
+
+     $scope.fb_login = function(){
+        FB.login(function(response) {
+
+        if (response.status === 'connected') {
+            //console.log('Welcome!  Fetching your information.... ');
+            //console.log(response); // dump complete info
+            var access_token = response.authResponse.accessToken; //get access token
+            var user_id = response.authResponse.userID; //get FB UID
+            var email ='';
+            FB.api('/me', function(response) {
+                email = response.email; //get user email
+                // you can store this data into your database             
+            });
+
+        } else {
+            //user hit cancel button
+            console.log('User cancelled login or did not fully authorize.');
+
+        }
+    }, {
+        scope: 'email'
+    });
+}
 });
 
 angular.module('angularNoteboosterApp').controller('DropdownCtrl', function($http, $state, $scope, $cookies, $location, nbApiService) {

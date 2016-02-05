@@ -32,7 +32,7 @@ angular.module('angularNoteboosterApp')
 
 
     $scope.searchSubject = function(courseSub) {
-      
+      alert(JSON.stringify(masterScope.note.school));
         var params = {search: courseSub};
         return nbApiService.getCourseSubject(params).then(function(data) {
           $scope.subjects = data.results;

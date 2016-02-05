@@ -117,6 +117,25 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                     'username': username,
                     'password': password
                 }
+            }).then(function(data) { // todo check if token was passed back to us from the server
+                if (!nbApiService.use_session) {
+                    $http.defaults.headers.common.Authorization = 'Token ' + data.key;
+                    $cookies.token = data.key;
+                }
+                nbApiService.authenticated = true;
+                return nbApiService.authenticationStatus(true, true);
+            }).then(function(data) {
+                $rootScope.$broadcast("nbApiService.logged_in");
+            });
+        },
+        'socialLogin': function(provider, token) {
+            var nbApiService = this;
+            return this.request({
+                'method': "POST",
+                'url': "/rest-auth/" + provider + "/",
+                'data': {
+                    'access_token': token
+                }
             }).then(function(data) {
                 if (!nbApiService.use_session) {
                     $http.defaults.headers.common.Authorization = 'Token ' + data.key;
@@ -154,14 +173,16 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
                 if (data.id) newObj.id = data.id;
                 if (data.username) newObj.username = data.username;
                 if (data.email) newObj.email = data.email;
-                if (data.profile.profile_picture) newObj.profile_picture = data.profile.profile_picture;
-                if (data.profile.user_type) {
-                    newObj.account_type = data.profile.user_type.toLowerCase();
-                } else {
-                    newObj.account_type = 'student'
-                }
-                if (data.profile.paypal_email) {
-                    newObj.paypal_email = data.profile.paypal_email;
+                if (data.profile){
+                    if (data.profile.profile_picture) newObj.profile_picture = data.profile.profile_picture;
+                    if (data.profile.user_type) {
+                        newObj.account_type = data.profile.user_type.toLowerCase();
+                    } else {
+                        newObj.account_type = 'student'
+                    }
+                    if (data.profile.paypal_email) {
+                        newObj.paypal_email = data.profile.paypal_email;
+                    }
                 }
                 deferred.resolve(newObj);
             } else {

@@ -32,7 +32,7 @@ angular.module('angularNoteboosterApp')
   		
 		var modalInstance = $modal.open({
 			animation: true,
-			templateUrl: 'views/partials/rate_this_note_modal.html',
+			templateUrl: '/views/partials/rate_this_note_modal.html',
 			controller: 'RateNoteCtrl',
 			resolve: {
 				noteSale: function () {
@@ -52,7 +52,7 @@ angular.module('angularNoteboosterApp')
     $scope.fileListingModal = function(id) {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'views/partials/note_file_listing_modal.html',
+            templateUrl: '/views/partials/note_file_listing_modal.html',
             controller: 'DownloadFileListingCtrl',
             resolve: {
 	         noteId: function () {
@@ -73,7 +73,7 @@ angular.module('angularNoteboosterApp')
   
 	init();
 	function init(){
-		$scope.getNotesPurchased($scope.order);
+		$scope.getNotesPurchased(1,$scope.order);
 	};
 });
 

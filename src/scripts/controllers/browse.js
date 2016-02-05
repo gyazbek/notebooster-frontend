@@ -2,9 +2,9 @@
 
 angular.module('angularNoteboosterApp')
  .controller('BrowseCtrl', function ($scope, $state, $stateParams, nbApiService, $http) {
-    // Variables for getting notes
-    $scope.schoolId = '';
-    $scope.courseId = '';
+
+    $scope.schoolId = null;
+    $scope.courseId = null;
     $scope.page = 1;
     $scope.pageOrder = "newest";
 
@@ -50,6 +50,7 @@ angular.module('angularNoteboosterApp')
       });
     };
 
+   
     $scope.searchCourse = function(course) {
       if (angular.isDefined($scope.school.selected) && $scope.school.selected!==null  && angular.isDefined($scope.school.selected.id)){
         var params = {search: course, school: $scope.school.selected.id};
@@ -98,25 +99,21 @@ angular.module('angularNoteboosterApp')
 
       // see if the school and course objects were passed along as parameters, if not we try to get any url parameters for display purposes
       if(angular.isDefined($stateParams.school)){
-        $scope.school = $stateParams.school;
+       // $scope.school = $stateParams.school;
       }else if($scope.schoolId && $scope.schoolName){
         $scope.school.selected = {'name':$scope.schoolName, 'id':$scope.schoolId}
       }
 
       if(angular.isDefined($stateParams.course)){
-        $scope.course = $stateParams.course;
+        //$scope.course = $stateParams.course;
       }else if($scope.courseId && $scope.courseName){
         $scope.course.selected = {'name':$scope.courseName, 'id':$scope.courseId}
       }
       
 
-     
-
       $scope.getNotes($scope.schoolId,$scope.courseId,$scope.page,$scope.pageOrder);
     }
 
-    // Initialize settings 
-    // This function was placed here because AngularJs can only reference a function if it has been previously defined.
-    // And currently getNotes() is a scope function.
+
     init();
 });

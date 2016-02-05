@@ -9,7 +9,7 @@
 								<p class="lead mbot0">{{items}} Items</p>
 							</div>
 							<div class="col-md-3 col-xs-9 mtop25-sm mbot25-sm">
-								<select ng-model="order" ng-change="getNotesPurchased(order)" class="form-control" ng-model="orderListValue">
+								<select ng-model="order" ng-change="getNotesPurchased(page,order)" class="form-control" ng-model="orderListValue">
 									<option value="newest">Newest First</option>
 									<option value="lowest">Lowest Price</option>
 									<option value="highest">Highest Price</option>

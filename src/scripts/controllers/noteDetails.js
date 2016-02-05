@@ -42,7 +42,7 @@ angular.module('angularNoteboosterApp')
       .then(function(data){
         var modalInstance = $modal.open({
           animation: true,
-          templateUrl: 'views/partials/follow_modal.html',
+          templateUrl: '/views/partials/follow_modal.html',
           controller: 'FollowCtrl',
           size: size,
           resolve: {
@@ -78,7 +78,7 @@ angular.module('angularNoteboosterApp')
     
     var modalInstance = $modal.open({
       animation: true,
-      templateUrl: 'views/partials/purchasenote_modal.html',
+      templateUrl: '/views/partials/purchasenote_modal.html',
       controller: 'PurchaseNoteModalCtrl',
       size: size,
       resolve: {
@@ -102,7 +102,7 @@ angular.module('angularNoteboosterApp')
      
     var modalInstance = $modal.open({
       animation: true,
-      templateUrl: 'views/partials/learn_more_organization_modal.html',
+      templateUrl: '/views/partials/learn_more_organization_modal.html',
       controller: 'LearnMoreOrganization',
      // size: size,
       resolve: {

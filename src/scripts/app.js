@@ -1,24 +1,26 @@
 'use strict';
-angular.module('angularNoteboosterApp', ['ui.router', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.select', 'ui.bootstrap', 'angularFileUpload', 'cgBusy','validation', 'validation.rule']).
-config(function($stateProvider, $urlRouterProvider) {
+angular.module('angularNoteboosterApp', ['ui.router', 'ngCookies', 'ngResource', 'ngSanitize', 'ui.select', 'ui.bootstrap', 'angularFileUpload', 'cgBusy','validation', 'validation.rule',]).
+config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     //  .config(['$routeProvider', function ($routeProvider) {
+
+        $locationProvider.html5Mode(true).hashPrefix('!');
     $stateProvider.state('users', {
         url: '/users',
-        templateUrl: 'views/users.html'
+        templateUrl: '/views/users.html'
     });
     $urlRouterProvider.otherwise('/');
     $stateProvider.state('app', {
         url: '/',
         views: {
             'header': {
-                templateUrl: 'views/header.html'
+                templateUrl: '/views/header.html'
             },
             'content': {
                 controller: 'MainCtrl',
-                templateUrl: 'views/main.html'
+                templateUrl: '/views/main.html'
             },
             'footer': {
-                templateUrl: 'views/footer.html'
+                templateUrl: '/views/footer.html'
             }
         },
         resolve: {
@@ -31,7 +33,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'AboutCtrl',
-                templateUrl: 'views/about.html'
+                templateUrl: '/views/about.html'
             }
         }
     }).state('app.contact', {
@@ -39,7 +41,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'ContactCtrl',
-                templateUrl: 'views/contact.html'
+                templateUrl: '/views/contact.html'
             }
         },
         resolve: {
@@ -52,7 +54,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'BrowseCtrl',
-                templateUrl: 'views/browse.html'
+                templateUrl: '/views/browse.html'
             }
         },
           params: {school: null, course: null},
@@ -69,7 +71,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'NoteDetailsCtrl',
-                templateUrl: 'views/notedetails.html'
+                templateUrl: '/views/notedetails.html'
             }
         },
         resolve: {
@@ -82,7 +84,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'NotePurchasedConfirmationCtrl',
-                templateUrl: 'views/note-purchased-confirmation.html'
+                templateUrl: '/views/note-purchased-confirmation.html'
             }
         },
         resolve: {
@@ -93,7 +95,7 @@ config(function($stateProvider, $urlRouterProvider) {
     }).state('app.settings', {
         views: {
             'content@': {
-                templateUrl: 'views/settings-template.html'
+                templateUrl: '/views/settings-template.html'
             }
         },
         resolve: {
@@ -106,7 +108,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'GoalCalculatorCtrl',
-                templateUrl: 'views/goalCalculator.html'
+                templateUrl: '/views/goalCalculator.html'
             }
         },
         resolve: {
@@ -119,7 +121,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'PaymentSettingsCtrl',
-                templateUrl: 'views/payment-settings.html'
+                templateUrl: '/views/payment-settings.html'
             }
         },
         resolve: {
@@ -132,7 +134,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'NotesPurchasedCtrl',
-                templateUrl: 'views/notes-purchased.html'
+                templateUrl: '/views/notes-purchased.html'
             }
         },
         resolve: {
@@ -145,7 +147,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'WatchlistCtrl',
-                templateUrl: 'views/watch-list.html'
+                templateUrl: '/views/watch-list.html'
             }
         },
         resolve: {
@@ -158,7 +160,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'MessagesCtrl',
-                templateUrl: 'views/messages.html'
+                templateUrl: '/views/messages.html'
             }
         },
         resolve: {
@@ -171,7 +173,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'MessagesThreadCtrl',
-                templateUrl: 'views/messages-detail.html'
+                templateUrl: '/views/messages-detail.html'
             }
         },
         resolve: {
@@ -184,7 +186,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'NotesForSaleCtrl',
-                templateUrl: 'views/notes-forsale.html'
+                templateUrl: '/views/notes-forsale.html'
             }
         },
         resolve: {
@@ -197,7 +199,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'ProfileSettingsCtrl',
-                templateUrl: 'views/profile-settings.html'
+                templateUrl: '/views/profile-settings.html'
             }
         },
         resolve: {
@@ -210,7 +212,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'PasswordSettingsCtrl',
-                templateUrl: 'views/password-settings.html'
+                templateUrl: '/views/password-settings.html'
             }
         },
         resolve: {
@@ -223,7 +225,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'OrganizationDonationsCtrl',
-                templateUrl: 'views/organization-donations.html'
+                templateUrl: '/views/organization-donations.html'
             }
         },
         resolve: {
@@ -236,7 +238,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'settings-content@app.settings': {
                 controller: 'MarketingToolsOrganizationCtrl',
-                templateUrl: 'views/marketing-tools.html'
+                templateUrl: '/views/marketing-tools.html'
             }
         },
         resolve: {
@@ -249,7 +251,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'NewNoteCtrl',
-                templateUrl: 'views/new-note.html'
+                templateUrl: '/views/new-note.html'
             }
         },
         resolve: {
@@ -261,14 +263,14 @@ config(function($stateProvider, $urlRouterProvider) {
     state('app.new-note.confirmation', {
         views: {
             'content@': {
-                templateUrl: 'views/note-posted-confirmation.html'
+                templateUrl: '/views/note-posted-confirmation.html'
             },
             params: { noteId: null, }
         }}).
      state('app.new-note.draft-confirmation', {
         views: {
             'content@': {
-                templateUrl: 'views/note-draft-confirmation.html'
+                templateUrl: '/views/note-draft-confirmation.html'
             }
         }})
         .state('app.update-note', {
@@ -276,7 +278,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'NewNoteCtrl',
-                templateUrl: 'views/new-note.html'
+                templateUrl: '/views/new-note.html'
             }
         },
         resolve: {
@@ -289,7 +291,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'UserprofileCtrl',
-                templateUrl: 'views/user-profile.html'
+                templateUrl: '/views/user-profile.html'
             }
         },
         resolve: {
@@ -302,7 +304,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'OrganizationProfileCtrl',
-                templateUrl: 'views/organization-profile.html'
+                templateUrl: '/views/organization-profile.html'
             }
         },
         resolve: {
@@ -315,7 +317,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'LegalCtrl',
-                templateUrl: 'views/legal.html'
+                templateUrl: '/views/legal.html'
             }
         },
         resolve: {
@@ -328,7 +330,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'FaqCtrl',
-                templateUrl: 'views/faq.html'
+                templateUrl: '/views/faq.html'
             }
         },
         resolve: {
@@ -341,7 +343,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'OrganizationPartnershipsCtrl',
-                templateUrl: 'views/organization-partnerships.html'
+                templateUrl: '/views/organization-partnerships.html'
             }
         },
         resolve: {
@@ -354,7 +356,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'OrganizationRegisterCtrl',
-                templateUrl: 'views/organization-signup.html'
+                templateUrl: '/views/organization-signup.html'
             }
         },
         resolve: {
@@ -365,7 +367,7 @@ config(function($stateProvider, $urlRouterProvider) {
     }).state('app.organization-register.confirmation', {
         views: {
             'content@': {
-                templateUrl: 'views/organization-signup-confirmation.html'
+                templateUrl: '/views/organization-signup-confirmation.html'
             }
         },
         resolve: {
@@ -378,7 +380,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'PasswordresetCtrl',
-                templateUrl: 'views/forgotpassword.html'
+                templateUrl: '/views/forgotpassword.html'
             }
         }
     }).state('app.forgotpasswordConfirm', {
@@ -386,7 +388,7 @@ config(function($stateProvider, $urlRouterProvider) {
         views: {
             'content@': {
                 controller: 'PasswordresetconfirmCtrl',
-                templateUrl: 'views/forgotpasswordconfirm.html'
+                templateUrl: '/views/forgotpasswordconfirm.html'
             }
         }
     }).state("modals", {
@@ -397,17 +399,46 @@ config(function($stateProvider, $urlRouterProvider) {
         },
         abstract: true
     });
-}).run(function($state, $stateParams, $rootScope,$location, nbApiService) {
+}).run(['$state', '$stateParams', '$rootScope','$location','$window', 'nbApiService', function($state, $stateParams, $rootScope,$location,$window, nbApiService) {
 
     //$rootScope.location = $location;
+    (function (d) {
+        var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        ref.parentNode.insertBefore(js, ref);
+    }(document));
 
-   nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
-   //nbApiService.initialize('http://localhost:8000', false).then(function(data) {
-        // nbApiService.identity().then(function(data){$rootScope.user = data;
-        // });
+
+    nbApiService.initialize('https://notebooster.com/api', false).then(function(data) {
+    //nbApiService.initialize('http://localhost:8000', false).then(function(data) {
+
+        $window.fbAsyncInit = function() {
+            FB.init({
+                appId: '479629998724967',
+                status: true, 
+                cookie: true, 
+                xfbml: true,
+                version: 'v2.4'
+            });
+
+                FB.Event.subscribe('auth.authResponseChange', function(response) {
+                    if (response.status === 'connected') {
+                        // console.log('You've been signed in ');
+                        // console.log(response); 
+                        nbApiService.socialLogin('facebook',response.authResponse.accessToken);
+                    } 
+                });
+            };
+    
     });
-    //nbApiService.initialize('https://notebooster.com/api', false);
-}).directive('ngEnter', function() {
+    
+}]).directive('ngEnter', function() {
     return function(scope, element, attrs) {
         element.bind("keydown keypress", function(event) {
             if (event.which === 13) {

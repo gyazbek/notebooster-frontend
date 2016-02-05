@@ -65,7 +65,7 @@ angular.module('angularNoteboosterApp')
       .then(function(data){
         var modalInstance = $modal.open({
           animation: true,
-          templateUrl: 'views/partials/follow_modal.html',
+          templateUrl: '/views/partials/follow_modal.html',
           controller: 'FollowCtrl',
           size: size,
           resolve: {
