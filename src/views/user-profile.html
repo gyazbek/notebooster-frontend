@@ -2,7 +2,7 @@
 <div class="container results mtop25 mbot25 outline" cg-busy="profileLoadPromise">
 	<div class="row vertical-align normalize-xs">
 		<div class="col-sm-2 col-xs-3 text-center mtop25-xs">
-			<img class="img-responsive" ng-src="{{ userInfo.profile.profile_picture || 'img/profile.png' }}" alt="Profile Picture" />
+			<img class="img-responsive" ng-src="{{ userInfo.profile.profile_picture || '/img/profile.png' }}" alt="Profile Picture" />
 			<span class="mtop15"><a href="javascript:void(0);" ng-click="report()">Report Violation</a></span>
 		</div>
 		<div class="col-sm-7 col-xs-9 mbot25-xs">
@@ -46,7 +46,7 @@
 					<div class="row mtop5">
 						<div class="col-sm-10 col-sm-offset-1">
 							<a href="user-profile">
-								<img ng-src="{{ userInfo.profile.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Image" />
+								<img ng-src="{{ userInfo.profile.profile_picture || '/img/profile.png' }}" class="img-responsive" alt="Profile Image" />
 							</a>
 						</div>
 					</div>
@@ -81,7 +81,7 @@
 		<h2>Comments</h2>
 			<div class="row mtop15 mbot15" ng-repeat="comment in comments" cg-busy="feedbackLoadPromise">
 				<div class="col-sm-2 col-xs-3 text-center">
-					<img ng-src="{{ comment.user.profile.profile_picture || 'img/profile.png' }}" class="img-responsive" alt="Profile Picture" />
+					<img ng-src="{{ comment.user.profile.profile_picture || '/img/profile.png' }}" class="img-responsive" alt="Profile Picture" />
 					<a href="" id="{{comment.user.username}}" ng-click="getUserProfile($event)"class="thin">{{comment.user.username}}</a>
 				</div>
 				<div class="col-sm-10 col-xs-9">

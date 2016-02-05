@@ -594,7 +594,7 @@ nav.navbar {
 .home-notes {
   padding: 15px 0 25px;
   background-color: #dfe5ea;
-  outline: 10px rgba(0, 0, 0, 0.1) solid; }
+  box-shadow: 0px 0px 0px 10px rgba(0, 0, 0, 0.1); }
   .home-notes label {
     color: #077dab; }
 
