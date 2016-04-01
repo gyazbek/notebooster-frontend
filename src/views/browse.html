@@ -17,7 +17,7 @@
 	<div class="col-sm-5 col-xs-12 form-group text-center">
 		<label>Course</label>
 		<ui-select ng-model="course.selected" data-ng-disabled="disabled" theme="bootstrap" >
-		<ui-select-match placeholder="Search for your course">{{$select.selected.name}}</ui-select-match>
+		<ui-select-match placeholder="Type the course name">{{$select.selected.name}}</ui-select-match>
 		<ui-select-choices repeat="course in courses">
 		<span ng-bind-html="course.name | highlight: $select.search"></span>
 	</ui-select-choices>
