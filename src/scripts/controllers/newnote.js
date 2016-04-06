@@ -13,6 +13,8 @@ angular.module('angularNoteboosterApp')
     $scope.note.fileDelete = [];
     $scope.note.charity_split = 24;
     $scope.note.charity = {"user":{"id":2606,"username":"WhoWePlayForFSU"},"name":"Who We Play for FSU","slug":"who-we-play-for-fsu2606"};
+
+
     $scope.note.year = new Date().getFullYear();
     $scope.semesterYears = null;
     $scope.currentYear = new Date().getFullYear();
@@ -409,7 +411,7 @@ angular.module('angularNoteboosterApp')
         $scope.availableSemesterYears(false);
       }
 
-      
+          $scope.loadOrganization($scope.note.charity);
     };
 
 

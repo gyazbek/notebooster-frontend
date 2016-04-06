@@ -60,9 +60,10 @@
 					<div class="col-md-4">
 						<label for="no_of_pages">Number of Pages:</label>
 					</div>
-					<div class="col-md-2 form-group">
-						<input ng-model="note.page_count" type="number" class="form-control" name="num_of_pages" required max="999" min="1" pattern="[0-9]"/>
+					<div class="col-md-2 form-group" ng-class="{'has-error': noteForm.num_of_pages.$dirty && noteForm.num_of_pages.$invalid}">
+						<input ng-model="note.page_count" type="number" required min="1" max="9999" class="form-control" placeholder="0" name="num_of_pages"/>
 					</div>
+					<div class="has-error-text mbot15" style="display: block;" ng-show="(noteForm.num_of_pages.$touched || noteForm.submitted || noteForm.num_of_pages.$dirty) && noteForm.num_of_pages.$invalid">Please put a approximate number of pages for this note.</div>
 					<div class="clearfix"></div>
 					<div class="col-md-4" ng-hide="1">
 						<label for="note_preview">Note Preview:</label>
