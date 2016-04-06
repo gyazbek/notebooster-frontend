@@ -24,7 +24,7 @@
 							<option value="Question">Question</option>
 							<option value="Praise">Praise</option>
 						</select>
-						<div class="has-error-text" id="subject-error" ng-show="contactForm.subject.$error.required">Please select a subject.</div>
+						<div class="has-error-text" id="subject-error" ng-show="formSubmitted && contactForm.subject.$error.required">Please select a subject.</div>
 					</div>
 					<div class="form-group">
 						<label for="cont-name">Your Name:</label>
