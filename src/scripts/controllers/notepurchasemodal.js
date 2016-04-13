@@ -15,8 +15,8 @@ $scope.extraDonation = 0;
 
 var saleFee = $scope.note.fee ? $scope.note.fee : ($scope.noteFee ? $scope.noteFee : 0);
 
-$scope.totalAmount = function() { return +$scope.note.price + ($scope.extraDonation ?  +$scope.extraDonation : 0) };
-$scope.charityAmount = function() { return $scope.note.price ? (+$scope.note.charity_split/100) * + $scope.note.price - saleFee + ($scope.extraDonation ?  +$scope.extraDonation : 0) : 0 };
+$scope.totalAmount = function() { return $scope.note.price + ($scope.extraDonation ?  $scope.extraDonation : 0) };
+$scope.charityAmount = function() { return $scope.note.price ? (($scope.note.charity_split/100) * ($scope.note.price - saleFee)) + ($scope.extraDonation ?  $scope.extraDonation : 0) : 0 };
 // //setup the PayPal digital goods flow
 var embeddedPPFlow = new PAYPAL.apps.DGFlow({trigger: null});
 
