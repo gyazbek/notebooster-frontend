@@ -358,7 +358,8 @@ angular.module('angularNoteboosterApp')
           $scope.saveNotePromise = nbApiService.newNote($scope.note)
           .then(function(data){
              if(type == 'draft'){
-              $state.go('app.new-note.draft-confirmation');
+              $state.go('app.new-note.draft-confirmation', {
+              'noteId': (data.id ? data.id : '')});
              }else{
                $state.go('app.new-note.confirmation', {
               'noteId': (data.id ? data.id : '')

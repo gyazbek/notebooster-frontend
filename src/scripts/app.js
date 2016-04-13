@@ -271,7 +271,7 @@ config(function($stateProvider, $urlRouterProvider, $locationProvider) {
         views: {
             'content@': {
                 templateUrl: '/views/note-draft-confirmation.html'
-            }
+            }, params: { noteId: null, }
         }})
         .state('app.update-note', {
         url: 'edit-note/{noteId}',
