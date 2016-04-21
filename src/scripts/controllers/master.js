@@ -107,10 +107,12 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
         }
     });
     // If the user attempts to access a restricted page, redirect them back to the main page.
-    $scope.$on('$stateChangeError', function(ev, current, previous, rejection) {
+    $scope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, rejection) {
         console.error("Unable to change routes.  Error: ", rejection)
 
-        $rootScope.stateAfterLogin = current.name;
+        $rootScope.stateAfterLogin = toState.name;
+        $rootScope.stateParamsAfterLogin = toParams;
+       
 //        $location.path("/");
 
         $scope.signinModal();
@@ -126,7 +128,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     $scope.signinModal = function(size) {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'views/partials/signin_modal.html',
+            templateUrl: '/views/partials/signin_modal.html',
             controller: 'LoginCtrl',
             size: size,
             scope:$scope
@@ -144,7 +146,7 @@ angular.module('angularNoteboosterApp').controller('MasterCtrl', function($scope
     $scope.signupModal = function(size) {
         var modalInstance = $modal.open({
             animation: true,
-            templateUrl: 'views/partials/signup_modal.html',
+            templateUrl: '/views/partials/signup_modal.html',
             controller: 'RegisterCtrl',
             size: size,
             scope:$scope
