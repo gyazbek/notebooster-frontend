@@ -9,3 +9,5 @@ The project relies on a REST api backend that contains proprietary code that may
 
 
 ###### If used, please respect the proper licenses of any third party library included.
+
+Service layer Inspired by Tivix/angular-django-registration-auth

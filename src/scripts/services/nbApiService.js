@@ -1,21 +1,15 @@
 'use strict';
 angular.module('angularNoteboosterApp').service('nbApiService', function nbApiService($q, $http, $cookies, $rootScope) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+    // Intended to use as a Singleton
     var service = {
-        /* START CUSTOMIZATION HERE */
-        // Change this to point to your Django REST Auth API
-        // e.g. /api/rest-auth  (DO NOT INCLUDE ENDING SLASH)
         'API_URL': '',
         // Set use_session to true to use Django sessions to store security token.
         // Set use_session to false to store the security token locally and transmit it as a custom header.
         'use_session': false,
-        /* END OF CUSTOMIZATION */
         'authenticated': null,
         'authPromise': null,
         '_identity': undefined,
         'request': function(args) {
-            
-            // Continue
             params = args.params || {}
             args = args || {};
             var deferred = $q.defer(),
@@ -164,10 +158,8 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
         },
         'identity': function(force) {
             var deferred = $q.defer();
-            // alert('I was called')
             if (angular.isDefined(this._identity)) {
                 nbApiService.authenticated = true;
-                // alert('nice, we are defined')
                 var newObj = {};
                 var data = this._identity;
                 if (data.id) newObj.id = data.id;
@@ -325,8 +317,6 @@ angular.module('angularNoteboosterApp').service('nbApiService', function nbApiSe
             // Set force to true to ignore stored value and query API
             restrict = restrict || false;
             force = force || false;
-            //alert('restrict: ' + restrict + ' / force: ' + force);
-            //  alert(this.authenticated);
             //Check if cookies are set for token, if not we automatically rule authentication out
             if (!$cookies.token) {
                 if (restrict) {
