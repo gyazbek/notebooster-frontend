@@ -1,8 +1,0 @@
-[
-  { "name" : "item1",
-    "description" : "descriptrion1",
-    "imageUrl": "http://placehold.it/300x300" },
-  { "name" : "item2",
-    "description" : "descriptrion2",
-    "imageUrl": "http://placehold.it/300x300" }
-]
