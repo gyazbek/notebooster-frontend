@@ -10,7 +10,6 @@ in /profile-settings for user (profile-settings.html):
 	DELETE /user
 
 
-
 NOTES-PURCHASE.HTML
 	- not sure where rate this note sends request
 	- download button not set up

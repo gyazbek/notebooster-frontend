@@ -52,14 +52,9 @@ angular.module('angularNoteboosterApp')
       }
     };
 
-
     // $http.get('https://notebooster.com/api/organization/').success(function(data) {
     //   $scope.organizations = data;
     // });
-
-
-
-
 
   });
 
